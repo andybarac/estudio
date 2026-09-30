@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sony HDW-1800 — validação</title>
+<style>
+:root{
+  --bg:#0d1115;--card:#151b20;--card2:#10151a;--line:#2e3942;--text:#eef2f4;--muted:#a9b3bb;
+  --accent:#68b6ff;--green:#49d870;--red:#ef4d49;--amber:#ffb84c;--blue:#5ca8ff;--off:#4c555b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{max-width:1540px;margin:auto;padding:22px}
+h1{margin:0 0 6px;font-size:30px}.lead{margin:0 0 18px;color:var(--muted);line-height:1.6}
+.layout{display:grid;grid-template-columns:minmax(850px,1fr) 410px;gap:18px;align-items:start}
+.card{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:16px}.stage{overflow:auto;position:relative}.stage svg{width:100%;min-width:850px;height:auto;display:block}
+.zone,.ctl{cursor:pointer}.hit{fill:transparent;stroke:transparent;stroke-width:5}.ctl.selected .hit,.zone.selected>.hit{stroke:var(--accent);fill:#15324a;fill-opacity:.11}
+.label{fill:#d8e0e4;font-size:9px;text-anchor:middle}.micro{fill:#929da4;font-size:7px;text-anchor:middle}.tiny{fill:#7f8a91;font-size:6px;text-anchor:middle}.darktxt{fill:#1f262b;font-size:7px;text-anchor:middle}.lcdtxt{fill:#d8f2d3;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.ledOff{fill:#454d52}.ledGreen{fill:var(--green);filter:drop-shadow(0 0 4px var(--green))}.ledRed{fill:var(--red);filter:drop-shadow(0 0 4px var(--red))}.ledAmber{fill:var(--amber);filter:drop-shadow(0 0 4px var(--amber))}.ledBlue{fill:var(--blue);filter:drop-shadow(0 0 4px var(--blue))}
+.side h2{margin:0 0 4px;font-size:24px}.term{color:var(--muted);font-size:14px;margin-bottom:14px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:12px 0 6px}.copy{line-height:1.65;margin:0}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.btn{background:transparent;color:var(--text);border:1px solid #455159;border-radius:10px;padding:9px 11px;cursor:pointer}.btn:hover,.btn.active{border-color:var(--accent);background:#15324a}.feedback{margin-top:10px;padding:11px;border-radius:10px;background:#11161a;border:1px solid #30383f;line-height:1.55}.statusGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.statusCard{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px}.statusCard b{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+@media(max-width:1160px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>Sony HDW-1800</h1>
+<p class="lead">Videocassete digital profissional HDCAM. Clique diretamente nos controles do painel para conhecer a função e experimentar estados de operação como carregar ou ejetar fita, transporte, remoto, gravação, áudio e busca por jog/shuttle. Nesta revisão, eu incluí também os botões menores do lado esquerdo e ajustei a distribuição visual para ficar mais próxima do equipamento físico.</p>
+
+<div class="layout">
+<section class="card stage">
+<svg id="panel" viewBox="0 0 1320 610" aria-label="Sony HDW-1800 painel frontal interativo">
+<defs>
+  <linearGradient id="upper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a5054"/><stop offset="1" stop-color="#24292d"/></linearGradient>
+  <linearGradient id="lower" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#32383c"/><stop offset="1" stop-color="#191e22"/></linearGradient>
+  <radialGradient id="knob"><stop offset="0" stop-color="#555d62"/><stop offset=".7" stop-color="#22272b"/><stop offset="1" stop-color="#090b0d"/></radialGradient>
+  <radialGradient id="wheel"><stop offset="0" stop-color="#2f3539"/><stop offset=".68" stop-color="#171b1e"/><stop offset="1" stop-color="#060708"/></radialGradient>
+</defs>
+
+<!-- chassis -->
+<rect x="45" y="40" width="1230" height="520" rx="10" fill="#111518" stroke="#596268" stroke-width="2"/>
+<rect x="63" y="58" width="1194" height="178" rx="6" fill="url(#upper)" stroke="#6b7479"/>
+<rect x="63" y="250" width="1194" height="286" rx="6" fill="url(#lower)" stroke="#6b7479"/>
+
+<!-- upper panel -->
+<text x="85" y="83" fill="#f5f7f8" font-size="19" font-weight="700">SONY</text>
+<text x="1125" y="80" fill="#d7dde0" font-size="10">HD DIGITAL VIDEOCASSETTE RECORDER</text>
+<text x="1238" y="80" fill="#d7dde0" font-size="10" text-anchor="end">HDW-1800</text>
+
+<!-- power -->
+<g class="ctl" data-key="power">
+  <rect x="84" y="104" width="50" height="58" rx="4" fill="#171b1e" stroke="#6c757a"/>
+  <rect id="powerSwitch" x="95" y="115" width="28" height="35" rx="2" fill="#30363a" stroke="#80898e"/>
+  <text x="109" y="124" class="tiny">I</text><text x="109" y="150" class="tiny">O</text>
+  <text x="109" y="173" class="label">POWER</text>
+  <rect class="hit" x="78" y="98" width="62" height="81" rx="5"/>
+</g>
+
+<!-- phones -->
+<g class="ctl" data-key="phones">
+  <circle cx="104" cy="207" r="10" fill="#080a0c" stroke="#929ca2"/>
+  <circle cx="142" cy="207" r="15" fill="url(#knob)" stroke="#7b8489"/><line id="phoneMark" x1="142" y1="207" x2="149" y2="196" stroke="#ddd"/>
+  <text x="104" y="228" class="tiny">PHONES</text><text x="142" y="228" class="tiny">LEVEL</text>
+  <rect class="hit" x="82" y="186" width="83" height="49" rx="5"/>
+</g>
+
+<!-- remote -->
+<g class="ctl" data-key="remote">
+  <text x="213" y="105" class="micro">REMOTE</text>
+  <rect id="remote9" x="177" y="114" width="45" height="27" rx="3" fill="#c4c9cc" stroke="#6a7277"/><text x="199" y="131" class="darktxt">1 (9P)</text>
+  <rect id="remote50" x="228" y="114" width="45" height="27" rx="3" fill="#c4c9cc" stroke="#6a7277"/><text x="250" y="131" class="darktxt">2 (50P)</text>
+  <circle id="rs232Led" cx="284" cy="127" r="5" class="ledOff"/><text x="284" y="148" class="tiny">RS-232C</text>
+  <rect class="hit" x="170" y="97" width="127" height="58" rx="5"/>
+</g>
+
+<!-- eject -->
+<g class="ctl" data-key="eject">
+  <rect id="ejectBtn" x="316" y="111" width="43" height="36" rx="4" fill="#20252a" stroke="#697278"/>
+  <path d="M326 131 l11-10 l11 10z" fill="#a9d8ff"/><text x="337" y="158" class="label">EJECT</text>
+  <rect class="hit" x="309" y="104" width="57" height="62" rx="5"/>
+</g>
+
+<!-- cassette compartment -->
+<g class="ctl" data-key="cassette">
+  <rect x="397" y="92" width="820" height="116" rx="8" fill="#c0c6c9" stroke="#858e93"/>
+  <rect x="415" y="110" width="784" height="78" rx="5" fill="#090b0d" stroke="#5e676c"/>
+  <rect id="tape" x="636" y="140" width="338" height="35" rx="3" fill="#9f7d4c" stroke="#d0ad70" opacity=".85"/>
+  <text id="tapeLabel" x="805" y="162" fill="#22180d" font-size="12" font-weight="700" text-anchor="middle">HDCAM CASSETTE</text>
+  <text x="1190" y="104" fill="#343a3e" font-size="10" text-anchor="end">HDCAM</text>
+  <rect class="hit" x="390" y="86" width="834" height="128" rx="8"/>
+</g>
+
+<!-- LCD and buttons around it -->
+<g class="zone" data-key="leftPanel">
+  <text x="88" y="296" class="micro">PANEL</text>
+  <text x="87" y="318" class="tiny">P1</text><rect x="100" y="307" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/>
+  <text x="87" y="342" class="tiny">P2</text><rect x="100" y="331" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/>
+  <text x="87" y="366" class="tiny">P3</text><rect x="100" y="355" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/>
+  <text x="87" y="390" class="tiny">P4</text><rect x="100" y="379" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/>
+  <text x="87" y="414" class="tiny">P5</text><rect x="100" y="403" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/>
+  <text x="87" y="438" class="tiny">P6</text><rect x="100" y="427" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/>
+  <rect class="hit" x="74" y="300" width="48" height="148" rx="4"/>
+</g>
+
+<g class="zone" data-key="lcd">
+  <rect x="128" y="292" width="286" height="126" rx="3" fill="#0b0e10" stroke="#606a70" stroke-width="2"/>
+  <rect id="lcdBg" x="136" y="300" width="270" height="110" rx="2" fill="#12221d"/>
+  <text id="lcdTop" x="145" y="318" class="lcdtxt" font-size="10">HOME   VIDEO IN: SDI    1080/59.94</text>
+  <text id="tc" x="145" y="352" class="lcdtxt" font-size="26">01:02:55:12</text>
+  <text id="lcdMid" x="145" y="372" class="lcdtxt" font-size="10">LTC  PLAY   REM: 42min</text>
+  <text id="lcdBot" x="145" y="394" class="lcdtxt" font-size="9">CH1 ▮▮▮▮▮   CH2 ▮▮▮▮    CH3 ▮▮▮     CH4 ▮▮▮▮▮</text>
+  <rect class="hit" x="124" y="288" width="294" height="134" rx="4"/>
+</g>
+
+<g class="zone" data-key="functionKeys">
+  <rect x="432" y="306" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/><text x="456" y="317" class="tiny" text-anchor="start">P1  HOME</text>
+  <rect x="432" y="330" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/><text x="456" y="341" class="tiny" text-anchor="start">P2  TC</text>
+  <rect x="432" y="354" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/><text x="456" y="365" class="tiny" text-anchor="start">P3  VID PROC</text>
+  <rect x="432" y="378" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/><text x="456" y="389" class="tiny" text-anchor="start">P4  AUD INP</text>
+  <rect x="432" y="402" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/><text x="456" y="413" class="tiny" text-anchor="start">P5  SYSTEM</text>
+  <rect x="432" y="426" width="14" height="14" rx="1" fill="#aeb5b9" stroke="#626b70"/><text x="456" y="437" class="tiny" text-anchor="start">P6  MACR OPER</text>
+  <rect class="hit" x="426" y="300" width="130" height="146" rx="4"/>
+</g>
+
+<g class="zone" data-key="menuEdit">
+  <rect x="558" y="354" width="54" height="16" rx="2" fill="#9ea6ab" stroke="#5f686d"/><text x="585" y="365" class="darktxt">INHIBIT</text>
+  <rect x="620" y="354" width="54" height="16" rx="2" fill="#9ea6ab" stroke="#5f686d"/><text x="647" y="365" class="darktxt">ENTRY</text>
+  <rect x="558" y="377" width="54" height="16" rx="2" fill="#9ea6ab" stroke="#5f686d"/><text x="585" y="388" class="darktxt">INHIBIT</text>
+  <rect x="620" y="377" width="54" height="16" rx="2" fill="#9ea6ab" stroke="#5f686d"/><text x="647" y="388" class="darktxt">ENTRY</text>
+  <text x="589" y="351" class="tiny">AUDIO SPLIT</text>
+  <text x="646" y="351" class="tiny">ASSEMBLE</text>
+  <text x="589" y="399" class="tiny">VIDEO</text>
+  <text x="646" y="399" class="tiny">AUDIO</text>
+  <rect x="552" y="430" width="32" height="18" rx="2" fill="#b7bec2" stroke="#626b70"/><text x="568" y="442" class="darktxt">SHIFT</text>
+  <rect x="590" y="430" width="42" height="18" rx="2" fill="#b7bec2" stroke="#626b70"/><text x="611" y="442" class="darktxt">DISPLAY</text>
+  <circle cx="662" cy="439" r="12" fill="url(#knob)" stroke="#7b858a"/><line x1="662" y1="439" x2="668" y2="429" stroke="#ddd"/><text x="662" y="458" class="micro">MULTI</text>
+  <text x="662" y="467" class="micro">CONTROL</text>
+  <rect class="hit" x="546" y="347" width="132" height="124" rx="5"/>
+</g>
+
+<!-- audio knobs -->
+<g class="zone" data-key="audio">
+  <text x="280" y="455" class="micro">REC</text><text x="279" y="521" class="micro">PB</text>
+  <text x="160" y="473" class="tiny">CH1</text><circle cx="160" cy="488" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="160" y1="488" x2="167" y2="476" stroke="#e0e3e4"/>
+  <text x="212" y="473" class="tiny">CH2</text><circle cx="212" cy="488" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="212" y1="488" x2="219" y2="476" stroke="#e0e3e4"/>
+  <text x="264" y="473" class="tiny">CH3</text><circle cx="264" cy="488" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="264" y1="488" x2="271" y2="476" stroke="#e0e3e4"/>
+  <text x="316" y="473" class="tiny">CH4</text><circle cx="316" cy="488" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="316" y1="488" x2="323" y2="476" stroke="#e0e3e4"/>
+  <text x="368" y="473" class="tiny">CUE</text><circle cx="368" cy="488" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="368" y1="488" x2="375" y2="476" stroke="#e0e3e4"/>
+  <text x="160" y="539" class="tiny">CH1</text><circle cx="160" cy="552" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="160" y1="552" x2="167" y2="540" stroke="#e0e3e4"/>
+  <text x="212" y="539" class="tiny">CH2</text><circle cx="212" cy="552" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="212" y1="552" x2="219" y2="540" stroke="#e0e3e4"/>
+  <text x="264" y="539" class="tiny">CH3</text><circle cx="264" cy="552" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="264" y1="552" x2="271" y2="540" stroke="#e0e3e4"/>
+  <text x="316" y="539" class="tiny">CH4</text><circle cx="316" cy="552" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="316" y1="552" x2="323" y2="540" stroke="#e0e3e4"/>
+  <text x="368" y="539" class="tiny">CUE</text><circle cx="368" cy="552" r="15" fill="url(#knob)" stroke="#7c858a"/><line x1="368" y1="552" x2="375" y2="540" stroke="#e0e3e4"/>
+  <rect x="406" y="474" width="24" height="16" rx="2" fill="#b7bec2" stroke="#626b70"/><text x="418" y="485" class="darktxt">REC</text>
+  <rect x="406" y="546" width="24" height="16" rx="2" fill="#b7bec2" stroke="#626b70"/><text x="418" y="557" class="darktxt">PB</text>
+  <rect class="hit" x="142" y="458" width="296" height="112" rx="5"/>
+</g>
+
+<!-- tape transport -->
+<g class="zone" data-key="transport">
+  <text x="754" y="362" class="tiny">REC</text>
+  <g class="ctl" data-key="rec"><rect id="recBtn" x="740" y="369" width="34" height="30" rx="2" fill="#8b2326" stroke="#b66565"/><circle id="recLed" cx="757" cy="384" r="6" class="ledOff"/><rect class="hit" x="735" y="364" width="44" height="40"/></g>
+  <text x="820" y="362" class="tiny">STANDBY</text><circle id="standbyLed" cx="820" cy="384" r="7" class="ledAmber"/>
+  <g class="ctl" data-key="rew"><rect x="706" y="430" width="36" height="26" rx="2" fill="#d4d8da" stroke="#6c757a"/><text x="724" y="447" class="darktxt">◀◀</text><rect class="hit" x="701" y="425" width="46" height="36"/></g>
+  <g class="ctl" data-key="play"><rect id="playBtn" x="750" y="430" width="36" height="26" rx="2" fill="#d4d8da" stroke="#6c757a"/><text x="768" y="447" class="darktxt">▶</text><rect class="hit" x="745" y="425" width="46" height="36"/></g>
+  <g class="ctl" data-key="fwd"><rect x="794" y="430" width="36" height="26" rx="2" fill="#d4d8da" stroke="#6c757a"/><text x="812" y="447" class="darktxt">▶▶</text><rect class="hit" x="789" y="425" width="46" height="36"/></g>
+  <g class="ctl" data-key="stop"><rect id="stopBtn" x="840" y="428" width="30" height="30" rx="2" fill="#2786ac" stroke="#6fc6e6"/><circle id="stopLed" cx="855" cy="443" r="5" class="ledGreen"/><rect class="hit" x="835" y="423" width="40" height="40"/></g>
+  <text x="724" y="422" class="tiny">REW</text><text x="768" y="422" class="tiny">PLAY</text><text x="812" y="422" class="tiny">F FWD</text><text x="855" y="422" class="tiny">STOP</text>
+</g>
+
+<!-- search dial -->
+<g class="zone" data-key="search">
+  <path d="M1032 313 q65 -34 130 0" fill="none" stroke="#bfc6ca" stroke-width="20" stroke-linecap="round" opacity=".95"/>
+  <g class="ctl" data-key="shuttle"><rect id="shuttleBtn" x="1018" y="298" width="52" height="20" rx="8" fill="#d7dbde" stroke="#626b70"/><text x="1044" y="311" class="darktxt">SHUTTLE</text><rect class="hit" x="1013" y="293" width="62" height="30"/></g>
+  <g class="ctl" data-key="jog"><rect id="jogBtn" x="1078" y="292" width="40" height="20" rx="8" fill="#d7dbde" stroke="#626b70"/><text x="1098" y="305" class="darktxt">JOG</text><rect class="hit" x="1073" y="287" width="50" height="30"/></g>
+  <g class="ctl" data-key="var"><rect id="varBtn" x="1128" y="298" width="40" height="20" rx="8" fill="#d7dbde" stroke="#626b70"/><text x="1148" y="311" class="darktxt">VAR</text><rect class="hit" x="1123" y="293" width="50" height="30"/></g>
+  <text x="1038" y="343" class="tiny">REVERSE</text>
+  <text x="1156" y="343" class="tiny">FORWARD</text>
+  <text x="1098" y="336" class="tiny">SEARCH</text>
+  <circle cx="1098" cy="424" r="92" fill="#1f2428" stroke="#4d565b" stroke-width="3"/>
+  <circle id="searchWheel" cx="1098" cy="424" r="70" fill="url(#wheel)" stroke="#7a8388" stroke-width="3"/>
+  <circle cx="1098" cy="424" r="18" fill="#22282c" stroke="#798287"/>
+  <line id="wheelMark" x1="1098" y1="356" x2="1098" y2="372" stroke="#f0f2f3" stroke-width="3"/>
+  <rect class="hit" id="wheelHit" x="1004" y="334" width="188" height="182" rx="94"/>
+</g>
+
+<!-- bottom small controls -->
+<g class="zone" data-key="editControl">
+  <rect x="934" y="481" width="60" height="22" rx="2" fill="#aeb5b9" stroke="#60696e"/><text x="964" y="496" class="darktxt">PREROLL</text>
+  <rect x="1001" y="481" width="60" height="22" rx="2" fill="#aeb5b9" stroke="#60696e"/><text x="1031" y="496" class="darktxt">PREVIEW</text>
+  <rect x="1068" y="481" width="60" height="22" rx="2" fill="#aeb5b9" stroke="#60696e"/><text x="1098" y="496" class="darktxt">AUTO EDIT</text>
+  <rect x="1135" y="481" width="60" height="22" rx="2" fill="#aeb5b9" stroke="#60696e"/><text x="1165" y="496" class="darktxt">REVIEW</text>
+  <rect class="hit" x="928" y="475" width="274" height="34" rx="4"/>
+</g>
+</svg>
+</section>
+
+<aside class="card side">
+<h2 id="title">Painel do HDW-1800</h2>
+<div class="term" id="term">(selecione um controle)</div>
+<div class="ey">O que faz</div><p id="what" class="copy">Clique diretamente em um botão, knob, área do LCD ou no jog/shuttle para conhecer a função.</p>
+<div class="ey">Quando usar</div><p id="when" class="copy">Use este simulador para reconhecer o painel físico antes de operar o deck no estúdio.</p>
+<div class="ey">Experimente</div><div id="modes" class="modes"></div><div id="feedback" class="feedback">Selecione um controle no painel.</div>
+<div class="statusGrid">
+  <div class="statusCard"><b>Fita</b><span id="stTape">Carregada</span></div>
+  <div class="statusCard"><b>Transporte</b><span id="stTransport">STOP</span></div>
+  <div class="statusCard"><b>Remoto</b><span id="stRemote">Local</span></div>
+  <div class="statusCard"><b>Busca</b><span id="stSearch">JOG</span></div>
+  <div class="statusCard"><b>Timecode</b><span id="stTc">01:02:55:12</span></div>
+  <div class="statusCard"><b>Áudio</b><span id="stAudio">0 dB</span></div>
+</div>
+</aside>
+</div>
+</main>
+<script>
+(()=>{
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const st={power:true,tape:true,transport:'STOP',remote:'LOCAL',search:'JOG',tcFrames:113262,audio:0,phones:45,recording:false,lcd:'HOME',wheel:0};
+let drag=null;
+function tcString(){let f=st.tcFrames%30,s=Math.floor(st.tcFrames/30)%60,m=Math.floor(st.tcFrames/1800)%60,h=Math.floor(st.tcFrames/108000)%24;return [h,m,s,f].map(x=>String(x).padStart(2,'0')).join(':')}
+function led(id,on,color='green'){const c={green:'ledGreen',red:'ledRed',amber:'ledAmber',blue:'ledBlue'}[color]||'ledGreen';$(id).setAttribute('class',on?c:'ledOff')}
+function render(){
+  $('#tape').style.opacity=st.tape?'.85':'0';$('#tapeLabel').style.opacity=st.tape?'1':'0';
+  $('#tc').textContent=tcString();$('#stTc').textContent=tcString();
+  $('#stTape').textContent=st.tape?'Carregada':'Sem fita';$('#stTransport').textContent=st.transport;$('#stRemote').textContent=st.remote;$('#stSearch').textContent=st.search;$('#stAudio').textContent=(st.audio>0?'+':'')+st.audio+' dB';
+  led('#recLed',st.recording,'red');led('#stopLed',st.transport==='STOP','green');
+  $('#playBtn').setAttribute('fill',st.transport==='PLAY'?'#5bcf77':'#d4d8da');$('#stopBtn').setAttribute('fill',st.transport==='STOP'?'#2786ac':'#d4d8da');
+  $('#remote9').setAttribute('fill',st.remote==='9P'?'#5ca8ff':'#c4c9cc');$('#remote50').setAttribute('fill',st.remote==='50P'?'#5ca8ff':'#c4c9cc');
+  ['shuttle','jog','var'].forEach(k=>$('#'+k+'Btn').setAttribute('fill',st.search===k.toUpperCase()?'#ffb84c':'#b9c0c4'));
+  $('#wheelMark').setAttribute('transform','rotate('+st.wheel+' 1115 415)');
+  $('#phoneMark').setAttribute('transform','rotate('+((st.phones-50)*1.8)+' 142 207)');
+  if(st.lcd==='HOME'){$('#lcdTop').textContent='HOME   VIDEO IN: SDI    1080/59.94';$('#lcdMid').textContent='LTC  '+st.transport+'   REM: 42min';$('#lcdBot').textContent='CH1 ▮▮▮▮▮   CH2 ▮▮▮▮    CH3 ▮▮▮     CH4 ▮▮▮▮▮'}
+  if(st.lcd==='VIDEO'){$('#lcdTop').textContent='VIDEO IN / PROCESS';$('#lcdMid').textContent='SDI INPUT     REF: EXT';$('#lcdBot').textContent='Y +0   Pb +0   Pr +0   SETUP +0'}
+  if(st.lcd==='AUDIO'){$('#lcdTop').textContent='AUDIO';$('#lcdMid').textContent='REC LEVEL '+st.audio+'dB';$('#lcdBot').textContent='CH1  CH2  CH3  CH4  CUE'}
+  if(st.lcd==='EDIT'){$('#lcdTop').textContent='EDIT';$('#lcdMid').textContent='ASSEMBLE / INSERT';$('#lcdBot').textContent='IN --:--:--:--   OUT --:--:--:--'}
+}
+const info={
+power:{t:'Liga / desliga',term:'POWER',what:'Liga ou desliga o HDW-1800. Com o aparelho ligado, o LCD e os circuitos do deck ficam ativos.',when:'Use no início e no encerramento da operação do deck. Antes de desligar, pare o transporte e confirme que não há uma gravação em andamento.',actions:[['Ligar / desligar',()=>{st.power=!st.power},'O estado de alimentação foi alternado.']]},
+phones:{t:'Monitor de fones',term:'PHONES / LEVEL',what:'Permite monitorar o áudio do deck por fones. O knob LEVEL ajusta o volume de escuta.',when:'Use para conferir rapidamente áudio gravado, playback ou sinais durante uma edição sem depender do monitor de áudio externo.',actions:[['Volume +',()=>st.phones=Math.min(100,st.phones+10),'Volume de fones aumentado.'],['Volume −',()=>st.phones=Math.max(0,st.phones-10),'Volume de fones reduzido.']]},
+remote:{t:'Controle remoto',term:'REMOTE 1 (9P) / 2 (50P)',what:'Define se o deck será controlado localmente ou por um controlador externo. O modo 9P é comum em sistemas de edição e automação profissional.',when:'Use 9P quando o deck estiver sob controle de uma ilha, automação ou editor externo. Para operação manual no próprio painel, deixe em modo local.',actions:[['Local',()=>st.remote='LOCAL','Controle local selecionado.'],['9P',()=>st.remote='9P','Controle remoto 9P selecionado.'],['50P',()=>st.remote='50P','Controle remoto 50P selecionado.']]},
+eject:{t:'Ejetar cassete',term:'EJECT',what:'Ejeta a fita do compartimento. Durante a ejeção, o botão acende.',when:'Use quando o transporte estiver parado e você precisar trocar ou retirar a fita HDCAM.',actions:[['Ejetar / carregar',()=>{st.tape=!st.tape;if(!st.tape){st.transport='STOP';st.recording=false}},'O estado da fita foi alterado.']]},
+cassette:{t:'Compartimento da fita',term:'Cassette compartment',what:'Recebe a videocassete HDCAM. O mecanismo carrega a fita para gravação ou reprodução.',when:'Insira a fita antes de playback ou gravação e aguarde o carregamento do mecanismo antes de acionar transporte.',actions:[['Inserir / retirar',()=>{st.tape=!st.tape},'O estado da cassete foi alterado.']]},
+lcd:{t:'LCD de operação',term:'LCD / Function Menu',what:'Exibe timecode, níveis de áudio, formato, estado do transporte e páginas do Function Menu.',when:'Use como referência principal durante playback, gravação e edição. É aqui que você confirma timecode, entradas, áudio e parâmetros ativos.',actions:[['HOME',()=>st.lcd='HOME','Página HOME aberta.'],['VIDEO',()=>st.lcd='VIDEO','Página de vídeo aberta.'],['AUDIO',()=>st.lcd='AUDIO','Página de áudio aberta.'],['EDIT',()=>st.lcd='EDIT','Página de edição aberta.']]},
+functionKeys:{t:'Teclas de função',term:'F1–F6 / P1–P6',what:'As teclas laterais mudam de função conforme a página exibida no LCD. Elas dão acesso rápido às opções mostradas junto à tela.',when:'Use quando precisar alterar parâmetros sem entrar em menus profundos. Primeiro observe a legenda correspondente no LCD.',actions:[['Abrir HOME',()=>st.lcd='HOME','Funções da página HOME exibidas.'],['Abrir VIDEO',()=>st.lcd='VIDEO','Funções da página VIDEO exibidas.']]},
+menuEdit:{t:'Menus e edição',term:'HOME / TC / VIDEO / AUDIO / EDIT / SET UP',what:'Esse bloco seleciona grupos de parâmetros e funções de edição. O MULTI CONTROL navega e altera valores.',when:'Use para configurar o deck, trabalhar com timecode, definir entrada de vídeo/áudio e preparar operações de edição.',actions:[['HOME',()=>st.lcd='HOME','HOME selecionado.'],['AUDIO',()=>st.lcd='AUDIO','AUDIO selecionado.'],['EDIT',()=>st.lcd='EDIT','EDIT selecionado.']]},
+leftPanel:{t:'Botões do lado esquerdo',term:'LEFT CONTROL PANEL',what:'Este bloco reúne botões auxiliares que ficam no lado esquerdo do painel inferior. Eles ajudam você a acessar funções de contagem, preset de timecode, monitoração, escolha de entrada e outras chamadas rápidas do deck.',when:'Use esta área para reconhecer a distribuição física dos botões menores à esquerda do painel. Mesmo quando você não operar todas as funções no dia a dia, é importante saber localizá-las visualmente no equipamento real.',actions:[['COUNTER',()=>{st.lcd='HOME'},'A área de contagem foi destacada.'],['TC PRESET',()=>{st.lcd='EDIT'},'O conjunto de preset de timecode foi destacado.'],['METER',()=>{st.lcd='AUDIO'},'A leitura ligada a medição foi destacada.']]},
+audio:{t:'Níveis de áudio',term:'REC / PB audio level controls',what:'Os knobs REC ajustam nível de gravação e os knobs PB ajustam nível de reprodução dos canais e do cue.',when:'Use REC para acertar o nível antes de gravar. Use PB quando precisar ajustar a saída de playback para monitoração ou integração ao sistema.',actions:[['REC +3 dB',()=>{st.audio=Math.min(12,st.audio+3);st.lcd='AUDIO'},'Nível de gravação aumentado.'],['REC −3 dB',()=>{st.audio=Math.max(-60,st.audio-3);st.lcd='AUDIO'},'Nível de gravação reduzido.'],['0 dB',()=>{st.audio=0;st.lcd='AUDIO'},'Nível retornou a 0 dB.']]},
+transport:{t:'Transporte da fita',term:'REC / REW / PLAY / FWD / STOP',what:'Controla o movimento físico da fita. PLAY reproduz, REW/FWD localizam trechos, STOP interrompe o transporte e REC inicia gravação quando as condições estão corretas.',when:'Use durante ingest, revisão e gravação. Sempre confirme o estado da fita e o timecode antes de REC.',actions:[['PLAY',()=>{if(st.tape)st.transport='PLAY'},'Playback iniciado.'],['STOP',()=>{st.transport='STOP';st.recording=false},'Transporte parado.'],['REW',()=>{if(st.tape){st.transport='REW';st.tcFrames=Math.max(0,st.tcFrames-300)}},'Rebobinando.'],['FWD',()=>{if(st.tape){st.transport='FWD';st.tcFrames+=300}},'Avanço rápido.'],['REC',()=>{if(st.tape){st.recording=true;st.transport='REC'}},'Gravação iniciada.']]},
+rec:{t:'Gravação',term:'REC',what:'Coloca o deck em gravação quando existe fita carregada e as condições de gravação estão disponíveis.',when:'Use somente depois de conferir a fita, o sinal de entrada, os níveis de áudio e o timecode.',actions:[['REC',()=>{if(st.tape){st.recording=true;st.transport='REC'}},'Gravação simulada iniciada.'],['STOP',()=>{st.recording=false;st.transport='STOP'},'Gravação interrompida.']]},
+rew:{t:'Rebobinar',term:'REW',what:'Move a fita rapidamente para trás.',when:'Use para retornar a um ponto anterior da gravação antes de procurar com precisão pelo jog.',actions:[['Rebobinar',()=>{if(st.tape){st.transport='REW';st.tcFrames=Math.max(0,st.tcFrames-300)}},'A fita recuou aproximadamente 10 segundos.']]},
+play:{t:'Reproduzir',term:'PLAY',what:'Reproduz a fita em velocidade normal.',when:'Use para assistir ou monitorar o conteúdo gravado e conferir áudio, vídeo e timecode.',actions:[['PLAY',()=>{if(st.tape)st.transport='PLAY'},'Playback iniciado.']]},
+fwd:{t:'Avanço rápido',term:'F FWD',what:'Move a fita rapidamente para frente.',when:'Use para avançar por grandes trechos antes de fazer uma busca fina.',actions:[['Avançar',()=>{if(st.tape){st.transport='FWD';st.tcFrames+=300}},'A fita avançou aproximadamente 10 segundos.']]},
+stop:{t:'Parar',term:'STOP',what:'Interrompe o movimento da fita e mantém o deck em condição segura de espera.',when:'Use antes de ejetar a fita, trocar de modo ou finalizar uma operação.',actions:[['STOP',()=>{st.transport='STOP';st.recording=false},'Transporte parado.']]},
+search:{t:'Busca precisa',term:'Search dial / Jog / Shuttle / Variable',what:'O grande dial permite localizar pontos com precisão. JOG responde ao giro quadro a quadro; SHUTTLE varia velocidade e direção conforme a posição; VAR permite reprodução em velocidade variável.',when:'Use depois de aproximar o ponto com REW/FWD. JOG é o modo mais útil para localizar um frame específico ou ponto de edição.',actions:[['JOG',()=>st.search='JOG','Modo JOG selecionado.'],['SHUTTLE',()=>st.search='SHUTTLE','Modo SHUTTLE selecionado.'],['VAR',()=>st.search='VAR','Modo VAR selecionado.'],['+1 quadro',()=>{st.tcFrames++;st.wheel=(st.wheel+18)%360},'Avançou um quadro.'],['−1 quadro',()=>{st.tcFrames=Math.max(0,st.tcFrames-1);st.wheel=(st.wheel-18)%360},'Recuou um quadro.']]},
+shuttle:{t:'Shuttle',term:'SHUTTLE',what:'Transforma a posição do dial em velocidade e direção de transporte.',when:'Use para percorrer rapidamente um trecho mantendo controle sobre a velocidade.',actions:[['Selecionar',()=>st.search='SHUTTLE','SHUTTLE selecionado.']]},
+jog:{t:'Jog',term:'JOG',what:'Move a fita em resposta direta ao giro do dial, permitindo busca muito precisa.',when:'Use para chegar exatamente ao frame desejado, especialmente antes de definir um ponto de edição.',actions:[['Selecionar',()=>st.search='JOG','JOG selecionado.'],['+1 quadro',()=>{st.tcFrames++;st.wheel=(st.wheel+18)%360},'Avançou um quadro.']]},
+var:{t:'Velocidade variável',term:'VAR',what:'Permite playback em velocidade variável dentro da faixa configurada.',when:'Use para revisar movimento em velocidades diferentes da normal sem entrar no comportamento amplo do shuttle.',actions:[['Selecionar',()=>st.search='VAR','VAR selecionado.']]},
+editControl:{t:'Controles de edição',term:'PREROLL / PREVIEW / AUTO EDIT / REVIEW',what:'Esses comandos fazem parte do fluxo de edição com pontos IN/OUT e controle externo ou local.',when:'Use quando o deck estiver integrado a um workflow de edição linear e os pontos de entrada/saída já estiverem definidos.',actions:[['PREVIEW',()=>st.lcd='EDIT','Preview de edição selecionado.'],['AUTO EDIT',()=>st.lcd='EDIT','Auto Edit selecionado.']]}
+};
+function show(key){const d=info[key]||info.transport;$$('.ctl,.zone').forEach(x=>x.classList.toggle('selected',x.dataset.key===key));$('#title').textContent=d.t;$('#term').textContent='('+d.term+')';$('#what').textContent=d.what;$('#when').textContent=d.when;const box=$('#modes');box.innerHTML='';d.actions.forEach(a=>{const b=document.createElement('button');b.className='btn';b.textContent=a[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');a[1]();render();$('#feedback').textContent=a[2]};box.appendChild(b)});$('#feedback').textContent='Controle selecionado.'}
+const direct={
+  power:()=>{st.power=!st.power},
+  remote:()=>{st.remote=st.remote==='LOCAL'?'9P':st.remote==='9P'?'50P':'LOCAL'},
+  eject:()=>{st.tape=!st.tape;if(!st.tape){st.transport='STOP';st.recording=false}},
+  rec:()=>{if(st.tape){st.recording=true;st.transport='REC'}},
+  rew:()=>{if(st.tape){st.transport='REW';st.tcFrames=Math.max(0,st.tcFrames-300)}},
+  play:()=>{if(st.tape)st.transport='PLAY'},
+  fwd:()=>{if(st.tape){st.transport='FWD';st.tcFrames+=300}},
+  stop:()=>{st.transport='STOP';st.recording=false},
+  shuttle:()=>{st.search='SHUTTLE'},
+  jog:()=>{st.search='JOG'},
+  var:()=>{st.search='VAR'}
+};
+$$('.ctl,.zone').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const k=el.dataset.key;show(k);if(direct[k]){direct[k]();render();$('#feedback').textContent='Controle físico acionado.'}}));
+$('#wheelHit').addEventListener('pointerdown',e=>{drag={x:e.clientX};$('#wheelHit').setPointerCapture(e.pointerId)});$('#wheelHit').addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;if(Math.abs(dx)>6){const step=dx>0?1:-1;st.tcFrames=Math.max(0,st.tcFrames+step);st.wheel=(st.wheel+step*12)%360;drag.x=e.clientX;render()}});$('#wheelHit').addEventListener('pointerup',()=>drag=null);
+render();
+})();
+</script>
+</body></html>
