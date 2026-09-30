@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sony RCP-1500 — V5 validação</title>
+<style>
+:root{
+  --bg:#0a0d10;--surface:#101419;--surface2:#151a20;--line:#303840;--text:#f4f6f7;--muted:#a7b0b7;
+  --accent:#68b8ff;--panel:#111518;--panel-edge:#3e454a;--white:#edf1f2;--green:#58d574;
+  --red:#ed564e;--amber:#e9ad39;--blue:#69b7d8;--off:#3f464b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{max-width:1500px;margin:auto;padding:18px}
+h1{margin:0 0 5px;font-size:29px}.lead{margin:0 0 14px;color:var(--muted);line-height:1.55}
+.topbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:13px;flex-wrap:wrap}
+.reset,.expbtn{background:#11161b;color:var(--text);border:1px solid #414b54;border-radius:8px;padding:8px 11px;cursor:pointer}.expbtn.active{border-color:var(--accent);background:#18364e}.directHint{color:var(--muted);font-size:13px;line-height:1.45}.topbar.noMap{align-items:center}
+.layout{display:grid;grid-template-columns:minmax(620px,780px) minmax(410px,1fr);gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:13px}.panelScroller{overflow:hidden;height:min(82vh,1040px);min-height:700px;display:flex;align-items:center;justify-content:center;position:sticky;top:10px}.panelScroller svg{display:block;width:100%;height:100%;min-width:0;max-width:100%;transition:filter .2s ease}.zoomButton{background:#11161b;color:var(--text);border:1px solid #414b54;border-radius:8px;padding:8px 11px;cursor:pointer}.zoomButton:disabled{opacity:.42;cursor:default}.topActions{display:flex;gap:8px;flex-wrap:wrap}.zone{cursor:default}.control{cursor:pointer}.hit{fill:transparent;stroke:transparent;stroke-width:5}.zone>.hit{pointer-events:all}.control .hit{pointer-events:all}.control.selected>.hit{stroke:var(--accent);fill:#173451;fill-opacity:.10}
+.print{fill:#f0f3f4;font-size:11px;font-weight:650;text-anchor:middle;letter-spacing:.015em}.printSmall{fill:#d8dde0;font-size:8px;font-weight:600;text-anchor:middle}.printTiny{fill:#b7c0c5;font-size:7px;text-anchor:middle}.darkPrint{fill:#101416;font-size:10px;font-weight:750;text-anchor:middle}
+.ledOff{fill:#394045}.ledGreen{fill:var(--green);filter:drop-shadow(0 0 4px var(--green))}.ledRed{fill:var(--red);filter:drop-shadow(0 0 4px var(--red))}.ledAmber{fill:var(--amber);filter:drop-shadow(0 0 4px var(--amber))}.ledBlue{fill:var(--blue);filter:drop-shadow(0 0 4px var(--blue))}
+.monitorTitle,.ey{font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.monitorFrame{background:#07090b;border:2px solid #3e464c;border-radius:10px;padding:11px;margin-top:8px}.monitor{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:3px;background:#0c1013}
+.scene,.bars,.nosig,.noise{position:absolute;inset:0}.scene{background:radial-gradient(circle at 55% 34%,#d2ad90 0 8%,transparent 8.2%),linear-gradient(to top,#273b46 0 34%,transparent 34%),linear-gradient(130deg,transparent 0 37%,rgba(224,232,236,.18) 37% 53%,transparent 53%),linear-gradient(108deg,transparent 0 67%,rgba(224,232,236,.12) 67% 83%,transparent 83%),linear-gradient(135deg,#335e75,#203a49 54%,#12212a)}
+.bars{display:none;grid-template-columns:repeat(7,1fr)}.bars div:nth-child(1){background:#bfbfbf}.bars div:nth-child(2){background:#bfbf00}.bars div:nth-child(3){background:#00bfbf}.bars div:nth-child(4){background:#00bf00}.bars div:nth-child(5){background:#bf00bf}.bars div:nth-child(6){background:#bf0000}.bars div:nth-child(7){background:#0000bf}.nosig{display:none;align-items:center;justify-content:center;background:#020304;color:#ddd;font:700 21px ui-monospace,monospace;letter-spacing:.12em}.noise{opacity:0;mix-blend-mode:screen;background-image:repeating-radial-gradient(circle at 15% 30%,rgba(255,255,255,.17) 0 1px,transparent 1px 4px)}
+.skin{position:absolute;left:46%;top:22%;width:19%;aspect-ratio:1;border-radius:50%;border:2px solid transparent}.detailOv{position:absolute;inset:0;opacity:0;mix-blend-mode:screen;background:linear-gradient(transparent 0 68%,rgba(255,255,255,.2) 68% 69%,transparent 69%),linear-gradient(90deg,transparent 0 23%,rgba(255,255,255,.2) 23% 24%,transparent 24%)}
+.osd{position:absolute;inset:0;font-family:ui-monospace,monospace;pointer-events:none}.osdTop,.osdBot{position:absolute;left:10px;right:10px;display:flex;justify-content:space-between;font-size:12px;text-shadow:0 1px 2px #000}.osdTop{top:8px}.osdBot{bottom:8px}
+.statusGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:11px}.status{background:#12171b;border:1px solid #354049;border-radius:10px;padding:9px 10px}.status b{display:block;color:var(--muted);font-size:10px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}.status span{font-size:14px;font-weight:650}
+.experiment{margin-top:14px;background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:15px}.experiment h2{margin:0;font-size:22px}.tech{color:var(--muted);font-size:14px;margin-top:3px}.intro{margin:10px 0 0;color:#e7ebed;line-height:1.55}.expgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:13px}.info{background:#11161a;border:1px solid #303840;border-radius:10px;padding:11px}.info p{margin:0;line-height:1.55;font-size:14px}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.feedback{margin-top:10px;background:#0f1418;border:1px solid #303940;border-radius:10px;padding:10px 11px;line-height:1.55;color:#eef1f2}.hint{margin-top:9px;font-size:12px;color:var(--muted)}
+@media(max-width:1150px){.layout{grid-template-columns:1fr}.panelScroller{position:relative;top:auto;height:76vh;min-height:620px}}@media(max-width:720px){main{padding:11px}.expgrid{grid-template-columns:1fr}.panelScroller{height:72vh;min-height:560px}}
+</style>
+</head>
+<body><main>
+<h1>Sony RCP-1500 — V5 para validação</h1>
+<p class="lead">Protótipo não publicado. O painel foi ampliado para preservar proporções e leitura dos grafismos. Navegue clicando diretamente nos controles físicos do RCP-1500.</p>
+<div class="topbar noMap">
+  <div class="directHint">O painel abre inteiro. Clique em qualquer ponto de uma área para ampliar. Para retornar, clique em qualquer espaço do painel fora da área ampliada.</div>
+  <div class="topActions"><button class="reset" id="reset">Restaurar painel</button></div>
+</div>
+
+<div class="layout">
+<section class="card panelScroller">
+<svg id="rcpPanel" viewBox="0 0 760 1440" preserveAspectRatio="xMidYMid meet" aria-label="Sony RCP-1500 V5 interativo">
+<defs>
+  <linearGradient id="panel" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#202529"/><stop offset=".47" stop-color="#0c1013"/><stop offset="1" stop-color="#1c2125"/></linearGradient>
+  <linearGradient id="silverKey" x1="0" y1="0" x2="0" y2="0.62"><stop stop-color="#eef1f2"/><stop offset=".45" stop-color="#c5cbce"/><stop offset="1" stop-color="#858e93"/></linearGradient>
+  <radialGradient id="blackKnob"><stop stop-color="#3d4449"/><stop offset=".7" stop-color="#171c1f"/><stop offset="1" stop-color="#050607"/></radialGradient>
+  <radialGradient id="joyGrad"><stop stop-color="#545c61"/><stop offset=".66" stop-color="#1b2023"/><stop offset="1" stop-color="#040506"/></radialGradient>
+</defs>
+
+<!-- rack ears and chassis -->
+<rect x="157" y="4.96" width="446" height="1426" rx="7" fill="url(#panel)" stroke="#4c555a" stroke-width="2"/>
+<rect x="140" y="0" width="480" height="48.36" fill="#1d2226"/><circle cx="380" cy="24.18" r="6.75" fill="#d5d7d8"/>
+<rect x="140" y="1430.96" width="480" height="10.8" fill="#1d2226"/>
+<text x="184" y="68.82" fill="#fafafa" font-size="30" font-weight="800">SONY</text><text x="576" y="66.96" fill="#b6bec3" font-size="13" text-anchor="end">RCP-1500</text>
+
+<!-- CAMERA / PANEL CONTROL -->
+<g class="zone" data-zone="camera">
+<path d="M177 80.6 H583 V321.16 H177 Z" fill="none" stroke="#6a7378" stroke-width="1.4"/>
+<text x="380" y="93.62" class="printSmall">CAMERA / PANEL CONTROL</text>
+
+<!-- top selection row -->
+<g class="control" data-control="para"><rect x="193" y="107.88" width="86" height="30.24" rx="4" fill="#c99a30" stroke="#755c22"/><text x="236" y="124" class="darkPrint">PARA</text><rect class="hit" x="187" y="104.16" width="98" height="38.88"/></g>
+<g class="control" data-control="master"><rect x="293" y="107.88" width="93" height="30.24" rx="4" fill="#c99a30" stroke="#755c22"/><text x="340" y="124" class="darkPrint">MASTER</text><rect class="hit" x="287" y="104.16" width="105" height="38.88"/></g>
+<g class="control" data-control="sub"><rect x="400" y="107.88" width="112" height="30.24" rx="4" fill="#b9c0c4" stroke="#697176"/><text x="456" y="119.66" class="darkPrint">SUB</text><text x="456" y="128.34" class="darkPrint">ORDINATE</text><rect class="hit" x="394" y="104.16" width="124" height="38.88"/></g>
+
+<!-- operation row -->
+<g class="control" data-control="camPw"><rect x="193" y="147.56" width="97" height="30.24" rx="4" fill="#58ad70" stroke="#2f6c40"/><circle id="ledCam" cx="209" cy="160.58" r="6" class="ledGreen"/><text x="248" y="163.68" class="darkPrint">CAM PW</text><rect class="hit" x="187" y="143.84" width="109" height="38.88"/></g>
+<g class="control" data-control="test"><rect x="304" y="147.56" width="72" height="30.24" rx="4" fill="#70b7c8" stroke="#3d7180"/><text x="340" y="163.68" class="darkPrint">TEST</text><rect class="hit" x="298" y="143.84" width="84" height="38.88"/></g>
+<g class="control" data-control="bars"><rect x="390" y="147.56" width="72" height="30.24" rx="4" fill="#d2a536" stroke="#785f20"/><circle id="ledBars" cx="404" cy="160.58" r="5" class="ledOff"/><text x="433" y="163.68" class="darkPrint">BARS</text><rect class="hit" x="384" y="143.84" width="84" height="38.88"/></g>
+<g class="control" data-control="close"><rect x="476" y="147.56" width="78" height="30.24" rx="4" fill="#aeb6bb" stroke="#626b70"/><text x="515" y="163.68" class="darkPrint">CLOSE</text><rect class="hit" x="470" y="143.84" width="90" height="38.88"/></g>
+
+<text x="212" y="188.48" class="printTiny">AUTO SETUP</text>
+<g class="control" data-control="standard"><rect x="193" y="197.16" width="103" height="30.24" rx="4" fill="#5cae73" stroke="#346b41"/><circle id="ledStd" cx="209" cy="210.18" r="5" class="ledOff"/><text x="250" y="213.28" class="darkPrint">STANDARD</text><rect class="hit" x="187" y="193.44" width="115" height="38.88"/></g>
+<g class="control" data-control="character"><rect x="310" y="197.16" width="103" height="30.24" rx="4" fill="#aeb6bb" stroke="#626b70"/><circle id="ledChar" cx="326" cy="210.18" r="5" class="ledOff"/><text x="364" y="213.28" class="darkPrint">CHARACTER</text><rect class="hit" x="304" y="193.44" width="115" height="38.88"/></g>
+<g class="control" data-control="skin"><rect x="427" y="197.16" width="127" height="30.24" rx="4" fill="#8dabc2" stroke="#536d7d"/><circle id="ledSkin" cx="443" cy="210.18" r="5" class="ledOff"/><text x="494" y="213.28" class="darkPrint">SKIN DETAIL</text><rect class="hit" x="421" y="193.44" width="139" height="38.88"/></g>
+
+<g class="control" data-control="k5600"><rect x="193" y="236.84" width="83" height="30.24" rx="4" fill="#aeb6bb" stroke="#626b70"/><circle id="led5600" cx="208" cy="249.86" r="5" class="ledOff"/><text x="243" y="252.96" class="darkPrint">5600K</text><rect class="hit" x="187" y="233.12" width="95" height="38.88"/></g>
+<g class="control" data-control="detail"><rect x="290" y="236.84" width="83" height="30.24" rx="4" fill="#aeb6bb" stroke="#626b70"/><text x="332" y="252.96" class="darkPrint">DETAIL</text><rect class="hit" x="284" y="233.12" width="95" height="38.88"/></g>
+<g class="control" data-control="gate"><rect x="387" y="236.84" width="70" height="30.24" rx="4" fill="#aeb6bb" stroke="#626b70"/><text x="422" y="252.96" class="darkPrint">GATE</text><rect class="hit" x="381" y="233.12" width="82" height="38.88"/></g>
+<g class="control" data-control="saturation"><rect x="471" y="236.84" width="83" height="30.24" rx="4" fill="#aeb6bb" stroke="#626b70"/><text x="513" y="252.96" class="darkPrint">SAT</text><rect class="hit" x="465" y="233.12" width="95" height="38.88"/></g>
+
+<g class="control" data-control="autoHue"><rect x="193" y="276.52" width="92" height="30.96" rx="4" fill="#aeb6bb" stroke="#626b70"/><text x="239" y="287.68" class="darkPrint">SKIN DTL</text><text x="239" y="296.98" class="darkPrint">AUTO HUE</text><rect class="hit" x="187" y="272.8" width="104" height="39.6"/></g>
+<g class="control" data-control="level"><rect x="299" y="276.52" width="72" height="30.96" rx="4" fill="#aeb6bb" stroke="#626b70"/><text x="335" y="293.26" class="darkPrint">LEVEL</text><rect class="hit" x="293" y="272.8" width="84" height="39.6"/></g>
+<g class="control" data-control="start"><rect x="385" y="276.52" width="83" height="30.96" rx="4" fill="#c45a50" stroke="#76362f"/><text x="427" y="287.68" class="darkPrint">START/</text><text x="427" y="296.98" class="darkPrint">BREAK</text><rect class="hit" x="379" y="272.8" width="95" height="39.6"/></g>
+<g class="control" data-control="whiteAuto"><rect x="482" y="276.52" width="72" height="30.96" rx="4" fill="#e2e5e6" stroke="#777f84"/><text x="518" y="293.26" class="darkPrint">WHITE</text><rect class="hit" x="476" y="272.8" width="84" height="39.6"/></g>
+<g class="control" data-control="blackAuto"><rect x="482" y="306.28" width="72" height="25.2" rx="4" fill="#555d62" stroke="#2e3438"/><text x="518" y="320.54" class="print">BLACK</text><rect class="hit" x="476" y="302.56" width="84" height="33.84"/></g>
+<rect class="hit" x="170" y="76.88" width="420" height="248.62" rx="7"/>
+</g>
+
+<!-- LCD MENU -->
+<g class="zone" data-zone="menu">
+<path d="M177 339.76 H583 V620 H177 Z" fill="none" stroke="#6a7378" stroke-width="1.4"/>
+<text x="380" y="353.4" class="printSmall">MENU OPERATION</text>
+<rect x="195" y="368.9" width="298" height="172.36" rx="5" fill="#07090b" stroke="#636d73" stroke-width="3"/>
+<rect x="208" y="376.96" width="272" height="156.24" rx="3" fill="#1e2930"/>
+<text id="lcdTitle" x="344" y="398.04" fill="#fff" font-size="20" text-anchor="middle" font-family="ui-monospace,monospace">STATUS</text>
+<text id="lcd1" x="228" y="424.08" fill="#e5eaec" font-size="16" font-family="ui-monospace,monospace">CAM 1</text>
+<text id="lcd2" x="228" y="446.4" fill="#e5eaec" font-size="16" font-family="ui-monospace,monospace">1080i59.94</text>
+<text id="lcd3" x="228" y="468.72" fill="#e5eaec" font-size="16" font-family="ui-monospace,monospace">IRIS F5.6</text>
+<text id="lcd4" x="228" y="491.04" fill="#e5eaec" font-size="16" font-family="ui-monospace,monospace">GAIN 0dB</text>
+
+<g class="control" data-control="selectKnob"><circle cx="531" cy="384.4" r="17.25" fill="url(#blackKnob)" stroke="#778187"/><line id="selectMark" x1="531" y1="384.4" x2="543" y2="373.24" stroke="#edf0f2" stroke-width="2"/><text x="531" y="406.1" class="printTiny">SELECT</text><circle class="hit" cx="531" cy="384.4" r="22.5"/></g>
+<g class="control" data-control="menuBtn"><rect x="508" y="424.08" width="46" height="26.64" rx="4" fill="url(#silverKey)" stroke="#616a70"/><text x="531" y="438.96" class="darkPrint">MENU</text><rect class="hit" x="502" y="420.36" width="58" height="35.28"/></g>
+<g class="control" data-control="custom1"><rect x="508" y="456.32" width="46" height="26.64" rx="4" fill="url(#silverKey)" stroke="#616a70"/><text x="531" y="470.58" class="darkPrint">1</text><rect class="hit" x="502" y="452.6" width="58" height="35.28"/></g>
+<g class="control" data-control="custom2"><rect x="508" y="488.56" width="46" height="26.64" rx="4" fill="url(#silverKey)" stroke="#616a70"/><text x="531" y="502.82" class="darkPrint">2</text><rect class="hit" x="502" y="484.84" width="58" height="35.28"/></g>
+<g class="control" data-control="paintMenu"><rect x="508" y="520.8" width="46" height="38.16" rx="4" fill="#c4a36c" stroke="#725d3e"/><text x="531" y="534.44" class="darkPrint">PAINT</text><text x="531" y="544.36" class="darkPrint">CUSTOM</text><rect class="hit" x="502" y="517.08" width="58" height="46.8"/></g>
+
+<g class="control" data-control="soft1"><circle cx="226" cy="573.5" r="17.25" fill="url(#blackKnob)" stroke="#778187"/><line id="soft1Mark" x1="226" y1="573.5" x2="237" y2="562.96" stroke="#edf0f2" stroke-width="2"/><text x="226" y="596.44" class="printTiny">CONTROL 1</text><circle class="hit" cx="226" cy="573.5" r="22.5"/></g><g class="control" data-control="soft2"><circle cx="306" cy="573.5" r="17.25" fill="url(#blackKnob)" stroke="#778187"/><line id="soft2Mark" x1="306" y1="573.5" x2="317" y2="562.96" stroke="#edf0f2" stroke-width="2"/><text x="306" y="596.44" class="printTiny">CONTROL 2</text><circle class="hit" cx="306" cy="573.5" r="22.5"/></g><g class="control" data-control="soft3"><circle cx="386" cy="573.5" r="17.25" fill="url(#blackKnob)" stroke="#778187"/><line id="soft3Mark" x1="386" y1="573.5" x2="397" y2="562.96" stroke="#edf0f2" stroke-width="2"/><text x="386" y="596.44" class="printTiny">CONTROL 3</text><circle class="hit" cx="386" cy="573.5" r="22.5"/></g><g class="control" data-control="soft4"><circle cx="466" cy="573.5" r="17.25" fill="url(#blackKnob)" stroke="#778187"/><line id="soft4Mark" x1="466" y1="573.5" x2="477" y2="562.96" stroke="#edf0f2" stroke-width="2"/><text x="466" y="596.44" class="printTiny">CONTROL 4</text><circle class="hit" cx="466" cy="573.5" r="22.5"/></g>
+<rect class="hit" x="170" y="336.04" width="420" height="288.3" rx="7"/>
+</g>
+
+<!-- FUNCTION / EXPOSURE -->
+<g class="zone" data-zone="function">
+<path d="M177 635.5 H583 V890.32 H177 Z" fill="none" stroke="#6a7378" stroke-width="1.4"/>
+<text x="380" y="649.14" class="printSmall">SCENE FILE / FILTER / EXPOSURE</text>
+<text x="224" y="670.22" class="printSmall">SCENE FILE</text>
+<g class="control" data-control="scene1"><circle id="sceneLed1" cx="204" cy="683.24" r="5" class="ledAmber"/><rect x="186" y="689.44" width="36" height="22.32" rx="4" fill="url(#silverKey)" stroke="#626b70"/><text x="204" y="702.46" class="darkPrint">1</text><rect class="hit" x="180" y="678.28" width="48" height="39.6"/></g><g class="control" data-control="scene2"><circle id="sceneLed2" cx="257" cy="683.24" r="5" class="ledOff"/><rect x="239" y="689.44" width="36" height="22.32" rx="4" fill="url(#silverKey)" stroke="#626b70"/><text x="257" y="702.46" class="darkPrint">2</text><rect class="hit" x="233" y="678.28" width="48" height="39.6"/></g><g class="control" data-control="scene3"><circle id="sceneLed3" cx="310" cy="683.24" r="5" class="ledOff"/><rect x="292" y="689.44" width="36" height="22.32" rx="4" fill="url(#silverKey)" stroke="#626b70"/><text x="310" y="702.46" class="darkPrint">3</text><rect class="hit" x="286" y="678.28" width="48" height="39.6"/></g><g class="control" data-control="scene4"><circle id="sceneLed4" cx="363" cy="683.24" r="5" class="ledOff"/><rect x="345" y="689.44" width="36" height="22.32" rx="4" fill="url(#silverKey)" stroke="#626b70"/><text x="363" y="702.46" class="darkPrint">4</text><rect class="hit" x="339" y="678.28" width="48" height="39.6"/></g><g class="control" data-control="scene5"><circle id="sceneLed5" cx="416" cy="683.24" r="5" class="ledOff"/><rect x="398" y="689.44" width="36" height="22.32" rx="4" fill="url(#silverKey)" stroke="#626b70"/><text x="416" y="702.46" class="darkPrint">5</text><rect class="hit" x="392" y="678.28" width="48" height="39.6"/></g>
+<g class="control" data-control="store"><rect x="470" y="689.44" width="74" height="22.32" rx="4" fill="#b76960" stroke="#72413a"/><text x="507" y="702.46" class="darkPrint">STORE</text><rect class="hit" x="464" y="685.72" width="86" height="30.96"/></g>
+
+<!-- ND -->
+<text x="234" y="734.08" class="printSmall">ND</text><rect x="196" y="742.76" width="76" height="76.88" rx="5" fill="#202529" stroke="#687177"/>
+<g class="control" data-control="ndUp"><polygon points="234,752.68 218,765.08 250,765.08" fill="#f0f3f4"/><rect class="hit" x="210" y="747.72" width="48" height="28.8"/></g>
+<rect x="211" y="775" width="46" height="23.76" rx="3" fill="#07090b" stroke="#5a6267"/><text id="ndDisp" x="234" y="789.88" fill="#f2f4f5" font-size="20" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+<g class="control" data-control="ndDown"><polygon points="234,810.96 218,798.56 250,798.56" fill="#f0f3f4"/><rect class="hit" x="210" y="797.32" width="48" height="28.8"/></g>
+
+<!-- CC -->
+<text x="334" y="734.08" class="printSmall">CC</text><rect x="296" y="742.76" width="76" height="76.88" rx="5" fill="#202529" stroke="#687177"/>
+<g class="control" data-control="ccUp"><polygon points="334,752.68 318,765.08 350,765.08" fill="#f0f3f4"/><rect class="hit" x="310" y="747.72" width="48" height="28.8"/></g>
+<rect x="311" y="775" width="46" height="23.76" rx="3" fill="#07090b" stroke="#5a6267"/><text id="ccDisp" x="334" y="789.88" fill="#f2f4f5" font-size="20" text-anchor="middle" font-family="ui-monospace,monospace">A</text>
+<g class="control" data-control="ccDown"><polygon points="334,810.96 318,798.56 350,798.56" fill="#f0f3f4"/><rect class="hit" x="310" y="797.32" width="48" height="28.8"/></g>
+
+<!-- MASTER GAIN -->
+<text x="480" y="734.08" class="printSmall">MASTER GAIN</text><rect x="428" y="742.76" width="104" height="76.88" rx="5" fill="#202529" stroke="#687177"/>
+<g class="control" data-control="gainUp"><polygon points="480,752.68 464,765.08 496,765.08" fill="#f0f3f4"/><rect class="hit" x="456" y="747.72" width="48" height="28.8"/></g>
+<rect x="454" y="775" width="52" height="23.76" rx="3" fill="#07090b" stroke="#5a6267"/><text id="gainDisp" x="480" y="789.88" fill="#f2f4f5" font-size="20" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<g class="control" data-control="gainDown"><polygon points="480,810.96 464,798.56 496,798.56" fill="#f0f3f4"/><rect class="hit" x="456" y="797.32" width="48" height="28.8"/></g>
+
+<text x="260" y="843.82" class="printSmall">SHUTTER</text><g class="control" data-control="shutter"><rect x="196" y="850.64" width="128" height="30.24" rx="4" fill="#202529" stroke="#687177"/><text id="shutDisp" x="260" y="868" fill="#f2f4f5" font-size="17" text-anchor="middle" font-family="ui-monospace,monospace">OFF</text><rect class="hit" x="190" y="846.92" width="140" height="38.88"/></g>
+<g class="control" data-control="absolute"><rect x="390" y="850.64" width="154" height="30.24" rx="4" fill="#aeb6bb" stroke="#626b70"/><circle id="ledAbsolute" cx="412" cy="863.66" r="6" class="ledOff"/><text x="473" y="868" class="darkPrint">ABSOLUTE</text><rect class="hit" x="384" y="846.92" width="166" height="38.88"/></g>
+<rect class="hit" x="170" y="631.78" width="420" height="262.88" rx="7"/>
+</g>
+
+<!-- PAINT -->
+<g class="zone" data-zone="paint">
+<path d="M177 903.96 H583 V1125.92 H177 Z" fill="none" stroke="#6a7378" stroke-width="1.4"/>
+<text x="380" y="918.22" class="printSmall">WHITE / BLACK / FLARE / DETAIL</text>
+<text x="297" y="942.4" class="printSmall">WHITE</text>
+<g class="control" data-control="whiteR"><circle cx="225" cy="977.74" r="25.5" fill="#d74949"/><circle cx="225" cy="977.74" r="20.25" fill="url(#blackKnob)" stroke="#768086"/><polygon points="225,965.96 218,977.12 232,977.12" fill="#edf1f2"/><text x="225" y="1006.26" class="printSmall">R</text><rect class="hit" x="183" y="951.7" width="84" height="52.08"/></g><g class="control" data-control="whiteG"><circle cx="297" cy="977.74" r="25.5" fill="#47b96c"/><circle cx="297" cy="977.74" r="20.25" fill="url(#blackKnob)" stroke="#768086"/><polygon points="297,965.96 290,977.12 304,977.12" fill="#edf1f2"/><text x="297" y="1006.26" class="printSmall">G</text><rect class="hit" x="255" y="951.7" width="84" height="52.08"/></g><g class="control" data-control="whiteB"><circle cx="369" cy="977.74" r="25.5" fill="#3d8fd7"/><circle cx="369" cy="977.74" r="20.25" fill="url(#blackKnob)" stroke="#768086"/><polygon points="369,965.96 362,977.12 376,977.12" fill="#edf1f2"/><text x="369" y="1006.26" class="printSmall">B</text><rect class="hit" x="327" y="951.7" width="84" height="52.08"/></g>
+<text x="297" y="1029.2" class="printSmall">BLACK / FLARE</text>
+<g class="control" data-control="blackR"><circle cx="225" cy="1064.54" r="25.5" fill="#d74949"/><circle cx="225" cy="1064.54" r="20.25" fill="url(#blackKnob)" stroke="#768086"/><polygon points="225,1052.76 218,1063.92 232,1063.92" fill="#edf1f2"/><text x="225" y="1093.06" class="printSmall">R</text><rect class="hit" x="183" y="1038.5" width="84" height="52.08"/></g><g class="control" data-control="blackG"><circle cx="297" cy="1064.54" r="25.5" fill="#47b96c"/><circle cx="297" cy="1064.54" r="20.25" fill="url(#blackKnob)" stroke="#768086"/><polygon points="297,1052.76 290,1063.92 304,1063.92" fill="#edf1f2"/><text x="297" y="1093.06" class="printSmall">G</text><rect class="hit" x="255" y="1038.5" width="84" height="52.08"/></g><g class="control" data-control="blackB"><circle cx="369" cy="1064.54" r="25.5" fill="#3d8fd7"/><circle cx="369" cy="1064.54" r="20.25" fill="url(#blackKnob)" stroke="#768086"/><polygon points="369,1052.76 362,1063.92 376,1063.92" fill="#edf1f2"/><text x="369" y="1093.06" class="printSmall">B</text><rect class="hit" x="327" y="1038.5" width="84" height="52.08"/></g>
+<g class="control" data-control="flare"><rect x="430" y="1049.66" width="108" height="27.36" rx="4" fill="#aeb6bb" stroke="#626b70"/><circle id="ledFlare" cx="449" cy="1061.44" r="5" class="ledOff"/><text x="495" y="1065.16" class="darkPrint">FLARE</text><rect class="hit" x="424" y="1045.94" width="120" height="36"/></g>
+<g class="control" data-control="detailKnob"><circle cx="485" cy="972.16" r="21.75" fill="url(#blackKnob)" stroke="#768086"/><line id="detailKnobMark" x1="485" y1="972.16" x2="500" y2="957.9" stroke="#edf1f2" stroke-width="2"/><text x="485" y="999.44" class="printSmall">DETAIL</text><rect class="hit" x="450" y="950.46" width="70" height="50.4"/></g>
+<g class="control" data-control="assign"><circle cx="485" cy="1103.6" r="18" fill="url(#blackKnob)" stroke="#768086"/><line id="assignMark" x1="485" y1="1103.6" x2="497" y2="1091.82" stroke="#edf1f2" stroke-width="2"/><text x="485" y="1122.2" class="printTiny">ASSIGN</text><rect class="hit" x="455" y="1085" width="60" height="43.2"/></g>
+<rect class="hit" x="170" y="900.24" width="420" height="230.02" rx="7"/>
+</g>
+
+<!-- IRIS / MASTER BLACK -->
+<g class="zone" data-zone="iris">
+<path d="M177 1140.8 H583 V1416.7 H177 Z" fill="none" stroke="#6a7378" stroke-width="1.4"/>
+<text x="380" y="1155.68" class="printSmall">IRIS / MASTER BLACK ADJUSTMENT</text>
+
+<!-- camera number -->
+<rect id="camBox" x="195" y="1170.56" width="80" height="38.88" rx="4" fill="#060809" stroke="#515a60"/><text id="camNum" x="235" y="1193.5" fill="#ffb449" font-size="32" text-anchor="middle" font-family="ui-monospace,monospace">1</text>
+
+<!-- iris scale -->
+<text x="317" y="1176.76" class="printTiny">IRIS POSITION</text>
+<rect id="irisLed0" x="310" y="1184.2" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed1" x="310" y="1191.02" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed2" x="310" y="1197.84" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed3" x="310" y="1204.66" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed4" x="310" y="1211.48" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed5" x="310" y="1218.3" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed6" x="310" y="1225.12" width="14" height="6.3" rx="2" class="ledAmber"/><rect id="irisLed7" x="310" y="1231.94" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed8" x="310" y="1238.76" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed9" x="310" y="1245.58" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed10" x="310" y="1252.4" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed11" x="310" y="1259.22" width="14" height="6.3" rx="2" class="ledOff"/><rect id="irisLed12" x="310" y="1266.04" width="14" height="6.3" rx="2" class="ledOff"/>
+
+<!-- SENS/COARSE -->
+<g class="control" data-control="sens"><circle cx="474" cy="1187.92" r="18.75" fill="url(#blackKnob)" stroke="#768086"/><line id="sensMark" x1="474" y1="1187.92" x2="487" y2="1176.14" stroke="#edf1f2" stroke-width="2"/><text x="474" y="1210.86" class="printSmall">SENS</text><rect class="hit" x="443" y="1168.7" width="62" height="44.64"/></g>
+<g class="control" data-control="coarse"><circle cx="540" cy="1187.92" r="18.75" fill="url(#blackKnob)" stroke="#768086"/><line id="coarseMark" x1="540" y1="1187.92" x2="553" y2="1176.14" stroke="#edf1f2" stroke-width="2"/><text x="540" y="1210.86" class="printSmall">COARSE</text><rect class="hit" x="509" y="1168.7" width="62" height="44.64"/></g>
+
+<!-- iris and MB displays -->
+<text x="235" y="1232.56" class="printSmall">IRIS</text><rect x="195" y="1240" width="80" height="32.4" rx="4" fill="#060809" stroke="#515a60"/><text id="irisDisp" x="235" y="1259.84" fill="#f2f4f5" font-size="22" text-anchor="middle" font-family="ui-monospace,monospace">5.6</text>
+<g class="control" data-control="irisRelative"><rect x="294" y="1240" width="117" height="32.4" rx="4" fill="#aeb6bb" stroke="#626b70"/><circle id="ledIrisRel" cx="315" cy="1253.64" r="6" class="ledOff"/><text x="361" y="1257.36" class="darkPrint">RELATIVE</text><rect class="hit" x="288" y="1236.28" width="129" height="41.04"/></g>
+
+<text x="235" y="1292.7" class="printSmall">MASTER BLACK</text><rect x="195" y="1300.14" width="80" height="32.4" rx="4" fill="#060809" stroke="#515a60"/><text id="mbDisp" x="235" y="1319.98" fill="#f2f4f5" font-size="22" text-anchor="middle" font-family="ui-monospace,monospace">0</text>
+<g class="control" data-control="mbRelative"><rect x="294" y="1300.14" width="117" height="32.4" rx="4" fill="#aeb6bb" stroke="#626b70"/><circle id="ledMbRel" cx="315" cy="1313.78" r="6" class="ledOff"/><text x="361" y="1317.5" class="darkPrint">RELATIVE</text><rect class="hit" x="288" y="1296.42" width="129" height="41.04"/></g>
+
+<g class="control" data-control="irisActive"><rect x="195" y="1342.92" width="150" height="30.96" rx="4" fill="#57aa6d" stroke="#326940"/><circle id="ledIrisActive" cx="216" cy="1355.94" r="6" class="ledGreen"/><text x="281" y="1359.66" class="darkPrint">IRIS/MB ACTIVE</text><rect class="hit" x="189" y="1339.2" width="162" height="39.6"/></g>
+<g class="control" data-control="autoIris"><rect x="429" y="1238.76" width="122" height="30.96" rx="4" fill="#aeb6bb" stroke="#626b70"/><circle id="ledAutoIris" cx="449" cy="1251.78" r="6" class="ledOff"/><text x="502" y="1255.5" class="darkPrint">AUTO IRIS</text><rect class="hit" x="423" y="1235.04" width="134" height="39.6"/></g>
+
+<!-- combined iris / pedestal control -->
+<ellipse cx="462" cy="1344.16" rx="88" ry="67.68" fill="#07090a" stroke="#555e63" stroke-width="4" pointer-events="none"/>
+<ellipse cx="462" cy="1344.16" rx="75" ry="58.32" fill="url(#joyGrad)" stroke="#747e83" stroke-width="2" pointer-events="none"/>
+<g id="mbRing" pointer-events="none">
+  <circle cx="462" cy="1344.16" r="45" fill="#111518" stroke="#838d92" stroke-width="4"/>
+  <circle cx="462" cy="1344.16" r="50.25" fill="none" stroke="#697278" stroke-width="2" stroke-dasharray="3 8"/>
+  <line id="pedestalMark" x1="462" y1="1306.96" x2="462" y2="1319.36" stroke="#ffffff" stroke-width="3"/>
+</g>
+<text x="462" y="1294.56" class="printTiny">MASTER BLACK / PEDESTAL DIAL</text>
+<g class="control" data-control="irisLever" id="irisLeverControl"><rect x="442" y="1313.78" width="40" height="57.04" rx="18" fill="#080a0b" stroke="#41494d"/><circle id="lever" cx="462" cy="1344.16" r="15.75" fill="#2a3034" stroke="#929ba0" stroke-width="2"/><circle id="leverDot" cx="462" cy="1344.16" r="5" fill="#e5e8e9"/><rect class="hit" x="435" y="1306.96" width="54" height="71.92" rx="22"/></g>
+<g class="control" data-control="mbRing" id="mbRingControl"><circle class="ringHit" cx="462" cy="1344.16" r="58.5" fill="none" stroke="transparent" stroke-width="24" style="pointer-events:stroke"/></g>
+<text x="462" y="1407.4" class="printSmall">IRIS LEVER + MASTER BLACK / PEDESTAL</text>
+
+<g class="control" data-control="panelActive"><rect x="195" y="1381.98" width="150" height="30.96" rx="4" fill="#57aa6d" stroke="#326940"/><circle id="ledPanel" cx="216" cy="1395" r="6" class="ledGreen"/><text x="281" y="1398.72" class="darkPrint">PANEL ACTIVE</text><rect class="hit" x="189" y="1378.26" width="162" height="39.6"/></g>
+<text x="535" y="1288.36" class="printTiny">EXT</text><circle id="extLed" cx="535" cy="1296.42" r="5" class="ledOff"/><text x="564" y="1288.36" class="printTiny">D EXT</text><circle id="dextLed" cx="564" cy="1296.42" r="5" class="ledOff"/>
+<rect class="hit" x="170" y="1137.08" width="420" height="283.96" rx="7"/>
+</g>
+</svg>
+</section>
+
+<section class="card">
+<div class="monitorTitle">Preview da câmera</div>
+<div class="monitorFrame"><div class="monitor">
+<div class="scene" id="scene"></div><div class="noise" id="noise"></div><div class="skin" id="skinOverlay"></div><div class="detailOv" id="detailOverlay"></div>
+<div class="bars" id="bars"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div class="nosig" id="nosig">NO SIGNAL</div>
+<div class="osd"><div class="osdTop"><span>CAM 1</span><span id="osdFormat">1080i59.94</span></div><div class="osdBot"><span id="osdIris">IRIS F5.6</span><span id="osdGain">GAIN 0dB</span></div></div>
+</div></div>
+
+<div class="statusGrid">
+<div class="status"><b>Fonte</b><span id="stSource">Câmera ativa</span></div>
+<div class="status"><b>Scene file</b><span id="stScene">1</span></div>
+<div class="status"><b>Filtros</b><span id="stFilters">ND 1 · CC A</span></div>
+<div class="status"><b>Exposição</b><span id="stExposure">F5.6 · 0 dB</span></div>
+<div class="status"><b>Paint</b><span id="stPaint">Neutro</span></div>
+<div class="status"><b>Modo de ajuste</b><span id="stMode">Íris absoluta · MB absoluto</span></div>
+</div>
+
+<section class="experiment">
+<div class="ey">Experimente</div>
+<h2 id="expTitle">Selecione um controle no painel</h2>
+<div class="tech" id="expTech">Navegação direta pelo equipamento</div>
+<p class="intro" id="expIntro">Clique diretamente em um botão, knob, display ou controle físico do RCP-1500. As informações complementares aparecerão aqui.</p>
+<div class="expgrid">
+  <div class="info"><div class="ey">Quando usar</div><p id="expWhen">Use na preparação ou encerramento da operação, depois de confirmar que a câmera pode ser energizada ou desligada.</p></div>
+  <div class="info"><div class="ey">O que observar</div><p id="expObserve">Quando a câmera é desligada, o preview perde o sinal e o LED CAM PW apaga.</p></div>
+</div>
+<div class="actions" id="expActions"></div>
+<div class="feedback" id="feedback">Clique em um controle do painel ou use os botões de teste.</div>
+<div class="hint">Não há seleção por áreas. A navegação acontece somente pelo próprio painel, para aproximar a exploração do equipamento físico.</div>
+</section>
+</section>
+</div>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const st={cam:true,bars:false,char:false,skin:false,k5600:false,detail:0,sat:0,scene:1,nd:1,cc:'A',gain:0,shutter:'OFF',absolute:false,flare:false,whiteR:0,whiteG:0,whiteB:0,blackR:0,blackG:0,blackB:0,iris:5.6,mb:0,irisRel:false,mbRel:false,sens:50,coarse:50,irisActive:true,autoIris:false,panel:true,menu:'STATUS',selectPos:0,soft1:0,soft2:0,soft3:0,soft4:0,assignPos:0};
+const defs={
+ camPw:{title:'CAM PW',tech:'Alimentação da câmera',intro:'Liga ou desliga a câmera controlada por este RCP.',when:'Use na preparação ou encerramento da operação, depois de confirmar que a câmera pode ser energizada ou desligada.',observe:'Quando a câmera é desligada, o preview perde o sinal e o LED CAM PW apaga.',actions:[['Alternar',()=>st.cam=!st.cam,'A alimentação da câmera foi alternada.']]},
+ bars:{title:'BARS',tech:'Barras de teste',intro:'Substitui a imagem da câmera por barras de cor para teste do caminho de vídeo.',when:'Use antes da gravação ou transmissão para verificar roteamento, monitoramento e processamento do sinal.',observe:'O preview passa imediatamente para barras e o LED BARS acende.',actions:[['Alternar',()=>{if(st.cam)st.bars=!st.bars},'As barras de teste foram alternadas.']]},
+ standard:{title:'STANDARD',tech:'Retorno à referência',intro:'Recupera uma condição de referência para os principais parâmetros da câmera.',when:'Use quando muitos ajustes foram alterados e você precisa voltar rapidamente a uma base conhecida para recomeçar o shading.',observe:'O preview volta à aparência neutra; ND, ganho, íris, detail, saturação e master black retornam aos valores-base simulados.',actions:[['Aplicar',()=>{st.detail=0;st.sat=0;st.k5600=false;st.skin=false;st.gain=0;st.nd=1;st.iris=5.6;st.mb=0},'A referência foi restaurada.']]},
+ character:{title:'CHARACTER',tech:'Sobreposição de caracteres',intro:'Ativa a exibição de informações de operação associadas à câmera.',when:'Use quando precisar conferir dados técnicos da câmera sem deixar a posição de controle.',observe:'O OSD do preview recebe a indicação CHAR.',actions:[['Alternar',()=>st.char=!st.char,'Character foi alternado.']]},
+ skin:{title:'SKIN DETAIL',tech:'Tratamento seletivo de detalhe na pele',intro:'Aplica tratamento de detalhe em uma faixa de cor escolhida, normalmente usada para tons de pele.',when:'Use em close de apresentadores quando o detail geral está adequado, mas você deseja suavizar ou controlar apenas a textura da pele.',observe:'A simulação destaca a região de pele para mostrar onde o recurso atua; a câmera real não desenha esse círculo no programa.',actions:[['Alternar',()=>st.skin=!st.skin,'Skin Detail foi alternado.']]},
+ k5600:{title:'5600K',tech:'Conversão para iluminação de temperatura mais alta',intro:'Muda a condição de correção de cor para uma situação de iluminação próxima de 5600 K.',when:'Use ao trabalhar com fontes de luz diurnas ou iluminação ajustada para uma temperatura mais alta que o padrão de estúdio em tungstênio.',observe:'O preview muda levemente de balanço para tornar a diferença perceptível.',actions:[['Alternar',()=>st.k5600=!st.k5600,'5600K foi alternado.']]},
+ detail:{title:'DETAIL',tech:'Realce de contornos',intro:'Ajusta o realce eletrônico de bordas e microcontraste percebido.',when:'Use com cuidado para casar a sensação de nitidez entre câmeras. Excesso produz contornos artificiais.',observe:'O preview fica progressivamente mais duro nas bordas conforme o valor sobe.',actions:[['Aumentar',()=>st.detail=Math.min(5,st.detail+1),'Detail aumentado.'],['Reduzir',()=>st.detail=Math.max(0,st.detail-1),'Detail reduzido.']]},
+ saturation:{title:'SATURATION',tech:'Intensidade das cores',intro:'Ajusta a intensidade global da crominância.',when:'Use para casar câmeras que estejam entregando cores perceptivelmente mais ou menos intensas.',observe:'O preview fica mais saturado ou mais discreto sem alterar diretamente a exposição.',actions:[['Aumentar',()=>st.sat=Math.min(5,st.sat+1),'Saturação aumentada.'],['Reduzir',()=>st.sat=Math.max(-4,st.sat-1),'Saturação reduzida.']]},
+ menuBtn:{title:'MENU',tech:'Menu principal do RCP',intro:'Abre a navegação de parâmetros que não possuem um controle dedicado no painel.',when:'Use para configurações menos frequentes ou para chegar a grupos de parâmetros específicos.',observe:'O LCD muda de conteúdo sem alterar a imagem por si só.',actions:[['STATUS',()=>st.menu='STATUS','Página STATUS aberta.'],['PAINT',()=>st.menu='PAINT','Página PAINT aberta.'],['EXPOSURE',()=>st.menu='EXPOSURE','Página EXPOSURE aberta.']]},
+ nd:{title:'ND',tech:'Filtro de densidade neutra',intro:'Reduz fisicamente a quantidade de luz que chega ao sensor sem mudar a cor desejada.',when:'Use quando há luz demais e você quer evitar fechar excessivamente a íris.',observe:'No preview, aumentar ND reduz a exposição. O display ND muda de posição.',actions:[['ND +',()=>st.nd=Math.min(5,st.nd+1),'ND aumentado.'],['ND −',()=>st.nd=Math.max(1,st.nd-1),'ND reduzido.']]},
+ cc:{title:'CC',tech:'Filtro de correção de cor',intro:'Seleciona a posição do filtro óptico de conversão/correção de cor.',when:'Use quando a câmera precisa de outra condição óptica de correção para a iluminação empregada.',observe:'O display troca entre A, B, C e D. Nesta simulação o efeito visual é sutil.',actions:[['Avançar',()=>st.cc=({A:'B',B:'C',C:'D',D:'A'})[st.cc],'CC avançou.'],['Voltar',()=>st.cc=({A:'D',D:'C',C:'B',B:'A'})[st.cc],'CC recuou.']]},
+ gain:{title:'MASTER GAIN',tech:'Ganho eletrônico',intro:'Aumenta ou reduz a amplificação eletrônica do sinal da câmera.',when:'Use quando não é possível obter exposição adequada apenas com iluminação, ND e íris. Evite ganho alto quando a qualidade de imagem for prioridade.',observe:'O preview clareia e a simulação adiciona ruído conforme o ganho aumenta.',actions:[['Gain +',()=>st.gain=Math.min(12,st.gain+3),'Ganho aumentado.'],['Gain −',()=>st.gain=Math.max(-6,st.gain-3),'Ganho reduzido.']]},
+ shutter:{title:'SHUTTER',tech:'Tempo de exposição eletrônico',intro:'Muda o tempo de exposição de cada quadro/campo.',when:'Use para controlar a representação de movimento ou situações específicas de iluminação e telas.',observe:'O valor aparece no display. A simulação mantém a cena estática, então o principal retorno é o OSD.',actions:[['Alterar',()=>{const q=['OFF','1/100','1/250','1/500'];st.shutter=q[(q.indexOf(st.shutter)+1)%q.length]},'Shutter alterado.']]},
+ absolute:{title:'ABSOLUTE',tech:'Modo absoluto dos knobs de paint',intro:'Faz a posição física dos knobs de WHITE, BLACK/FLARE, DETAIL e ASSIGN corresponder ao valor ajustado.',when:'Use quando deseja que a posição do knob seja uma referência direta. No modo relativo, o knob altera o valor a partir do ponto atual sem exigir correspondência física.',observe:'O LED indica o modo absoluto. Não há mudança no preview até que algum parâmetro seja movido.',actions:[['Alternar',()=>st.absolute=!st.absolute,'Modo absoluto alternado.']]},
+ whiteR:{title:'WHITE R',tech:'Componente vermelho do balanço de branco',intro:'Ajusta o componente vermelho do branco.',when:'Use para remover uma dominante fria/quente ou casar câmeras observando áreas neutras e tons claros.',observe:'A simulação desloca discretamente a cor do preview.',actions:[['R +',()=>st.whiteR++,'White R aumentado.'],['R −',()=>st.whiteR--,'White R reduzido.']]},
+ whiteG:{title:'WHITE G',tech:'Componente verde do balanço de branco',intro:'Ajusta o componente verde do branco.',when:'Use apenas em pequenos refinamentos quando a câmera apresenta dominante verde/magenta em áreas claras.',observe:'A mudança aparece na coloração geral do preview.',actions:[['G +',()=>st.whiteG++,'White G aumentado.'],['G −',()=>st.whiteG--,'White G reduzido.']]},
+ whiteB:{title:'WHITE B',tech:'Componente azul do balanço de branco',intro:'Ajusta o componente azul do branco.',when:'Use para corrigir dominante quente/fria ou casar a resposta azul entre câmeras.',observe:'A simulação altera discretamente a tendência quente/fria do preview.',actions:[['B +',()=>st.whiteB++,'White B aumentado.'],['B −',()=>st.whiteB--,'White B reduzido.']]},
+ blackR:{title:'BLACK / FLARE R',tech:'Componente vermelho do preto ou flare',intro:'No modo BLACK, este knob corrige o equilíbrio de preto do canal vermelho — isto é, a neutralidade cromática das regiões escuras próximas ao pedestal. Com FLARE aceso, o mesmo knob deixa de atuar no black balance e passa a compensar flare óptico, uma elevação/contaminação do nível escuro causada por luz espalhada na óptica.',when:'Use BLACK para casar a neutralidade das sombras entre câmeras. Use FLARE quando houver necessidade de compensar o efeito de luz parasita/flare da lente; não use FLARE como substituto de master black ou de black balance.',observe:'BLACK atua no equilíbrio de cor das regiões escuras. FLARE usa os mesmos três knobs R/G/B, mas para outra compensação. MASTER BLACK/PEDESTAL, no joystick, sobe ou desce o nível de preto global.',actions:[['R +',()=>{st.blackR++;st.mb=Math.min(10,st.mb+1)},'Black R aumentado.'],['R −',()=>{st.blackR--;st.mb=Math.max(-10,st.mb-1)},'Black R reduzido.']]},
+ flare:{title:'FLARE',tech:'Alterna a função do conjunto BLACK/FLARE',intro:'Alterna a função dos três knobs R/G/B. Com FLARE apagado, eles fazem BLACK BALANCE e corrigem a neutralidade das sombras. Com FLARE aceso, passam a compensar flare óptico/luz espalhada, que pode elevar ou colorir regiões próximas ao preto.',when:'Para casamento normal de câmeras, trabalhe primeiro com BLACK. Ative FLARE apenas quando a compensação de flare for realmente necessária.',observe:'O LED FLARE indica a troca de função. Isso é diferente de MASTER BLACK/PEDESTAL: o pedestal desloca o nível de preto global, enquanto BLACK/FLARE atua em equilíbrio/compensação por canal.',actions:[['Alternar',()=>st.flare=!st.flare,'Modo FLARE alternado.']]},
+ irisRelative:{title:'IRIS RELATIVE',tech:'Modo relativo da íris',intro:'Quando aceso, o lever altera a íris relativamente ao valor atual. Apagado, o controle trabalha no modo absoluto.',when:'Use RELATIVE quando várias câmeras ou operadores podem alterar a íris e você quer evitar que a posição física do controle imponha imediatamente um valor absoluto.',observe:'O LED RELATIVE acende; o cartão de modo muda para “Íris relativa”.',actions:[['Alternar',()=>st.irisRel=!st.irisRel,'Modo relativo da íris alternado.']]},
+ mbRelative:{title:'MASTER BLACK RELATIVE',tech:'Modo relativo do master black',intro:'Quando aceso, o anel altera o master black a partir do valor atual. Apagado, opera em modo absoluto.',when:'Use quando o valor pode ter sido alterado por outra estação e você deseja continuar ajustando sem salto brusco.',observe:'O LED RELATIVE acende; o valor numérico continua no display de master black.',actions:[['Alternar',()=>st.mbRel=!st.mbRel,'Modo relativo do master black alternado.']]},
+ sens:{title:'SENS',tech:'Faixa superior da íris em modo absoluto',intro:'No modo absoluto, SENS define a extensão útil do lado OPEN em relação ao limite CLOSE definido por COARSE.',when:'Use para adaptar a faixa do lever à situação. Uma faixa menor facilita movimentos finos perto do ponto de trabalho.',observe:'O knob gira e o controle do lever passa a representar uma faixa mais estreita ou mais ampla. No modo relativo, SENS não atua.',actions:[['Aumentar',()=>st.sens=Math.min(100,st.sens+10),'SENS aumentado.'],['Reduzir',()=>st.sens=Math.max(10,st.sens-10),'SENS reduzido.']]},
+ coarse:{title:'COARSE',tech:'Ajuste grosso / limite CLOSE da íris',intro:'COARSE participa da definição da faixa de íris no modo absoluto e permite um ajuste mais amplo.',when:'Use para posicionar a região geral de trabalho da íris; depois refine com o lever e SENS.',observe:'O knob gira. A simulação não força a íris a mudar até que o lever seja movimentado.',actions:[['Aumentar',()=>st.coarse=Math.min(100,st.coarse+10),'COARSE aumentado.'],['Reduzir',()=>st.coarse=Math.max(10,st.coarse-10),'COARSE reduzido.']]},
+ irisActive:{title:'IRIS/MB ACTIVE',tech:'Habilita o bloco de íris e master black',intro:'Autoriza este RCP a operar os controles de íris e master black.',when:'Use para assumir ou liberar o controle desta câmera a partir deste painel.',observe:'Com o botão apagado, os comandos do lever e do anel deixam de alterar os valores na simulação.',actions:[['Alternar',()=>st.irisActive=!st.irisActive,'IRIS/MB ACTIVE alternado.']]},
+ autoIris:{title:'AUTO IRIS',tech:'Controle automático de íris',intro:'Entrega o controle da íris ao sistema automático da câmera.',when:'Pode ser útil em condições que mudam rapidamente, mas em estúdio multicâmera normalmente é importante avaliar se a automação manterá consistência entre câmeras.',observe:'O LED AUTO IRIS acende. A simulação mantém o valor corrente para facilitar comparação.',actions:[['Alternar',()=>st.autoIris=!st.autoIris,'AUTO IRIS alternado.']]},
+ panelActive:{title:'PANEL ACTIVE',tech:'Ativa o painel remoto',intro:'Indica se este painel está autorizado a controlar a câmera.',when:'Confira este botão quando um comando parece não responder. Em sistemas com mais de uma superfície de controle, a autoridade pode estar em outro painel.',observe:'O LED verde indica que o RCP está ativo.',actions:[['Alternar',()=>st.panel=!st.panel,'PANEL ACTIVE alternado.']]}
+};
+
+Object.assign(defs,{
+ para:{title:'PARA',tech:'Controle paralelo',intro:'Permite que um painel sem a autoridade principal opere a câmera em paralelo com o painel ativo, respeitando as restrições do sistema.',when:'Use em sistemas com mais de um painel quando outra posição precisa atuar sobre a mesma câmera sem transferir toda a autoridade.',observe:'O recurso altera a permissão de controle. Íris e master black continuam sujeitos à autoridade IRIS/MB ACTIVE.',actions:[['Entender o uso',()=>{},'PARA permite operação paralela sem tornar este painel o único painel ativo.']]},
+ master:{title:'MASTER',tech:'Câmera mestre para vínculo de balanço de branco',intro:'Define esta câmera como referência mestre em um grupo Master/Subordinate.',when:'Use quando várias câmeras precisam acompanhar a mesma correção de balanço de branco a partir de uma câmera de referência.',observe:'Alterações de white balance no Master podem ser aplicadas às câmeras Subordinate vinculadas.',actions:[['Selecionar conceito',()=>{},'Esta câmera passa a ser tratada como referência mestre na explicação.']]},
+ sub:{title:'SUBORDINATE',tech:'Câmera subordinada ao Master',intro:'Vincula esta câmera às correções de balanço de branco feitas na câmera definida como Master.',when:'Use em operação multicâmera quando deseja que as câmeras subordinadas acompanhem a correção aplicada no Master.',observe:'Ajustar uma Subordinate não altera as demais; a direção principal do vínculo parte do Master.',actions:[['Selecionar conceito',()=>{},'A câmera é tratada como subordinada para fins didáticos.']]},
+ test:{title:'TEST',tech:'Sinal de teste da câmera',intro:'Comanda o gerador de sinal de teste da câmera.',when:'Use para verificar um caminho de vídeo sem depender da imagem captada pelo sensor.',observe:'Na câmera real, TEST seleciona o sinal de teste correspondente. BARS tem prioridade quando está aceso.',actions:[['Mostrar indicação',()=>{},'TEST foi selecionado como função em estudo.']]},
+ close:{title:'CLOSE',tech:'Fechamento da íris',intro:'Fecha completamente a íris da lente conectada à câmera.',when:'Use em verificações de black/flare ou quando precisa garantir ausência de luz chegando ao sensor.',observe:'O valor de íris passa para uma condição de fechamento; no preview a imagem fica praticamente preta.',actions:[['Fechar íris',()=>{st.iris=16},'A íris foi levada ao fechamento máximo da simulação.'],['Reabrir',()=>{st.iris=5.6},'A íris voltou ao valor de referência.']]},
+ gate:{title:'GATE',tech:'Sinal de gate para ajuste seletivo',intro:'Mostra a região na qual funções seletivas, como Skin Detail ou Multi Matrix, estão atuando.',when:'Use durante ajuste técnico para verificar visualmente se a faixa de cor selecionada está cobrindo o objeto ou pele desejados.',observe:'É um auxílio de ajuste. A simulação usa o destaque de região apenas para ensinar onde o efeito seria aplicado.',actions:[['Mostrar região',()=>{st.skin=true},'A região de atuação foi destacada na simulação.'],['Ocultar',()=>{st.skin=false},'O destaque de região foi ocultado.']]},
+ autoHue:{title:'SKIN DTL AUTO HUE',tech:'Busca automática da tonalidade para Skin Detail',intro:'Mede automaticamente uma tonalidade de referência para que Skin Detail atue na faixa correta.',when:'Enquadre a pele ou objeto de referência no centro e use a rotina antes de refinar manualmente o Skin Detail.',observe:'A câmera procura a fase de cor adequada. O preview mantém a região destacada apenas como referência pedagógica.',actions:[['Simular medição',()=>{st.skin=true},'A faixa de Skin Detail foi simulada como localizada.']]},
+ level:{title:'LEVEL',tech:'Auto level setup',intro:'Seleciona a rotina automática de ajuste de nível para ser executada por START/BREAK.',when:'Use em procedimentos de setup automático previstos pela câmera, seguindo as condições de referência exigidas pelo sistema.',observe:'O botão sozinho seleciona a rotina; START/BREAK é quem inicia a execução.',actions:[['Selecionar',()=>{},'LEVEL foi selecionado para o próximo START/BREAK.']]},
+ start:{title:'START/BREAK',tech:'Inicia ou interrompe o auto setup selecionado',intro:'Executa a função automática previamente selecionada, como Skin Detail Auto Hue ou Level, e também interrompe uma rotina em andamento.',when:'Primeiro escolha a rotina desejada; depois pressione START/BREAK. Pressione novamente durante a execução para interromper.',observe:'No equipamento real, a indicação luminosa informa execução ou interrupção.',actions:[['Simular início',()=>{},'A rotina automática selecionada foi iniciada na simulação.'],['Interromper',()=>{},'A rotina automática foi interrompida.']]},
+ whiteAuto:{title:'WHITE',tech:'Balanço de branco automático',intro:'Inicia o ajuste automático de balanço de branco da câmera.',when:'Use com uma referência branca/neutra corretamente iluminada e enquadrada conforme o procedimento da câmera.',observe:'O botão permanece iluminado durante o processo e apaga quando o ajuste termina.',actions:[['Simular auto white',()=>{st.whiteR=st.whiteG=st.whiteB=0;st.menu='PAINT'},'O balanço de branco foi normalizado na simulação.']]},
+ blackAuto:{title:'BLACK',tech:'Balanço de preto automático',intro:'Inicia o ajuste automático de balanço de preto.',when:'Use no procedimento de preparação da câmera quando o sistema exigir nova calibração de preto.',observe:'Durante o processo, o botão indica atividade; ao terminar, a câmera retorna ao estado normal.',actions:[['Simular auto black',()=>{st.blackR=st.blackG=st.blackB=0;st.mb=0;st.menu='PAINT'},'O balanço de preto foi normalizado na simulação.']]},
+ store:{title:'STORE',tech:'Grava o estado em um Scene File',intro:'Armazena o conjunto atual de parâmetros no arquivo de cena selecionado.',when:'Use depois de preparar uma condição de câmera que será reutilizada, por exemplo um setup específico para um cenário ou tipo de programa.',observe:'Depois de armazenado, o Scene File permite recuperar rapidamente aquela configuração.',actions:[['Simular armazenamento',()=>{},'A configuração atual foi considerada armazenada no Scene File selecionado.']]},
+ assign:{title:'ASSIGN',tech:'Knob de função atribuível',intro:'Pode receber uma função definida pelo usuário para acesso rápido.',when:'Use para colocar um parâmetro frequentemente ajustado na posição física mais conveniente para o operador.',observe:'A função exata depende da configuração do painel; por isso o rótulo principal permanece ASSIGN.',actions:[['Exemplo',()=>{},'Exemplo: atribuir um parâmetro de paint usado com frequência.']]}
+});
+
+Object.assign(defs,{
+ selectKnob:{title:'SELECT',tech:'Encoder de navegação do LCD',intro:'Gira para percorrer páginas e opções no LCD e pode ser pressionado para confirmar seleções.',when:'Use quando o parâmetro desejado não possui um botão dedicado. O encoder é a navegação principal dentro das páginas do menu.',observe:'Nesta simulação, girar percorre STATUS, PAINT, EXPOSURE e SCENE e o ponteiro do knob acompanha o movimento.',actions:[['Girar à direita',()=>{const q=['STATUS','PAINT','EXPOSURE','SCENE'];st.selectPos=(st.selectPos+1)%q.length;st.menu=q[st.selectPos]},'O SELECT avançou para a próxima página.'],['Girar à esquerda',()=>{const q=['STATUS','PAINT','EXPOSURE','SCENE'];st.selectPos=(st.selectPos+q.length-1)%q.length;st.menu=q[st.selectPos]},'O SELECT voltou uma página.']]},
+ soft1:{title:'CONTROL 1',tech:'Knob contextual do LCD',intro:'A função deste knob depende da página mostrada no LCD. Ele ajusta o primeiro parâmetro apresentado naquela tela.',when:'Use após abrir uma página de menu. Em um RCP real, o rótulo e a função mudam conforme o conteúdo do LCD.',observe:'O ponteiro gira para indicar ajuste; a explicação destaca que este não é um controle de função fixa.',actions:[['Girar +',()=>st.soft1=(st.soft1+1)%10,'CONTROL 1 girou para a direita.'],['Girar −',()=>st.soft1=(st.soft1+9)%10,'CONTROL 1 girou para a esquerda.']]},
+ soft2:{title:'CONTROL 2',tech:'Knob contextual do LCD',intro:'A função muda conforme a página ativa e normalmente corresponde ao segundo parâmetro mostrado no LCD.',when:'Use quando o menu apresenta um segundo parâmetro ajustável nesta posição.',observe:'O ponteiro gira sem alterar um parâmetro fixo, porque sua função depende da tela.',actions:[['Girar +',()=>st.soft2=(st.soft2+1)%10,'CONTROL 2 girou para a direita.'],['Girar −',()=>st.soft2=(st.soft2+9)%10,'CONTROL 2 girou para a esquerda.']]},
+ soft3:{title:'CONTROL 3',tech:'Knob contextual do LCD',intro:'A função muda conforme a página ativa e normalmente corresponde ao terceiro parâmetro mostrado no LCD.',when:'Use em páginas que oferecem três ou mais ajustes simultâneos.',observe:'O ponteiro do knob gira para representar o ajuste contextual.',actions:[['Girar +',()=>st.soft3=(st.soft3+1)%10,'CONTROL 3 girou para a direita.'],['Girar −',()=>st.soft3=(st.soft3+9)%10,'CONTROL 3 girou para a esquerda.']]},
+ soft4:{title:'CONTROL 4',tech:'Knob contextual do LCD',intro:'A função muda conforme a página ativa e corresponde ao quarto parâmetro quando disponível.',when:'Use quando o LCD apresenta um quarto parâmetro vinculado a este encoder.',observe:'O ponteiro gira para indicar a mudança contextual.',actions:[['Girar +',()=>st.soft4=(st.soft4+1)%10,'CONTROL 4 girou para a direita.'],['Girar −',()=>st.soft4=(st.soft4+9)%10,'CONTROL 4 girou para a esquerda.']]},
+ irisLever:{title:'IRIS LEVER',tech:'Alavanca de controle de íris',intro:'Move a íris da câmera de forma contínua. É o principal controle operacional de exposição durante shading.',when:'Use para igualar a exposição entre câmeras durante ensaio ou programa. Movimentos pequenos são mais seguros que correções abruptas.',observe:'O valor de íris, a escala vertical e o preview mudam juntos. IRIS/MB ACTIVE precisa estar habilitado.',actions:[['Abrir íris',()=>{if(st.irisActive&&!st.autoIris)st.iris=Math.max(1.4,+(st.iris-.3).toFixed(1))},'A íris foi aberta.'],['Fechar íris',()=>{if(st.irisActive&&!st.autoIris)st.iris=Math.min(16,+(st.iris+.3).toFixed(1))},'A íris foi fechada.']]},
+ mbRing:{title:'MASTER BLACK / PEDESTAL',tech:'Dial de pedestal ao redor do lever',intro:'O anel ao redor do lever ajusta o master black, também chamado de pedestal. Ele desloca o nível de preto global da câmera, sem substituir os ajustes RGB de BLACK BALANCE.',when:'Use para igualar o nível de preto global entre câmeras depois de acertar exposição e balanços. Arraste sobre o anel para a esquerda/direita ou em movimento circular.',observe:'O dial gira, o display MASTER BLACK muda e o preview altera o pedestal das sombras. BLACK BALANCE continua sendo um ajuste diferente, por canal RGB.',actions:[['Aumentar',()=>{if(st.irisActive)st.mb=Math.min(10,st.mb+1)},'Master black aumentado.'],['Reduzir',()=>{if(st.irisActive)st.mb=Math.max(-10,st.mb-1)},'Master black reduzido.']]}
+});
+const alias={ndUp:'nd',ndDown:'nd',ccUp:'cc',ccDown:'cc',gainUp:'gain',gainDown:'gain',custom1:'menuBtn',custom2:'menuBtn',paintMenu:'menuBtn',detailKnob:'detail'};
+for(let n=1;n<=5;n++) defs['scene'+n]={title:'SCENE FILE '+n,tech:'Memória de parâmetros da câmera',intro:'Recupera um conjunto de parâmetros previamente armazenado no Scene File '+n+'.',when:'Use para alternar rapidamente entre configurações preparadas para cenários, condições de luz ou estilos de operação diferentes.',observe:'O indicador do Scene File selecionado acende e os parâmetros armazenados passam a ser a referência da câmera.',actions:[['Selecionar',()=>{st.scene=n;st.menu='SCENE'},'Scene File '+n+' selecionado.']]};
+for(const [k,label,channel] of [['whiteG','WHITE G','verde'],['whiteB','WHITE B','azul']]) defs[k]={title:label,tech:'Componente '+channel+' do balanço de branco',intro:'Ajusta o componente '+channel+' do balanço de branco.',when:'Use em pequenos refinamentos para neutralizar dominantes ou casar câmeras.',observe:'O preview desloca discretamente a resposta de cor.',actions:[['Aumentar',()=>{if(k==='whiteG')st.whiteG++;else st.whiteB++},label+' aumentado.'],['Reduzir',()=>{if(k==='whiteG')st.whiteG--;else st.whiteB--},label+' reduzido.']]};
+for(const [k,label,channel] of [['blackG','BLACK / FLARE G','verde'],['blackB','BLACK / FLARE B','azul']]) defs[k]={title:label,tech:'Componente '+channel+' do preto ou flare',intro:'Com FLARE apagado, ajusta o '+channel+' do BLACK BALANCE para neutralizar as regiões escuras. Com FLARE aceso, o mesmo knob passa a compensar o componente '+channel+' do flare óptico/luz espalhada.',when:'Use BLACK para casar a cor das sombras. Use FLARE apenas quando for necessário compensar flare da lente; ele não substitui o pedestal/master black.',observe:'BLACK/FLARE trabalha por canal RGB. MASTER BLACK/PEDESTAL é outro controle e desloca o nível de preto global.',actions:[['Aumentar',()=>{if(k==='blackG')st.blackG++;else st.blackB++;st.mb=Math.min(10,st.mb+1)},label+' aumentado.'],['Reduzir',()=>{if(k==='blackG')st.blackG--;else st.blackB--;st.mb=Math.max(-10,st.mb-1)},label+' reduzido.']]};
+
+function led(id,on,color='green'){const cls={green:'ledGreen',red:'ledRed',amber:'ledAmber',blue:'ledBlue'}[color]||'ledGreen';$(id).setAttribute('class',on?cls:'ledOff')}
+function rot(id,cx,cy,v){$(id).setAttribute('transform',`rotate(${v} ${cx} ${cy})`)}
+function refresh(){
+ $('#ndDisp').textContent=st.nd;$('#ccDisp').textContent=st.cc;$('#gainDisp').textContent=st.gain;$('#shutDisp').textContent=st.shutter;$('#irisDisp').textContent=st.iris.toFixed(1);$('#mbDisp').textContent=st.mb;
+ led('#ledCam',st.cam);led('#ledBars',st.bars,'red');led('#ledChar',st.char);led('#ledSkin',st.skin,'amber');led('#led5600',st.k5600,'blue');led('#ledAbsolute',st.absolute,'amber');led('#ledFlare',st.flare,'amber');led('#ledIrisRel',st.irisRel,'amber');led('#ledMbRel',st.mbRel,'amber');led('#ledIrisActive',st.irisActive);led('#ledAutoIris',st.autoIris);led('#ledPanel',st.panel);
+ for(let i=1;i<=5;i++)led('#sceneLed'+i,st.scene===i,'amber');
+ $('#camBox').setAttribute('fill',st.bars?'#ef4f49':'#060809');$('#camNum').setAttribute('fill',st.bars?'#111':'#ffb449');
+ const pos=Math.max(0,Math.min(12,Math.round((16-st.iris)/1.2)));for(let i=0;i<13;i++)$('#irisLed'+i).setAttribute('class',i===pos?'ledAmber':'ledOff');
+ rot('#sensMark',474,1188,(st.sens-50)*1.2);rot('#coarseMark',540,1188,(st.coarse-50)*1.2);rot('#selectMark',531,384,st.selectPos*36);rot('#soft1Mark',226,574,st.soft1*18);rot('#soft2Mark',306,574,st.soft2*18);rot('#soft3Mark',386,574,st.soft3*18);rot('#soft4Mark',466,574,st.soft4*18);rot('#detailKnobMark',485,972,st.detail*18);rot('#assignMark',485,1104,st.assignPos*18);$('#mbRing').setAttribute('transform',`rotate(${st.mb*4} 462 1344)`);$('#lever').setAttribute('cy',1344+(st.iris-5.6)*1.43);$('#leverDot').setAttribute('cy',1344+(st.iris-5.6)*1.43);
+ updateLCD();updatePreview();updateStatus();
+}
+function updateLCD(){
+ $('#lcdTitle').textContent=st.menu;
+ if(st.menu==='STATUS'){ $('#lcd1').textContent='CAM 1';$('#lcd2').textContent='1080i59.94';$('#lcd3').textContent='IRIS F'+st.iris.toFixed(1);$('#lcd4').textContent='GAIN '+st.gain+'dB';}
+ else if(st.menu==='PAINT'){ $('#lcd1').textContent='WHITE R '+st.whiteR;$('#lcd2').textContent=(st.flare?'FLARE ':'BLACK ')+st.blackR;$('#lcd3').textContent='DETAIL '+st.detail;$('#lcd4').textContent='SAT '+st.sat;}
+ else if(st.menu==='EXPOSURE'){ $('#lcd1').textContent='ND '+st.nd;$('#lcd2').textContent='CC '+st.cc;$('#lcd3').textContent='SHUT '+st.shutter;$('#lcd4').textContent='GAIN '+st.gain+'dB';}
+ else {$('#lcd1').textContent='FILE '+st.scene;$('#lcd2').textContent='STORE READY';$('#lcd3').textContent='';$('#lcd4').textContent='';}
+}
+function updatePreview(){
+ const scene=$('#scene'),bars=$('#bars'),ns=$('#nosig');if(!st.cam){scene.style.display='none';bars.style.display='none';ns.style.display='flex'}else if(st.bars){scene.style.display='none';bars.style.display='grid';ns.style.display='none'}else{scene.style.display='block';bars.style.display='none';ns.style.display='none'}
+ const exp=1+(st.gain*.035)-((st.nd-1)*.085)+((5.6-st.iris)*.04)+(st.mb*.018);const sat=1+st.sat*.13+(st.whiteR+st.whiteG+st.whiteB)*.012;const hue=(st.k5600?-8:0)+(st.whiteR-st.whiteB)*1.8;
+ scene.style.filter=`brightness(${Math.max(.38,exp)}) contrast(${1+st.detail*.045}) saturate(${Math.max(.25,sat)}) hue-rotate(${hue}deg)`;$('#detailOverlay').style.opacity=st.detail>0?Math.min(.14+st.detail*.08,.52):0;$('#skinOverlay').style.borderColor=st.skin?'rgba(255,150,150,.95)':'transparent';$('#skinOverlay').style.boxShadow=st.skin?'0 0 0 7px rgba(255,150,150,.12)':'none';$('#noise').style.opacity=Math.max(0,st.gain/24);$('#osdFormat').textContent='1080i59.94'+(st.char?' CHAR':'');$('#osdIris').textContent='IRIS F'+st.iris.toFixed(1);$('#osdGain').textContent='GAIN '+st.gain+'dB';
+}
+function updateStatus(){
+ $('#stSource').textContent=!st.cam?'Câmera desligada':st.bars?'Barras de cor':'Câmera ativa';$('#stScene').textContent=String(st.scene);$('#stFilters').textContent='ND '+st.nd+' · CC '+st.cc;$('#stExposure').textContent='F'+st.iris.toFixed(1)+' · '+st.gain+' dB';$('#stPaint').textContent='Detail '+st.detail+' · Sat '+st.sat+(st.k5600?' · 5600K':'');$('#stMode').textContent=(st.irisRel?'Íris relativa':'Íris absoluta')+' · '+(st.mbRel?'MB relativo':'MB absoluto');
+}
+function selectControl(key){
+ const canonical=alias[key]||key; const d=defs[canonical]; if(!d)return;
+ $$('.control').forEach(x=>x.classList.toggle('selected',x.dataset.control===key));
+ $('#expTitle').textContent=d.title;
+ $('#expTech').textContent=d.tech;
+ $('#expIntro').textContent=d.intro;
+ $('#expWhen').textContent=d.when;
+ $('#expObserve').textContent=d.observe;
+ const box=$('#expActions'); box.innerHTML='';
+ d.actions.forEach(([name,fn,msg])=>{
+   const b=document.createElement('button'); b.className='expbtn'; b.textContent=name;
+   b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active')); b.classList.add('active'); fn(); refresh(); $('#feedback').textContent=msg};
+   box.appendChild(b);
+ });
+}
+function runPhysical(key){
+ if(key==='camPw')st.cam=!st.cam;
+ else if(key==='bars'&&st.cam)st.bars=!st.bars;
+ else if(key==='standard'){st.detail=0;st.sat=0;st.k5600=false;st.skin=false;st.gain=0;st.nd=1;st.iris=5.6;st.mb=0;}
+ else if(key==='character')st.char=!st.char;
+ else if(key==='skin')st.skin=!st.skin;
+ else if(key==='k5600')st.k5600=!st.k5600;
+ else if(key==='detail'||key==='detailKnob')st.detail=(st.detail+1)%6;
+ else if(key==='saturation')st.sat=st.sat>=5?0:st.sat+1;
+ else if(key==='menuBtn')st.menu='STATUS';
+ else if(key==='selectKnob'){const q=['STATUS','PAINT','EXPOSURE','SCENE'];st.selectPos=(st.selectPos+1)%q.length;st.menu=q[st.selectPos];}
+ else if(/^soft[1-4]$/.test(key))st[key]=(st[key]+1)%10;
+ else if(key==='custom1'||key==='paintMenu')st.menu='PAINT';
+ else if(key==='custom2')st.menu='EXPOSURE';
+ else if(key==='ndUp')st.nd=Math.min(5,st.nd+1);
+ else if(key==='ndDown')st.nd=Math.max(1,st.nd-1);
+ else if(key==='ccUp')st.cc=({A:'B',B:'C',C:'D',D:'A'})[st.cc];
+ else if(key==='ccDown')st.cc=({A:'D',D:'C',C:'B',B:'A'})[st.cc];
+ else if(key==='gainUp')st.gain=Math.min(12,st.gain+3);
+ else if(key==='gainDown')st.gain=Math.max(-6,st.gain-3);
+ else if(key==='shutter'){const q=['OFF','1/100','1/250','1/500'];st.shutter=q[(q.indexOf(st.shutter)+1)%q.length];}
+ else if(key==='absolute')st.absolute=!st.absolute;
+ else if(key==='flare')st.flare=!st.flare;
+ else if(key==='whiteR')st.whiteR++;
+ else if(key==='whiteG')st.whiteG++;
+ else if(key==='whiteB')st.whiteB++;
+ else if(key==='blackR'){st.blackR--;st.mb=Math.max(-10,st.mb-1);}
+ else if(key==='blackG'){st.blackG--;st.mb=Math.max(-10,st.mb-1);}
+ else if(key==='blackB'){st.blackB--;st.mb=Math.max(-10,st.mb-1);}
+ else if(key==='irisRelative')st.irisRel=!st.irisRel;
+ else if(key==='mbRelative')st.mbRel=!st.mbRel;
+ else if(key==='sens')st.sens=st.sens>=100?20:st.sens+10;
+ else if(key==='coarse')st.coarse=st.coarse>=100?20:st.coarse+10;
+ else if(key==='irisActive')st.irisActive=!st.irisActive;
+ else if(key==='autoIris')st.autoIris=!st.autoIris;
+ else if(key==='panelActive')st.panel=!st.panel;
+ else if(key==='irisLever'){if(st.irisActive&&!st.autoIris)st.iris=Math.max(1.4,+(st.iris-.3).toFixed(1));}
+ else if(key==='mbRing'){if(st.irisActive)st.mb=Math.min(10,st.mb+1);}
+ else if(key==='assign')st.assignPos=(st.assignPos+1)%10;
+ else if(/^scene[1-5]$/.test(key)){st.scene=+key.slice(-1);st.menu='SCENE';}
+ refresh();
+}
+const panelSvg=$('#rcpPanel');
+const fullView=[0,0,760,1440];
+let currentView=[...fullView], zoomAnim=null;
+function setView(v){currentView=v;panelSvg.setAttribute('viewBox',v.join(' '));}
+function animateView(target){
+ if(zoomAnim)cancelAnimationFrame(zoomAnim);
+ const start=[...currentView], t0=performance.now(), dur=280;
+ const step=t=>{const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);const v=start.map((s,i)=>s+(target[i]-s)*e);setView(v);if(p<1)zoomAnim=requestAnimationFrame(step);};
+ zoomAnim=requestAnimationFrame(step);
+}
+let isZoomed=false, activeZone=null, suppressClick=false;
+function zoneView(zone){const b=zone.getBBox(),px=28,py=24;return [Math.max(0,b.x-px),Math.max(0,b.y-py),Math.min(760,b.width+px*2),b.height+py*2];}
+function zoomToZone(zone){activeZone=zone;isZoomed=true;animateView(zoneView(zone));}
+function zoomToControl(el){const zone=el.closest('.zone');if(zone)zoomToZone(zone);}
+function showFullPanel(){activeZone=null;isZoomed=false;animateView(fullView);}
+// Put the transparent area hit behind the physical controls so blank space can zoom without blocking buttons.
+$$('.zone').forEach(z=>{const h=[...z.children].find(el=>el.classList&&el.classList.contains('hit'));if(h)z.insertBefore(h,z.firstChild);});
+$$('.zone').forEach(z=>{const h=[...z.children].find(el=>el.classList&&el.classList.contains('hit'));if(h)h.addEventListener('click',e=>{e.stopPropagation();zoomToZone(z);});});
+$$('.control').forEach(c=>c.addEventListener('click',e=>{e.stopPropagation();if(suppressClick){suppressClick=false;return;}const key=c.dataset.control;selectControl(key);runPhysical(key);zoomToControl(c)}));
+panelSvg.addEventListener('click',e=>{if(e.target.closest('.control')||e.target.closest('.zone'))return;if(isZoomed)showFullPanel();});
+document.querySelector('.panelScroller').addEventListener('click',e=>{if(e.target===e.currentTarget&&isZoomed)showFullPanel();});
+function svgPoint(e){const pt=panelSvg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(panelSvg.getScreenCTM().inverse());}
+let dragMode=null,dragStart=null;
+function beginDrag(mode,e){if(!st.irisActive)return;e.preventDefault();e.stopPropagation();dragMode=mode;dragStart=svgPoint(e);suppressClick=false;e.currentTarget.setPointerCapture?.(e.pointerId);selectControl(mode==='iris'?'irisLever':'mbRing');}
+function moveDrag(e){if(!dragMode)return;const p=svgPoint(e);const dx=p.x-dragStart.x,dy=p.y-dragStart.y;if(Math.abs(dx)+Math.abs(dy)>2)suppressClick=true;if(dragMode==='iris'&&!st.autoIris){const y=Math.max(1319,Math.min(1369,p.y));const t=(y-1319)/50;st.iris=+(1.4+t*(16-1.4)).toFixed(1);}else if(dragMode==='pedestal'){const a0=Math.atan2(dragStart.y-1344,dragStart.x-462),a=Math.atan2(p.y-1344,p.x-462);let d=(a-a0)*180/Math.PI;if(d>180)d-=360;if(d<-180)d+=360;st.mb=Math.max(-10,Math.min(10,Math.round(st.mb+d/10)));dragStart=p;}refresh();}
+function endDrag(e){if(!dragMode)return;dragMode=null;try{e.currentTarget.releasePointerCapture?.(e.pointerId)}catch(_){}zoomToControl(e.currentTarget);$('#feedback').textContent='Controle ajustado por arraste.';}
+const leverCtl=$('#irisLeverControl'), ringCtl=$('#mbRingControl');
+leverCtl.addEventListener('pointerdown',e=>beginDrag('iris',e));leverCtl.addEventListener('pointermove',moveDrag);leverCtl.addEventListener('pointerup',endDrag);leverCtl.addEventListener('pointercancel',endDrag);
+ringCtl.addEventListener('pointerdown',e=>beginDrag('pedestal',e));ringCtl.addEventListener('pointermove',moveDrag);ringCtl.addEventListener('pointerup',endDrag);ringCtl.addEventListener('pointercancel',endDrag);
+$('#reset').onclick=()=>{
+ Object.assign(st,{cam:true,bars:false,char:false,skin:false,k5600:false,detail:0,sat:0,scene:1,nd:1,cc:'A',gain:0,shutter:'OFF',absolute:false,flare:false,whiteR:0,whiteG:0,whiteB:0,blackR:0,blackG:0,blackB:0,iris:5.6,mb:0,irisRel:false,mbRel:false,sens:50,coarse:50,irisActive:true,autoIris:false,panel:true,menu:'STATUS',selectPos:0,soft1:0,soft2:0,soft3:0,soft4:0,assignPos:0});
+ $$('.control').forEach(x=>x.classList.remove('selected'));
+ refresh();
+ $('#expTitle').textContent='Selecione um controle no painel';
+ $('#expTech').textContent='Navegação direta pelo equipamento';
+ $('#expIntro').textContent='Clique diretamente em um botão, knob, display ou controle físico do RCP-1500. As informações complementares aparecerão aqui.';
+ $('#expWhen').textContent='Comece por qualquer função que queira explorar. O painel lateral acompanha somente o controle físico selecionado.';
+ $('#expObserve').textContent='O monitor de preview e os cartões de estado serão atualizados quando a função tiver efeito visual ou operacional.';
+ $('#expActions').innerHTML='';
+ $('#feedback').textContent='Painel restaurado. Clique em um controle para começar.';
+ showFullPanel();
+};
+refresh();
+$$('.control').forEach(x=>x.classList.remove('selected'));
+$('#expTitle').textContent='Selecione um controle no painel';
+$('#expTech').textContent='Navegação direta pelo equipamento';
+$('#expIntro').textContent='Clique diretamente em um botão, knob, display ou controle físico do RCP-1500. As informações complementares aparecerão aqui.';
+$('#expWhen').textContent='Comece por qualquer função que queira explorar. O painel lateral acompanha somente o controle físico selecionado.';
+$('#expObserve').textContent='O monitor de preview e os cartões de estado serão atualizados quando a função tiver efeito visual ou operacional.';
+$('#expActions').innerHTML='';
+$('#feedback').textContent='Clique diretamente em um controle do painel para começar.';
+setView(fullView);
+})();
+</script>
+</main></body></html>
