@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DV Promix 3 — ENG e PRD</title>
+<style>
+:root{
+  --bg:#0d1115;--card:#151b20;--card2:#10151a;--line:#2e3942;--text:#eef2f4;--muted:#a8b3bb;
+  --accent:#68b6ff;--green:#48d66d;--amber:#ffb84c;--red:#ef4d49;--off:#46515a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{max-width:1500px;margin:auto;padding:22px}
+h1{margin:0 0 6px;font-size:30px}.lead{margin:0 0 18px;color:var(--muted);line-height:1.6}
+.layout{display:grid;grid-template-columns:minmax(880px,1fr) 410px;gap:18px;align-items:start}
+.card{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:16px}.stage{overflow:auto}.stage svg{width:100%;min-width:880px;height:auto;display:block}
+.device{cursor:pointer}.ctl.selected .hit,.device.selected .outline{stroke:var(--accent)!important;filter:drop-shadow(0 0 6px rgba(104,182,255,.45))}.hit{fill:transparent;stroke:transparent;stroke-width:5;cursor:pointer}
+.silk{fill:#e9eef2;font-size:10px}.micro{fill:#adb7bd;font-size:7px}.tiny{fill:#87939a;font-size:6px}.darktxt{fill:#1f2529;font-size:8px;font-weight:700}.brand{fill:#f3f5f7;font-size:12px;font-weight:700;letter-spacing:.06em}.labelMain{fill:#f2f5f7;font-size:22px;font-weight:700;letter-spacing:.05em}
+.side h2{margin:0 0 4px;font-size:24px}.term{color:var(--muted);font-size:14px;margin-bottom:14px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:12px 0 6px}.copy{line-height:1.65;margin:0}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.btn{background:transparent;color:var(--text);border:1px solid #455159;border-radius:10px;padding:9px 11px;cursor:pointer}.btn:hover,.btn.active{border-color:var(--accent);background:#15324a}
+.feedback{margin-top:10px;padding:11px;border-radius:10px;background:#11161a;border:1px solid #30383f;line-height:1.55}
+.statusGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.statusCard{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px}.statusCard b{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.notice{margin-top:14px;padding:12px;border-radius:12px;background:#12171b;border:1px solid var(--line);line-height:1.6}
+@media(max-width:1180px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>DV Promix 3 — retornos ENG e PRD</h1>
+<p class="lead">Refiz os dois aparelhos com o frontal mais próximo da referência real. Os dois mixers continuam fisicamente iguais, mas um pertence ao retorno <strong>ENG</strong> e o outro ao retorno <strong>PRD</strong> das câmeras. Clique diretamente no aparelho ou nos seus controles para estudar a função.</p>
+
+<div class="layout">
+<section class="card stage">
+<svg viewBox="0 0 1240 560" aria-label="Dois DV Promix 3 mais fiéis ao frontal real">
+<defs>
+  <linearGradient id="front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f2427"/><stop offset="1" stop-color="#090b0d"/></linearGradient>
+  <radialGradient id="knob" cx="38%" cy="35%" r="75%"><stop offset="0" stop-color="#50595f"/><stop offset="0.55" stop-color="#252b2f"/><stop offset="1" stop-color="#07090b"/></radialGradient>
+</defs>
+
+<!-- ENG -->
+<g class="device selected" data-unit="ENG">
+  <rect class="outline" x="58" y="82" width="1120" height="124" rx="3" fill="url(#front)" stroke="#667077" stroke-width="1.5"/>
+  <text x="74" y="106" class="brand">DV PROMIX 3</text>
+  <text x="1148" y="106" class="micro" text-anchor="end">PROMIX ENG · retorno ENG</text>
+
+  <!-- ch1 -->
+  <g class="ctl" data-key="ENG-CH1">
+    <text x="126" y="134" class="micro">60 150 4 5 6 7</text>
+    <text x="93" y="151" class="micro">20</text><text x="161" y="151" class="micro">0</text>
+    <text x="96" y="188" class="micro">10</text><text x="154" y="188" class="micro">9</text>
+    <circle cx="127" cy="164" r="26" fill="url(#knob)" stroke="#89939a" stroke-width="1.4"/>
+    <line id="ENGCH1mark" x1="127" y1="164" x2="140" y2="144" stroke="#f2f4f5" stroke-width="2.5"/>
+    <text x="127" y="197" class="silk" text-anchor="middle">CH1</text><text x="127" y="205" class="tiny" text-anchor="middle">RET CAM 1</text>
+    <rect class="hit" x="94" y="126" width="66" height="80" rx="6"/>
+  </g>
+
+  <!-- ch2 -->
+  <g class="ctl" data-key="ENG-CH2">
+    <text x="314" y="134" class="micro">60 150 4 5 6 7</text>
+    <text x="281" y="151" class="micro">20</text><text x="349" y="151" class="micro">0</text>
+    <text x="284" y="188" class="micro">10</text><text x="342" y="188" class="micro">9</text>
+    <circle cx="315" cy="164" r="26" fill="url(#knob)" stroke="#89939a" stroke-width="1.4"/>
+    <line id="ENGCH2mark" x1="315" y1="164" x2="328" y2="144" stroke="#f2f4f5" stroke-width="2.5"/>
+    <text x="315" y="197" class="silk" text-anchor="middle">CH2</text><text x="315" y="205" class="tiny" text-anchor="middle">RET CAM 2</text>
+    <rect class="hit" x="282" y="126" width="66" height="80" rx="6"/>
+  </g>
+
+  <!-- ch3 -->
+  <g class="ctl" data-key="ENG-CH3">
+    <text x="502" y="134" class="micro">60 150 4 5 6 7</text>
+    <text x="469" y="151" class="micro">20</text><text x="537" y="151" class="micro">0</text>
+    <text x="472" y="188" class="micro">10</text><text x="530" y="188" class="micro">9</text>
+    <circle cx="503" cy="164" r="26" fill="url(#knob)" stroke="#89939a" stroke-width="1.4"/>
+    <line id="ENGCH3mark" x1="503" y1="164" x2="516" y2="144" stroke="#f2f4f5" stroke-width="2.5"/>
+    <text x="503" y="197" class="silk" text-anchor="middle">CH3</text><text x="503" y="205" class="tiny" text-anchor="middle">RET CAM 3</text>
+    <rect class="hit" x="470" y="126" width="66" height="80" rx="6"/>
+  </g>
+
+  <!-- tiny switches -->
+  <g fill="#c9d0d4" stroke="#6d767b">
+    <rect x="188" y="150" width="10" height="10" rx="1"/><rect x="205" y="150" width="10" height="10" rx="1"/>
+    <rect x="376" y="150" width="10" height="10" rx="1"/><rect x="393" y="150" width="10" height="10" rx="1"/>
+    <rect x="564" y="150" width="10" height="10" rx="1"/><rect x="581" y="150" width="10" height="10" rx="1"/>
+  </g>
+
+  <!-- central logo and meter -->
+  <text x="720" y="150" class="labelMain" text-anchor="middle">DV PRO MIX 3</text>
+  <text x="720" y="164" class="micro" text-anchor="middle">BY PROFESSIONAL SOUND CORP.</text>
+  <text x="720" y="176" class="micro" text-anchor="middle">PROAUDIO.COM</text>
+  <text x="717" y="129" class="micro" text-anchor="middle">-20 -10 -7 -5 -3 -1 0 1 2 3</text>
+  <g id="engMeter">
+    <circle cx="650" cy="138" r="3" fill="#48d66d"/><circle cx="666" cy="138" r="3" fill="#48d66d"/><circle cx="682" cy="138" r="3" fill="#48d66d"/><circle cx="698" cy="138" r="3" fill="#48d66d"/><circle cx="714" cy="138" r="3" fill="#48d66d"/><circle cx="730" cy="138" r="3" fill="#48d66d"/><circle cx="746" cy="138" r="3" fill="#ffb84c"/><circle cx="762" cy="138" r="3" fill="#ffb84c"/><circle cx="778" cy="138" r="3" fill="#ef4d49"/><circle cx="794" cy="138" r="3" fill="#ef4d49"/>
+  </g>
+  <text x="794" y="177" class="micro" text-anchor="end">HEADPHONE</text>
+  <text x="794" y="185" class="micro" text-anchor="end">MONITOR VOLUME</text>
+
+  <!-- monitor volume -->
+  <g class="ctl" data-key="ENG-MONITOR">
+    <circle cx="838" cy="163" r="20" fill="url(#knob)" stroke="#89939a" stroke-width="1.3"/>
+    <line id="ENGMONmark" x1="838" y1="163" x2="849" y2="146" stroke="#f2f4f5" stroke-width="2.3"/>
+    <rect class="hit" x="813" y="138" width="50" height="50" rx="6"/>
+  </g>
+
+  <!-- dir/tape and batt -->
+  <g class="ctl" data-key="ENG-TAPE">
+    <text x="934" y="146" class="silk">DIR</text><text x="972" y="146" class="silk">TAPE</text>
+    <rect x="928" y="154" width="50" height="12" rx="2" fill="#d7dcdf" stroke="#6a7378"/>
+    <rect id="ENGTapeHandle" x="929" y="155" width="23" height="10" rx="1" fill="#707a80" stroke="#2a3135"/>
+    <rect class="hit" x="922" y="144" width="62" height="28" rx="4"/>
+  </g>
+  <g class="ctl" data-key="ENG-POWER">
+    <text x="1042" y="146" class="silk">BATT</text>
+    <text x="1020" y="188" class="micro">OFF</text><text x="1056" y="188" class="micro">EXT</text>
+    <circle id="ENGpowerLed" cx="1048" cy="158" r="5" fill="#48d66d"/>
+    <rect x="1020" y="154" width="44" height="12" rx="2" fill="#d7dcdf" stroke="#6a7378"/>
+    <rect id="ENGPowerHandle" x="1039" y="155" width="20" height="10" rx="1" fill="#707a80" stroke="#2a3135"/>
+    <rect class="hit" x="1012" y="144" width="60" height="48" rx="4"/>
+  </g>
+</g>
+
+<!-- PRD -->
+<g class="device" data-unit="PRD">
+  <rect class="outline" x="58" y="318" width="1120" height="124" rx="3" fill="url(#front)" stroke="#667077" stroke-width="1.5"/>
+  <text x="74" y="342" class="brand">DV PROMIX 3</text>
+  <text x="1148" y="342" class="micro" text-anchor="end">PROMIX PRD · retorno PRD</text>
+
+  <g class="ctl" data-key="PRD-CH1">
+    <text x="126" y="370" class="micro">60 150 4 5 6 7</text>
+    <text x="93" y="387" class="micro">20</text><text x="161" y="387" class="micro">0</text>
+    <text x="96" y="424" class="micro">10</text><text x="154" y="424" class="micro">9</text>
+    <circle cx="127" cy="400" r="26" fill="url(#knob)" stroke="#89939a" stroke-width="1.4"/>
+    <line id="PRDCH1mark" x1="127" y1="400" x2="140" y2="380" stroke="#f2f4f5" stroke-width="2.5"/>
+    <text x="127" y="433" class="silk" text-anchor="middle">CH1</text><text x="127" y="441" class="tiny" text-anchor="middle">RET CAM 1</text>
+    <rect class="hit" x="94" y="362" width="66" height="80" rx="6"/>
+  </g>
+  <g class="ctl" data-key="PRD-CH2">
+    <text x="314" y="370" class="micro">60 150 4 5 6 7</text>
+    <text x="281" y="387" class="micro">20</text><text x="349" y="387" class="micro">0</text>
+    <text x="284" y="424" class="micro">10</text><text x="342" y="424" class="micro">9</text>
+    <circle cx="315" cy="400" r="26" fill="url(#knob)" stroke="#89939a" stroke-width="1.4"/>
+    <line id="PRDCH2mark" x1="315" y1="400" x2="328" y2="380" stroke="#f2f4f5" stroke-width="2.5"/>
+    <text x="315" y="433" class="silk" text-anchor="middle">CH2</text><text x="315" y="441" class="tiny" text-anchor="middle">RET CAM 2</text>
+    <rect class="hit" x="282" y="362" width="66" height="80" rx="6"/>
+  </g>
+  <g class="ctl" data-key="PRD-CH3">
+    <text x="502" y="370" class="micro">60 150 4 5 6 7</text>
+    <text x="469" y="387" class="micro">20</text><text x="537" y="387" class="micro">0</text>
+    <text x="472" y="424" class="micro">10</text><text x="530" y="424" class="micro">9</text>
+    <circle cx="503" cy="400" r="26" fill="url(#knob)" stroke="#89939a" stroke-width="1.4"/>
+    <line id="PRDCH3mark" x1="503" y1="400" x2="516" y2="380" stroke="#f2f4f5" stroke-width="2.5"/>
+    <text x="503" y="433" class="silk" text-anchor="middle">CH3</text><text x="503" y="441" class="tiny" text-anchor="middle">RET CAM 3</text>
+    <rect class="hit" x="470" y="362" width="66" height="80" rx="6"/>
+  </g>
+
+  <g fill="#c9d0d4" stroke="#6d767b">
+    <rect x="188" y="386" width="10" height="10" rx="1"/><rect x="205" y="386" width="10" height="10" rx="1"/>
+    <rect x="376" y="386" width="10" height="10" rx="1"/><rect x="393" y="386" width="10" height="10" rx="1"/>
+    <rect x="564" y="386" width="10" height="10" rx="1"/><rect x="581" y="386" width="10" height="10" rx="1"/>
+  </g>
+
+  <text x="720" y="386" class="labelMain" text-anchor="middle">DV PRO MIX 3</text>
+  <text x="720" y="400" class="micro" text-anchor="middle">BY PROFESSIONAL SOUND CORP.</text>
+  <text x="720" y="412" class="micro" text-anchor="middle">PROAUDIO.COM</text>
+  <text x="717" y="365" class="micro" text-anchor="middle">-20 -10 -7 -5 -3 -1 0 1 2 3</text>
+  <g id="prdMeter">
+    <circle cx="650" cy="374" r="3" fill="#48d66d"/><circle cx="666" cy="374" r="3" fill="#48d66d"/><circle cx="682" cy="374" r="3" fill="#48d66d"/><circle cx="698" cy="374" r="3" fill="#48d66d"/><circle cx="714" cy="374" r="3" fill="#48d66d"/><circle cx="730" cy="374" r="3" fill="#48d66d"/><circle cx="746" cy="374" r="3" fill="#ffb84c"/><circle cx="762" cy="374" r="3" fill="#ffb84c"/><circle cx="778" cy="374" r="3" fill="#ef4d49"/><circle cx="794" cy="374" r="3" fill="#ef4d49"/>
+  </g>
+  <text x="794" y="413" class="micro" text-anchor="end">HEADPHONE</text>
+  <text x="794" y="421" class="micro" text-anchor="end">MONITOR VOLUME</text>
+
+  <g class="ctl" data-key="PRD-MONITOR">
+    <circle cx="838" cy="399" r="20" fill="url(#knob)" stroke="#89939a" stroke-width="1.3"/>
+    <line id="PRDMONmark" x1="838" y1="399" x2="849" y2="382" stroke="#f2f4f5" stroke-width="2.3"/>
+    <rect class="hit" x="813" y="374" width="50" height="50" rx="6"/>
+  </g>
+  <g class="ctl" data-key="PRD-TAPE">
+    <text x="934" y="382" class="silk">DIR</text><text x="972" y="382" class="silk">TAPE</text>
+    <rect x="928" y="390" width="50" height="12" rx="2" fill="#d7dcdf" stroke="#6a7378"/>
+    <rect id="PRDTapeHandle" x="929" y="391" width="23" height="10" rx="1" fill="#707a80" stroke="#2a3135"/>
+    <rect class="hit" x="922" y="380" width="62" height="28" rx="4"/>
+  </g>
+  <g class="ctl" data-key="PRD-POWER">
+    <text x="1042" y="382" class="silk">BATT</text>
+    <text x="1020" y="424" class="micro">OFF</text><text x="1056" y="424" class="micro">EXT</text>
+    <circle id="PRDpowerLed" cx="1048" cy="394" r="5" fill="#48d66d"/>
+    <rect x="1020" y="390" width="44" height="12" rx="2" fill="#d7dcdf" stroke="#6a7378"/>
+    <rect id="PRDPowerHandle" x="1039" y="391" width="20" height="10" rx="1" fill="#707a80" stroke="#2a3135"/>
+    <rect class="hit" x="1012" y="380" width="60" height="48" rx="4"/>
+  </g>
+</g>
+</svg>
+</section>
+
+<aside class="card side">
+<h2 id="title">Promix ENG</h2>
+<div class="term" id="term">(retorno ENG para as câmeras)</div>
+<div class="ey">O que faz</div>
+<p id="what" class="copy">No MCE-325, as linhas de intercom são canais programáveis de conversa e escuta. No nosso sistema, uma dessas linhas foi identificada como ENG. Ela reúne a comunicação técnica entre DTV, Videoman e câmeras. Este Promix recebe esse retorno ENG e permite ajustar separadamente quanto desse retorno chega a cada câmera.</p>
+<div class="ey">Quando usar</div>
+<p id="when" class="copy">Use este mixer quando precisar equilibrar o retorno técnico que cada câmera recebe. Se uma câmera estiver ouvindo ENG muito alto ou muito baixo, ajuste apenas o knob correspondente àquela câmera, sem alterar as outras.</p>
+<div class="ey">Aplicação</div>
+<p id="application" class="copy">Linha ENG do MCE-325 → Promix ENG → retorno individual das câmeras. CH1 controla o volume de retorno da Câmera 1, CH2 da Câmera 2 e CH3 da Câmera 3.</p>
+<div class="ey">Experimente</div>
+<div id="modes" class="modes"></div>
+<div id="feedback" class="feedback">Selecione um aparelho ou controle.</div>
+<div class="statusGrid">
+  <div class="statusCard"><b>Unidade</b><span id="stUnit">ENG</span></div>
+  <div class="statusCard"><b>Estado</b><span id="stPower">Ligado</span></div>
+  <div class="statusCard"><b>Fala Cam 1</b><span id="stCh1">50%</span></div>
+  <div class="statusCard"><b>Fala Cam 2</b><span id="stCh2">50%</span></div>
+  <div class="statusCard"><b>Fala Cam 3</b><span id="stCh3">50%</span></div>
+  <div class="statusCard"><b>Monitor</b><span id="stMon">50%</span></div>
+</div>
+<div class="notice"><strong>ENG</strong> é a linha técnica entre DTV, Videoman e câmeras. <strong>PRD</strong> é a linha de produção que inclui todas as estações. Em cada Promix, CH1, CH2 e CH3 controlam quanto da fala das câmeras 1, 2 e 3 entra na linha correspondente.</div>
+</aside>
+</div>
+</main>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const st={ENG:{power:true,ch:[50,50,50],mon:50,tape:false},PRD:{power:true,ch:[50,50,50],mon:50,tape:false},selectedUnit:'ENG',selectedKey:'ENG'};
+function rotateMark(id,cx,cy,val){const a=-130+(val/100)*260,r=21,rad=a*Math.PI/180;const x=cx+Math.cos(rad)*r,y=cy+Math.sin(rad)*r;$(id).setAttribute('x2',x.toFixed(1));$(id).setAttribute('y2',y.toFixed(1));}
+function render(){['ENG','PRD'].forEach(u=>{rotateMark('#'+u+'CH1mark',127,u==='ENG'?164:400,st[u].ch[0]);rotateMark('#'+u+'CH2mark',315,u==='ENG'?164:400,st[u].ch[1]);rotateMark('#'+u+'CH3mark',503,u==='ENG'?164:400,st[u].ch[2]);rotateMark('#'+u+'MONmark',838,u==='ENG'?163:399,st[u].mon);$('#'+u+'powerLed').setAttribute('fill',st[u].power?'#48d66d':'#46515a');$('#'+u+'TapeHandle').setAttribute('x',st[u].tape?(u==='ENG'?955:955):(u==='ENG'?929:929));$('#'+u+'PowerHandle').setAttribute('x',st[u].power?(u==='ENG'?1043:1043):(u==='ENG'?1021:1021));});const u=st.selectedUnit;$('#stUnit').textContent=u;$('#stPower').textContent=st[u].power?'Ligado':'Desligado';$('#stCh1').textContent=st[u].ch[0]+'%';$('#stCh2').textContent=st[u].ch[1]+'%';$('#stCh3').textContent=st[u].ch[2]+'%';$('#stMon').textContent=st[u].mon+'%';$$('.device').forEach(d=>d.classList.toggle('selected',d.dataset.unit===u));}
+const unitText={
+  ENG:{
+    title:'Promix ENG',
+    term:'retorno ENG para as câmeras',
+    what:'Este Promix controla quanto da fala de cada câmera entra na linha ENG. ENG é a linha técnica entre DTV, Videoman e câmeras.',
+    when:'Use os três knobs para equilibrar a presença das câmeras 1, 2 e 3 na linha ENG. Se uma câmera estiver muito alta ou muito baixa para DTV e Videoman, ajuste o canal correspondente.',
+    app:'Câmeras 1, 2 e 3 → Promix ENG → linha ENG → DTV, Videoman e câmeras. CH1 controla a fala da Câmera 1, CH2 a fala da Câmera 2 e CH3 a fala da Câmera 3.'
+  },
+  PRD:{
+    title:'Promix PRD',
+    term:'retorno PRD para as câmeras',
+    what:'Este Promix controla quanto da fala de cada câmera entra na linha PRD. PRD é a linha de produção que inclui todas as estações.',
+    when:'Use os três knobs para equilibrar a presença das câmeras 1, 2 e 3 na linha PRD. Ajuste o canal correspondente quando uma câmera estiver falando muito alto ou muito baixo para a produção.',
+    app:'Câmeras 1, 2 e 3 → Promix PRD → linha PRD → todas as estações. CH1 controla a fala da Câmera 1, CH2 a fala da Câmera 2 e CH3 a fala da Câmera 3.'
+  }
+};
+function setUnit(u){st.selectedUnit=u;st.selectedKey=u;const d=unitText[u];$('#title').textContent=d.title;$('#term').textContent='('+d.term+')';$('#what').textContent=d.what;$('#when').textContent=d.when;$('#application').textContent=d.app;const box=$('#modes');box.innerHTML='';[['Fala Cam 1 +',()=>st[u].ch[0]=Math.min(100,st[u].ch[0]+10),'Fala da Câmera 1 aumentada na linha.'],['Fala Cam 2 +',()=>st[u].ch[1]=Math.min(100,st[u].ch[1]+10),'Fala da Câmera 2 aumentada na linha.'],['Fala Cam 3 +',()=>st[u].ch[2]=Math.min(100,st[u].ch[2]+10),'Fala da Câmera 3 aumentada na linha.'],['Monitor +',()=>st[u].mon=Math.min(100,st[u].mon+10),'Volume de monitor aumentado.'],['Ligar / desligar',()=>st[u].power=!st[u].power,'Estado de alimentação alternado.'],['Restaurar níveis',()=>{st[u].ch=[50,50,50];st[u].mon=50},'Níveis restaurados.']].forEach(a=>{const b=document.createElement('button');b.className='btn';b.textContent=a[0];b.onclick=()=>{a[1]();render();$('#feedback').textContent=a[2]};box.appendChild(b)});render();$('#feedback').textContent='Unidade '+u+' selecionada.';$$('.ctl').forEach(x=>x.classList.remove('selected'));}
+function selectControl(key){const [u,part]=key.split('-');st.selectedUnit=u;st.selectedKey=key;$$('.ctl').forEach(x=>x.classList.toggle('selected',x.dataset.key===key));const d=unitText[u];const box=$('#modes');box.innerHTML='';if(/^CH[123]$/.test(part)){const idx=+part.slice(2)-1;const cam=idx+1;$('#title').textContent='Fala da Câmera '+cam+' · '+d.title;$('#term').textContent='(CH'+cam+' / presença na linha '+u+')';$('#what').textContent='Este knob controla quanto da fala da Câmera '+cam+' entra na linha '+u+'.';$('#when').textContent='Use quando a Câmera '+cam+' estiver muito alta ou muito baixa em relação às outras. Ajuste até a fala ficar equilibrada na conversa de intercom.';$('#application').textContent=d.app;[['−10%',()=>st[u].ch[idx]=Math.max(0,st[u].ch[idx]-10)],['+10%',()=>st[u].ch[idx]=Math.min(100,st[u].ch[idx]+10)],['50%',()=>st[u].ch[idx]=50]].forEach(a=>{const b=document.createElement('button');b.className='btn';b.textContent=a[0];b.onclick=()=>{a[1]();render();$('#feedback').textContent='Presença da fala da Câmera '+cam+' ajustada.'};box.appendChild(b)});} else if(part==='MONITOR'){ $('#title').textContent='Monitor · '+d.title;$('#term').textContent='(Headphone / monitor volume)';$('#what').textContent='Este knob ajusta somente a monitoração local do próprio Promix. Ele não é o controle de retorno de uma câmera. Os volumes individuais de retorno estão nos três knobs CH1, CH2 e CH3.';$('#when').textContent='Use para conferir localmente o sinal do mixer sem alterar o volume de retorno entregue às câmeras.';$('#application').textContent=d.app;[['−10%',()=>st[u].mon=Math.max(0,st[u].mon-10)],['+10%',()=>st[u].mon=Math.min(100,st[u].mon+10)]].forEach(a=>{const b=document.createElement('button');b.className='btn';b.textContent=a[0];b.onclick=()=>{a[1]();render();$('#feedback').textContent='Monitor ajustado.'};box.appendChild(b)});} else if(part==='TAPE'){ $('#title').textContent='DIR / TAPE · '+d.title;$('#term').textContent='(Monitor source)';$('#what').textContent='Seleciona a origem usada na monitoração, permitindo ouvir o sinal direto ou o retorno de tape.';$('#when').textContent='Use quando quiser comparar o sinal direto do mixer com a fonte retornada para monitoração.';$('#application').textContent=d.app;[['DIR',()=>st[u].tape=false],['TAPE',()=>st[u].tape=true]].forEach(a=>{const b=document.createElement('button');b.className='btn';b.textContent=a[0];b.onclick=()=>{a[1]();render();$('#feedback').textContent='Fonte de monitor alterada.'};box.appendChild(b)});} else if(part==='POWER'){ $('#title').textContent='BATT / OFF / EXT · '+d.title;$('#term').textContent='(Power selector)';$('#what').textContent='Controla o estado de alimentação da unidade. O DV Promix 3 foi projetado como mixer portátil e pode trabalhar com bateria ou alimentação externa.';$('#when').textContent='Use para identificar se o mixer está energizado antes de testar o retorno ENG ou PRD.';$('#application').textContent=d.app;const b=document.createElement('button');b.className='btn';b.textContent='Ligar / desligar';b.onclick=()=>{st[u].power=!st[u].power;render();$('#feedback').textContent='Alimentação alternada.'};box.appendChild(b);} render();$('#feedback').textContent='Controle selecionado.';}
+$$('.device').forEach(d=>d.addEventListener('click',()=>setUnit(d.dataset.unit)));
+$$('.ctl').forEach(c=>c.addEventListener('click',e=>{e.stopPropagation();selectControl(c.dataset.key)}));
+setUnit('ENG');
+})();
+</script>
+</body>
+</html>
