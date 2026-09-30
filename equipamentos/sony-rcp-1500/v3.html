@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sony RCP-1500 — painel interativo V3</title>
+<style>
+:root{--bg:#0e1216;--panel:#d7dbdc;--line:#858d92;--text:#f4f6f7;--muted:#adb6bc;--card:#1b2127;--card2:#12171b;--accent:#5ea8ff;--accentbg:#173451;--ink:#22282c;--green:#4dd86d;--red:#ff4f4f;--amber:#ffb84d;--blue:#69c3ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{max-width:1440px;margin:auto;padding:18px}
+h1{margin:0 0 6px;font-size:28px}
+.lead{margin:0 0 16px;color:var(--muted);line-height:1.6}
+.toolbar{display:flex;justify-content:flex-end;margin-bottom:12px}
+.ui,.sim{background:transparent;color:var(--text);border:1px solid #465059;border-radius:10px;padding:10px 14px;cursor:pointer}
+.sim.active{background:var(--accentbg);border-color:var(--accent);font-weight:600}
+.layout{display:grid;grid-template-columns:minmax(650px,780px) minmax(380px,1fr);gap:18px;align-items:start}
+.card{background:var(--card2);border:1px solid #313940;border-radius:16px;padding:14px}
+.panel-wrap{overflow:auto}
+svg{width:100%;min-width:650px;height:auto;display:block}
+.hotspot{cursor:pointer}
+.hit{fill:transparent;stroke:transparent;stroke-width:4}
+.hotspot.selected .hit{stroke:var(--accent);fill:var(--accentbg);fill-opacity:.09}
+.screenfx{transition:filter .18s,opacity .18s,transform .18s}
+.monitor-title,.ey{text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.monitor-title{font-size:13px;margin-bottom:10px}.ey{font-size:11px;font-weight:700;margin-bottom:6px}
+.monitor-shell{background:#161b20;border:1px solid #313940;border-radius:14px;padding:14px}
+.monitor-frame{background:#080b0e;border:2px solid #434b51;border-radius:10px;padding:12px}
+.monitor-screen{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:4px;background:#10161b}
+.preview-scene,.preview-bars,.preview-nosignal,.preview-noise{position:absolute;inset:0}
+.preview-scene{background:
+radial-gradient(circle at 56% 34%,#d4b298 0 8%,transparent 8.2%),
+linear-gradient(to top,#2a3c46 0 34%,transparent 34%),
+linear-gradient(130deg,transparent 0 36%,rgba(220,230,235,.17) 36% 52%,transparent 52%),
+linear-gradient(110deg,transparent 0 66%,rgba(220,230,235,.12) 66% 82%,transparent 82%),
+linear-gradient(135deg,#325a70,#233d4b 52%,#13232d)}
+.preview-bars{display:none;grid-template-columns:repeat(7,1fr)}
+.preview-bars div:nth-child(1){background:#bfbfbf}.preview-bars div:nth-child(2){background:#bfbf00}.preview-bars div:nth-child(3){background:#00bfbf}.preview-bars div:nth-child(4){background:#00bf00}.preview-bars div:nth-child(5){background:#bf00bf}.preview-bars div:nth-child(6){background:#bf0000}.preview-bars div:nth-child(7){background:#0000bf}
+.preview-nosignal{display:none;align-items:center;justify-content:center;background:#050708;color:#ddd;font:700 22px ui-monospace,monospace;letter-spacing:.12em}
+.preview-noise{pointer-events:none;opacity:0;background-image:repeating-radial-gradient(circle at 15% 30%,rgba(255,255,255,.16) 0 1px,transparent 1px 4px);mix-blend-mode:screen}
+.preview-skin{position:absolute;width:20%;aspect-ratio:1;left:46%;top:22%;border-radius:50%;border:2px solid transparent;pointer-events:none}
+.preview-detail{position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(transparent 0 67%,rgba(255,255,255,.18) 67% 68%,transparent 68%),linear-gradient(90deg,transparent 0 22%,rgba(255,255,255,.18) 22% 23%,transparent 23%);mix-blend-mode:screen}
+.osd{position:absolute;inset:0;pointer-events:none;font-family:ui-monospace,monospace}.osd-top,.osd-bottom{position:absolute;left:12px;right:12px;display:flex;justify-content:space-between;font-size:12px;color:#f0f3f4;text-shadow:0 1px 1px #000}.osd-top{top:10px}.osd-bottom{bottom:10px}
+.status-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.status-pill{border:1px solid #39424a;background:#14191d;border-radius:12px;padding:10px 12px;font-size:13px;color:#dbe0e3}
+.lesson{margin-top:16px;background:var(--card);border:1px solid #313940;border-radius:16px;padding:16px}.lesson h2{margin:0 0 4px;font-size:22px}.term{color:var(--muted);font-size:14px;margin-bottom:14px}.lesson-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.copy{line-height:1.65;margin:0;color:#f0f2f3}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.feedback{margin-top:12px;border-radius:12px;padding:12px;background:#14191d;border:1px solid #313940;color:#e8ecee;line-height:1.6}.small-note{margin-top:8px;color:var(--muted);font-size:12px}
+@media(max-width:1100px){.layout{grid-template-columns:1fr}}@media(max-width:700px){main{padding:12px}.lesson-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<h1>Sony RCP-1500</h1>
+<p class="lead">Painel remoto de controle de câmera, com grafismo de superfície, LEDs, displays LCD e monitor de preview respondendo aos principais ajustes.</p>
+<div class="toolbar"><button class="ui" id="resetAll">Restaurar painel</button></div>
+
+<div class="layout">
+<section class="card panel-wrap">
+<svg viewBox="0 0 760 1240" aria-label="Sony RCP-1500 detalhado">
+<defs>
+<linearGradient id="panelGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e3e7e8"/><stop offset=".5" stop-color="#ced3d5"/><stop offset="1" stop-color="#bcc3c6"/></linearGradient>
+<linearGradient id="buttonGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#edf0f1"/><stop offset="1" stop-color="#c6cccf"/></linearGradient>
+<radialGradient id="knobGrad"><stop offset="0" stop-color="#f4f5f5"/><stop offset=".72" stop-color="#b3b9bc"/><stop offset="1" stop-color="#899194"/></radialGradient>
+</defs>
+
+<rect x="120" y="20" width="520" height="1190" rx="16" fill="url(#panelGrad)" stroke="#7f878c" stroke-width="2"/>
+<rect x="130" y="30" width="500" height="1170" rx="12" fill="none" stroke="#f5f7f7" opacity=".35"/>
+<text x="148" y="56" font-size="24" font-weight="700" fill="#161c20">SONY</text>
+<text x="610" y="56" font-size="14" fill="#4c555b" text-anchor="end">RCP-1500</text>
+
+<!-- bloco superior -->
+<g class="hotspot selected" data-key="cameraBlock">
+<rect x="145" y="82" width="470" height="240" rx="8" fill="#dfe3e4" stroke="#8f979c"/>
+<text x="160" y="102" font-size="12" fill="#4d565c">CAMERA / PANEL CONTROL</text>
+
+<g font-size="11" fill="#22282c" text-anchor="middle">
+<g class="hotspot control" data-action="para"><rect x="165" y="120" width="70" height="34" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="200" y="142">PARA</text><rect class="hit" x="160" y="115" width="80" height="44" rx="5"/></g>
+<g class="hotspot control" data-action="master"><rect x="245" y="120" width="90" height="34" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="290" y="142">MASTER</text><rect class="hit" x="240" y="115" width="100" height="44" rx="5"/></g>
+<g class="hotspot control" data-action="subordinate"><rect x="345" y="120" width="110" height="34" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="400" y="136">SUB</text><text x="400" y="149">ORDINATE</text><rect class="hit" x="340" y="115" width="120" height="44" rx="5"/></g>
+
+<g class="hotspot control" data-action="camPw"><rect x="165" y="170" width="78" height="36" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><circle id="ledCamPw" cx="178" cy="188" r="5" fill="#4dd86d"/><text x="207" y="192">CAM PW</text><rect class="hit" x="160" y="165" width="88" height="46" rx="5"/></g>
+<g class="hotspot control" data-action="test"><rect x="253" y="170" width="70" height="36" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="288" y="192">TEST</text><rect class="hit" x="248" y="165" width="80" height="46" rx="5"/></g>
+<g class="hotspot control" data-action="bars"><rect x="333" y="170" width="70" height="36" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><circle id="ledBars" cx="346" cy="188" r="5" fill="#4a5054"/><text x="373" y="192">BARS</text><rect class="hit" x="328" y="165" width="80" height="46" rx="5"/></g>
+<g class="hotspot control" data-action="close"><rect x="413" y="170" width="70" height="36" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="448" y="192">CLOSE</text><rect class="hit" x="408" y="165" width="80" height="46" rx="5"/></g>
+
+<g class="hotspot control" data-action="standard"><rect x="165" y="220" width="92" height="36" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><circle id="ledStandard" cx="178" cy="238" r="5" fill="#4a5054"/><text x="215" y="242">STANDARD</text><rect class="hit" x="160" y="215" width="102" height="46" rx="5"/></g>
+<g class="hotspot control" data-action="character"><rect x="267" y="220" width="102" height="36" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><circle id="ledCharacter" cx="280" cy="238" r="5" fill="#4a5054"/><text x="318" y="242">CHARACTER</text><rect class="hit" x="262" y="215" width="112" height="46" rx="5"/></g>
+<g class="hotspot control" data-action="skin"><rect x="379" y="220" width="110" height="36" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><circle id="ledSkin" cx="392" cy="238" r="5" fill="#4a5054"/><text x="434" y="242">SKIN DETAIL</text><rect class="hit" x="374" y="215" width="120" height="46" rx="5"/></g>
+
+<g class="hotspot control" data-action="5600k"><rect x="165" y="270" width="82" height="34" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><circle id="led5600k" cx="178" cy="287" r="5" fill="#4a5054"/><text x="212" y="291">5600K</text><rect class="hit" x="160" y="265" width="92" height="44" rx="5"/></g>
+<g class="hotspot control" data-action="detail"><rect x="257" y="270" width="82" height="34" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="298" y="291">DETAIL</text><rect class="hit" x="252" y="265" width="92" height="44" rx="5"/></g>
+<g class="hotspot control" data-action="gate"><rect x="349" y="270" width="82" height="34" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="390" y="291">GATE</text><rect class="hit" x="344" y="265" width="92" height="44" rx="5"/></g>
+<g class="hotspot control" data-action="saturation"><rect x="441" y="270" width="110" height="34" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="496" y="291">SATURATION</text><rect class="hit" x="436" y="265" width="120" height="44" rx="5"/></g>
+</g>
+<rect class="hit" x="140" y="77" width="480" height="250" rx="10"/>
+</g>
+
+<!-- LCD -->
+<g class="hotspot" data-key="lcdBlock">
+<rect x="145" y="340" width="470" height="300" rx="8" fill="#dfe3e4" stroke="#8f979c"/>
+<text x="160" y="360" font-size="12" fill="#4d565c">LCD / TOUCH / MENU</text>
+<rect x="165" y="380" width="305" height="190" rx="6" fill="#0e1215" stroke="#687176" stroke-width="3"/>
+<rect x="176" y="392" width="283" height="166" rx="3" fill="#1d2a31"/>
+<text id="svgLcdTitle" x="318" y="420" font-size="18" fill="#f4f7f8" text-anchor="middle" style="font-family:ui-monospace,monospace">STATUS</text>
+<text id="svgLcdLine1" x="190" y="448" font-size="15" fill="#dfe5e8" style="font-family:ui-monospace,monospace">CAM 1</text>
+<text id="svgLcdLine2" x="190" y="476" font-size="15" fill="#dfe5e8" style="font-family:ui-monospace,monospace">1080i59.94</text>
+<text id="svgLcdLine3" x="190" y="504" font-size="15" fill="#dfe5e8" style="font-family:ui-monospace,monospace">IRIS F5.6</text>
+<text id="svgLcdLine4" x="190" y="532" font-size="15" fill="#dfe5e8" style="font-family:ui-monospace,monospace">GAIN 0dB</text>
+<circle cx="515" cy="415" r="23" fill="url(#knobGrad)" stroke="#737b80"/><text x="515" y="448" font-size="11" fill="#41494f" text-anchor="middle">SELECT</text>
+<g class="hotspot control" data-action="menuBtn"><rect x="492" y="470" width="46" height="30" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="515" y="489" font-size="11" fill="#22282c" text-anchor="middle">MENU</text><rect class="hit" x="487" y="465" width="56" height="40" rx="5"/></g>
+<g class="hotspot control" data-action="custom1"><rect x="492" y="508" width="46" height="30" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="515" y="526" font-size="9" fill="#22282c" text-anchor="middle">CUSTOM 1</text><rect class="hit" x="487" y="503" width="56" height="40" rx="5"/></g>
+<g class="hotspot control" data-action="custom2"><rect x="492" y="546" width="46" height="30" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="515" y="564" font-size="9" fill="#22282c" text-anchor="middle">CUSTOM 2</text><rect class="hit" x="487" y="541" width="56" height="40" rx="5"/></g>
+<circle cx="210" cy="600" r="20" fill="url(#knobGrad)" stroke="#727a7f"/><circle cx="285" cy="600" r="20" fill="url(#knobGrad)" stroke="#727a7f"/><circle cx="360" cy="600" r="20" fill="url(#knobGrad)" stroke="#727a7f"/><circle cx="435" cy="600" r="20" fill="url(#knobGrad)" stroke="#727a7f"/>
+<text x="210" y="630" font-size="9" fill="#4d565c" text-anchor="middle">SOFT 1</text><text x="285" y="630" font-size="9" fill="#4d565c" text-anchor="middle">SOFT 2</text><text x="360" y="630" font-size="9" fill="#4d565c" text-anchor="middle">SOFT 3</text><text x="435" y="630" font-size="9" fill="#4d565c" text-anchor="middle">SOFT 4</text>
+<rect class="hit" x="140" y="335" width="480" height="310" rx="10"/>
+</g>
+
+<!-- funções -->
+<g class="hotspot" data-key="functionBlock">
+<rect x="145" y="660" width="470" height="250" rx="8" fill="#dfe3e4" stroke="#8f979c"/>
+<text x="160" y="680" font-size="12" fill="#4d565c">SCENE / FILTER / SHUTTER / GAIN</text>
+<text x="165" y="704" font-size="11" fill="#4d565c">SCENE FILE</text>
+<g class="hotspot control" data-action="scene1"><rect x="165" y="715" width="36" height="28" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="183" y="733" font-size="11" fill="#22282c" text-anchor="middle">1</text><circle id="sceneLed1" cx="183" cy="707" r="4" fill="#ffb84d"/><rect class="hit" x="160" y="702" width="46" height="46" rx="5"/></g><g class="hotspot control" data-action="scene2"><rect x="209" y="715" width="36" height="28" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="227" y="733" font-size="11" fill="#22282c" text-anchor="middle">2</text><circle id="sceneLed2" cx="227" cy="707" r="4" fill="#4a5054"/><rect class="hit" x="204" y="702" width="46" height="46" rx="5"/></g><g class="hotspot control" data-action="scene3"><rect x="253" y="715" width="36" height="28" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="271" y="733" font-size="11" fill="#22282c" text-anchor="middle">3</text><circle id="sceneLed3" cx="271" cy="707" r="4" fill="#4a5054"/><rect class="hit" x="248" y="702" width="46" height="46" rx="5"/></g><g class="hotspot control" data-action="scene4"><rect x="297" y="715" width="36" height="28" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="315" y="733" font-size="11" fill="#22282c" text-anchor="middle">4</text><circle id="sceneLed4" cx="315" cy="707" r="4" fill="#4a5054"/><rect class="hit" x="292" y="702" width="46" height="46" rx="5"/></g><g class="hotspot control" data-action="scene5"><rect x="341" y="715" width="36" height="28" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="359" y="733" font-size="11" fill="#22282c" text-anchor="middle">5</text><circle id="sceneLed5" cx="359" cy="707" r="4" fill="#4a5054"/><rect class="hit" x="336" y="702" width="46" height="46" rx="5"/></g>
+<g class="hotspot control" data-action="store"><rect x="389" y="715" width="56" height="28" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="417" y="733" font-size="11" fill="#22282c" text-anchor="middle">STORE</text><rect class="hit" x="384" y="710" width="66" height="38" rx="5"/></g>
+
+<text x="185" y="780" font-size="11" fill="#4d565c" text-anchor="middle">ND</text>
+<rect x="165" y="790" width="42" height="86" rx="5" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="186" y="815" font-size="13" fill="#22282c" text-anchor="middle">▲</text><text id="ndDispSvg" x="186" y="842" font-size="22" fill="#15191c" text-anchor="middle" style="font-family:ui-monospace,monospace">1</text><text x="186" y="868" font-size="13" fill="#22282c" text-anchor="middle">▼</text><rect class="hit hotspot control" data-action="ndCycle" x="160" y="785" width="52" height="96" rx="6"/>
+
+<text x="265" y="780" font-size="11" fill="#4d565c" text-anchor="middle">CC</text>
+<rect x="244" y="790" width="42" height="86" rx="5" fill="url(#buttonGrad)" stroke="#7d858a"/><text x="265" y="815" font-size="13" fill="#22282c" text-anchor="middle">▲</text><text id="ccDispSvg" x="265" y="842" font-size="22" fill="#15191c" text-anchor="middle" style="font-family:ui-monospace,monospace">A</text><text x="265" y="868" font-size="13" fill="#22282c" text-anchor="middle">▼</text><rect class="hit hotspot control" data-action="ccCycle" x="239" y="785" width="52" height="96" rx="6"/>
+
+<text x="360" y="780" font-size="11" fill="#4d565c" text-anchor="middle">SHUTTER</text>
+<rect x="327" y="790" width="66" height="86" rx="5" fill="url(#buttonGrad)" stroke="#7d858a"/><text id="shutterDispSvg" x="360" y="840" font-size="16" fill="#15191c" text-anchor="middle" style="font-family:ui-monospace,monospace">OFF</text><text x="360" y="866" font-size="10" fill="#4d565c" text-anchor="middle">ON / SPEED</text><rect class="hit hotspot control" data-action="shutterCycle" x="322" y="785" width="76" height="96" rx="6"/>
+
+<text x="468" y="780" font-size="11" fill="#4d565c" text-anchor="middle">MASTER GAIN</text>
+<rect x="435" y="790" width="66" height="86" rx="5" fill="url(#buttonGrad)" stroke="#7d858a"/><text id="gainDispSvg" x="468" y="842" font-size="26" fill="#15191c" text-anchor="middle" style="font-family:ui-monospace,monospace">0</text><text x="468" y="868" font-size="10" fill="#4d565c" text-anchor="middle">dB</text><rect class="hit hotspot control" data-action="gainCycle" x="430" y="785" width="76" height="96" rx="6"/>
+<rect class="hit" x="140" y="655" width="480" height="260" rx="10"/>
+</g>
+
+<!-- paint -->
+<g class="hotspot" data-key="paintBlock">
+<rect x="145" y="930" width="470" height="160" rx="8" fill="#dfe3e4" stroke="#8f979c"/>
+<text x="160" y="950" font-size="12" fill="#4d565c">PAINT / WHITE / BLACK / FLARE</text>
+<text x="190" y="975" font-size="11" fill="#4d565c">WHITE</text>
+<g class="hotspot control" data-action="whiteR"><circle cx="185" cy="1018" r="24" fill="url(#knobGrad)" stroke="#737b80"/><text x="185" y="1023" font-size="12" fill="#22282c" text-anchor="middle">R</text><rect class="hit" x="155" y="988" width="60" height="60" rx="8"/></g><g class="hotspot control" data-action="whiteG"><circle cx="245" cy="1018" r="24" fill="url(#knobGrad)" stroke="#737b80"/><text x="245" y="1023" font-size="12" fill="#22282c" text-anchor="middle">G</text><rect class="hit" x="215" y="988" width="60" height="60" rx="8"/></g><g class="hotspot control" data-action="whiteB"><circle cx="305" cy="1018" r="24" fill="url(#knobGrad)" stroke="#737b80"/><text x="305" y="1023" font-size="12" fill="#22282c" text-anchor="middle">B</text><rect class="hit" x="275" y="988" width="60" height="60" rx="8"/></g>
+<text x="430" y="975" font-size="11" fill="#4d565c">BLACK / FLARE</text>
+<g class="hotspot control" data-action="blackR"><circle cx="395" cy="1018" r="24" fill="url(#knobGrad)" stroke="#737b80"/><text x="395" y="1023" font-size="12" fill="#22282c" text-anchor="middle">R</text><rect class="hit" x="365" y="988" width="60" height="60" rx="8"/></g><g class="hotspot control" data-action="blackG"><circle cx="455" cy="1018" r="24" fill="url(#knobGrad)" stroke="#737b80"/><text x="455" y="1023" font-size="12" fill="#22282c" text-anchor="middle">G</text><rect class="hit" x="425" y="988" width="60" height="60" rx="8"/></g><g class="hotspot control" data-action="blackB"><circle cx="515" cy="1018" r="24" fill="url(#knobGrad)" stroke="#737b80"/><text x="515" y="1023" font-size="12" fill="#22282c" text-anchor="middle">B</text><rect class="hit" x="485" y="988" width="60" height="60" rx="8"/></g>
+<rect class="hit" x="140" y="925" width="480" height="170" rx="10"/>
+</g>
+
+<!-- iris -->
+<g class="hotspot" data-key="irisBlock">
+<rect x="145" y="1105" width="470" height="90" rx="8" fill="#dfe3e4" stroke="#8f979c"/>
+<text x="160" y="1125" font-size="12" fill="#4d565c">IRIS / MASTER BLACK / CAMERA NUMBER</text>
+<rect id="camNumBox" x="165" y="1137" width="62" height="42" rx="5" fill="#181d20" stroke="#6b7378"/><text id="camNumSvg" x="196" y="1165" font-size="28" fill="#ffb84d" text-anchor="middle" style="font-family:ui-monospace,monospace">1</text>
+<rect x="240" y="1137" width="74" height="42" rx="5" fill="#181d20" stroke="#6b7378"/><text id="irisDispSvg" x="277" y="1163" font-size="18" fill="#f4f6f7" text-anchor="middle" style="font-family:ui-monospace,monospace">5.6</text><text x="277" y="1188" font-size="10" fill="#4d565c" text-anchor="middle">IRIS</text>
+<rect x="325" y="1137" width="74" height="42" rx="5" fill="#181d20" stroke="#6b7378"/><text id="mbDispSvg" x="362" y="1163" font-size="18" fill="#f4f6f7" text-anchor="middle" style="font-family:ui-monospace,monospace">0</text><text x="362" y="1188" font-size="10" fill="#4d565c" text-anchor="middle">MASTER BLACK</text>
+<circle cx="525" cy="1158" r="32" fill="#d7dcde" stroke="#777f84" stroke-width="3"/><circle cx="525" cy="1158" r="22" fill="url(#knobGrad)" stroke="#7b8388"/><circle id="joyDot" cx="525" cy="1158" r="8" fill="#7b8388"/>
+<g class="hotspot control" data-action="autoIris"><rect x="418" y="1138" width="88" height="24" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><circle id="ledAutoIris" cx="430" cy="1150" r="4" fill="#4a5054"/><text x="465" y="1154" font-size="9" fill="#22282c" text-anchor="middle">AUTO IRIS</text><rect class="hit" x="413" y="1133" width="98" height="34" rx="5"/></g>
+<g class="hotspot control" data-action="panelActive"><rect x="418" y="1168" width="88" height="20" rx="4" fill="url(#buttonGrad)" stroke="#7d858a"/><circle id="ledPanelActive" cx="430" cy="1178" r="4" fill="#4dd86d"/><text x="468" y="1182" font-size="9" fill="#22282c" text-anchor="middle">PANEL ACTIVE</text><rect class="hit" x="413" y="1163" width="98" height="30" rx="5"/></g>
+<g class="hotspot control" data-action="irisOpen"><rect class="hit" x="505" y="1118" width="40" height="22" rx="4"/></g>
+<g class="hotspot control" data-action="irisClose"><rect class="hit" x="505" y="1178" width="40" height="22" rx="4"/></g>
+<g class="hotspot control" data-action="mbDown"><rect class="hit" x="475" y="1142" width="22" height="32" rx="4"/></g>
+<g class="hotspot control" data-action="mbUp"><rect class="hit" x="553" y="1142" width="22" height="32" rx="4"/></g>
+<rect class="hit" x="140" y="1100" width="480" height="100" rx="10"/>
+</g>
+</svg>
+</section>
+
+<section class="card">
+<div class="monitor-title">Monitor de preview</div>
+<div class="monitor-shell">
+<div class="monitor-frame">
+<div class="monitor-screen">
+<div class="preview-scene screenfx" id="previewScene"></div>
+<div class="preview-noise" id="previewNoise"></div>
+<div class="preview-skin" id="previewSkin"></div>
+<div class="preview-detail" id="previewDetail"></div>
+<div class="preview-bars" id="previewBars"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<div class="preview-nosignal" id="previewNoSignal">NO SIGNAL</div>
+<div class="osd"><div class="osd-top"><span id="osdCam">CAM 1</span><span id="osdFormat">1080i59.94</span></div><div class="osd-bottom"><span id="osdLeft">IRIS F5.6</span><span id="osdRight">GAIN 0dB</span></div></div>
+</div>
+</div>
+<div class="status-grid">
+<div class="status-pill" id="pillScene">Scene file — 1</div>
+<div class="status-pill" id="pillWhite">Temperatura — padrão</div>
+<div class="status-pill" id="pillExposure">Exposição — normal</div>
+<div class="status-pill" id="pillPaint">Paint — neutro</div>
+<div class="status-pill" id="pillIris">Íris — F5.6</div>
+<div class="status-pill" id="pillBlack">Master black — 0</div>
+</div>
+</div>
+
+<section class="lesson" aria-live="polite">
+<h2 id="lessonTitle">Bloco de controle de câmera</h2><div class="term" id="lessonTerm">(Camera / Panel Control)</div>
+<div class="lesson-grid"><div><div class="ey">Como funciona</div><p class="copy" id="lessonFunc"></p></div><div><div class="ey">Exemplo de uso</div><p class="copy" id="lessonExample"></p></div></div>
+<div class="ey" style="margin-top:16px">Experimente</div><div class="modes" id="lessonModes"></div><div class="feedback" id="lessonFeedback">Selecione um controle.</div>
+<div class="small-note">O preview é uma simulação didática da consequência visual dos ajustes, não uma emulação da câmera.</div>
+</section>
+</section>
+</div>
+
+<script>
+(()=>{const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const st={camPower:true,bars:false,standard:false,character:false,skin:false,k5600:false,detail:0,saturation:0,scene:1,nd:1,cc:'A',shutter:'OFF',gain:0,iris:5.6,mb:0,autoIris:false,panelActive:true,menu:'STATUS',whiteR:0,whiteG:0,whiteB:0,blackR:0,blackG:0,blackB:0};
+function setLed(id,on,color='green'){const map={green:'#4dd86d',red:'#ff4f4f',amber:'#ffb84d',blue:'#69c3ff',off:'#4a5054'};$(id).setAttribute('fill',on?map[color]:map.off)}
+function updateLCD(){
+$('#svgLcdTitle').textContent=st.menu;
+if(st.menu==='STATUS'){ $('#svgLcdLine1').textContent='CAM 1';$('#svgLcdLine2').textContent='1080i59.94';$('#svgLcdLine3').textContent='IRIS F'+st.iris.toFixed(1);$('#svgLcdLine4').textContent='GAIN '+st.gain+'dB';}
+if(st.menu==='PAINT'){ $('#svgLcdLine1').textContent='WHITE R '+st.whiteR;$('#svgLcdLine2').textContent='BLACK R '+st.blackR;$('#svgLcdLine3').textContent='DETAIL '+st.detail;$('#svgLcdLine4').textContent='SAT '+st.saturation;}
+if(st.menu==='EXPOSURE'){ $('#svgLcdLine1').textContent='ND '+st.nd;$('#svgLcdLine2').textContent='CC '+st.cc;$('#svgLcdLine3').textContent='SHUT '+st.shutter;$('#svgLcdLine4').textContent='GAIN '+st.gain+'dB';}
+if(st.menu==='SCENE'){ $('#svgLcdLine1').textContent='FILE '+st.scene;$('#svgLcdLine2').textContent='STORE READY';$('#svgLcdLine3').textContent='';$('#svgLcdLine4').textContent='';}
+}
+function updateMonitor(){
+const scene=$('#previewScene'),bars=$('#previewBars'),ns=$('#previewNoSignal');
+if(!st.camPower){scene.style.display='none';bars.style.display='none';ns.style.display='flex'}
+else if(st.bars){scene.style.display='none';bars.style.display='grid';ns.style.display='none'}
+else{scene.style.display='block';bars.style.display='none';ns.style.display='none'}
+const exp=1+(st.gain*.035)-((st.nd-1)*.085)+((5.6-st.iris)*.04)+(st.mb*.018);
+const cont=1+(st.detail*.045);
+const sat=Math.max(.25,1+(st.saturation*.14)+(st.whiteR+st.whiteG+st.whiteB)*.015);
+const hue=(st.k5600?-8:0)+(st.whiteR-st.whiteB)*1.8;
+scene.style.filter=`brightness(${Math.max(.38,exp)}) contrast(${cont}) saturate(${sat}) hue-rotate(${hue}deg)`;
+$('#previewDetail').style.opacity=st.detail>0?Math.min(.15+st.detail*.08,.55):0;
+$('#previewSkin').style.borderColor=st.skin?'rgba(255,150,150,.95)':'transparent';
+$('#previewSkin').style.boxShadow=st.skin?'0 0 0 8px rgba(255,150,150,.12)':'none';
+$('#previewNoise').style.opacity=Math.max(0,st.gain/24);
+$('#osdFormat').textContent='1080i59.94'+(st.character?' CHAR':'');
+$('#osdLeft').textContent='IRIS F'+st.iris.toFixed(1);
+$('#osdRight').textContent='GAIN '+st.gain+'dB';
+}
+function refresh(){
+$('#ndDispSvg').textContent=st.nd;$('#ccDispSvg').textContent=st.cc;$('#shutterDispSvg').textContent=st.shutter;$('#gainDispSvg').textContent=st.gain;$('#irisDispSvg').textContent=st.iris.toFixed(1);$('#mbDispSvg').textContent=st.mb;
+setLed('#ledCamPw',st.camPower);setLed('#ledBars',st.bars,'red');setLed('#ledStandard',st.standard,'amber');setLed('#ledCharacter',st.character);setLed('#ledSkin',st.skin,'amber');setLed('#led5600k',st.k5600,'blue');setLed('#ledAutoIris',st.autoIris);setLed('#ledPanelActive',st.panelActive);
+for(let i=1;i<=5;i++)setLed('#sceneLed'+i,st.scene===i,'amber');
+$('#camNumBox').setAttribute('fill',st.bars?'#ef4f49':'#181d20');
+$('#camNumSvg').setAttribute('fill',st.bars?'#111':'#ffb84d');
+$('#pillScene').textContent='Scene file — '+st.scene;$('#pillWhite').textContent='Temperatura — '+(st.k5600?'5600K ativa':'padrão');$('#pillExposure').textContent='Exposição — ND '+st.nd+' · Gain '+st.gain+'dB';$('#pillPaint').textContent='Paint — Detail '+st.detail+' · Sat '+st.saturation;$('#pillIris').textContent='Íris — F'+st.iris.toFixed(1);$('#pillBlack').textContent='Master black — '+st.mb;
+updateLCD();updateMonitor();
+}
+const lessons={
+cameraBlock:{title:'Controle de câmera e painel',term:'Camera / Panel Control',func:'Este bloco reúne os comandos de acesso rápido usados durante a operação da câmera, incluindo energia, barras, retorno ao padrão, caracteres, skin detail, 5600K, detail e saturation.',example:'Para testar o caminho de vídeo, ligue BARS. Para desfazer alterações de paint durante uma aula, use STANDARD. CHARACTER permite visualizar sobreposição de informações.',modes:[['CAM PW',()=>st.camPower=!st.camPower,'A alimentação da câmera foi alternada.'],['BARS',()=>{if(st.camPower)st.bars=!st.bars},'As barras de teste foram alternadas.'],['STANDARD',()=>{Object.assign(st,{standard:true,k5600:false,skin:false,detail:0,saturation:0,gain:0,nd:1,iris:5.6,mb:0,whiteR:0,whiteG:0,whiteB:0,blackR:0,blackG:0,blackB:0})},'Os principais ajustes retornaram à referência.'],['CHARACTER',()=>st.character=!st.character,'A indicação de caracteres foi alternada.'],['SKIN DETAIL',()=>{st.skin=!st.skin;st.menu='PAINT'},'Skin Detail foi alternado.'],['5600K',()=>{st.k5600=!st.k5600;st.menu='PAINT'},'5600K foi alternado.'],['DETAIL +',()=>{st.detail=Math.min(5,st.detail+1);st.menu='PAINT'},'Detail foi aumentado.'],['SATURATION +',()=>{st.saturation=Math.min(5,st.saturation+1);st.menu='PAINT'},'Saturação foi aumentada.']]},
+lcdBlock:{title:'LCD e menus',term:'LCD / Touch / Menu / Custom',func:'A tela central apresenta estado e menus. Os controles ao lado e os quatro encoders inferiores permitem navegação e ajuste de parâmetros.',example:'Antes de ajustar a câmera, STATUS permite conferir rapidamente íris e ganho. PAINT organiza os parâmetros de cor e detalhe; EXPOSURE reúne filtros, shutter e ganho.',modes:[['STATUS',()=>st.menu='STATUS','A tela mostra o estado geral.'],['PAINT',()=>st.menu='PAINT','O menu de paint foi aberto.'],['EXPOSURE',()=>st.menu='EXPOSURE','O menu de exposição foi aberto.'],['SCENE',()=>st.menu='SCENE','O menu de scene files foi aberto.']]},
+functionBlock:{title:'Scene file, filtros, shutter e ganho',term:'Scene / ND / CC / Shutter / Master Gain',func:'Este bloco controla memórias de cena e parâmetros que influenciam diretamente a exposição e a resposta da câmera.',example:'Em muita luz, aumente ND antes de fechar excessivamente a íris. Gain pode ajudar quando falta luz, mas o preview mostra também o aumento de ruído.',modes:[['Scene 1',()=>{st.scene=1;st.menu='SCENE'},'Scene File 1 selecionado.'],['Scene 2',()=>{st.scene=2;st.menu='SCENE'},'Scene File 2 selecionado.'],['ND',()=>{st.nd=st.nd>=5?1:st.nd+1;st.menu='EXPOSURE'},'O filtro ND avançou.'],['CC',()=>{st.cc=({A:'B',B:'C',C:'D',D:'A'})[st.cc];st.menu='EXPOSURE'},'O filtro CC foi alterado.'],['Shutter',()=>{const q=['OFF','1/100','1/250','1/500'];st.shutter=q[(q.indexOf(st.shutter)+1)%q.length];st.menu='EXPOSURE'},'O shutter foi alterado.'],['Gain',()=>{const q=[-3,0,3,6,9,12];st.gain=q[(q.indexOf(st.gain)+1)%q.length];st.menu='EXPOSURE'},'O ganho foi alterado.']]},
+paintBlock:{title:'Ajustes de paint',term:'White / Black / Flare',func:'Os controles RGB refinam a neutralidade do branco e do preto para aproximar câmeras em uma produção multicâmera.',example:'Se uma câmera está levemente mais quente que outra, um pequeno ajuste relativo entre R e B no white pode ajudar a casar as duas imagens.',modes:[['White R +',()=>{st.whiteR++;st.menu='PAINT'},'White R foi aumentado.'],['White B +',()=>{st.whiteB++;st.menu='PAINT'},'White B foi aumentado.'],['Black R -',()=>{st.blackR--;st.mb=Math.max(-5,st.mb-1);st.menu='PAINT'},'Black R foi reduzido.'],['Neutro',()=>{st.whiteR=st.whiteG=st.whiteB=st.blackR=st.blackG=st.blackB=0;st.mb=0;st.menu='PAINT'},'Os ajustes RGB voltaram ao neutro.']]},
+irisBlock:{title:'Íris, master black e displays',term:'Iris / Master Black / Camera Number',func:'O conjunto inferior concentra a operação contínua de exposição. O display mostra o número da câmera e valores digitais de íris e master black.',example:'Durante um programa, o operador pode abrir ou fechar a íris para manter câmeras com exposição semelhante. Master black ajusta o nível de preto de forma independente.',modes:[['Abrir íris',()=>{st.iris=Math.max(1.4,+(st.iris-.3).toFixed(1));$('#joyDot').setAttribute('cy','1149')},'A íris foi aberta.'],['Fechar íris',()=>{st.iris=Math.min(16,+(st.iris+.3).toFixed(1));$('#joyDot').setAttribute('cy','1167')},'A íris foi fechada.'],['Master black +',()=>{st.mb=Math.min(5,st.mb+1);$('#joyDot').setAttribute('cx','534')},'Master black foi elevado.'],['Master black −',()=>{st.mb=Math.max(-5,st.mb-1);$('#joyDot').setAttribute('cx','516')},'Master black foi reduzido.'],['AUTO IRIS',()=>st.autoIris=!st.autoIris,'Auto Iris foi alternado.'],['PANEL ACTIVE',()=>st.panelActive=!st.panelActive,'Panel Active foi alternado.']]}
+};
+function showLesson(k){const l=lessons[k];if(!l)return;$$('.hotspot[data-key]').forEach(x=>x.classList.toggle('selected',x.dataset.key===k));$('#lessonTitle').textContent=l.title;$('#lessonTerm').textContent='('+l.term+')';$('#lessonFunc').textContent=l.func;$('#lessonExample').textContent=l.example;const box=$('#lessonModes');box.innerHTML='';l.modes.forEach(m=>{const b=document.createElement('button');b.className='sim';b.textContent=m[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');m[1]();refresh();$('#lessonFeedback').textContent=m[2]};box.appendChild(b)})}
+function action(a){
+if(a==='camPw')st.camPower=!st.camPower;
+else if(a==='bars'&&st.camPower)st.bars=!st.bars;
+else if(a==='standard'){Object.assign(st,{standard:true,k5600:false,skin:false,detail:0,saturation:0,gain:0,nd:1,iris:5.6,mb:0,whiteR:0,whiteG:0,whiteB:0,blackR:0,blackG:0,blackB:0})}
+else if(a==='character')st.character=!st.character;
+else if(a==='skin'){st.skin=!st.skin;st.menu='PAINT'}
+else if(a==='5600k'){st.k5600=!st.k5600;st.menu='PAINT'}
+else if(a==='detail'){st.detail=(st.detail+1)%6;st.menu='PAINT'}
+else if(a==='saturation'){st.saturation=st.saturation>=5?0:st.saturation+1;st.menu='PAINT'}
+else if(a==='menuBtn')st.menu='STATUS';
+else if(a==='custom1')st.menu='PAINT';
+else if(a==='custom2')st.menu='EXPOSURE';
+else if(/^scene[1-5]$/.test(a)){st.scene=+a.slice(-1);st.menu='SCENE'}
+else if(a==='ndCycle'){st.nd=st.nd>=5?1:st.nd+1;st.menu='EXPOSURE'}
+else if(a==='ccCycle'){st.cc=({A:'B',B:'C',C:'D',D:'A'})[st.cc];st.menu='EXPOSURE'}
+else if(a==='shutterCycle'){const q=['OFF','1/100','1/250','1/500'];st.shutter=q[(q.indexOf(st.shutter)+1)%q.length];st.menu='EXPOSURE'}
+else if(a==='gainCycle'){const q=[-3,0,3,6,9,12];st.gain=q[(q.indexOf(st.gain)+1)%q.length];st.menu='EXPOSURE'}
+else if(a==='whiteR'){st.whiteR++;st.menu='PAINT'}
+else if(a==='whiteG'){st.whiteG++;st.menu='PAINT'}
+else if(a==='whiteB'){st.whiteB++;st.menu='PAINT'}
+else if(a==='blackR'){st.blackR--;st.mb=Math.max(-5,st.mb-1);st.menu='PAINT'}
+else if(a==='blackG'){st.blackG--;st.mb=Math.max(-5,st.mb-1);st.menu='PAINT'}
+else if(a==='blackB'){st.blackB--;st.mb=Math.max(-5,st.mb-1);st.menu='PAINT'}
+else if(a==='autoIris')st.autoIris=!st.autoIris;
+else if(a==='panelActive')st.panelActive=!st.panelActive;
+else if(a==='irisOpen'){st.iris=Math.max(1.4,+(st.iris-.3).toFixed(1));$('#joyDot').setAttribute('cy','1149')}
+else if(a==='irisClose'){st.iris=Math.min(16,+(st.iris+.3).toFixed(1));$('#joyDot').setAttribute('cy','1167')}
+else if(a==='mbUp'){st.mb=Math.min(5,st.mb+1);$('#joyDot').setAttribute('cx','534')}
+else if(a==='mbDown'){st.mb=Math.max(-5,st.mb-1);$('#joyDot').setAttribute('cx','516')}
+refresh();
+}
+function reset(){
+Object.assign(st,{camPower:true,bars:false,standard:false,character:false,skin:false,k5600:false,detail:0,saturation:0,scene:1,nd:1,cc:'A',shutter:'OFF',gain:0,iris:5.6,mb:0,autoIris:false,panelActive:true,menu:'STATUS',whiteR:0,whiteG:0,whiteB:0,blackR:0,blackG:0,blackB:0});
+$('#joyDot').setAttribute('cx','525');$('#joyDot').setAttribute('cy','1158');refresh();showLesson('cameraBlock');$('#lessonFeedback').textContent='O painel voltou ao estado inicial.';
+}
+$$('.hotspot[data-key]').forEach(x=>x.addEventListener('click',()=>showLesson(x.dataset.key)));
+$$('.control').forEach(x=>x.addEventListener('click',e=>{e.stopPropagation();if(x.dataset.action)action(x.dataset.action)}));
+$('#resetAll').addEventListener('click',reset);
+reset();
+})();
+</script>
+</main></body></html>
