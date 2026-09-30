@@ -85,6 +85,33 @@ svg{max-width:100%}
   .ubq-context-host{margin-top:10px}
 }
 
+
+@media(max-width:760px){
+  .frame,.panelScroller,.panelWrap,.instrument,.stage,.wrap{
+    width:calc(100% - 12px)!important;
+    max-width:calc(100% - 12px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
+  svg#front,svg#panel,svg#rcpPanel{
+    width:96%!important;
+    max-width:96%!important;
+    min-width:0!important;
+    height:auto!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    display:block!important;
+  }
+}
+@media(max-width:430px){
+  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
+  svg#front,svg#panel,svg#rcpPanel{
+    width:94%!important;
+    max-width:94%!important;
+  }
+}
+
 </style></head><body><main>
 <h1>Blackmagic HyperDeck Studio 4K Pro</h1><p class="muted">Gravador e reprodutor profissional. Toque em cada parte do painel e experimente seu funcionamento.</p>
 <div class="frame"><svg viewBox="0 0 1500 220" aria-label="Painel frontal interativo HyperDeck Studio 4K Pro">
