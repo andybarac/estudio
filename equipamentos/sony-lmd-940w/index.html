@@ -51,43 +51,46 @@ svg{max-width:100%}
 }
 
 
-/* UBIQUIDADE CONTEXTO V3 */
+/* UBIQUIDADE CONTEXTO V4 - painel fora do aparelho */
+.ubq-context-backdrop{display:none!important}
 .lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
-  background:color-mix(in srgb,var(--card,#151c22) 86%,transparent)!important;
-  -webkit-backdrop-filter:blur(9px) saturate(120%);
-  backdrop-filter:blur(9px) saturate(120%);
-  border-color:rgba(150,170,185,.45)!important;
-  box-shadow:0 18px 56px rgba(0,0,0,.38)!important;
-  top:auto!important;bottom:14px!important;transform:translateX(-50%)!important;
-  max-height:46vh!important;
+  position:relative!important;
+  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  transform:none!important;
+  width:100%!important;max-width:none!important;max-height:none!important;
+  overflow:auto!important;
+  margin:12px 0 0!important;
+  display:none!important;
+  background:rgba(18,24,29,.88)!important;
+  -webkit-backdrop-filter:blur(8px) saturate(115%);
+  backdrop-filter:blur(8px) saturate(115%);
+  border:1px solid rgba(150,170,185,.38)!important;
+  border-radius:14px!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.28)!important;
+  padding:16px!important;
 }
-.ubq-context-backdrop{
-  background:rgba(0,0,0,.18)!important;
-  backdrop-filter:blur(1px);
+.lesson.ubq-context.open,.side.ubq-context.open,.experiment.ubq-context.open{display:block!important}
+.ubq-context-host{
+  width:100%;
+  max-width:100%;
+  clear:both;
 }
-@media(max-width:760px){
-  .lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
-    left:8px!important;right:8px!important;top:auto!important;bottom:8px!important;
-    transform:none!important;width:auto!important;max-height:44vh!important;
-    background:rgba(18,24,29,.84)!important;
+@media(min-width:1180px){
+  .layout.ubq-layout-wide{
+    grid-template-columns:minmax(0,1fr) minmax(320px,420px)!important;
+    align-items:start!important;
   }
-  .frame,.panelScroller,.panelWrap,.instrument,.stage,.wrap{
-    width:calc(100% - 12px)!important;
-    max-width:calc(100% - 12px)!important;
-    margin-left:auto!important;margin-right:auto!important;
+  .ubq-context-host.ubq-side-host{
+    margin-top:0!important;
+    position:sticky;
+    top:12px;
   }
-  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
-  svg#front,svg#panel,svg#rcpPanel{
-    width:96%!important;max-width:96%!important;min-width:0!important;height:auto!important;
-    margin-left:auto!important;margin-right:auto!important;display:block!important;
+  .ubq-context-host.ubq-side-host .ubq-context{
+    margin-top:0!important;
   }
 }
-@media(max-width:430px){
-  .frame,.panelScroller,.panelWrap,.instrument,.stage,.wrap{
-    width:calc(100% - 16px)!important;max-width:calc(100% - 16px)!important;
-  }
-  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
-  svg#front,svg#panel,svg#rcpPanel{width:94%!important;max-width:94%!important}
+@media(max-width:1179px){
+  .ubq-context-host{margin-top:10px}
 }
 
 </style>
@@ -267,17 +270,48 @@ $('.spot').forEach(s=>s.onclick=()=>{const k=s.dataset.key;if(!['menu','return',
 (()=>{
   const one=(s,r=document)=>r.querySelector(s);
   const all=(s,r=document)=>[...r.querySelectorAll(s)];
+
   const candidates=all('.lesson,.side,.experiment').filter(el=>{
     if(el.closest('.modal')) return false;
     return !!el.querySelector('h2,[id*="Title"],[id*="title"],.eyebrow,.ey,.copy,.intro');
   });
   if(!candidates.length) return;
+
   const panel=candidates[candidates.length-1];
   panel.classList.add('ubq-context');
 
-  const backdrop=document.createElement('div');
-  backdrop.className='ubq-context-backdrop';
-  document.body.appendChild(backdrop);
+  const host=document.createElement('div');
+  host.className='ubq-context-host';
+
+  const layout=one('.layout');
+  const apparatus=
+    one('.stage')||
+    one('.instrument')||
+    one('.panelScroller')||
+    one('.panelWrap')||
+    one('.frame')||
+    one('.wrap')||
+    one('section.card');
+
+  if(layout && layout.contains(apparatus)){
+    const children=[...layout.children];
+    const existingSide=children.find(x=>x!==apparatus && (x.classList.contains('side')||x.contains(panel)));
+    if(existingSide && existingSide.contains(panel)){
+      existingSide.replaceWith(host);
+      host.appendChild(panel);
+    }else{
+      apparatus.insertAdjacentElement('afterend',host);
+      host.appendChild(panel);
+    }
+    layout.classList.add('ubq-layout-wide');
+    host.classList.add('ubq-side-host');
+  }else if(apparatus){
+    apparatus.insertAdjacentElement('afterend',host);
+    host.appendChild(panel);
+  }else{
+    document.body.appendChild(host);
+    host.appendChild(panel);
+  }
 
   const close=document.createElement('button');
   close.type='button';
@@ -287,48 +321,25 @@ $('.spot').forEach(s=>s.onclick=()=>{const k=s.dataset.key;if(!['menu','return',
   close.title='Fechar';
   panel.prepend(close);
 
-  function placePanel(trigger){
-    const r=trigger?.getBoundingClientRect?.();
-    const vh=window.innerHeight;
-    if(!r){panel.style.top='';panel.style.bottom='14px';return}
-    const triggerMid=r.top+r.height/2;
-    const preferTop=triggerMid>vh*.52;
-    if(preferTop){
-      panel.style.top='10px';
-      panel.style.bottom='auto';
-    }else{
-      panel.style.top='auto';
-      panel.style.bottom='10px';
-    }
-  }
-
-  const openContext=(trigger)=>{
-    placePanel(trigger);
+  const openContext=()=>{
     panel.classList.add('open');
-    backdrop.classList.add('open');
-    document.body.classList.add('ubq-context-open');
     panel.scrollTop=0;
   };
-  const closeContext=()=>{
-    panel.classList.remove('open');
-    backdrop.classList.remove('open');
-    document.body.classList.remove('ubq-context-open');
-  };
+  const closeContext=()=>panel.classList.remove('open');
 
   close.addEventListener('click',e=>{e.stopPropagation();closeContext()});
-  backdrop.addEventListener('click',closeContext);
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeContext()});
 
   const triggerSelector='.spot,.control,.ctl,.zone,[data-key],[data-control],[data-part],[data-zone],[data-id],[data-mode]';
   document.addEventListener('click',e=>{
     if(e.target.closest('.ubq-context')) return;
     const trigger=e.target.closest(triggerSelector);
-    if(trigger) requestAnimationFrame(()=>openContext(trigger));
+    if(trigger){
+      requestAnimationFrame(openContext);
+      return;
+    }
+    if(panel.classList.contains('open')) closeContext();
   },true);
-
-  window.addEventListener('resize',()=>{
-    if(panel.classList.contains('open')) panel.style.maxHeight=Math.min(window.innerHeight*.46,520)+'px';
-  });
 
   const iconMap=[
     [/restaurar|reset/i,'↺'],
@@ -340,16 +351,20 @@ $('.spot').forEach(s=>s.onclick=()=>{const k=s.dataset.key;if(!['menu','return',
     const txt=(el.dataset.ubqLabel||el.textContent||'').trim();
     for(const [re,icon] of iconMap){
       if(re.test(txt)&&txt.length>5){
-        el.dataset.ubqLabel=txt;el.textContent=icon;el.classList.add('ubq-icon-btn');
-        el.setAttribute('aria-label',txt);el.title=txt;break;
+        el.dataset.ubqLabel=txt;
+        el.textContent=icon;
+        el.classList.add('ubq-icon-btn');
+        el.setAttribute('aria-label',txt);
+        el.title=txt;
+        break;
       }
     }
   });
 
   const lead=one('.lead');
-  if(lead&&!lead.classList.contains('ubq-lead-after')){
-    const anchor=one('.layout')||one('.frame')||one('.instrument')||one('.panelScroller')||one('.stage');
-    if(anchor&&anchor.parentNode){anchor.insertAdjacentElement('afterend',lead);lead.classList.add('ubq-lead-after')}
+  if(lead&&!lead.classList.contains('ubq-lead-after')&&apparatus){
+    host.insertAdjacentElement('afterend',lead);
+    lead.classList.add('ubq-lead-after');
   }
 })();
 </script>
