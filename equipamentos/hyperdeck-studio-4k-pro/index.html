@@ -1,5 +1,48 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HyperDeck Studio 4K Pro — painel frontal interativo</title><style>
-:root{--bg:#0f1317;--card:#20262d;--text:#f4f6f7;--muted:#adb5bd;--accent:#64a8ff;--red:#ef4444;--green:#22c55e;--orange:#f59e0b;--blue:#1f78c8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.frame{overflow-x:auto;border:1px solid #3c444c;border-radius:14px;padding:12px;background:#12171b}svg{width:100%;min-width:950px}.spot{cursor:pointer}.hit{fill:transparent;stroke:transparent;stroke-width:2}.spot.sel .hit{stroke:var(--accent);fill:#173451;fill-opacity:.2}.glow{fill:none;stroke-width:4}.off{stroke:transparent}.rec{stroke:var(--red);filter:drop-shadow(0 0 4px var(--red))}.play{stroke:var(--green);filter:drop-shadow(0 0 4px var(--green))}.bad{stroke:var(--orange);filter:drop-shadow(0 0 4px var(--orange))}.lesson{margin-top:14px;background:var(--card);border:1px solid #3c444c;border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.sim{border:1px solid #4a545d;background:transparent;color:var(--text);padding:9px 12px;border-radius:8px;margin:6px 6px 0 0;cursor:pointer}.sim.active{border-color:var(--accent);background:#173451}.feedback{margin-top:12px;padding:12px;background:#171c21;border-radius:9px;line-height:1.55}.status{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;color:var(--muted);font-size:13px}.status span{border:1px solid #3c444c;padding:4px 8px;border-radius:99px}@media(max-width:700px){.grid{grid-template-columns:1fr}main{padding:12px}}</style></head><body><main>
+:root{--bg:#0f1317;--card:#20262d;--text:#f4f6f7;--muted:#adb5bd;--accent:#64a8ff;--red:#ef4444;--green:#22c55e;--orange:#f59e0b;--blue:#1f78c8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.frame{overflow-x:auto;border:1px solid #3c444c;border-radius:14px;padding:12px;background:#12171b}svg{width:100%;min-width:950px}.spot{cursor:pointer}.hit{fill:transparent;stroke:transparent;stroke-width:2}.spot.sel .hit{stroke:var(--accent);fill:#173451;fill-opacity:.2}.glow{fill:none;stroke-width:4}.off{stroke:transparent}.rec{stroke:var(--red);filter:drop-shadow(0 0 4px var(--red))}.play{stroke:var(--green);filter:drop-shadow(0 0 4px var(--green))}.bad{stroke:var(--orange);filter:drop-shadow(0 0 4px var(--orange))}.lesson{margin-top:14px;background:var(--card);border:1px solid #3c444c;border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.sim{border:1px solid #4a545d;background:transparent;color:var(--text);padding:9px 12px;border-radius:8px;margin:6px 6px 0 0;cursor:pointer}.sim.active{border-color:var(--accent);background:#173451}.feedback{margin-top:12px;padding:12px;background:#171c21;border-radius:9px;line-height:1.55}.status{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;color:var(--muted);font-size:13px}.status span{border:1px solid #3c444c;padding:4px 8px;border-radius:99px}@media(max-width:700px){.grid{grid-template-columns:1fr}main{padding:12px}}
+/* UBIQUIDADE / MOBILE 2026-09 */
+:root{--ubq-border:#46545e;--ubq-backdrop:rgba(0,0,0,.72)}
+html,body{max-width:100%;overflow-x:hidden}
+img,canvas,video{max-width:100%;height:auto}
+svg{max-width:100%}
+.ubq-context-backdrop{position:fixed;inset:0;background:var(--ubq-backdrop);z-index:9000;display:none}
+.ubq-context-backdrop.open{display:block}
+.lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
+  position:fixed!important;z-index:9001!important;left:50%!important;top:50%!important;
+  transform:translate(-50%,-50%)!important;width:min(680px,calc(100vw - 28px))!important;
+  max-height:min(82vh,760px)!important;overflow:auto!important;margin:0!important;
+  border:1px solid var(--ubq-border)!important;border-radius:16px!important;
+  box-shadow:0 24px 80px rgba(0,0,0,.55)!important;background:var(--card,#151c22)!important;
+  padding:20px!important;display:none!important
+}
+.lesson.ubq-context.open,.side.ubq-context.open,.experiment.ubq-context.open{display:block!important}
+.ubq-close{position:sticky;float:right;top:0;margin:-6px -6px 8px 10px;width:38px;height:38px;border-radius:50%;
+  border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;z-index:2}
+.ubq-close:hover,.ubq-close:focus{border-color:#6ab8ff;outline:2px solid rgba(106,184,255,.3)}
+.ubq-icon-btn{min-width:40px!important;width:40px!important;height:40px!important;padding:0!important;display:inline-flex!important;
+  align-items:center!important;justify-content:center!important;font-size:20px!important;line-height:1!important}
+@media(max-width:760px){
+  main{padding:10px!important;max-width:100%!important}
+  h1{font-size:clamp(21px,6vw,28px)!important;line-height:1.08!important}
+  .lead{font-size:14px!important;margin-bottom:10px!important}
+  .frame,.panelScroller,.panelWrap,.wrap,.rack,.stage{max-width:100%!important;overflow:hidden!important;padding-left:4px!important;padding-right:4px!important}
+  .frame svg,.panelScroller svg,.panelWrap svg,svg#front,svg#panel,svg#rcpPanel{width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;display:block!important}
+  .layout,.row,.grid,.expgrid,.expGrid,.statusGrid{grid-template-columns:1fr!important;gap:8px!important}
+  .toolbar{gap:6px!important;margin:8px 0!important;flex-wrap:wrap!important}
+  .btn,.action,.sim{min-height:40px}
+  .status,.statusCard{padding:8px!important;font-size:12px!important}
+  .lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
+    left:8px!important;right:8px!important;top:auto!important;bottom:8px!important;transform:none!important;
+    width:auto!important;max-height:76vh!important;border-radius:14px!important;padding:16px!important
+  }
+  .lesson.ubq-context h2,.side.ubq-context h2,.experiment.ubq-context h2{font-size:20px!important;padding-right:40px}
+}
+@media(max-width:420px){
+  .frame,.panelScroller,.panelWrap{border:1px solid #37434c!important;border-radius:10px!important}
+  .micro,.tiny{font-size:inherit}
+}
+
+</style></head><body><main>
 <h1>Blackmagic HyperDeck Studio 4K Pro</h1><p class="muted">Gravador e reprodutor profissional. Toque em cada parte do painel e experimente seu funcionamento.</p>
 <div class="frame"><svg viewBox="0 0 1500 220" aria-label="Painel frontal interativo HyperDeck Studio 4K Pro">
 <defs><linearGradient id="m" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#3b4249"/><stop offset="1" stop-color="#171b1f"/></linearGradient><radialGradient id="d"><stop stop-color="#5a6269"/><stop offset=".65" stop-color="#262b30"/><stop offset="1" stop-color="#0c0f11"/></radialGradient></defs>
@@ -34,4 +77,42 @@ search:{t:'Modos de busca',term:'STL / JOG / SCR',f:'Esses botões definem como 
 dial:{t:'Seletor de busca',term:'Search Dial',f:'O seletor move o ponto de reprodução conforme o modo de busca ativo.',e:'Use JOG para marcar o primeiro quadro de um VT. Em STL ou SCR, um giro maior percorre uma quantidade maior de conteúdo.',a:[['Girar à esquerda',()=>{angle-=45;$('#dm').setAttribute('transform','rotate('+angle+' 1180 111)');frames=Math.max(0,frames-(mode==='JOG'?1:mode==='STL'?90:300));upd()}],['Girar à direita',()=>{angle+=45;$('#dm').setAttribute('transform','rotate('+angle+' 1180 111)');frames+=mode==='JOG'?1:mode==='STL'?90:300;upd()}]]},
 audio:{t:'Monitoramento de áudio',term:'Speaker / Headphones',f:'O alto-falante frontal e a saída para fones permitem ouvir rapidamente o áudio do sinal ou arquivo.',e:'Antes de colocar um VT no ar, escute alguns segundos para confirmar que o áudio realmente existe, além de observar os medidores.',a:[['Monitorar áudio',()=>{}],['Silenciar',()=>{}]]}};
 function show(k){let l=L[k]||L.transport;$$('.spot').forEach(x=>x.classList.toggle('sel',x.dataset.k===k));$('#title').textContent=l.t;$('#term').textContent='('+l.term+')';$('#func').textContent=l.f;$('#ex').textContent=l.e;let b=$('#buttons');b.innerHTML='';l.a.forEach((a,i)=>{let x=document.createElement('button');x.className='sim';x.textContent=a[0];x.onclick=()=>{[...b.children].forEach(y=>y.classList.remove('active'));x.classList.add('active');a[1]();$('#feedback').textContent=a[0]+' aplicado ao painel.'};b.appendChild(x);if(i===0)setTimeout(()=>x.click(),0)})}
-$$('.spot').forEach(x=>x.onclick=()=>show(x.dataset.k));show('transport')})();</script></main></body></html>
+$$('.spot').forEach(x=>x.onclick=()=>show(x.dataset.k));show('transport')})();</script></main>
+<script id="ubq-mobile-layer">
+(()=>{
+ const $=(s,r=document)=>r.querySelector(s), $=(s,r=document)=>[...r.querySelectorAll(s)];
+ const candidates=$('.lesson,.side,.experiment').filter(el=>{
+   if(el.closest('.modal')) return false;
+   return el.querySelector('h2,[id*="Title"],[id*="title"],.eyebrow,.ey,.copy,.intro');
+ });
+ if(!candidates.length) return;
+ const panel=candidates[candidates.length-1];
+ panel.classList.add('ubq-context');
+ const backdrop=document.createElement('div');backdrop.className='ubq-context-backdrop';document.body.appendChild(backdrop);
+ const close=document.createElement('button');close.type='button';close.className='ubq-close';close.innerHTML='×';close.setAttribute('aria-label','Fechar explicação');close.title='Fechar';panel.prepend(close);
+ const open=()=>{panel.classList.add('open');backdrop.classList.add('open');document.body.classList.add('ubq-context-open')};
+ const shut=()=>{panel.classList.remove('open');backdrop.classList.remove('open');document.body.classList.remove('ubq-context-open')};
+ close.addEventListener('click',e=>{e.stopPropagation();shut()});
+ backdrop.addEventListener('click',shut);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
+ const triggers='.spot,.control,[data-key],[data-control],[data-part],[data-zone],[data-id],[data-mode]';
+ $(triggers).forEach(el=>el.addEventListener('click',()=>setTimeout(open,0)));
+ // Compacta apenas comandos utilitários; ações pedagógicas mantêm texto.
+ const iconMap=[
+   [/restaurar|reset/i,'↺','Restaurar'],
+   [/painel inteiro|ver painel|full panel/i,'⛶','Ver painel inteiro'],
+   [/fechar|close/i,'×','Fechar'],
+   [/nova aba|abrir página|abrir em nova/i,'↗','Abrir em nova aba']
+ ];
+ $('button,.btn,a.btn').forEach(el=>{
+   const txt=(el.textContent||'').trim();
+   for(const [re,icon,label] of iconMap){
+     if(re.test(txt) && txt.length>5){
+       el.dataset.ubqLabel=txt;el.textContent=icon;el.classList.add('ubq-icon-btn');
+       el.setAttribute('aria-label',txt||label);el.title=txt||label;break;
+     }
+   }
+ });
+})();
+</script>
+</body></html>
