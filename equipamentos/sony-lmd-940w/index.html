@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sony LMD-940W — monitor interativo</title>
+<style>
+:root{--bg:#0f1317;--panel:#151a1f;--card:#20262d;--line:#3d464f;--text:#f4f6f7;--muted:#aeb6bd;--accent:#64a8ff;--accentbg:#173451;--red:#ef4444;--green:#22c55e;--amber:#f59e0b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.frame{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#12171b;padding:12px}.frame svg{width:100%;min-width:900px}.toolbar{display:flex;justify-content:flex-end;margin:10px 0}.btn,.sim,.tallybtn{background:transparent;color:var(--text);border:1px solid #4a545d;border-radius:8px;padding:9px 12px;cursor:pointer}.sim.active,.tallybtn.active{background:var(--accentbg);border-color:var(--accent);font-weight:600}.spot{cursor:pointer;outline:none}.hit{fill:transparent;stroke:transparent;stroke-width:3}.spot.selected .hit{stroke:var(--accent);fill:var(--accentbg);fill-opacity:.12}.lesson,.tallycard{margin-top:14px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.copy{font-size:14px;line-height:1.6}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.feedback{margin-top:12px;background:var(--panel);border-radius:9px;padding:12px;font-size:14px;line-height:1.55}.tiny{font-size:7px;fill:#cbd1d6;text-anchor:middle;pointer-events:none}.micro{font-size:6px;fill:#9ca6ad;text-anchor:middle;pointer-events:none}.led{transition:fill .15s,filter .15s}.screenfx{transition:filter .18s,transform .18s,opacity .18s}.rot{transition:transform .18s}@media(max-width:700px){main{padding:12px}.grid{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.screenfx,.rot{transition:none}}
+</style>
+</head>
+<body><main>
+<h1>Sony LMD-940W</h1>
+<p class="muted">Monitor profissional compacto de 9,4 polegadas. Toque nos controles do painel inferior e experimente o comportamento da imagem e dos menus.</p>
+
+<div class="toolbar"><button id="reset" class="btn">Restaurar monitor</button></div>
+
+<div class="frame">
+<svg viewBox="0 0 1260 760" aria-label="Sony LMD-940W interativo">
+<defs>
+  <linearGradient id="sonyBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#353b40"/><stop offset=".45" stop-color="#252a2f"/><stop offset="1" stop-color="#15191d"/></linearGradient>
+  <linearGradient id="sonyFeed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#315b72"/><stop offset=".55" stop-color="#213b4b"/><stop offset="1" stop-color="#12242e"/></linearGradient>
+</defs>
+
+<!-- body and protection panel -->
+<rect x="120" y="38" width="1020" height="650" rx="14" fill="url(#sonyBody)" stroke="#6f7880" stroke-width="2"/>
+<rect x="152" y="82" width="956" height="500" rx="5" fill="#0b0e10" stroke="#555e66" stroke-width="3"/>
+<g fill="#0a0d0f" stroke="#9aa2a8" stroke-width="2">
+  <circle cx="168" cy="98" r="8"/><circle cx="1092" cy="98" r="8"/><circle cx="168" cy="566" r="8"/><circle cx="1092" cy="566" r="8"/>
+</g>
+
+<!-- tally -->
+<g class="spot" data-key="tally" tabindex="0">
+  <rect x="545" y="55" width="170" height="20" rx="8" fill="#d8dde0" stroke="#717a82"/>
+  <rect id="tallylamp" x="551" y="60" width="158" height="10" rx="5" fill="#dce0e2"/>
+  <rect class="hit" x="532" y="47" width="196" height="37" rx="9"/>
+</g>
+
+<!-- screen -->
+<g id="screen" class="screenfx">
+  <rect x="171" y="101" width="918" height="448" fill="url(#sonyFeed)"/>
+  <path d="M171 420 L360 320 L515 395 L720 277 L910 383 L1089 300 V549 H171 Z" fill="#7b8c98" opacity=".34"/>
+  <rect x="258" y="211" width="176" height="145" fill="#c7ced3" opacity=".12"/>
+  <rect x="892" y="195" width="142" height="155" fill="#d3d8dc" opacity=".10"/>
+  <circle cx="631" cy="260" r="55" fill="#caaa8d"/>
+  <path d="M545 476 Q631 307 718 476 V549 H545 Z" fill="#2a3b44"/>
+
+  <!-- H/V delay -->
+  <rect id="hblank" x="171" y="101" width="918" height="32" fill="#030405" opacity="0"/>
+  <rect id="vblank" x="171" y="101" width="39" height="448" fill="#030405" opacity="0"/>
+
+  <!-- scan frame -->
+  <rect id="scanframe" x="171" y="101" width="918" height="448" fill="none" stroke="#ffe05b" stroke-width="2" opacity="0"/>
+
+  <!-- OSD -->
+  <g id="osd" opacity="0">
+    <rect x="365" y="182" width="530" height="286" rx="5" fill="#0a0d10" opacity=".88" stroke="#6a737a"/>
+    <text id="osdtitle" x="390" y="216" fill="#fff" font-size="20" font-family="monospace">STATUS</text>
+    <text id="osd1" x="390" y="252" fill="#d6dadd" font-size="16" font-family="monospace"></text>
+    <text id="osd2" x="390" y="284" fill="#d6dadd" font-size="16" font-family="monospace"></text>
+    <text id="osd3" x="390" y="316" fill="#d6dadd" font-size="16" font-family="monospace"></text>
+    <text id="osd4" x="390" y="348" fill="#d6dadd" font-size="16" font-family="monospace"></text>
+    <text id="osd5" x="390" y="380" fill="#d6dadd" font-size="16" font-family="monospace"></text>
+    <text id="osd6" x="390" y="412" fill="#d6dadd" font-size="16" font-family="monospace"></text>
+  </g>
+
+  <!-- volume -->
+  <g id="volosd" opacity="0">
+    <rect x="420" y="470" width="420" height="48" rx="6" fill="#080b0d" opacity=".82"/>
+    <text x="440" y="500" fill="#fff" font-size="15">VOLUME</text>
+    <rect x="535" y="485" width="270" height="15" rx="7" fill="#3f474e"/>
+    <rect id="volbar" x="535" y="485" width="135" height="15" rx="7" fill="#5ca8ff"/>
+  </g>
+</g>
+
+<!-- logo and lower panel -->
+<text x="630" y="575" fill="#f5f6f7" font-size="24" font-weight="700" text-anchor="middle">SONY</text>
+<rect x="120" y="590" width="1020" height="98" fill="#181c20" stroke="#596269"/>
+
+<!-- headphones -->
+<g class="spot" data-key="audio" tabindex="0">
+  <circle cx="154" cy="640" r="17" fill="#0a0d0f" stroke="#9fa6ac" stroke-width="2"/><circle cx="154" cy="640" r="6" fill="#020303"/>
+  <rect class="hit" x="132" y="614" width="48" height="52" rx="5"/>
+</g>
+
+<!-- speaker grille -->
+<g fill="#090b0d">
+  <circle cx="195" cy="621" r="2.2"/><circle cx="207" cy="621" r="2.2"/><circle cx="219" cy="621" r="2.2"/><circle cx="231" cy="621" r="2.2"/><circle cx="243" cy="621" r="2.2"/>
+  <circle cx="195" cy="633" r="2.2"/><circle cx="207" cy="633" r="2.2"/><circle cx="219" cy="633" r="2.2"/><circle cx="231" cy="633" r="2.2"/><circle cx="243" cy="633" r="2.2"/>
+  <circle cx="195" cy="645" r="2.2"/><circle cx="207" cy="645" r="2.2"/><circle cx="219" cy="645" r="2.2"/><circle cx="231" cy="645" r="2.2"/><circle cx="243" cy="645" r="2.2"/>
+  <circle cx="195" cy="657" r="2.2"/><circle cx="207" cy="657" r="2.2"/><circle cx="219" cy="657" r="2.2"/><circle cx="231" cy="657" r="2.2"/><circle cx="243" cy="657" r="2.2"/>
+</g>
+
+<!-- input buttons -->
+<g class="spot selected" data-key="inputs" tabindex="0">
+  <text x="290" y="616" class="micro">SDI</text><text x="337" y="616" class="micro">HDMI</text><text x="392" y="616" class="micro">COMPOSITE</text>
+  <rect id="sdiBtn" x="276" y="628" width="28" height="22" rx="4" fill="#242a2f" stroke="#818a91"/><rect id="sdiLed" x="284" y="634" width="12" height="10" rx="2" fill="#df3b3b"/>
+  <rect id="hdmiBtn" x="323" y="628" width="28" height="22" rx="4" fill="#242a2f" stroke="#818a91"/><rect id="hdmiLed" x="331" y="634" width="12" height="10" rx="2" fill="#3b4248"/>
+  <rect id="compBtn" x="378" y="628" width="28" height="22" rx="4" fill="#242a2f" stroke="#818a91"/><rect id="compLed" x="386" y="634" width="12" height="10" rx="2" fill="#3b4248"/>
+  <rect class="hit" x="266" y="607" width="152" height="54" rx="6"/>
+</g>
+
+<!-- F buttons -->
+<g class="spot" data-key="functions" tabindex="0">
+  <g fill="#252b30" stroke="#899198">
+    <rect x="430" y="628" width="28" height="22" rx="4"/><rect x="468" y="628" width="28" height="22" rx="4"/><rect x="506" y="628" width="28" height="22" rx="4"/>
+    <rect x="544" y="628" width="28" height="22" rx="4"/><rect x="582" y="628" width="28" height="22" rx="4"/><rect x="620" y="628" width="28" height="22" rx="4"/><rect x="658" y="628" width="28" height="22" rx="4"/>
+  </g>
+  <text x="444" y="616" class="micro">F1</text><text x="482" y="616" class="micro">F2</text><text x="520" y="616" class="micro">F3</text><text x="558" y="616" class="micro">F4</text><text x="596" y="616" class="micro">F5</text><text x="634" y="616" class="micro">F6</text><text x="672" y="616" class="micro">F7</text>
+  <rect class="hit" x="422" y="607" width="274" height="54" rx="6"/>
+</g>
+
+<!-- encoder -->
+<g class="spot" data-key="encoder" tabindex="0">
+  <circle cx="745" cy="639" r="25" fill="#0b0e10" stroke="#939ba2" stroke-width="2"/>
+  <circle cx="745" cy="639" r="18" fill="#343a40"/>
+  <line id="encoderMark" x1="745" y1="639" x2="757" y2="624" stroke="#e0e3e5" stroke-width="2"/>
+  <rect class="hit" x="715" y="608" width="60" height="62" rx="8"/>
+</g>
+
+<!-- enter return menu -->
+<g class="spot" data-key="enter" tabindex="0"><text x="807" y="616" class="micro">ENTER</text><rect x="793" y="628" width="32" height="22" rx="4" fill="#252b30" stroke="#899198"/><rect class="hit" x="785" y="607" width="48" height="54" rx="6"/></g>
+<g class="spot" data-key="return" tabindex="0"><text x="861" y="616" class="micro">RETURN</text><rect x="845" y="628" width="32" height="22" rx="4" fill="#252b30" stroke="#899198"/><rect class="hit" x="837" y="607" width="48" height="54" rx="6"/></g>
+<g class="spot" data-key="menu" tabindex="0"><text x="913" y="616" class="micro">MENU</text><rect x="897" y="628" width="32" height="22" rx="4" fill="#252b30" stroke="#899198"/><rect class="hit" x="889" y="607" width="48" height="54" rx="6"/></g>
+
+<!-- power -->
+<g class="spot" data-key="power" tabindex="0">
+  <circle id="powerLed" cx="980" cy="615" r="5" fill="#31c765"/>
+  <text x="980" y="604" class="micro">POWER</text>
+  <rect x="998" y="623" width="62" height="31" rx="5" fill="#090c0e" stroke="#747d85"/>
+  <rect id="powerHandle" x="1004" y="628" width="24" height="21" rx="3" fill="#69737b"/>
+  <rect class="hit" x="966" y="594" width="105" height="70" rx="7"/>
+</g>
+</svg>
+</div>
+
+<section class="lesson" aria-live="polite">
+<h2 id="title">Seleção da entrada</h2><div id="term" class="muted">(SDI / HDMI / Composite)</div>
+<div class="grid" style="margin-top:16px"><div><div class="ey">Como funciona</div><p id="func" class="copy"></p></div><div><div class="ey">Exemplo de uso</div><p id="example" class="copy"></p></div></div>
+<div class="ey">Experimente</div><div id="modes" class="modes"></div><div id="feedback" class="feedback"></div>
+</section>
+
+<section class="tallycard">
+<div class="ey">Sinalização da câmera</div>
+<p class="copy">A luz de tally no topo pode indicar três estados diferentes.</p>
+<div class="modes"><button class="tallybtn" data-tally="red">Vermelho</button><button class="tallybtn" data-tally="green">Verde</button><button class="tallybtn" data-tally="amber">Âmbar</button><button class="tallybtn active" data-tally="off">Apagado</button></div>
+</section>
+
+<script>
+(()=>{const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const st={input:'SDI',brightness:1,contrast:1,chroma:1,scan:'NORMAL',hv:false,volume:50,ip:'INTER-FIELD',tally:'off',power:true,angle:0};let osdTimer=null;
+function applyPicture(){const s=$('#screen');s.style.opacity=st.power?'1':'0.06';s.style.filter='brightness('+st.brightness+') contrast('+st.contrast+') saturate('+st.chroma+')';if(st.scan==='OVER')s.setAttribute('transform','translate(-22 -11) scale(1.04)');else if(st.scan==='NATIVE')s.setAttribute('transform','translate(50 24) scale(.91)');else if(st.scan==='FULL')s.setAttribute('transform','scale(1 1.04)');else s.setAttribute('transform','');$('#scanframe').setAttribute('opacity',st.scan==='NATIVE'?'1':'0');$('#hblank').setAttribute('opacity',st.hv?'.88':'0');$('#vblank').setAttribute('opacity',st.hv?'.88':'0')}
+function input(v){st.input=v;[['SDI','#sdiLed'],['HDMI','#hdmiLed'],['COMPOSITE','#compLed']].forEach(([n,id])=>$(id).setAttribute('fill',n===v?'#df3b3b':'#3b4248'))}
+function tally(){const c=st.tally==='red'?'#ef4444':st.tally==='green'?'#22c55e':st.tally==='amber'?'#f59e0b':'#dce0e2';$('#tallylamp').setAttribute('fill',c);$$('.tallybtn').forEach(b=>b.classList.toggle('active',b.dataset.tally===st.tally))}
+function scheduleOsdClose(){if(osdTimer)clearTimeout(osdTimer);osdTimer=setTimeout(()=>osdOff(),6000)}
+function osd(title,lines){if(osdTimer)clearTimeout(osdTimer);$('#osd').setAttribute('opacity','1');$('#osdtitle').textContent=title;for(let i=1;i<=6;i++)$('#osd'+i).textContent=lines[i-1]||'';scheduleOsdClose()}
+function osdOff(){if(osdTimer){clearTimeout(osdTimer);osdTimer=null}$('#osd').setAttribute('opacity','0')}
+function volumeOSD(){$('#volosd').setAttribute('opacity','1');$('#volbar').setAttribute('width',270*st.volume/100);setTimeout(()=>$('#volosd').setAttribute('opacity','0'),1200)}
+const L={
+inputs:{t:'Seleção da entrada',term:'SDI / HDMI / Composite',f:'Esses três botões escolhem qual conector de entrada será mostrado na tela.',e:'Você pode usar SDI para o sinal profissional do estúdio, HDMI para uma fonte digital externa e Composite para equipamentos de vídeo analógico.',m:[['SDI',()=>input('SDI'),'A entrada SDI está selecionada.'],['HDMI',()=>input('HDMI'),'A entrada HDMI está selecionada.'],['Composite',()=>input('COMPOSITE'),'A entrada de vídeo composto está selecionada.']]},
+functions:{t:'Teclas de função',term:'F1 a F7',f:'As sete teclas podem receber funções diferentes. Na configuração de fábrica elas controlam brilho, contraste, cor, scan, H/V Delay, volume e processamento entrelaçado.',e:'Durante uma operação, F4 permite conferir overscan ou pixels nativos sem entrar no menu. F5 ajuda no diagnóstico das bordas do sinal e F6 dá acesso rápido ao volume.',m:[
+['F1 Brilho',()=>{st.brightness=st.brightness===1?1.28:1;applyPicture()},'O brilho da imagem foi alternado.'],
+['F2 Contraste',()=>{st.contrast=st.contrast===1?1.35:1;applyPicture()},'O contraste foi alternado.'],
+['F3 Cor',()=>{st.chroma=st.chroma===1?1.5:1;applyPicture()},'A intensidade das cores foi alterada.'],
+['F4 Scan',()=>{st.scan=st.scan==='NORMAL'?'OVER':st.scan==='OVER'?'FULL':st.scan==='FULL'?'NATIVE':'NORMAL';applyPicture()},'O modo de scan avançou para '+st.scan+'.'],
+['F5 H/V Delay',()=>{st.hv=!st.hv;applyPicture()},'A visualização H/V Delay foi alternada.'],
+['F6 Volume',()=>{st.volume=st.volume>=80?30:st.volume+25;volumeOSD()},'O volume foi ajustado para '+st.volume+'%.'],
+['F7 I/P Mode',()=>{st.ip=st.ip==='INTER-FIELD'?'FIELD MERGE':st.ip==='FIELD MERGE'?'LINE DOUBLER':'INTER-FIELD';osd('I/P MODE',[st.ip])},'O processamento mudou para '+st.ip+'.']
+]},
+encoder:{t:'Seletor de menu',term:'MENU SEL / controle giratório',f:'O encoder gira para escolher opções ou valores e pode ser pressionado para confirmar uma seleção.',e:'Ao ajustar brilho ou contraste pelo painel, o encoder define o valor. Dentro do menu ele percorre as opções e confirma a escolha.',m:[['Girar à esquerda',()=>{st.angle-=45;$('#encoderMark').setAttribute('transform','rotate('+st.angle+' 745 639)')},'O seletor foi girado para a esquerda.'],['Girar à direita',()=>{st.angle+=45;$('#encoderMark').setAttribute('transform','rotate('+st.angle+' 745 639)')},'O seletor foi girado para a direita.'],['Pressionar',()=>osd('SET',['Seleção confirmada']) ,'O encoder também pode confirmar a opção selecionada.']]},
+enter:{t:'Informações de estado',term:'ENTER',f:'Fora do menu, ENTER pode chamar as informações de estado do monitor.',e:'É uma forma rápida de confirmar qual entrada, formato e modo de scan estão ativos antes de começar uma gravação.',m:[['Mostrar status',()=>osd('STATUS',[st.input,'HD-SDI 1080 / 60I','SCAN '+st.scan,'I/P '+st.ip,'LMD-940W']),'A tela mostra o estado atual.'],['Fechar',osdOff,'As informações foram fechadas.']]},
+return:{t:'Identificação das teclas',term:'RETURN',f:'Fora do menu, RETURN pode mostrar na tela quais funções estão atribuídas às teclas F1 a F7.',e:'Isso é útil quando alguém personalizou o monitor e você não sabe mais o que cada tecla faz.',m:[['Mostrar funções',()=>osd('FUNCTION ASSIGN',['F1 BRIGHTNESS','F2 CONTRAST','F3 CHROMA','F4 SCAN','F5 H/V DELAY','F6 VOLUME / F7 I/P']),'As funções das teclas aparecem na tela.'],['Fechar',osdOff,'A indicação foi fechada.']]},
+menu:{t:'Menu de configuração',term:'MENU',f:'Esse botão abre ou fecha o menu de configuração do monitor.',e:'Use o menu quando precisar alterar parâmetros menos frequentes, como temperatura de cor, marcadores, áudio SDI, remoto ou bloqueio de teclas.',m:[['Abrir menu',()=>osd('USER CONFIG',['SYSTEM SETTING','MARKER SETTING','WFM / ALM','FUNCTION BUTTON','AUDIO SETTING','REMOTE / KEY INHIBIT']),'O menu de configuração está aberto.'],['Fechar menu',osdOff,'O menu foi fechado.']]},
+audio:{t:'Monitoramento de áudio',term:'Headphones / Speaker',f:'O monitor possui alto-falante mono e saída de fones para conferir o áudio da fonte selecionada.',e:'Antes de colocar uma fonte no ar, você pode confirmar rapidamente se o sinal tem áudio, além de observar os medidores na tela quando necessário.',m:[['Volume baixo',()=>{st.volume=25;volumeOSD()},'O volume foi reduzido.'],['Volume médio',()=>{st.volume=55;volumeOSD()},'O volume foi colocado em nível médio.'],['Volume alto',()=>{st.volume=85;volumeOSD()},'O volume foi aumentado.']]},
+power:{t:'Liga e desliga',term:'Power',f:'A chave de energia liga ou desliga o monitor.',e:'Se o monitor estiver apagado, confira primeiro esta chave e o LED de energia antes de procurar falhas no sinal de vídeo.',m:[['Ligado',()=>{st.power=true;$('#powerLed').setAttribute('fill','#31c765');$('#powerHandle').setAttribute('x','1030');applyPicture()},'O monitor está ligado.'],['Desligado',()=>{st.power=false;$('#powerLed').setAttribute('fill','#30373d');$('#powerHandle').setAttribute('x','1004');applyPicture();osdOff()},'O monitor foi desligado.']]},
+tally:{t:'Sinalização',term:'Tally',f:'A luz no topo pode acender em vermelho, verde ou âmbar conforme o comando recebido pela entrada remota.',e:'Em uma parede de monitores, o tally permite reconhecer imediatamente qual fonte está no ar, em prévia ou em outro estado definido pelo sistema.',m:[['Vermelho',()=>{st.tally='red';tally()},'Tally vermelho aceso.'],['Verde',()=>{st.tally='green';tally()},'Tally verde aceso.'],['Âmbar',()=>{st.tally='amber';tally()},'Tally âmbar aceso.'],['Apagado',()=>{st.tally='off';tally()},'Tally apagado.']]}
+};
+function show(k){const l=L[k];$$('.spot').forEach(s=>s.classList.toggle('selected',s.dataset.key===k));$('#title').textContent=l.t;$('#term').textContent='('+l.term+')';$('#func').textContent=l.f;$('#example').textContent=l.e;const box=$('#modes');box.innerHTML='';l.m.forEach((m,i)=>{const b=document.createElement('button');b.className='sim';b.textContent=m[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');m[1]();$('#feedback').textContent=typeof m[2]==='function'?m[2]():m[2]};box.appendChild(b);if(i===0&&k!=='functions')setTimeout(()=>b.click(),0)})}
+function reset(){if(osdTimer){clearTimeout(osdTimer);osdTimer=null}Object.assign(st,{input:'SDI',brightness:1,contrast:1,chroma:1,scan:'NORMAL',hv:false,volume:50,ip:'INTER-FIELD',tally:'off',power:true,angle:0});input('SDI');tally();applyPicture();osdOff();$('#volosd').setAttribute('opacity','0');$('#powerLed').setAttribute('fill','#31c765');$('#powerHandle').setAttribute('x','1030');$('#encoderMark').removeAttribute('transform');show('inputs')}
+$('.spot').forEach(s=>s.onclick=()=>{const k=s.dataset.key;if(!['menu','return','enter','encoder'].includes(k))osdOff();show(k)});$('.tallybtn').forEach(b=>b.onclick=()=>{osdOff();st.tally=b.dataset.tally;tally()});$('#reset').onclick=reset;reset()})();
+</script>
+</main></body></html>
