@@ -87,6 +87,33 @@ svg{max-width:100%}
   .ubq-context-host{margin-top:10px}
 }
 
+
+@media(max-width:760px){
+  .frame,.panelScroller,.panelWrap,.instrument,.stage,.wrap{
+    width:calc(100% - 12px)!important;
+    max-width:calc(100% - 12px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
+  svg#front,svg#panel,svg#rcpPanel{
+    width:96%!important;
+    max-width:96%!important;
+    min-width:0!important;
+    height:auto!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    display:block!important;
+  }
+}
+@media(max-width:430px){
+  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
+  svg#front,svg#panel,svg#rcpPanel{
+    width:94%!important;
+    max-width:94%!important;
+  }
+}
+
 </style></head><body><main>
 <h1>RTS MCE-325</h1><p class="muted">Estação programável de intercom de até quatro canais. Toque nos controles e observe como os estados de fala, escuta, microfone e chamada se relacionam.</p>
 <div class="toolbar"><button id="reset" class="btn">Restaurar estação</button></div>
