@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blackmagic SmartView 4K — monitor interativo</title>
+<style>
+:root{--bg:#0f1317;--panel:#151a1f;--card:#20262d;--line:#3d464f;--text:#f4f6f7;--muted:#aeb6bd;--accent:#64a8ff;--accentbg:#173451;--red:#ef4444;--green:#22c55e;--blue:#3b82f6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.toolbar{display:flex;justify-content:flex-end;margin:10px 0}.btn,.sim,.tallybtn{background:transparent;color:var(--text);border:1px solid #4a545d;border-radius:8px;padding:9px 12px;cursor:pointer}.sim.active,.tallybtn.active{background:var(--accentbg);border-color:var(--accent);font-weight:600}.frame{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#12171b;padding:12px}.frame svg{width:100%;min-width:980px}.spot{cursor:pointer;outline:none}.hit{fill:transparent;stroke:transparent;stroke-width:3}.spot.selected .hit{stroke:var(--accent);fill:var(--accentbg);fill-opacity:.13}.lesson,.tallycard{margin-top:14px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.copy{font-size:14px;line-height:1.6}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.feedback{margin-top:12px;background:var(--panel);border-radius:9px;padding:12px;font-size:14px;line-height:1.55}.screenfx{transition:opacity .18s ease,transform .18s ease,filter .18s ease}.tiny{font-size:6px;fill:#cfd4d8;text-anchor:middle;pointer-events:none}@media(max-width:700px){main{padding:12px}.grid{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.screenfx{transition:none}}
+</style>
+</head>
+<body><main>
+<h1>Blackmagic SmartView 4K</h1>
+<p class="muted">Monitor profissional de vídeo. Toque em um controle do painel inferior e depois experimente seu efeito sobre a imagem.</p>
+<div class="toolbar"><button id="reset" class="btn">Restaurar monitor</button></div>
+
+<div class="frame">
+<svg viewBox="0 0 1460 700" aria-label="Blackmagic SmartView 4K interativo">
+<defs>
+<linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3035"/><stop offset=".45" stop-color="#1b2025"/><stop offset="1" stop-color="#101418"/></linearGradient>
+<linearGradient id="feed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#335d74"/><stop offset=".55" stop-color="#223c4c"/><stop offset="1" stop-color="#13232d"/></linearGradient>
+<filter id="bluefilter"><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 .14  0 0 1 0 .82  0 0 0 1 0"/></filter>
+</defs>
+<rect x="36" y="42" width="1388" height="602" rx="10" fill="url(#body)" stroke="#727b83" stroke-width="2"/>
+<rect x="36" y="42" width="54" height="602" fill="#14181c" stroke="#727b83"/><rect x="1370" y="42" width="54" height="602" fill="#14181c" stroke="#727b83"/>
+<g fill="#0d1012" stroke="#969ea5"><rect x="53" y="65" width="20" height="28" rx="8"/><rect x="53" y="593" width="20" height="28" rx="8"/><rect x="1388" y="65" width="20" height="28" rx="8"/><rect x="1388" y="593" width="20" height="28" rx="8"/></g>
+<rect id="tally" x="104" y="92" width="1250" height="452" rx="4" fill="none" stroke="transparent" stroke-width="18"/>
+<rect x="111" y="99" width="1236" height="438" rx="4" fill="#090c0e" stroke="#444c53" stroke-width="2"/>
+
+<g id="screen" class="screenfx">
+<rect x="126" y="114" width="1206" height="408" rx="2" fill="url(#feed)"/>
+<path d="M126 376 L420 255 L635 352 L872 214 L1128 328 L1332 260 V522 H126 Z" fill="#7a8d9a" opacity=".34"/>
+<rect x="238" y="182" width="226" height="154" fill="#c3cbd1" opacity=".12"/><rect x="1024" y="172" width="180" height="170" fill="#d3d9dd" opacity=".10"/>
+<circle cx="742" cy="242" r="60" fill="#caa98b"/><path d="M650 442 Q742 286 836 442 V522 H650 Z" fill="#293b45"/>
+<rect id="blanktop" x="126" y="114" width="1206" height="36" fill="#040608" opacity="0"/><rect id="blankleft" x="126" y="114" width="48" height="408" fill="#040608" opacity="0"/>
+<rect id="h1" x="126" y="172" width="1206" height="2" fill="#ffd95b" opacity="0"/><rect id="h2" x="126" y="430" width="1206" height="2" fill="#ffd95b" opacity="0"/>
+<rect id="v1" x="318" y="114" width="2" height="408" fill="#ffd95b" opacity="0"/><rect id="v2" x="1138" y="114" width="2" height="408" fill="#ffd95b" opacity="0"/>
+<g id="peak" opacity="0" fill="none" stroke="#ff2f4f" stroke-width="5"><circle cx="742" cy="242" r="61"/><path d="M650 442 Q742 286 836 442"/><rect x="238" y="182" width="226" height="154"/><rect x="1024" y="172" width="180" height="170"/></g>
+<rect id="lutwarm" x="126" y="114" width="1206" height="408" fill="#f4a85f" opacity="0"/><rect id="lutcool" x="126" y="114" width="1206" height="408" fill="#8fb7ff" opacity="0"/>
+</g>
+
+<text x="730" y="580" fill="#f3f5f6" font-size="13" font-weight="700" text-anchor="middle">BLACKMAGIC DESIGN</text>
+<text x="730" y="602" fill="#9ea7af" font-size="8" text-anchor="middle">SMARTVIEW 4K</text>
+<rect x="392" y="608" width="676" height="16" rx="4" fill="#0e1114" stroke="#3f474e"/>
+
+<g fill="#171b1f" stroke="#8a949c">
+<g class="spot selected" data-key="input"><rect x="416" y="596" width="70" height="24" rx="5"/><text x="451" y="611" class="tiny">INPUT</text><rect class="hit" x="409" y="589" width="84" height="38" rx="6"/></g>
+<g class="spot" data-key="display"><rect x="496" y="596" width="70" height="24" rx="5"/><text x="531" y="611" class="tiny">DISPLAY</text><rect class="hit" x="489" y="589" width="84" height="38" rx="6"/></g>
+<g class="spot" data-key="hv"><rect x="576" y="596" width="70" height="24" rx="5"/><text x="611" y="611" class="tiny">H/V DELAY</text><rect class="hit" x="569" y="589" width="84" height="38" rx="6"/></g>
+<g class="spot" data-key="blue"><rect x="656" y="596" width="70" height="24" rx="5"/><text x="691" y="611" class="tiny">BLUE ONLY</text><rect class="hit" x="649" y="589" width="84" height="38" rx="6"/></g>
+<g class="spot" data-key="zoom"><rect x="736" y="596" width="70" height="24" rx="5"/><text x="771" y="611" class="tiny">ZOOM</text><rect class="hit" x="729" y="589" width="84" height="38" rx="6"/></g>
+<g class="spot" data-key="peaking"><rect x="816" y="596" width="70" height="24" rx="5"/><text x="851" y="611" class="tiny">PEAKING</text><rect class="hit" x="809" y="589" width="84" height="38" rx="6"/></g>
+<g class="spot" data-key="lut"><rect x="896" y="596" width="70" height="24" rx="5"/><text x="931" y="611" class="tiny">3D LUT</text><rect class="hit" x="889" y="589" width="84" height="38" rx="6"/></g>
+<g class="spot" data-key="marker"><rect x="976" y="596" width="70" height="24" rx="5"/><text x="1011" y="611" class="tiny">MARKER</text><rect class="hit" x="969" y="589" width="84" height="38" rx="6"/></g>
+</g>
+</svg>
+</div>
+
+<section class="lesson" aria-live="polite">
+<h2 id="title">Seleção de entrada</h2><div id="term" class="muted">(Input)</div>
+<div class="grid" style="margin-top:16px"><div><div class="ey">Como funciona</div><p id="func" class="copy"></p></div><div><div class="ey">Exemplo de uso</div><p id="example" class="copy"></p></div></div>
+<div class="ey">Experimente</div><div id="modes" class="modes"></div><div id="feedback" class="feedback"></div>
+</section>
+
+<section class="tallycard"><div class="ey">Sinalização da fonte</div><p class="copy">A borda do monitor pode indicar estados de tally.</p><div class="modes">
+<button class="tallybtn" data-tally="red">No ar</button><button class="tallybtn" data-tally="green">Prévia</button><button class="tallybtn" data-tally="blue">Azul</button><button class="tallybtn active" data-tally="off">Sem tally</button>
+</div></section>
+
+<script>
+(()=>{const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const state={brightness:1,zoom:false,blue:false,hv:false,peaking:false,lut:0,marker:0,tally:'off'};
+function apply(){const s=$('#screen');s.style.opacity=String(state.brightness);s.setAttribute('transform',state.zoom?'translate(-110 -42) scale(1.16)':'');s.style.filter=state.blue?'url(#bluefilter)':'';$('#blanktop').setAttribute('opacity',state.hv?'.85':'0');$('#blankleft').setAttribute('opacity',state.hv?'.85':'0');$('#peak').setAttribute('opacity',state.peaking?'1':'0');$('#lutwarm').setAttribute('opacity',state.lut===1?'.18':'0');$('#lutcool').setAttribute('opacity',state.lut===2?'.18':'0');let h=state.marker===1||state.marker===3,v=state.marker===2||state.marker===3;$('#h1').setAttribute('opacity',h?'1':'0');$('#h2').setAttribute('opacity',h?'1':'0');$('#v1').setAttribute('opacity',v?'1':'0');$('#v2').setAttribute('opacity',v?'1':'0')}
+function applyTally(){$('#tally').setAttribute('stroke',state.tally==='red'?'#ef4444':state.tally==='green'?'#22c55e':state.tally==='blue'?'#3b82f6':'transparent');$$('.tallybtn').forEach(b=>b.classList.toggle('active',b.dataset.tally===state.tally))}
+const L={
+input:{t:'Seleção de entrada',term:'Input',f:'Esse controle escolhe qual sinal de vídeo o monitor exibe.',e:'Se duas fontes chegam ao mesmo monitor, você pode alternar entre elas para conferir rapidamente qual sinal está correto.',m:[['SDI 1',()=>{},'A primeira entrada é exibida.'],['SDI 2',()=>{},'A segunda entrada é exibida.']]},
+display:{t:'Brilho da tela',term:'Display',f:'Esse controle altera o brilho do visor sem modificar o sinal de vídeo.',e:'Em uma sala escura, menos brilho deixa o monitor mais confortável. Em um ambiente claro, aumentar o brilho pode facilitar a visualização.',m:[['Baixo',()=>{state.brightness=.58;apply()},'A imagem fica mais escura.'],['Normal',()=>{state.brightness=1;apply()},'O brilho volta ao nível normal.'],['Alto',()=>{state.brightness=1.15;apply()},'A imagem fica mais intensa.']]},
+hv:{t:'Verificação das bordas do sinal',term:'H/V Delay',f:'Esse recurso revela partes do sinal que normalmente ficam escondidas nas bordas da imagem.',e:'Ele ajuda a observar problemas ou informações indevidas fora da área visível normal.',m:[['Ativar',()=>{state.hv=true;apply()},'As áreas de apagamento ficam visíveis.'],['Desativar',()=>{state.hv=false;apply()},'A imagem volta ao normal.']]},
+blue:{t:'Visualização somente azul',term:'Blue Only',f:'Esse modo mostra apenas o componente azul da imagem.',e:'É útil para avaliação de crominância e exercícios de monitoramento de sinal.',m:[['Ativar',()=>{state.blue=true;apply()},'A imagem passa para somente azul.'],['Desativar',()=>{state.blue=false;apply()},'As cores normais retornam.']]},
+zoom:{t:'Ampliação da imagem',term:'Zoom',f:'Esse recurso amplia a imagem para facilitar a inspeção de detalhes.',e:'Ao checar foco, ampliar um rosto ajuda a perceber pequenas perdas de nitidez.',m:[['Ampliar',()=>{state.zoom=true;apply()},'A imagem é ampliada.'],['Normal',()=>{state.zoom=false;apply()},'O enquadramento completo retorna.']]},
+peaking:{t:'Destaque de foco',term:'Focus Peaking',f:'O pico de foco destaca bordas e detalhes mais nítidos.',e:'Durante o ajuste de foco, os contornos ajudam a identificar rapidamente o que está realmente nítido.',m:[['Ativar',()=>{state.peaking=true;apply()},'As regiões nítidas recebem contorno.'],['Desativar',()=>{state.peaking=false;apply()},'Os contornos desaparecem.']]},
+lut:{t:'Transformação de cor',term:'3D LUT',f:'Uma LUT muda apenas a aparência usada no monitor, sem alterar o sinal original.',e:'Uma imagem Log pode parecer lavada. Uma LUT ajuda a visualizar uma aparência mais próxima do resultado final.',m:[['Sem LUT',()=>{state.lut=0;apply()},'Sem transformação adicional.'],['LUT quente',()=>{state.lut=1;apply()},'Uma aparência mais quente é aplicada.'],['LUT fria',()=>{state.lut=2;apply()},'Uma aparência mais fria é aplicada.']]},
+marker:{t:'Guias de enquadramento',term:'Marker',f:'Esse recurso coloca guias sobre a imagem para ajudar na composição e na previsão de cortes.',e:'As guias podem indicar área segura, região para grafismos ou um recorte vertical para outra plataforma.',m:[['Sem guia',()=>{state.marker=0;apply()},'Nenhuma guia está visível.'],['Horizontais',()=>{state.marker=1;apply()},'Guias horizontais aparecem.'],['Verticais',()=>{state.marker=2;apply()},'Guias verticais aparecem.'],['Completas',()=>{state.marker=3;apply()},'As duas orientações aparecem juntas.']]}
+};
+function show(k){const l=L[k];$$('.spot').forEach(s=>s.classList.toggle('selected',s.dataset.key===k));$('#title').textContent=l.t;$('#term').textContent='('+l.term+')';$('#func').textContent=l.f;$('#example').textContent=l.e;const box=$('#modes');box.innerHTML='';l.m.forEach((m,i)=>{const b=document.createElement('button');b.className='sim';b.textContent=m[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');m[1]();$('#feedback').textContent=m[2]};box.appendChild(b);if(i===0)setTimeout(()=>b.click(),0)})}
+function resetAll(){Object.assign(state,{brightness:1,zoom:false,blue:false,hv:false,peaking:false,lut:0,marker:0,tally:'off'});apply();applyTally();show('input')}
+$$('.spot').forEach(s=>s.onclick=()=>show(s.dataset.key));$$('.tallybtn').forEach(b=>b.onclick=()=>{state.tally=b.dataset.tally;applyTally()});$('#reset').onclick=resetAll;resetAll()})();
+</script>
+</main></body></html>
