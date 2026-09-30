@@ -45,23 +45,43 @@ svg{max-width:100%}
 }
 
 
-/* UBIQUIDADE CONTEXTO V2 */
+/* UBIQUIDADE CONTEXTO V3 */
 .lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
-  top:14px!important;bottom:auto!important;transform:translateX(-50%)!important;
-  max-height:calc(100vh - 28px)!important;
+  background:color-mix(in srgb,var(--card,#151c22) 86%,transparent)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(120%);
+  backdrop-filter:blur(9px) saturate(120%);
+  border-color:rgba(150,170,185,.45)!important;
+  box-shadow:0 18px 56px rgba(0,0,0,.38)!important;
+  top:auto!important;bottom:14px!important;transform:translateX(-50%)!important;
+  max-height:46vh!important;
 }
-.ubq-lead-after{
-  margin:12px 0 0!important;
-  font-size:13px!important;
-  line-height:1.45!important;
-  color:var(--muted,#a9b3bb)!important;
+.ubq-context-backdrop{
+  background:rgba(0,0,0,.18)!important;
+  backdrop-filter:blur(1px);
 }
 @media(max-width:760px){
   .lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
-    left:8px!important;right:8px!important;top:8px!important;bottom:auto!important;
-    transform:none!important;width:auto!important;max-height:calc(100vh - 16px)!important;
+    left:8px!important;right:8px!important;top:auto!important;bottom:8px!important;
+    transform:none!important;width:auto!important;max-height:44vh!important;
+    background:rgba(18,24,29,.84)!important;
   }
-  .ubq-lead-after{font-size:12px!important;line-height:1.4!important}
+  .frame,.panelScroller,.panelWrap,.instrument,.stage,.wrap{
+    width:calc(100% - 12px)!important;
+    max-width:calc(100% - 12px)!important;
+    margin-left:auto!important;margin-right:auto!important;
+  }
+  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
+  svg#front,svg#panel,svg#rcpPanel{
+    width:96%!important;max-width:96%!important;min-width:0!important;height:auto!important;
+    margin-left:auto!important;margin-right:auto!important;display:block!important;
+  }
+}
+@media(max-width:430px){
+  .frame,.panelScroller,.panelWrap,.instrument,.stage,.wrap{
+    width:calc(100% - 16px)!important;max-width:calc(100% - 16px)!important;
+  }
+  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
+  svg#front,svg#panel,svg#rcpPanel{width:94%!important;max-width:94%!important}
 }
 
 </style></head><body><main>
@@ -150,13 +170,11 @@ $$('.spot').forEach(s=>s.onclick=()=>show(s.dataset.key));$('#reset').onclick=re
 (()=>{
   const one=(s,r=document)=>r.querySelector(s);
   const all=(s,r=document)=>[...r.querySelectorAll(s)];
-
   const candidates=all('.lesson,.side,.experiment').filter(el=>{
     if(el.closest('.modal')) return false;
     return !!el.querySelector('h2,[id*="Title"],[id*="title"],.eyebrow,.ey,.copy,.intro');
   });
   if(!candidates.length) return;
-
   const panel=candidates[candidates.length-1];
   panel.classList.add('ubq-context');
 
@@ -172,7 +190,23 @@ $$('.spot').forEach(s=>s.onclick=()=>show(s.dataset.key));$('#reset').onclick=re
   close.title='Fechar';
   panel.prepend(close);
 
-  const openContext=()=>{
+  function placePanel(trigger){
+    const r=trigger?.getBoundingClientRect?.();
+    const vh=window.innerHeight;
+    if(!r){panel.style.top='';panel.style.bottom='14px';return}
+    const triggerMid=r.top+r.height/2;
+    const preferTop=triggerMid>vh*.52;
+    if(preferTop){
+      panel.style.top='10px';
+      panel.style.bottom='auto';
+    }else{
+      panel.style.top='auto';
+      panel.style.bottom='10px';
+    }
+  }
+
+  const openContext=(trigger)=>{
+    placePanel(trigger);
     panel.classList.add('open');
     backdrop.classList.add('open');
     document.body.classList.add('ubq-context-open');
@@ -192,8 +226,12 @@ $$('.spot').forEach(s=>s.onclick=()=>show(s.dataset.key));$('#reset').onclick=re
   document.addEventListener('click',e=>{
     if(e.target.closest('.ubq-context')) return;
     const trigger=e.target.closest(triggerSelector);
-    if(trigger) requestAnimationFrame(openContext);
+    if(trigger) requestAnimationFrame(()=>openContext(trigger));
   },true);
+
+  window.addEventListener('resize',()=>{
+    if(panel.classList.contains('open')) panel.style.maxHeight=Math.min(window.innerHeight*.46,520)+'px';
+  });
 
   const iconMap=[
     [/restaurar|reset/i,'↺'],
@@ -202,26 +240,19 @@ $$('.spot').forEach(s=>s.onclick=()=>show(s.dataset.key));$('#reset').onclick=re
     [/nova aba|abrir página|abrir em nova/i,'↗']
   ];
   all('button,.btn,a.btn').forEach(el=>{
-    const txt=(el.textContent||'').trim();
+    const txt=(el.dataset.ubqLabel||el.textContent||'').trim();
     for(const [re,icon] of iconMap){
       if(re.test(txt)&&txt.length>5){
-        el.dataset.ubqLabel=txt;
-        el.textContent=icon;
-        el.classList.add('ubq-icon-btn');
-        el.setAttribute('aria-label',txt);
-        el.title=txt;
-        break;
+        el.dataset.ubqLabel=txt;el.textContent=icon;el.classList.add('ubq-icon-btn');
+        el.setAttribute('aria-label',txt);el.title=txt;break;
       }
     }
   });
 
   const lead=one('.lead');
-  if(lead){
+  if(lead&&!lead.classList.contains('ubq-lead-after')){
     const anchor=one('.layout')||one('.frame')||one('.instrument')||one('.panelScroller')||one('.stage');
-    if(anchor&&anchor.parentNode){
-      anchor.insertAdjacentElement('afterend',lead);
-      lead.classList.add('ubq-lead-after');
-    }
+    if(anchor&&anchor.parentNode){anchor.insertAdjacentElement('afterend',lead);lead.classList.add('ubq-lead-after')}
   }
 })();
 </script>
