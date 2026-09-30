@@ -42,6 +42,26 @@ svg{max-width:100%}
   .micro,.tiny{font-size:inherit}
 }
 
+
+/* UBIQUIDADE CONTEXTO V2 */
+.lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
+  top:14px!important;bottom:auto!important;transform:translateX(-50%)!important;
+  max-height:calc(100vh - 28px)!important;
+}
+.ubq-lead-after{
+  margin:12px 0 0!important;
+  font-size:13px!important;
+  line-height:1.45!important;
+  color:var(--muted,#a9b3bb)!important;
+}
+@media(max-width:760px){
+  .lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
+    left:8px!important;right:8px!important;top:8px!important;bottom:auto!important;
+    transform:none!important;width:auto!important;max-height:calc(100vh - 16px)!important;
+  }
+  .ubq-lead-after{font-size:12px!important;line-height:1.4!important}
+}
+
 </style></head><body><main>
 <h1>Blackmagic HyperDeck Studio 4K Pro</h1><p class="muted">Gravador e reprodutor profissional. Toque em cada parte do painel e experimente seu funcionamento.</p>
 <div class="frame"><svg viewBox="0 0 1500 220" aria-label="Painel frontal interativo HyperDeck Studio 4K Pro">
@@ -80,39 +100,81 @@ function show(k){let l=L[k]||L.transport;$$('.spot').forEach(x=>x.classList.togg
 $$('.spot').forEach(x=>x.onclick=()=>show(x.dataset.k));show('transport')})();</script></main>
 <script id="ubq-mobile-layer">
 (()=>{
- const $=(s,r=document)=>r.querySelector(s), $=(s,r=document)=>[...r.querySelectorAll(s)];
- const candidates=$('.lesson,.side,.experiment').filter(el=>{
-   if(el.closest('.modal')) return false;
-   return el.querySelector('h2,[id*="Title"],[id*="title"],.eyebrow,.ey,.copy,.intro');
- });
- if(!candidates.length) return;
- const panel=candidates[candidates.length-1];
- panel.classList.add('ubq-context');
- const backdrop=document.createElement('div');backdrop.className='ubq-context-backdrop';document.body.appendChild(backdrop);
- const close=document.createElement('button');close.type='button';close.className='ubq-close';close.innerHTML='×';close.setAttribute('aria-label','Fechar explicação');close.title='Fechar';panel.prepend(close);
- const open=()=>{panel.classList.add('open');backdrop.classList.add('open');document.body.classList.add('ubq-context-open')};
- const shut=()=>{panel.classList.remove('open');backdrop.classList.remove('open');document.body.classList.remove('ubq-context-open')};
- close.addEventListener('click',e=>{e.stopPropagation();shut()});
- backdrop.addEventListener('click',shut);
- document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
- const triggers='.spot,.control,[data-key],[data-control],[data-part],[data-zone],[data-id],[data-mode]';
- $(triggers).forEach(el=>el.addEventListener('click',()=>setTimeout(open,0)));
- // Compacta apenas comandos utilitários; ações pedagógicas mantêm texto.
- const iconMap=[
-   [/restaurar|reset/i,'↺','Restaurar'],
-   [/painel inteiro|ver painel|full panel/i,'⛶','Ver painel inteiro'],
-   [/fechar|close/i,'×','Fechar'],
-   [/nova aba|abrir página|abrir em nova/i,'↗','Abrir em nova aba']
- ];
- $('button,.btn,a.btn').forEach(el=>{
-   const txt=(el.textContent||'').trim();
-   for(const [re,icon,label] of iconMap){
-     if(re.test(txt) && txt.length>5){
-       el.dataset.ubqLabel=txt;el.textContent=icon;el.classList.add('ubq-icon-btn');
-       el.setAttribute('aria-label',txt||label);el.title=txt||label;break;
-     }
-   }
- });
+  const one=(s,r=document)=>r.querySelector(s);
+  const all=(s,r=document)=>[...r.querySelectorAll(s)];
+
+  const candidates=all('.lesson,.side,.experiment').filter(el=>{
+    if(el.closest('.modal')) return false;
+    return !!el.querySelector('h2,[id*="Title"],[id*="title"],.eyebrow,.ey,.copy,.intro');
+  });
+  if(!candidates.length) return;
+
+  const panel=candidates[candidates.length-1];
+  panel.classList.add('ubq-context');
+
+  const backdrop=document.createElement('div');
+  backdrop.className='ubq-context-backdrop';
+  document.body.appendChild(backdrop);
+
+  const close=document.createElement('button');
+  close.type='button';
+  close.className='ubq-close';
+  close.innerHTML='×';
+  close.setAttribute('aria-label','Fechar explicação');
+  close.title='Fechar';
+  panel.prepend(close);
+
+  const openContext=()=>{
+    panel.classList.add('open');
+    backdrop.classList.add('open');
+    document.body.classList.add('ubq-context-open');
+    panel.scrollTop=0;
+  };
+  const closeContext=()=>{
+    panel.classList.remove('open');
+    backdrop.classList.remove('open');
+    document.body.classList.remove('ubq-context-open');
+  };
+
+  close.addEventListener('click',e=>{e.stopPropagation();closeContext()});
+  backdrop.addEventListener('click',closeContext);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeContext()});
+
+  const triggerSelector='.spot,.control,.ctl,.zone,[data-key],[data-control],[data-part],[data-zone],[data-id],[data-mode]';
+  document.addEventListener('click',e=>{
+    if(e.target.closest('.ubq-context')) return;
+    const trigger=e.target.closest(triggerSelector);
+    if(trigger) requestAnimationFrame(openContext);
+  },true);
+
+  const iconMap=[
+    [/restaurar|reset/i,'↺'],
+    [/painel inteiro|ver painel|full panel/i,'⛶'],
+    [/fechar|close/i,'×'],
+    [/nova aba|abrir página|abrir em nova/i,'↗']
+  ];
+  all('button,.btn,a.btn').forEach(el=>{
+    const txt=(el.textContent||'').trim();
+    for(const [re,icon] of iconMap){
+      if(re.test(txt)&&txt.length>5){
+        el.dataset.ubqLabel=txt;
+        el.textContent=icon;
+        el.classList.add('ubq-icon-btn');
+        el.setAttribute('aria-label',txt);
+        el.title=txt;
+        break;
+      }
+    }
+  });
+
+  const lead=one('.lead');
+  if(lead){
+    const anchor=one('.layout')||one('.frame')||one('.instrument')||one('.panelScroller')||one('.stage');
+    if(anchor&&anchor.parentNode){
+      anchor.insertAdjacentElement('afterend',lead);
+      lead.classList.add('ubq-lead-after');
+    }
+  }
 })();
 </script>
 </body></html>
