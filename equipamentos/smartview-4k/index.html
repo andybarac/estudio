@@ -7,6 +7,49 @@
 <style>
 :root{--bg:#0f1317;--panel:#151a1f;--card:#20262d;--line:#3d464f;--text:#f4f6f7;--muted:#aeb6bd;--accent:#64a8ff;--accentbg:#173451;--red:#ef4444;--green:#22c55e;--blue:#3b82f6}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.toolbar{display:flex;justify-content:flex-end;margin:10px 0}.btn,.sim,.tallybtn{background:transparent;color:var(--text);border:1px solid #4a545d;border-radius:8px;padding:9px 12px;cursor:pointer}.sim.active,.tallybtn.active{background:var(--accentbg);border-color:var(--accent);font-weight:600}.frame{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#12171b;padding:12px}.frame svg{width:100%;min-width:980px}.spot{cursor:pointer;outline:none}.hit{fill:transparent;stroke:transparent;stroke-width:3}.spot.selected .hit{stroke:var(--accent);fill:var(--accentbg);fill-opacity:.13}.lesson,.tallycard{margin-top:14px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.copy{font-size:14px;line-height:1.6}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.feedback{margin-top:12px;background:var(--panel);border-radius:9px;padding:12px;font-size:14px;line-height:1.55}.screenfx{transition:opacity .18s ease,transform .18s ease,filter .18s ease}.tiny{font-size:6px;fill:#cfd4d8;text-anchor:middle;pointer-events:none}@media(max-width:700px){main{padding:12px}.grid{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.screenfx{transition:none}}
+
+/* UBIQUIDADE / MOBILE 2026-09 */
+:root{--ubq-border:#46545e;--ubq-backdrop:rgba(0,0,0,.72)}
+html,body{max-width:100%;overflow-x:hidden}
+img,canvas,video{max-width:100%;height:auto}
+svg{max-width:100%}
+.ubq-context-backdrop{position:fixed;inset:0;background:var(--ubq-backdrop);z-index:9000;display:none}
+.ubq-context-backdrop.open{display:block}
+.lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
+  position:fixed!important;z-index:9001!important;left:50%!important;top:50%!important;
+  transform:translate(-50%,-50%)!important;width:min(680px,calc(100vw - 28px))!important;
+  max-height:min(82vh,760px)!important;overflow:auto!important;margin:0!important;
+  border:1px solid var(--ubq-border)!important;border-radius:16px!important;
+  box-shadow:0 24px 80px rgba(0,0,0,.55)!important;background:var(--card,#151c22)!important;
+  padding:20px!important;display:none!important
+}
+.lesson.ubq-context.open,.side.ubq-context.open,.experiment.ubq-context.open{display:block!important}
+.ubq-close{position:sticky;float:right;top:0;margin:-6px -6px 8px 10px;width:38px;height:38px;border-radius:50%;
+  border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;z-index:2}
+.ubq-close:hover,.ubq-close:focus{border-color:#6ab8ff;outline:2px solid rgba(106,184,255,.3)}
+.ubq-icon-btn{min-width:40px!important;width:40px!important;height:40px!important;padding:0!important;display:inline-flex!important;
+  align-items:center!important;justify-content:center!important;font-size:20px!important;line-height:1!important}
+@media(max-width:760px){
+  main{padding:10px!important;max-width:100%!important}
+  h1{font-size:clamp(21px,6vw,28px)!important;line-height:1.08!important}
+  .lead{font-size:14px!important;margin-bottom:10px!important}
+  .frame,.panelScroller,.panelWrap,.wrap,.rack,.stage{max-width:100%!important;overflow:hidden!important;padding-left:4px!important;padding-right:4px!important}
+  .frame svg,.panelScroller svg,.panelWrap svg,svg#front,svg#panel,svg#rcpPanel{width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;display:block!important}
+  .layout,.row,.grid,.expgrid,.expGrid,.statusGrid{grid-template-columns:1fr!important;gap:8px!important}
+  .toolbar{gap:6px!important;margin:8px 0!important;flex-wrap:wrap!important}
+  .btn,.action,.sim{min-height:40px}
+  .status,.statusCard{padding:8px!important;font-size:12px!important}
+  .lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
+    left:8px!important;right:8px!important;top:auto!important;bottom:8px!important;transform:none!important;
+    width:auto!important;max-height:76vh!important;border-radius:14px!important;padding:16px!important
+  }
+  .lesson.ubq-context h2,.side.ubq-context h2,.experiment.ubq-context h2{font-size:20px!important;padding-right:40px}
+}
+@media(max-width:420px){
+  .frame,.panelScroller,.panelWrap{border:1px solid #37434c!important;border-radius:10px!important}
+  .micro,.tiny{font-size:inherit}
+}
+
 </style>
 </head>
 <body><main>
@@ -85,4 +128,42 @@ function show(k){const l=L[k];$$('.spot').forEach(s=>s.classList.toggle('selecte
 function resetAll(){Object.assign(state,{brightness:1,zoom:false,blue:false,hv:false,peaking:false,lut:0,marker:0,tally:'off'});apply();applyTally();show('input')}
 $$('.spot').forEach(s=>s.onclick=()=>show(s.dataset.key));$$('.tallybtn').forEach(b=>b.onclick=()=>{state.tally=b.dataset.tally;applyTally()});$('#reset').onclick=resetAll;resetAll()})();
 </script>
-</main></body></html>
+</main>
+<script id="ubq-mobile-layer">
+(()=>{
+ const $=(s,r=document)=>r.querySelector(s), $=(s,r=document)=>[...r.querySelectorAll(s)];
+ const candidates=$('.lesson,.side,.experiment').filter(el=>{
+   if(el.closest('.modal')) return false;
+   return el.querySelector('h2,[id*="Title"],[id*="title"],.eyebrow,.ey,.copy,.intro');
+ });
+ if(!candidates.length) return;
+ const panel=candidates[candidates.length-1];
+ panel.classList.add('ubq-context');
+ const backdrop=document.createElement('div');backdrop.className='ubq-context-backdrop';document.body.appendChild(backdrop);
+ const close=document.createElement('button');close.type='button';close.className='ubq-close';close.innerHTML='×';close.setAttribute('aria-label','Fechar explicação');close.title='Fechar';panel.prepend(close);
+ const open=()=>{panel.classList.add('open');backdrop.classList.add('open');document.body.classList.add('ubq-context-open')};
+ const shut=()=>{panel.classList.remove('open');backdrop.classList.remove('open');document.body.classList.remove('ubq-context-open')};
+ close.addEventListener('click',e=>{e.stopPropagation();shut()});
+ backdrop.addEventListener('click',shut);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
+ const triggers='.spot,.control,[data-key],[data-control],[data-part],[data-zone],[data-id],[data-mode]';
+ $(triggers).forEach(el=>el.addEventListener('click',()=>setTimeout(open,0)));
+ // Compacta apenas comandos utilitários; ações pedagógicas mantêm texto.
+ const iconMap=[
+   [/restaurar|reset/i,'↺','Restaurar'],
+   [/painel inteiro|ver painel|full panel/i,'⛶','Ver painel inteiro'],
+   [/fechar|close/i,'×','Fechar'],
+   [/nova aba|abrir página|abrir em nova/i,'↗','Abrir em nova aba']
+ ];
+ $('button,.btn,a.btn').forEach(el=>{
+   const txt=(el.textContent||'').trim();
+   for(const [re,icon,label] of iconMap){
+     if(re.test(txt) && txt.length>5){
+       el.dataset.ubqLabel=txt;el.textContent=icon;el.classList.add('ubq-icon-btn');
+       el.setAttribute('aria-label',txt||label);el.title=txt||label;break;
+     }
+   }
+ });
+})();
+</script>
+</body></html>
