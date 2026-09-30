@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sony DFS-900M — validação</title>
+<style>
+:root{
+  --bg:#0d1115;--card:#151b20;--card2:#10151a;--line:#2e3942;--text:#eef2f4;--muted:#a9b3bb;
+  --accent:#6ab8ff;--green:#46d46a;--off:#59656d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{max-width:1380px;margin:auto;padding:22px}
+h1{margin:0 0 6px;font-size:30px}.lead{margin:0 0 18px;color:var(--muted);line-height:1.6}
+.layout{display:grid;grid-template-columns:minmax(760px,1fr) 390px;gap:18px;align-items:start}
+.card{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:16px}.stage{overflow:auto}.stage svg{width:100%;min-width:760px;height:auto;display:block}
+.hit{fill:transparent;cursor:pointer}.focusable{transition:filter .15s, stroke .15s}.selected .focusable{stroke:var(--accent)!important;filter:drop-shadow(0 0 7px rgba(106,184,255,.45))}
+.side h2{margin:0 0 4px;font-size:24px}.term{color:var(--muted);font-size:14px;margin-bottom:14px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:12px 0 6px}.copy{line-height:1.65;margin:0}
+.statusGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.statusCard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.statusCard b{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.btn{background:transparent;color:var(--text);border:1px solid #455059;border-radius:10px;padding:10px 12px;cursor:pointer}.btn.active,.btn:hover{border-color:var(--accent);background:#15324a}
+.note{margin-top:14px;padding:12px;background:#12171b;border:1px solid var(--line);border-radius:12px;color:#dfe5e8;line-height:1.6}.footerNote{margin-top:14px;color:var(--muted);font-size:13px;line-height:1.6}
+@media(max-width:1120px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Sony DFS-900M</h1>
+  <p class="lead">Agora deixei apenas a <strong>frente do gabinete</strong>, com foco no que realmente aparece no painel frontal do equipamento: os dois interruptores <strong>POWER A</strong> e <strong>POWER B</strong>.</p>
+
+  <div class="layout">
+    <section class="card stage">
+      <svg viewBox="0 0 1040 390" aria-label="Sony DFS-900M painel frontal">
+        <!-- frontal -->
+        <rect x="80" y="78" width="880" height="214" rx="4" fill="#06080a" stroke="#40484e" stroke-width="2"/>
+        <rect x="89" y="87" width="862" height="196" rx="2" fill="#090b0d" stroke="#1c2227"/>
+
+        <!-- parafusos / orelhas de rack -->
+        <circle cx="104" cy="130" r="8" fill="#bbc4c8" stroke="#5f676c"/>
+        <circle cx="104" cy="239" r="8" fill="#bbc4c8" stroke="#5f676c"/>
+        <circle cx="936" cy="130" r="8" fill="#bbc4c8" stroke="#5f676c"/>
+        <circle cx="936" cy="239" r="8" fill="#bbc4c8" stroke="#5f676c"/>
+
+        <!-- marcações -->
+        <text x="116" y="111" fill="#e8edf0" font-size="26" font-weight="700">SONY</text>
+        <text x="205" y="111" fill="#dce3e6" font-size="10">POWER A</text>
+        <text x="817" y="111" fill="#dce3e6" font-size="10">MULTI FORMAT SWITCHER</text>
+        <text x="913" y="111" fill="#dce3e6" font-size="10">DFS-900M</text>
+
+        <!-- bloco A -->
+        <g id="zoneA" class="selected">
+          <rect class="focusable" x="156" y="115" width="70" height="55" rx="2" fill="#0d1013" stroke="#6e7a82" stroke-width="1.4"/>
+          <rect x="165" y="123" width="17" height="39" rx="1.5" fill="#1aa03c" stroke="#0d4c20"/>
+          <text x="173.5" y="137" fill="#eff5ef" font-size="9" font-weight="700" text-anchor="middle">ON</text>
+          <text x="173.5" y="156" fill="#eff5ef" font-size="9" font-weight="700" text-anchor="middle">OFF</text>
+          <line x1="165" y1="143" x2="182" y2="143" stroke="#083415"/>
+          <text x="198" y="128" fill="#eff3f5" font-size="9">I</text>
+          <circle cx="205" cy="143" r="5.8" fill="none" stroke="#eff3f5" stroke-width="1.4"/>
+          <text x="217" y="155" fill="#eff3f5" font-size="14" font-weight="700">—</text>
+          <text x="173" y="180" fill="#c0c8cc" font-size="8" text-anchor="middle">ON</text>
+          <text x="173" y="190" fill="#778188" font-size="8" text-anchor="middle">OFF</text>
+          <rect class="hit" id="hitA" x="152" y="111" width="78" height="83" rx="3"/>
+        </g>
+
+        <!-- bloco B -->
+        <text x="205" y="196" fill="#dce3e6" font-size="10">POWER B</text>
+        <g id="zoneB">
+          <rect class="focusable" x="156" y="200" width="70" height="55" rx="2" fill="#0d1013" stroke="#6e7a82" stroke-width="1.4"/>
+          <rect x="165" y="208" width="17" height="39" rx="1.5" fill="#1aa03c" stroke="#0d4c20"/>
+          <text x="173.5" y="222" fill="#eff5ef" font-size="9" font-weight="700" text-anchor="middle">ON</text>
+          <text x="173.5" y="241" fill="#eff5ef" font-size="9" font-weight="700" text-anchor="middle">OFF</text>
+          <line x1="165" y1="228" x2="182" y2="228" stroke="#083415"/>
+          <text x="198" y="213" fill="#eff3f5" font-size="9">I</text>
+          <circle cx="205" cy="228" r="5.8" fill="none" stroke="#eff3f5" stroke-width="1.4"/>
+          <text x="217" y="240" fill="#eff3f5" font-size="14" font-weight="700">—</text>
+          <text x="173" y="265" fill="#c0c8cc" font-size="8" text-anchor="middle">ON</text>
+          <text x="173" y="275" fill="#778188" font-size="8" text-anchor="middle">OFF</text>
+          <rect class="hit" id="hitB" x="152" y="196" width="78" height="83" rx="3"/>
+        </g>
+      </svg>
+    </section>
+
+    <aside class="card side">
+      <h2 id="title">Power A</h2>
+      <div class="term" id="term">(Interruptor superior)</div>
+
+      <div class="ey">O que faz</div>
+      <p class="copy" id="what">Power A corresponde ao interruptor superior do bloco de energia no lado esquerdo do painel frontal. Neste protótipo, ele foi mantido clicável para ajudar você a reconhecer rapidamente a posição do comando e relacionar o rótulo impresso ao controle físico.</p>
+
+      <div class="ey">Quando usar</div>
+      <p class="copy" id="when">Use esta área quando você quiser conhecer o frontal do DFS-900M, treinar a identificação visual dos comandos de energia e aprender onde localizar o primeiro controle acessível do gabinete durante a montagem ou conferência do sistema.</p>
+
+      <div class="ey">Experimente</div>
+      <div class="btns">
+        <button class="btn active" id="focusA">Selecionar Power A</button>
+        <button class="btn" id="focusB">Selecionar Power B</button>
+        <button class="btn" id="toggleSelected">Ligar / Desligar selecionado</button>
+      </div>
+
+      <div class="statusGrid">
+        <div class="statusCard"><b>Power A</b><span id="stateA">Ligado</span></div>
+        <div class="statusCard"><b>Power B</b><span id="stateB">Ligado</span></div>
+        <div class="statusCard"><b>Gabinete</b><span>Único</span></div>
+        <div class="statusCard"><b>Vista</b><span>Frontal</span></div>
+      </div>
+
+      <div class="note" id="note">O frontal do DFS-900M é bastante limpo e concentra seus comandos visíveis no bloco de energia à esquerda. Neste protótipo, o foco está em ajudar você a memorizar essa organização e diferenciar rapidamente Power A de Power B.</div>
+
+      <div class="ey">Informações do equipamento</div>
+      <p class="copy">O DFS-900M é um switcher multiformato voltado à operação em HD e SD. Na configuração padrão, oferece 8 entradas e 4 saídas, 4 keyers, 2 DSKs e memória de quadros, podendo ser expandido com placas opcionais. Mesmo sendo um sistema robusto, o painel frontal do gabinete é simples e serve principalmente para identificação da unidade e acesso aos comandos de energia.</p>
+
+      <div class="footerNote">Clique diretamente em cada interruptor desenhado no painel ou use os botões laterais para alternar o foco entre Power A e Power B. A ideia aqui é que você primeiro reconheça o frontal do equipamento e depois associe cada comando ao nome impresso no gabinete.</div>
+    </aside>
+  </div>
+</main>
+<script>
+(() => {
+  const state = { a:true, b:true, selected:'A' };
+  const refs = {
+    zoneA: document.getElementById('zoneA'), zoneB: document.getElementById('zoneB'),
+    stateA: document.getElementById('stateA'), stateB: document.getElementById('stateB'),
+    title: document.getElementById('title'), term: document.getElementById('term'),
+    what: document.getElementById('what'), when: document.getElementById('when'), note: document.getElementById('note'),
+    focusA: document.getElementById('focusA'), focusB: document.getElementById('focusB'), toggleSelected: document.getElementById('toggleSelected')
+  };
+
+  const content = {
+    A: {
+      title:'Power A', term:'(Interruptor superior)',
+      what:'Power A corresponde ao interruptor superior do bloco de energia no lado esquerdo do painel frontal. Neste protótipo, ele foi mantido clicável para ajudar você a reconhecer rapidamente a posição do comando e relacionar o rótulo impresso ao controle físico.',
+      when:'Use esta área quando você quiser conhecer o frontal do DFS-900M, treinar a identificação visual dos comandos de energia e aprender onde localizar o primeiro controle acessível do gabinete durante a montagem ou conferência do sistema.'
+    },
+    B: {
+      title:'Power B', term:'(Interruptor inferior)',
+      what:'Power B corresponde ao interruptor inferior do bloco de energia. Assim como o comando superior, ele foi mantido clicável para reforçar a leitura espacial do painel e ajudar você a perceber a organização vertical dos dois interruptores.',
+      when:'Use esta área quando você quiser reforçar a organização vertical do bloco de energia, percebendo que o segundo comando fica logo abaixo de Power A e faz parte do mesmo conjunto visual do frontal.'
+    }
+  };
+
+  function renderSwitch(which, on){
+    const green = on ? '#1aa03c' : '#59656d';
+    const stroke = on ? '#0d4c20' : '#40494f';
+    const rect = document.querySelector(`#zone${which} rect[x="165"]`) || document.querySelector(`#zone${which} rect[x="165"]`);
+    if(rect){ rect.setAttribute('fill', green); rect.setAttribute('stroke', stroke); }
+  }
+
+  function select(which){
+    state.selected = which;
+    refs.zoneA.classList.toggle('selected', which==='A');
+    refs.zoneB.classList.toggle('selected', which==='B');
+    refs.focusA.classList.toggle('active', which==='A');
+    refs.focusB.classList.toggle('active', which==='B');
+    refs.title.textContent = content[which].title;
+    refs.term.textContent = content[which].term;
+    refs.what.textContent = content[which].what;
+    refs.when.textContent = content[which].when;
+  }
+
+  function updateVisualStates(){
+    renderSwitch('A', state.a);
+    renderSwitch('B', state.b);
+    refs.stateA.textContent = state.a ? 'Ligado' : 'Desligado';
+    refs.stateB.textContent = state.b ? 'Ligado' : 'Desligado';
+  }
+
+  function toggleSelected(){
+    if(state.selected==='A') state.a = !state.a; else state.b = !state.b;
+    updateVisualStates();
+  }
+
+  document.getElementById('hitA').addEventListener('click', ()=>{ select('A'); state.a = !state.a; updateVisualStates(); });
+  document.getElementById('hitB').addEventListener('click', ()=>{ select('B'); state.b = !state.b; updateVisualStates(); });
+  refs.focusA.addEventListener('click', ()=>select('A'));
+  refs.focusB.addEventListener('click', ()=>select('B'));
+  refs.toggleSelected.addEventListener('click', toggleSelected);
+
+  select('A'); updateVisualStates();
+})();
+</script>
+</body>
+</html>
