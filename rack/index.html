@@ -34,6 +34,20 @@ main{max-width:1540px;margin:auto;padding:20px} h1{margin:0 0 6px;font-size:30px
   .closeBtn::before{content:'×';font-size:22px!important}
 }
 
+
+/* TAGS CROMATICAS SEGURAS */
+[data-filter]{--tag:#6ab8ff}
+[data-filter="infra"]{--tag:#9aa4ad}
+[data-filter="ccu"]{--tag:#d8c38f}
+[data-filter="record"]{--tag:#ef6f61}
+[data-filter="monitor"]{--tag:#5bb7ff}
+[data-filter="intercom"]{--tag:#b58cff}
+[data-filter="control"]{--tag:#58d68d}
+[data-filter]::before{content:'';display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--tag);margin-right:7px;vertical-align:1px}
+[data-filter].active{border-color:var(--tag)!important;background:color-mix(in srgb,var(--tag) 18%,#10161a)!important;box-shadow:inset 0 0 0 1px var(--tag)}
+.eq.filter-hit .frame{stroke:var(--tag-hit,#6ab8ff)!important;stroke-width:3!important}
+.group.filter-hit .group-outline{stroke:var(--tag-hit,#6ab8ff)!important;stroke-width:3!important}
+
 </style></head><body><main>
 <h1>Rack do Estúdio</h1>
 
@@ -102,5 +116,5 @@ function side(el){$('#title').textContent=el.dataset.title||'Grupo';$('#term').t
 function show(title,el){$('#modalTitle').textContent=title;$('#modal').classList.add('open');const f=$('#modalFrame'),m=$('#modalMsg'),a=$('#modalOpenNew');f.src='about:blank';f.removeAttribute('srcdoc');if(el.dataset.link){f.style.display='block';m.style.display='none';f.src=el.dataset.link;a.style.display='inline-block';a.href=el.dataset.link;a.textContent='Abrir em nova aba';return;}f.style.display='none';m.style.display='block';m.textContent=el.dataset.status||'Página individual ainda não criada.';a.style.display='none';}
 function openEq(el){reset();el.classList.add('selected');side(el);show(el.dataset.title,el)}
 $$('.eq').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();openEq(el)}));$$('.group').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();reset();el.classList.add('selected');$('#title').textContent=el.dataset.title;$('#term').textContent='Grupo';$('#desc').textContent=el.dataset.desc||'';const list=$('#list');list.innerHTML='';(groups[el.dataset.groupbox]||[]).forEach(id=>{const x=document.querySelector('[data-id="'+id+'"]');if(!x)return;const item=document.createElement('div');item.className='item';item.innerHTML='<div><strong>'+x.dataset.title+'</strong><div class="status">'+(x.dataset.term||'')+'</div></div>';const b=document.createElement('button');b.textContent='Abrir';b.onclick=()=>openEq(x);item.appendChild(b);list.appendChild(item)})}));
-$$('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{const f=btn.dataset.filter;$$('.btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');$$('.eq').forEach(x=>x.classList.toggle('dim',x.dataset.group!==f));$$('.group').forEach(x=>x.classList.toggle('dim',x.dataset.groupbox!==f));$('#title').textContent='Filtro: '+btn.textContent;$('#term').textContent='Visualização por grupo';$('#desc').textContent='Os itens fora do grupo permanecem no lugar, mas ficam esmaecidos.';$('#list').innerHTML='';}));$('#showAll').onclick=()=>{$$('.btn').forEach(x=>x.classList.remove('active'));$('#showAll').classList.add('active');$$('.eq,.group').forEach(x=>x.classList.remove('dim'));$('#title').textContent='Rack completo';$('#term').textContent='Mapa técnico do estúdio';$('#desc').textContent='Clique em um equipamento para abrir sua página individual.';$('#list').innerHTML='';};$('#modalClose').onclick=()=>{$('#modal').classList.remove('open');$('#modalFrame').src='about:blank';$('#modalFrame').removeAttribute('srcdoc')};$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')$('#modalClose').click()});})();
+$$('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{const f=btn.dataset.filter,color=getComputedStyle(btn).getPropertyValue('--tag').trim()||'#6ab8ff';$('.btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');$('.eq').forEach(x=>{const hit=x.dataset.group===f;x.classList.toggle('dim',!hit);x.classList.toggle('filter-hit',hit);x.style.setProperty('--tag-hit',color)});$('.group').forEach(x=>{const hit=x.dataset.groupbox===f;x.classList.toggle('dim',!hit);x.classList.toggle('filter-hit',hit);x.style.setProperty('--tag-hit',color)});$('#title').textContent='Filtro: '+btn.textContent;$('#term').textContent='Visualização por grupo';$('#desc').textContent='Os itens fora do grupo permanecem no lugar, mas ficam esmaecidos.';$('#list').innerHTML='';}));$('#showAll').onclick=()=>{$$('.btn').forEach(x=>x.classList.remove('active'));$('#showAll').classList.add('active');$('.eq,.group').forEach(x=>{x.classList.remove('dim');x.classList.remove('filter-hit')});$('#title').textContent='Rack completo';$('#term').textContent='Mapa técnico do estúdio';$('#desc').textContent='Clique em um equipamento para abrir sua página individual.';$('#list').innerHTML='';};$('#modalClose').onclick=()=>{$('#modal').classList.remove('open');$('#modalFrame').src='about:blank';$('#modalFrame').removeAttribute('srcdoc')};$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')$('#modalClose').click()});})();
 </script></body></html>
