@@ -8,6 +8,18 @@
 :root{--bg:#0f1317;--panel:#1a2026;--card:#20272e;--line:#6f7983;--text:#f0f3f5;--muted:#aeb6bd;--accent:#62a8ff;--accentbg:#17304f;--red:#ef4444;--green:#22c55e;--amber:#f59e0b;--off:#5c6670}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:20px}.lead{color:var(--muted);line-height:1.55}.toolbar{display:flex;justify-content:flex-end;margin:12px 0}.btn,.sim{background:transparent;color:var(--text);border:1px solid #424b54;border-radius:9px;padding:10px 13px;cursor:pointer}.sim.active{background:var(--accentbg);border-color:var(--accent);font-weight:650}.frame{overflow-x:auto;border:1px solid #3d464f;border-radius:14px;background:#14191e;padding:12px}.frame svg{width:100%;min-width:930px}.spot{cursor:pointer;outline:none}.hit{fill:transparent;stroke:transparent;stroke-width:2}.spot.selected .hit{stroke:var(--accent);fill:var(--accentbg);fill-opacity:.15}.led{transition:fill .18s,opacity .18s,filter .18s}.led-off{fill:var(--off);opacity:.28}.led-red{fill:var(--red);filter:drop-shadow(0 0 5px var(--red))}.led-green{fill:var(--green);filter:drop-shadow(0 0 5px var(--green))}.led-amber{fill:var(--amber);filter:drop-shadow(0 0 5px var(--amber))}.blink-red{fill:var(--red);filter:drop-shadow(0 0 5px var(--red));animation:blink .72s steps(1,end) infinite}.blink-green{fill:var(--green);filter:drop-shadow(0 0 5px var(--green));animation:blink .72s steps(1,end) infinite}.paneltext{fill:#d9dde1;font-size:5.3px;text-anchor:middle}.micro{fill:#aeb6bd;font-size:4.2px;text-anchor:middle}.move{transition:transform .2s ease}.lesson{margin-top:16px;border:1px solid #3d464f;border-radius:14px;background:var(--card);padding:18px}.row{display:grid;grid-template-columns:1fr 1fr;gap:20px}.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:11px;color:var(--muted);font-weight:700}.copy{line-height:1.6;color:var(--text);font-size:14px}.term{color:var(--muted);font-size:14px;margin-top:4px}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.feedback{margin-top:12px;background:var(--panel);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:flex-start}.dot{width:12px;height:12px;border-radius:50%;margin-top:5px;flex:0 0 auto}@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.1}}@media(max-width:700px){main{padding:14px}.row{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.blink-red,.blink-green{animation:none}.move{transition:none}}
 
+
+/* CONTEXTO LOCAL — hxcu-100 */
+.context-drawer{display:none!important;position:relative!important;width:100%!important;max-width:none!important;margin:12px 0 0!important}
+.context-drawer.open{display:block!important}
+.context-close{float:right;width:38px;height:38px;border-radius:50%;border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;margin:-4px -4px 8px 12px}
+.context-close:focus{outline:2px solid rgba(106,184,255,.35)}
+@media(max-width:760px){
+  main{padding-left:10px!important;padding-right:10px!important}
+  .frame{max-width:calc(100vw - 20px)!important;margin-left:auto!important;margin-right:auto!important;overflow:hidden!important}
+  .frame svg{max-width:100%!important;min-width:0!important;height:auto!important}
+}
+
 </style>
 </head>
 <body><main>
@@ -63,4 +75,27 @@ function show(k){const l=lessons[k];$$('.spot').forEach(s=>s.classList.toggle('s
 $$('.spot').forEach(s=>{s.onclick=()=>show(s.dataset.key);s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(s.dataset.key)}}});$('#reset').onclick=()=>{defaults();show('tally')};defaults();show('tally')})();
 </script>
 </main>
+
+<script id="context-drawer-local">
+(()=>{
+  const panel=document.querySelector('.lesson');
+  if(!panel)return;
+  panel.classList.add('context-drawer');
+  if(!panel.querySelector('.context-close')){
+    const close=document.createElement('button');
+    close.type='button';close.className='context-close';close.textContent='×';
+    close.setAttribute('aria-label','Fechar explicação');close.title='Fechar';
+    panel.prepend(close);
+    close.addEventListener('click',e=>{e.stopPropagation();panel.classList.remove('open')});
+  }
+  const triggerSelector='.spot';
+  document.addEventListener('click',e=>{
+    if(panel.contains(e.target))return;
+    const trigger=e.target.closest(triggerSelector);
+    if(trigger){requestAnimationFrame(()=>panel.classList.add('open'));return;}
+    panel.classList.remove('open');
+  },true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remove('open')});
+})();
+</script>
 </body></html>
