@@ -7,6 +7,22 @@
 <style>
 :root{--bg:#0f1317;--panel:#151a1f;--card:#20262d;--line:#3d464f;--text:#f4f6f7;--muted:#aeb6bd;--accent:#64a8ff;--accentbg:#173451;--red:#ef4444;--green:#22c55e;--amber:#f59e0b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.frame{overflow-x:hidden;border:1px solid var(--line);border-radius:14px;background:#12171b;padding:12px}.frame svg{width:min(100%,820px);max-width:820px;min-width:0;height:auto;margin:0 auto;display:block}.toolbar{display:flex;justify-content:flex-end;margin:10px 0}.btn,.sim,.tallybtn{background:transparent;color:var(--text);border:1px solid #4a545d;border-radius:8px;padding:9px 12px;cursor:pointer}.sim.active,.tallybtn.active{background:var(--accentbg);border-color:var(--accent);font-weight:600}.spot{cursor:pointer;outline:none}.hit{fill:transparent;stroke:transparent;stroke-width:3}.spot.selected .hit{stroke:var(--accent);fill:var(--accentbg);fill-opacity:.12}.lesson,.tallycard{margin-top:14px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.copy{font-size:14px;line-height:1.6}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.feedback{margin-top:12px;background:var(--panel);border-radius:9px;padding:12px;font-size:14px;line-height:1.55}.device-note{margin:10px 2px 0;color:var(--muted);font-size:13px;line-height:1.45}.tiny{font-size:7px;fill:#cbd1d6;text-anchor:middle;pointer-events:none}.micro{font-size:6px;fill:#9ca6ad;text-anchor:middle;pointer-events:none}.led{transition:fill .15s,filter .15s}.screenfx{transition:filter .18s,transform .18s,opacity .18s}.rot{transition:transform .18s}@media(max-width:700px){main{padding:12px}.grid{grid-template-columns:1fr}.frame{padding:6px}.frame svg{width:96%;max-width:96%}}@media(prefers-reduced-motion:reduce){.screenfx,.rot{transition:none}}
+
+/* CONTEXTO LOCAL — sony-lmd-940w */
+.context-drawer{display:none!important;position:relative!important;width:100%!important;max-width:none!important;margin:12px 0 0!important;padding:16px!important;border-radius:14px!important;overflow:visible!important}
+.context-drawer.open{display:block!important}
+.context-close{float:right;width:38px;height:38px;border-radius:50%;border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;margin:-4px -4px 8px 12px}
+.context-close:focus{outline:2px solid rgba(106,184,255,.35)}
+
+.frame{overflow:hidden!important;max-width:820px!important;margin-left:auto!important;margin-right:auto!important}
+.frame svg{width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;display:block!important;margin:0 auto!important}
+@media(max-width:760px){
+  main{padding-left:10px!important;padding-right:10px!important}
+  .frame{max-width:calc(100vw - 20px)!important;padding-left:6px!important;padding-right:6px!important}
+  .frame svg{width:96%!important;max-width:96%!important}
+  .context-drawer{padding:14px!important}
+}
+
 </style>
 </head>
 <body><main>
@@ -178,4 +194,27 @@ function show(k){const l=L[k];$('.spot').forEach(s=>s.classList.toggle('selected
 function reset(){if(osdTimer){clearTimeout(osdTimer);osdTimer=null}Object.assign(st,{input:'SDI',brightness:1,contrast:1,chroma:1,scan:'NORMAL',hv:false,volume:50,ip:'INTER-FIELD',tally:'off',power:true,angle:0});input('SDI');tally();applyPicture();osdOff();$('#volosd').setAttribute('opacity','0');$('#powerLed').setAttribute('fill','#31c765');$('#powerHandle').setAttribute('x','1030');$('#encoderMark').removeAttribute('transform');show('inputs')}
 $$('.spot').forEach(s=>s.onclick=()=>{const k=s.dataset.key;if(!['menu','return','enter','encoder'].includes(k))osdOff();show(k)});$$('.tallybtn').forEach(b=>b.onclick=()=>{osdOff();st.tally=b.dataset.tally;tally()});$('#reset').onclick=reset;reset()})();
 </script>
-</main></body></html>
+</main>
+<script id="context-drawer-local">
+(()=>{
+  const panel=document.querySelector('.lesson');
+  if(!panel)return;
+  panel.classList.add('context-drawer');
+  if(!panel.querySelector('.context-close')){
+    const close=document.createElement('button');
+    close.type='button';close.className='context-close';close.textContent='×';
+    close.setAttribute('aria-label','Fechar explicação');close.title='Fechar';
+    panel.prepend(close);
+    close.addEventListener('click',e=>{e.stopPropagation();panel.classList.remove('open')});
+  }
+  const triggerSelector='.spot';
+  document.addEventListener('click',e=>{
+    if(panel.contains(e.target))return;
+    const trigger=e.target.closest(triggerSelector);
+    if(trigger){requestAnimationFrame(()=>panel.classList.add('open'));return;}
+    panel.classList.remove('open');
+  },true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remove('open')});
+})();
+</script>
+</body></html>
