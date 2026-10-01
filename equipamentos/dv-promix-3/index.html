@@ -23,6 +23,22 @@ h1{margin:0 0 6px;font-size:30px}.lead{margin:0 0 18px;color:var(--muted);line-h
 .notice{margin-top:14px;padding:12px;border-radius:12px;background:#12171b;border:1px solid var(--line);line-height:1.6}
 @media(max-width:1180px){.layout{grid-template-columns:1fr}}
 
+
+/* CONTEXTO LOCAL — dv-promix-3 */
+.context-drawer{display:none!important;position:relative!important;width:100%!important;max-width:none!important;margin:12px 0 0!important;padding:16px!important;border-radius:14px!important;overflow:visible!important}
+.context-drawer.open{display:block!important}
+.context-close{float:right;width:38px;height:38px;border-radius:50%;border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;margin:-4px -4px 8px 12px}
+.context-close:focus{outline:2px solid rgba(106,184,255,.35)}
+.layout{display:block!important}.stage{width:100%!important;max-width:100%!important;margin:0 auto!important}
+.stage{overflow:hidden!important;max-width:1040px!important;margin-left:auto!important;margin-right:auto!important}
+.stage svg{width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;display:block!important;margin:0 auto!important}
+@media(max-width:760px){
+  main{padding-left:10px!important;padding-right:10px!important}
+  .stage{max-width:calc(100vw - 20px)!important;padding-left:6px!important;padding-right:6px!important}
+  .stage svg{width:96%!important;max-width:96%!important}
+  .context-drawer{padding:14px!important}
+}
+
 </style>
 </head>
 <body>
@@ -244,6 +260,29 @@ function selectControl(key){const [u,part]=key.split('-');st.selectedUnit=u;st.s
 $$('.device').forEach(d=>d.addEventListener('click',()=>setUnit(d.dataset.unit)));
 $$('.ctl').forEach(c=>c.addEventListener('click',e=>{e.stopPropagation();selectControl(c.dataset.key)}));
 setUnit('ENG');
+})();
+</script>
+
+<script id="context-drawer-local">
+(()=>{
+  const panel=document.querySelector('.side');
+  if(!panel)return;
+  panel.classList.add('context-drawer');
+  if(!panel.querySelector('.context-close')){
+    const close=document.createElement('button');
+    close.type='button';close.className='context-close';close.textContent='×';
+    close.setAttribute('aria-label','Fechar explicação');close.title='Fechar';
+    panel.prepend(close);
+    close.addEventListener('click',e=>{e.stopPropagation();panel.classList.remove('open')});
+  }
+  const triggerSelector='.ctl,.device';
+  document.addEventListener('click',e=>{
+    if(panel.contains(e.target))return;
+    const trigger=e.target.closest(triggerSelector);
+    if(trigger){requestAnimationFrame(()=>panel.classList.add('open'));return;}
+    panel.classList.remove('open');
+  },true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remove('open')});
 })();
 </script>
 </body>
