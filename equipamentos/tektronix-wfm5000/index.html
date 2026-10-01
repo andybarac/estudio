@@ -120,6 +120,16 @@ svg{max-width:100%}
   }
 }
 
+
+/* WFM COMPACT CONTEXT */
+.instrument{transition:max-height .22s ease}
+.instrument.wfm-compact{max-height:58vh!important;overflow:hidden!important}
+.instrument.wfm-compact #front{height:auto!important;max-height:56vh!important}
+@media(max-width:760px){
+  .instrument.wfm-compact{max-height:46vh!important}
+  .instrument.wfm-compact #front{max-height:44vh!important}
+}
+
 </style>
 </head><body><main>
 <h1>Tektronix WFM5000</h1>
@@ -233,15 +243,15 @@ function zoneView(z){
   // Each contextual crop therefore frames the selected controls together with
   // the full screen, rather than zooming to the controls alone.
   const name=z.dataset.zone;
-  if(name==='left')   return [58,108,850,525];   // inputs + full display
-  if(name==='right')  return [194,108,932,590];  // full display + adjustment controls
-  if(name==='bottom') return [190,112,710,590];  // full display + display-selection row
+  if(name==='left')   return [58,155,850,430];   // inputs + full display
+  if(name==='right')  return [194,150,932,445];  // full display + adjustment controls
+  if(name==='bottom') return [190,185,710,390];  // full display + display-selection row
   const b=z.getBBox(), screen={x:205,y:128,w:681,h:478};
   const x1=Math.min(b.x,screen.x)-18, y1=Math.min(b.y,screen.y)-18;
   const x2=Math.max(b.x+b.width,screen.x+screen.w)+18, y2=Math.max(b.y+b.height,screen.y+screen.h)+18;
   return [Math.max(0,x1),Math.max(0,y1),Math.min(1200,x2-x1),Math.min(790,y2-y1)];
 }
-function zoomZone(z){activeZone=z;zoomed=true;animateView(zoneView(z))}function full(){activeZone=null;zoomed=false;animateView(fullView)}
+function zoomZone(z){activeZone=z;zoomed=true;document.querySelector('.instrument')?.classList.add('wfm-compact');animateView(zoneView(z))}function full(){activeZone=null;zoomed=false;document.querySelector('.instrument')?.classList.remove('wfm-compact');animateView(fullView)}
 $$('.zone').forEach(z=>{const hit=z.querySelector(':scope>.zoneHit');if(hit)hit.addEventListener('click',e=>{e.stopPropagation();zoomZone(z)})});
 $('#front').addEventListener('click',e=>{if(e.target.closest('.control')||e.target.closest('.zone'))return;if(zoomed)full()});
 $('.instrument').addEventListener('click',e=>{if(e.target===e.currentTarget&&zoomed)full()});
@@ -292,9 +302,9 @@ preset:{title:'Presets',tech:'PRESET',intro:'Recupera configurações previament
 phones:{title:'Saída de fones',tech:'Phones',intro:'Permite escutar o áudio monitorado pelo instrumento.',when:'Use para conferir embedded audio diretamente no WFM5000.',observe:'Com AUDIO ativo, o knob HORIZ passa a controlar o volume do headphone.',actions:[['Abrir AUDIO',()=>{state.quad=false;setDisplay('AUDIO')}]]},
 usb:{title:'Porta USB frontal',tech:'USB',intro:'Usada para funções como salvar capturas e trabalhar com dados/presets conforme configuração do instrumento.',when:'Útil para registrar uma tela de medição para documentação ou análise posterior.',observe:'Não altera a medição; é uma interface de armazenamento/transferência.',actions:[['Mostrar MAIN',()=>{state.quad=true}]]}
 };
-function renderInfo(key){const i=info[key];if(!i)return;$('#expTitle').textContent=i.title;$('#expTech').textContent=i.tech;$('#expIntro').textContent=i.intro;$('#expWhen').textContent=i.when;$('#expObserve').textContent=i.observe;const box=$('#actions');box.innerHTML='';i.actions.forEach(a=>{const b=document.createElement('button');b.className='action';b.textContent=a[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');a[1]();updateStatus();$('#feedback').textContent=a[0]+' aplicado.'};box.appendChild(b)})}
-function handleControl(key){selectControl(key);if(key==='inputA'){state.input='A';state.signal='lock'}else if(key==='inputB'){state.input='B';state.signal='lock'}else if(key==='extRef'){state.ref=state.ref==='External'?'Internal':'External'}else if(key==='help'){state.help=!state.help;state.config=false;state.preset=false}else if(key==='config'){state.config=!state.config;state.help=false;state.preset=false}else if(key==='display'){state.quad=true;state.activeTile=state.activeTile%4+1}else if(key==='main'){state.quad=!state.quad}else if(key==='power'){state.power=!state.power}else if(key==='wfm'){state.quad=false;setDisplay('WFM')}else if(key==='vector'){state.quad=false;setDisplay('VECTOR')}else if(key==='pict'){state.quad=false;setDisplay('PICT')}else if(key==='audio'){state.quad=false;setDisplay('AUDIO')}else if(key==='gamut'){state.quad=false;setDisplay('GAMUT')}else if(key==='status'){state.quad=false;setDisplay('STATUS')}else if(key==='nav'){state.general++}else if(key==='general'){state.general++;if(state.lineSel)state.line++}else if(key==='gain'){state.gain=({1:2,2:5,5:10,10:1})[state.gain]}else if(key==='sweep'){state.sweep=state.sweep==='1 Line'?'1 Field':'1 Line'}else if(key==='mag'){const q=['Best','x10','x20','x30'];state.mag=q[(q.indexOf(state.mag)+1)%q.length]}else if(key==='lineSel'){state.lineSel=!state.lineSel}else if(key==='thumbnail'){state.thumbnail=!state.thumbnail}else if(key==='vertical'){state.vOffset=state.vOffset>=20?-20:state.vOffset+10}else if(key==='horizontal'){if(state.display==='AUDIO')state.volume=Math.min(100,state.volume+5);else state.hOffset=state.hOffset>=20?-20:state.hOffset+10}else if(key==='freeze'){state.freeze=!state.freeze}else if(key==='preset'){state.preset=!state.preset;state.config=false;state.help=false}updateStatus()}
-$$('.control').forEach(c=>c.addEventListener('click',e=>{e.stopPropagation();handleControl(c.dataset.control)}));
+function renderInfo(key){const i=info[key];if(!i)return;$('#expTitle').textContent=i.title;$('#expTech').textContent=i.tech;$('#expIntro').textContent=i.intro;$('#expWhen').textContent=i.when;$('#expObserve').textContent=i.observe;const box=$('#actions');box.innerHTML='';i.actions.forEach(a=>{const b=document.createElement('button');b.className='action';b.textContent=a[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');a[1]();updateStatus();draw();document.querySelector('.instrument')?.classList.add('wfm-compact');$('#feedback').textContent=a[0]+' aplicado.'};box.appendChild(b)})}
+function handleControl(key){selectControl(key);if(key==='inputA'){state.input='A';state.signal='lock'}else if(key==='inputB'){state.input='B';state.signal='lock'}else if(key==='extRef'){state.ref=state.ref==='External'?'Internal':'External'}else if(key==='help'){state.help=!state.help;state.config=false;state.preset=false}else if(key==='config'){state.config=!state.config;state.help=false;state.preset=false}else if(key==='display'){state.quad=true;state.activeTile=state.activeTile%4+1}else if(key==='main'){state.quad=!state.quad}else if(key==='power'){state.power=!state.power}else if(key==='wfm'){state.quad=false;setDisplay('WFM')}else if(key==='vector'){state.quad=false;setDisplay('VECTOR')}else if(key==='pict'){state.quad=false;setDisplay('PICT')}else if(key==='audio'){state.quad=false;setDisplay('AUDIO')}else if(key==='gamut'){state.quad=false;setDisplay('GAMUT')}else if(key==='status'){state.quad=false;setDisplay('STATUS')}else if(key==='nav'){state.general++}else if(key==='general'){state.general++;if(state.lineSel)state.line++}else if(key==='gain'){state.gain=({1:2,2:5,5:10,10:1})[state.gain]}else if(key==='sweep'){state.sweep=state.sweep==='1 Line'?'1 Field':'1 Line'}else if(key==='mag'){const q=['Best','x10','x20','x30'];state.mag=q[(q.indexOf(state.mag)+1)%q.length]}else if(key==='lineSel'){state.lineSel=!state.lineSel}else if(key==='thumbnail'){state.thumbnail=!state.thumbnail}else if(key==='vertical'){state.vOffset=state.vOffset>=20?-20:state.vOffset+10}else if(key==='horizontal'){if(state.display==='AUDIO')state.volume=Math.min(100,state.volume+5);else state.hOffset=state.hOffset>=20?-20:state.hOffset+10}else if(key==='freeze'){state.freeze=!state.freeze}else if(key==='preset'){state.preset=!state.preset;state.config=false;state.help=false}updateStatus();draw()}
+$('.control').forEach(c=>c.addEventListener('click',e=>{e.stopPropagation();handleControl(c.dataset.control)}));
 setView(fullView);updateStatus();
 })();
 </script>
