@@ -34,3 +34,13 @@ Antes de considerar uma página validada:
 5. A página não pode depender de `ubq-mobile-layer` nem do CSS global antigo.
 6. Em viewport vertical, o aparelho deve caber sem barra horizontal.
 7. Para controles que alteram estado visual, a mudança deve permanecer perceptível com o drawer aberto.
+
+
+## Aplicação atual do padrão
+
+- **Drawer local abaixo do aparelho:** DV Promix 3, HXCU-100, HyperDeck Studio 4K Pro, RTS MCE-325, SmartView 4K, DFS-900M, HDW-1800, Sony LMD-940W, RCP-1500 e WFM-5000.
+- **Zoom contextual preservado:** RCP-1500, WFM-5000 e HDW-1800.
+- **Painéis largos:** MCE-325, DV Promix, DFS-900M e HDW-1800 devem limitar o desenho à largura disponível, sem barra horizontal em viewport vertical.
+- **Rack:** mantém modal próprio para abrir páginas individuais; o botão de fechar do modal é independente dos drawers das páginas internas.
+- **Ordem visual:** título → aparelho → descrição curta → contexto detalhado sob demanda.
+- **Critério de publicação:** qualquer revisão em uma página deve ser validada isoladamente antes de ser propagada para as demais. Nunca aplicar alteração em lote no JavaScript operacional dos simuladores.
