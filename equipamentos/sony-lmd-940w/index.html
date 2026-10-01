@@ -6,7 +6,7 @@
 <title>Sony LMD-940W — monitor interativo</title>
 <style>
 :root{--bg:#0f1317;--panel:#151a1f;--card:#20262d;--line:#3d464f;--text:#f4f6f7;--muted:#aeb6bd;--accent:#64a8ff;--accentbg:#173451;--red:#ef4444;--green:#22c55e;--amber:#f59e0b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.frame{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#12171b;padding:12px}.frame svg{width:100%;min-width:900px}.toolbar{display:flex;justify-content:flex-end;margin:10px 0}.btn,.sim,.tallybtn{background:transparent;color:var(--text);border:1px solid #4a545d;border-radius:8px;padding:9px 12px;cursor:pointer}.sim.active,.tallybtn.active{background:var(--accentbg);border-color:var(--accent);font-weight:600}.spot{cursor:pointer;outline:none}.hit{fill:transparent;stroke:transparent;stroke-width:3}.spot.selected .hit{stroke:var(--accent);fill:var(--accentbg);fill-opacity:.12}.lesson,.tallycard{margin-top:14px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.copy{font-size:14px;line-height:1.6}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.feedback{margin-top:12px;background:var(--panel);border-radius:9px;padding:12px;font-size:14px;line-height:1.55}.tiny{font-size:7px;fill:#cbd1d6;text-anchor:middle;pointer-events:none}.micro{font-size:6px;fill:#9ca6ad;text-anchor:middle;pointer-events:none}.led{transition:fill .15s,filter .15s}.screenfx{transition:filter .18s,transform .18s,opacity .18s}.rot{transition:transform .18s}@media(max-width:700px){main{padding:12px}.grid{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.screenfx,.rot{transition:none}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.frame{overflow-x:hidden;border:1px solid var(--line);border-radius:14px;background:#12171b;padding:12px}.frame svg{width:min(100%,820px);max-width:820px;min-width:0;margin:0 auto;display:block}.toolbar{display:flex;justify-content:flex-end;margin:10px 0}.btn,.sim,.tallybtn{background:transparent;color:var(--text);border:1px solid #4a545d;border-radius:8px;padding:9px 12px;cursor:pointer}.sim.active,.tallybtn.active{background:var(--accentbg);border-color:var(--accent);font-weight:600}.spot{cursor:pointer;outline:none}.hit{fill:transparent;stroke:transparent;stroke-width:3}.spot.selected .hit{stroke:var(--accent);fill:var(--accentbg);fill-opacity:.12}.lesson,.tallycard{margin-top:14px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.copy{font-size:14px;line-height:1.6}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.feedback{margin-top:12px;background:var(--panel);border-radius:9px;padding:12px;font-size:14px;line-height:1.55}.tiny{font-size:7px;fill:#cbd1d6;text-anchor:middle;pointer-events:none}.micro{font-size:6px;fill:#9ca6ad;text-anchor:middle;pointer-events:none}.led{transition:fill .15s,filter .15s}.screenfx{transition:filter .18s,transform .18s,opacity .18s}.rot{transition:transform .18s}@media(max-width:700px){main{padding:12px}.grid{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.screenfx,.rot{transition:none}}
 
 /* UBIQUIDADE / MOBILE 2026-09 */
 :root{--ubq-border:#46545e;--ubq-backdrop:rgba(0,0,0,.72)}
@@ -124,8 +124,6 @@ svg{max-width:100%}
 </head>
 <body><main>
 <h1>Sony LMD-940W</h1>
-<p class="lead">Monitor profissional de vídeo. Toque nos controles para experimentar entrada, imagem, menu e monitoração.</p>
-<p class="muted">Monitor profissional compacto de 9,4 polegadas. Toque nos controles do painel inferior e experimente o comportamento da imagem e dos menus.</p>
 
 <div class="toolbar"><button id="reset" class="btn">Restaurar monitor</button></div>
 
@@ -247,6 +245,7 @@ svg{max-width:100%}
 </g>
 </svg>
 </div>
+<p class="lead ubq-lead-after">Monitor profissional de vídeo. Toque nos controles para experimentar entrada, imagem, menu e monitoração.</p>
 
 <section class="lesson" aria-live="polite">
 <h2 id="title">Seleção da entrada</h2><div id="term" class="muted">(SDI / HDMI / Composite)</div>
