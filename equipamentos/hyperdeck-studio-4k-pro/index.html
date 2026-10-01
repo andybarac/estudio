@@ -1,5 +1,17 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HyperDeck Studio 4K Pro — painel frontal interativo</title><style>
 :root{--bg:#0f1317;--card:#20262d;--text:#f4f6f7;--muted:#adb5bd;--accent:#64a8ff;--red:#ef4444;--green:#22c55e;--orange:#f59e0b;--blue:#1f78c8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif}main{max-width:1180px;margin:auto;padding:18px}.muted{color:var(--muted);line-height:1.6}.frame{overflow-x:auto;border:1px solid #3c444c;border-radius:14px;padding:12px;background:#12171b}svg{width:100%;min-width:950px}.spot{cursor:pointer}.hit{fill:transparent;stroke:transparent;stroke-width:2}.spot.sel .hit{stroke:var(--accent);fill:#173451;fill-opacity:.2}.glow{fill:none;stroke-width:4}.off{stroke:transparent}.rec{stroke:var(--red);filter:drop-shadow(0 0 4px var(--red))}.play{stroke:var(--green);filter:drop-shadow(0 0 4px var(--green))}.bad{stroke:var(--orange);filter:drop-shadow(0 0 4px var(--orange))}.lesson{margin-top:14px;background:var(--card);border:1px solid #3c444c;border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}.sim{border:1px solid #4a545d;background:transparent;color:var(--text);padding:9px 12px;border-radius:8px;margin:6px 6px 0 0;cursor:pointer}.sim.active{border-color:var(--accent);background:#173451}.feedback{margin-top:12px;padding:12px;background:#171c21;border-radius:9px;line-height:1.55}.status{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;color:var(--muted);font-size:13px}.status span{border:1px solid #3c444c;padding:4px 8px;border-radius:99px}@media(max-width:700px){.grid{grid-template-columns:1fr}main{padding:12px}}
+
+/* CONTEXTO LOCAL — hyperdeck-studio-4k-pro */
+.context-drawer{display:none!important;position:relative!important;width:100%!important;max-width:none!important;margin:12px 0 0!important}
+.context-drawer.open{display:block!important}
+.context-close{float:right;width:38px;height:38px;border-radius:50%;border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;margin:-4px -4px 8px 12px}
+.context-close:focus{outline:2px solid rgba(106,184,255,.35)}
+@media(max-width:760px){
+  main{padding-left:10px!important;padding-right:10px!important}
+  .frame{max-width:calc(100vw - 20px)!important;margin-left:auto!important;margin-right:auto!important;overflow:hidden!important}
+  .frame svg{max-width:100%!important;min-width:0!important;height:auto!important}
+}
+
 </style></head><body><main>
 <h1>Blackmagic HyperDeck Studio 4K Pro</h1><p class="muted">Gravador e reprodutor profissional. Toque em cada parte do painel e experimente seu funcionamento.</p>
 <div class="frame"><svg viewBox="0 0 1500 220" aria-label="Painel frontal interativo HyperDeck Studio 4K Pro">
@@ -65,4 +77,27 @@ scrbtn:{t:'Scrub',term:'SCR',f:'Permite percorrer o material rapidamente com o d
 audio:{t:'Monitoramento de áudio',term:'Speaker / Headphones',f:'O alto-falante frontal e a saída para fones permitem ouvir rapidamente o áudio do sinal ou arquivo.',e:'Antes de colocar um VT no ar, escute alguns segundos para confirmar que o áudio realmente existe, além de observar os medidores.',a:[['Monitorar áudio',()=>{}],['Silenciar',()=>{}]]}};
 function show(k){let l=L[k]||L.transport;$('.spot').forEach(x=>x.classList.toggle('sel',x.dataset.k===k));$('#title').textContent=l.t;$('#term').textContent='('+l.term+')';$('#func').textContent=l.f;$('#ex').textContent=l.e;let b=$('#buttons');b.innerHTML='';l.a.forEach((a,i)=>{let x=document.createElement('button');x.className='sim';x.textContent=a[0];x.onclick=()=>{[...b.children].forEach(y=>y.classList.remove('active'));x.classList.add('active');a[1]();$('#feedback').textContent=a[0]+' aplicado ao painel.'};b.appendChild(x);if(i===0)setTimeout(()=>x.click(),0)})}
 $$('.spot').forEach(x=>x.onclick=e=>{e.stopPropagation();show(x.dataset.k)});show('transport')})();</script></main>
+
+<script id="context-drawer-local">
+(()=>{
+  const panel=document.querySelector('.lesson');
+  if(!panel)return;
+  panel.classList.add('context-drawer');
+  if(!panel.querySelector('.context-close')){
+    const close=document.createElement('button');
+    close.type='button';close.className='context-close';close.textContent='×';
+    close.setAttribute('aria-label','Fechar explicação');close.title='Fechar';
+    panel.prepend(close);
+    close.addEventListener('click',e=>{e.stopPropagation();panel.classList.remove('open')});
+  }
+  const triggerSelector='.spot';
+  document.addEventListener('click',e=>{
+    if(panel.contains(e.target))return;
+    const trigger=e.target.closest(triggerSelector);
+    if(trigger){requestAnimationFrame(()=>panel.classList.add('open'));return;}
+    panel.classList.remove('open');
+  },true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remove('open')});
+})();
+</script>
 </body></html>
