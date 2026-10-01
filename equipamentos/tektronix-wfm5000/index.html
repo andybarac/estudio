@@ -7,133 +7,10 @@
 <style>
 :root{--bg:#0a0d10;--surface:#101419;--surface2:#151a20;--line:#303840;--text:#f3f5f6;--muted:#9faab1;--accent:#62b6ff;--tek:#555e59;--tek2:#414946;--button:#737d79;--button2:#4b5551;--green:#74f36b;--red:#ff5a52;--amber:#f2b848;--cyan:#65d8e8}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}main{max-width:1560px;margin:auto;padding:18px}h1{margin:0 0 5px;font-size:29px}.lead{margin:0 0 14px;color:var(--muted);line-height:1.55}.layout{display:grid;grid-template-columns:minmax(720px,980px) minmax(390px,1fr);gap:18px;align-items:start}.card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:13px}.instrument{height:min(80vh,840px);min-height:650px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:sticky;top:10px}.instrument svg{width:100%;height:100%;display:block}.control{cursor:pointer}.hit{fill:transparent;stroke:transparent;stroke-width:5}.control.selected>.hit{stroke:var(--accent);fill:#173652;fill-opacity:.11}.zoneHit{fill:transparent;pointer-events:all;cursor:zoom-in}.panelLabel{font-size:11px;fill:#f4f6f5;text-anchor:middle;font-weight:700}.tiny{font-size:9px;fill:#dfe5e2;text-anchor:middle}.micro{font-size:8px;fill:#b6c0bc;text-anchor:middle}.ledOff{fill:#38413d}.ledOn{fill:var(--green);filter:drop-shadow(0 0 6px var(--green))}.ledAmber{fill:var(--amber);filter:drop-shadow(0 0 5px var(--amber))}.statusGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.status{background:#12171c;border:1px solid #354049;border-radius:10px;padding:9px 10px}.status b{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}.status span{font-size:14px;font-weight:650}.experiment{margin-top:13px;background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:15px}.experiment h2{margin:0;font-size:22px}.tech{color:var(--muted);font-size:14px;margin:3px 0 11px}.intro{line-height:1.55;margin:0 0 12px}.expGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.info{background:#10151a;border:1px solid #303940;border-radius:10px;padding:10px}.ey{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:750;margin-bottom:4px}.info p{margin:0;line-height:1.5;font-size:14px}.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.action{background:#11171c;color:var(--text);border:1px solid #46525b;border-radius:8px;padding:8px 10px;cursor:pointer}.action.active{border-color:var(--accent);background:#173652}.feedback{margin-top:10px;background:#0e1317;border:1px solid #303840;border-radius:10px;padding:10px;line-height:1.5}.sourceNote{margin-top:8px;color:var(--muted);font-size:12px;line-height:1.45}@media(max-width:1160px){.layout{grid-template-columns:1fr}.instrument{position:relative;top:auto;height:70vh}}@media(max-width:720px){main{padding:11px}.instrument{height:62vh;min-height:520px}.expGrid{grid-template-columns:1fr}}
-
-/* UBIQUIDADE / MOBILE 2026-09 */
-:root{--ubq-border:#46545e;--ubq-backdrop:rgba(0,0,0,.72)}
-html,body{max-width:100%;overflow-x:hidden}
-img,canvas,video{max-width:100%;height:auto}
-svg{max-width:100%}
-.ubq-context-backdrop{position:fixed;inset:0;background:var(--ubq-backdrop);z-index:9000;display:none}
-.ubq-context-backdrop.open{display:block}
-.lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
-  position:fixed!important;z-index:9001!important;left:50%!important;top:50%!important;
-  transform:translate(-50%,-50%)!important;width:min(680px,calc(100vw - 28px))!important;
-  max-height:min(82vh,760px)!important;overflow:auto!important;margin:0!important;
-  border:1px solid var(--ubq-border)!important;border-radius:16px!important;
-  box-shadow:0 24px 80px rgba(0,0,0,.55)!important;background:var(--card,#151c22)!important;
-  padding:20px!important;display:none!important
-}
-.lesson.ubq-context.open,.side.ubq-context.open,.experiment.ubq-context.open{display:block!important}
-.ubq-close{position:sticky;float:right;top:0;margin:-6px -6px 8px 10px;width:38px;height:38px;border-radius:50%;
-  border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;z-index:2}
-.ubq-close:hover,.ubq-close:focus{border-color:#6ab8ff;outline:2px solid rgba(106,184,255,.3)}
-.ubq-icon-btn{min-width:40px!important;width:40px!important;height:40px!important;padding:0!important;display:inline-flex!important;
-  align-items:center!important;justify-content:center!important;font-size:20px!important;line-height:1!important}
-@media(max-width:760px){
-  main{padding:10px!important;max-width:100%!important}
-  h1{font-size:clamp(21px,6vw,28px)!important;line-height:1.08!important}
-  .lead{font-size:14px!important;margin-bottom:10px!important}
-  .frame,.panelScroller,.panelWrap,.wrap,.rack,.stage{max-width:100%!important;overflow:hidden!important;padding-left:4px!important;padding-right:4px!important}
-  .frame svg,.panelScroller svg,.panelWrap svg,svg#front,svg#panel,svg#rcpPanel{width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;display:block!important}
-  .layout,.row,.grid,.expgrid,.expGrid,.statusGrid{grid-template-columns:1fr!important;gap:8px!important}
-  .toolbar{gap:6px!important;margin:8px 0!important;flex-wrap:wrap!important}
-  .btn,.action,.sim{min-height:40px}
-  .status,.statusCard{padding:8px!important;font-size:12px!important}
-  .lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
-    left:8px!important;right:8px!important;top:auto!important;bottom:8px!important;transform:none!important;
-    width:auto!important;max-height:76vh!important;border-radius:14px!important;padding:16px!important
-  }
-  .lesson.ubq-context h2,.side.ubq-context h2,.experiment.ubq-context h2{font-size:20px!important;padding-right:40px}
-}
-@media(max-width:420px){
-  .frame,.panelScroller,.panelWrap{border:1px solid #37434c!important;border-radius:10px!important}
-  .micro,.tiny{font-size:inherit}
-}
-
-
-/* UBIQUIDADE CONTEXTO V4 - painel fora do aparelho */
-.ubq-context-backdrop{display:none!important}
-.lesson.ubq-context,.side.ubq-context,.experiment.ubq-context{
-  position:relative!important;
-  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
-  transform:none!important;
-  width:100%!important;max-width:none!important;max-height:none!important;
-  overflow:auto!important;
-  margin:12px 0 0!important;
-  display:none!important;
-  background:rgba(18,24,29,.88)!important;
-  -webkit-backdrop-filter:blur(8px) saturate(115%);
-  backdrop-filter:blur(8px) saturate(115%);
-  border:1px solid rgba(150,170,185,.38)!important;
-  border-radius:14px!important;
-  box-shadow:0 10px 28px rgba(0,0,0,.28)!important;
-  padding:16px!important;
-}
-.lesson.ubq-context.open,.side.ubq-context.open,.experiment.ubq-context.open{display:block!important}
-.ubq-context-host{
-  width:100%;
-  max-width:100%;
-  clear:both;
-}
-@media(min-width:1180px){
-  .layout.ubq-layout-wide{
-    grid-template-columns:minmax(0,1fr) minmax(320px,420px)!important;
-    align-items:start!important;
-  }
-  .ubq-context-host.ubq-side-host{
-    margin-top:0!important;
-    position:sticky;
-    top:12px;
-  }
-  .ubq-context-host.ubq-side-host .ubq-context{
-    margin-top:0!important;
-  }
-}
-@media(max-width:1179px){
-  .ubq-context-host{margin-top:10px}
-}
-
-
-@media(max-width:760px){
-  .frame,.panelScroller,.panelWrap,.instrument,.stage,.wrap{
-    width:calc(100% - 12px)!important;
-    max-width:calc(100% - 12px)!important;
-    margin-left:auto!important;
-    margin-right:auto!important;
-  }
-  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
-  svg#front,svg#panel,svg#rcpPanel{
-    width:96%!important;
-    max-width:96%!important;
-    min-width:0!important;
-    height:auto!important;
-    margin-left:auto!important;
-    margin-right:auto!important;
-    display:block!important;
-  }
-}
-@media(max-width:430px){
-  .frame svg,.panelScroller svg,.panelWrap svg,.instrument svg,.stage svg,.wrap svg,
-  svg#front,svg#panel,svg#rcpPanel{
-    width:94%!important;
-    max-width:94%!important;
-  }
-}
-
-
-/* WFM COMPACT CONTEXT */
-.instrument{transition:max-height .22s ease}
-.instrument.wfm-compact{max-height:58vh!important;overflow:hidden!important}
-.instrument.wfm-compact #front{height:auto!important;max-height:56vh!important}
-@media(max-width:760px){
-  .instrument.wfm-compact{max-height:46vh!important}
-  .instrument.wfm-compact #front{max-height:44vh!important}
-}
-
 </style>
 </head><body><main>
 <h1>Tektronix WFM5000</h1>
-<p class="lead">Monitor de forma de onda. Toque nos controles para explorar medições, displays, referência, áudio e diagnóstico.</p>
+<p class="lead">Protótipo local para validação. Clique diretamente no painel físico. A área correspondente amplia; clique fora da área ampliada para voltar ao equipamento inteiro.</p>
 <div class="layout">
 <section class="card instrument">
 <svg id="front" viewBox="0 0 1200 790" preserveAspectRatio="xMidYMid meet" aria-label="Tektronix WFM5000 interativo">
@@ -243,15 +120,15 @@ function zoneView(z){
   // Each contextual crop therefore frames the selected controls together with
   // the full screen, rather than zooming to the controls alone.
   const name=z.dataset.zone;
-  if(name==='left')   return [58,155,850,430];   // inputs + full display
-  if(name==='right')  return [194,150,932,445];  // full display + adjustment controls
-  if(name==='bottom') return [190,185,710,390];  // full display + display-selection row
+  if(name==='left')   return [58,108,850,525];   // inputs + full display
+  if(name==='right')  return [194,108,932,590];  // full display + adjustment controls
+  if(name==='bottom') return [190,112,710,590];  // full display + display-selection row
   const b=z.getBBox(), screen={x:205,y:128,w:681,h:478};
   const x1=Math.min(b.x,screen.x)-18, y1=Math.min(b.y,screen.y)-18;
   const x2=Math.max(b.x+b.width,screen.x+screen.w)+18, y2=Math.max(b.y+b.height,screen.y+screen.h)+18;
   return [Math.max(0,x1),Math.max(0,y1),Math.min(1200,x2-x1),Math.min(790,y2-y1)];
 }
-function zoomZone(z){activeZone=z;zoomed=true;document.querySelector('.instrument')?.classList.add('wfm-compact');animateView(zoneView(z))}function full(){activeZone=null;zoomed=false;document.querySelector('.instrument')?.classList.remove('wfm-compact');animateView(fullView)}
+function zoomZone(z){activeZone=z;zoomed=true;animateView(zoneView(z))}function full(){activeZone=null;zoomed=false;animateView(fullView)}
 $$('.zone').forEach(z=>{const hit=z.querySelector(':scope>.zoneHit');if(hit)hit.addEventListener('click',e=>{e.stopPropagation();zoomZone(z)})});
 $('#front').addEventListener('click',e=>{if(e.target.closest('.control')||e.target.closest('.zone'))return;if(zoomed)full()});
 $('.instrument').addEventListener('click',e=>{if(e.target===e.currentTarget&&zoomed)full()});
@@ -302,113 +179,10 @@ preset:{title:'Presets',tech:'PRESET',intro:'Recupera configurações previament
 phones:{title:'Saída de fones',tech:'Phones',intro:'Permite escutar o áudio monitorado pelo instrumento.',when:'Use para conferir embedded audio diretamente no WFM5000.',observe:'Com AUDIO ativo, o knob HORIZ passa a controlar o volume do headphone.',actions:[['Abrir AUDIO',()=>{state.quad=false;setDisplay('AUDIO')}]]},
 usb:{title:'Porta USB frontal',tech:'USB',intro:'Usada para funções como salvar capturas e trabalhar com dados/presets conforme configuração do instrumento.',when:'Útil para registrar uma tela de medição para documentação ou análise posterior.',observe:'Não altera a medição; é uma interface de armazenamento/transferência.',actions:[['Mostrar MAIN',()=>{state.quad=true}]]}
 };
-function renderInfo(key){const i=info[key];if(!i)return;$('#expTitle').textContent=i.title;$('#expTech').textContent=i.tech;$('#expIntro').textContent=i.intro;$('#expWhen').textContent=i.when;$('#expObserve').textContent=i.observe;const box=$('#actions');box.innerHTML='';i.actions.forEach(a=>{const b=document.createElement('button');b.className='action';b.textContent=a[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');a[1]();updateStatus();draw();document.querySelector('.instrument')?.classList.add('wfm-compact');$('#feedback').textContent=a[0]+' aplicado.'};box.appendChild(b)})}
-function handleControl(key){selectControl(key);if(key==='inputA'){state.input='A';state.signal='lock'}else if(key==='inputB'){state.input='B';state.signal='lock'}else if(key==='extRef'){state.ref=state.ref==='External'?'Internal':'External'}else if(key==='help'){state.help=!state.help;state.config=false;state.preset=false}else if(key==='config'){state.config=!state.config;state.help=false;state.preset=false}else if(key==='display'){state.quad=true;state.activeTile=state.activeTile%4+1}else if(key==='main'){state.quad=!state.quad}else if(key==='power'){state.power=!state.power}else if(key==='wfm'){state.quad=false;setDisplay('WFM')}else if(key==='vector'){state.quad=false;setDisplay('VECTOR')}else if(key==='pict'){state.quad=false;setDisplay('PICT')}else if(key==='audio'){state.quad=false;setDisplay('AUDIO')}else if(key==='gamut'){state.quad=false;setDisplay('GAMUT')}else if(key==='status'){state.quad=false;setDisplay('STATUS')}else if(key==='nav'){state.general++}else if(key==='general'){state.general++;if(state.lineSel)state.line++}else if(key==='gain'){state.gain=({1:2,2:5,5:10,10:1})[state.gain]}else if(key==='sweep'){state.sweep=state.sweep==='1 Line'?'1 Field':'1 Line'}else if(key==='mag'){const q=['Best','x10','x20','x30'];state.mag=q[(q.indexOf(state.mag)+1)%q.length]}else if(key==='lineSel'){state.lineSel=!state.lineSel}else if(key==='thumbnail'){state.thumbnail=!state.thumbnail}else if(key==='vertical'){state.vOffset=state.vOffset>=20?-20:state.vOffset+10}else if(key==='horizontal'){if(state.display==='AUDIO')state.volume=Math.min(100,state.volume+5);else state.hOffset=state.hOffset>=20?-20:state.hOffset+10}else if(key==='freeze'){state.freeze=!state.freeze}else if(key==='preset'){state.preset=!state.preset;state.config=false;state.help=false}updateStatus();draw()}
-$('.control').forEach(c=>c.addEventListener('click',e=>{e.stopPropagation();handleControl(c.dataset.control)}));
+function renderInfo(key){const i=info[key];if(!i)return;$('#expTitle').textContent=i.title;$('#expTech').textContent=i.tech;$('#expIntro').textContent=i.intro;$('#expWhen').textContent=i.when;$('#expObserve').textContent=i.observe;const box=$('#actions');box.innerHTML='';i.actions.forEach(a=>{const b=document.createElement('button');b.className='action';b.textContent=a[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');a[1]();updateStatus();$('#feedback').textContent=a[0]+' aplicado.'};box.appendChild(b)})}
+function handleControl(key){selectControl(key);if(key==='inputA'){state.input='A';state.signal='lock'}else if(key==='inputB'){state.input='B';state.signal='lock'}else if(key==='extRef'){state.ref=state.ref==='External'?'Internal':'External'}else if(key==='help'){state.help=!state.help;state.config=false;state.preset=false}else if(key==='config'){state.config=!state.config;state.help=false;state.preset=false}else if(key==='display'){state.quad=true;state.activeTile=state.activeTile%4+1}else if(key==='main'){state.quad=!state.quad}else if(key==='power'){state.power=!state.power}else if(key==='wfm'){state.quad=false;setDisplay('WFM')}else if(key==='vector'){state.quad=false;setDisplay('VECTOR')}else if(key==='pict'){state.quad=false;setDisplay('PICT')}else if(key==='audio'){state.quad=false;setDisplay('AUDIO')}else if(key==='gamut'){state.quad=false;setDisplay('GAMUT')}else if(key==='status'){state.quad=false;setDisplay('STATUS')}else if(key==='nav'){state.general++}else if(key==='general'){state.general++;if(state.lineSel)state.line++}else if(key==='gain'){state.gain=({1:2,2:5,5:10,10:1})[state.gain]}else if(key==='sweep'){state.sweep=state.sweep==='1 Line'?'1 Field':'1 Line'}else if(key==='mag'){const q=['Best','x10','x20','x30'];state.mag=q[(q.indexOf(state.mag)+1)%q.length]}else if(key==='lineSel'){state.lineSel=!state.lineSel}else if(key==='thumbnail'){state.thumbnail=!state.thumbnail}else if(key==='vertical'){state.vOffset=state.vOffset>=20?-20:state.vOffset+10}else if(key==='horizontal'){if(state.display==='AUDIO')state.volume=Math.min(100,state.volume+5);else state.hOffset=state.hOffset>=20?-20:state.hOffset+10}else if(key==='freeze'){state.freeze=!state.freeze}else if(key==='preset'){state.preset=!state.preset;state.config=false;state.help=false}updateStatus()}
+$$('.control').forEach(c=>c.addEventListener('click',e=>{e.stopPropagation();handleControl(c.dataset.control)}));
 setView(fullView);updateStatus();
 })();
 </script>
-</main>
-<script id="ubq-mobile-layer">
-(()=>{
-  const one=(s,r=document)=>r.querySelector(s);
-  const all=(s,r=document)=>[...r.querySelectorAll(s)];
-
-  const candidates=all('.lesson,.side,.experiment').filter(el=>{
-    if(el.closest('.modal')) return false;
-    return !!el.querySelector('h2,[id*="Title"],[id*="title"],.eyebrow,.ey,.copy,.intro');
-  });
-  if(!candidates.length) return;
-
-  const panel=candidates[candidates.length-1];
-  panel.classList.add('ubq-context');
-
-  const host=document.createElement('div');
-  host.className='ubq-context-host';
-
-  const layout=one('.layout');
-  const apparatus=
-    one('.stage')||
-    one('.instrument')||
-    one('.panelScroller')||
-    one('.panelWrap')||
-    one('.frame')||
-    one('.wrap')||
-    one('section.card');
-
-  if(layout && layout.contains(apparatus)){
-    const children=[...layout.children];
-    const existingSide=children.find(x=>x!==apparatus && (x.classList.contains('side')||x.contains(panel)));
-    if(existingSide && existingSide.contains(panel)){
-      existingSide.replaceWith(host);
-      host.appendChild(panel);
-    }else{
-      apparatus.insertAdjacentElement('afterend',host);
-      host.appendChild(panel);
-    }
-    layout.classList.add('ubq-layout-wide');
-    host.classList.add('ubq-side-host');
-  }else if(apparatus){
-    apparatus.insertAdjacentElement('afterend',host);
-    host.appendChild(panel);
-  }else{
-    document.body.appendChild(host);
-    host.appendChild(panel);
-  }
-
-  const close=document.createElement('button');
-  close.type='button';
-  close.className='ubq-close';
-  close.innerHTML='×';
-  close.setAttribute('aria-label','Fechar explicação');
-  close.title='Fechar';
-  panel.prepend(close);
-
-  const openContext=()=>{
-    panel.classList.add('open');
-    panel.scrollTop=0;
-  };
-  const closeContext=()=>panel.classList.remove('open');
-
-  close.addEventListener('click',e=>{e.stopPropagation();closeContext()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeContext()});
-
-  const triggerSelector='.spot,.control,.ctl,.zone,[data-key],[data-control],[data-part],[data-zone],[data-id],[data-mode]';
-  document.addEventListener('click',e=>{
-    if(e.target.closest('.ubq-context')) return;
-    const trigger=e.target.closest(triggerSelector);
-    if(trigger){
-      requestAnimationFrame(openContext);
-      return;
-    }
-    if(panel.classList.contains('open')) closeContext();
-  },true);
-
-  const iconMap=[
-    [/restaurar|reset/i,'↺'],
-    [/painel inteiro|ver painel|full panel/i,'⛶'],
-    [/fechar|close/i,'×'],
-    [/nova aba|abrir página|abrir em nova/i,'↗']
-  ];
-  all('button,.btn,a.btn').forEach(el=>{
-    const txt=(el.dataset.ubqLabel||el.textContent||'').trim();
-    for(const [re,icon] of iconMap){
-      if(re.test(txt)&&txt.length>5){
-        el.dataset.ubqLabel=txt;
-        el.textContent=icon;
-        el.classList.add('ubq-icon-btn');
-        el.setAttribute('aria-label',txt);
-        el.title=txt;
-        break;
-      }
-    }
-  });
-
-  const lead=one('.lead');
-  if(lead&&!lead.classList.contains('ubq-lead-after')&&apparatus){
-    host.insertAdjacentElement('afterend',lead);
-    lead.classList.add('ubq-lead-after');
-  }
-})();
-</script>
-</body></html>
+</main></body></html>
