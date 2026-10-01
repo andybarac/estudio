@@ -20,6 +20,22 @@ h1{margin:0 0 6px;font-size:30px}.lead{margin:0 0 18px;color:var(--muted);line-h
 .side h2{margin:0 0 4px;font-size:24px}.term{color:var(--muted);font-size:14px;margin-bottom:14px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:12px 0 6px}.copy{line-height:1.65;margin:0}.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.btn{background:transparent;color:var(--text);border:1px solid #455159;border-radius:10px;padding:9px 11px;cursor:pointer}.btn:hover,.btn.active{border-color:var(--accent);background:#15324a}.feedback{margin-top:10px;padding:11px;border-radius:10px;background:#11161a;border:1px solid #30383f;line-height:1.55}.statusGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.statusCard{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px}.statusCard b{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
 @media(max-width:1160px){.layout{grid-template-columns:1fr}}
 
+
+/* CONTEXTO LOCAL — sony-hdw-1800 */
+.context-drawer{display:none!important;position:relative!important;width:100%!important;max-width:none!important;margin:12px 0 0!important;padding:16px!important;border-radius:14px!important;overflow:visible!important}
+.context-drawer.open{display:block!important}
+.context-close{float:right;width:38px;height:38px;border-radius:50%;border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;margin:-4px -4px 8px 12px}
+.context-close:focus{outline:2px solid rgba(106,184,255,.35)}
+.layout{display:block!important}.stage{width:100%!important;max-width:100%!important;margin:0 auto!important}
+.stage{overflow:hidden!important;max-width:1040px!important;margin-left:auto!important;margin-right:auto!important}
+.stage svg{width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;display:block!important;margin:0 auto!important}
+@media(max-width:760px){
+  main{padding-left:10px!important;padding-right:10px!important}
+  .stage{max-width:calc(100vw - 20px)!important;padding-left:6px!important;padding-right:6px!important}
+  .stage svg{width:96%!important;max-width:96%!important}
+  .context-drawer{padding:14px!important}
+}
+
 </style>
 </head>
 <body>
@@ -297,6 +313,29 @@ panelSvg.addEventListener('click',e=>{if(e.target.closest('.ctl')||e.target.clos
 $('.stage').addEventListener('click',e=>{if(e.target===e.currentTarget&&hdwZoomed)hdwFull()});
 $('#wheelHit').addEventListener('pointerdown',e=>{drag={x:e.clientX};$('#wheelHit').setPointerCapture(e.pointerId)});$('#wheelHit').addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;if(Math.abs(dx)>6){const step=dx>0?1:-1;st.tcFrames=Math.max(0,st.tcFrames+step);st.wheel=(st.wheel+step*12)%360;drag.x=e.clientX;render()}});$('#wheelHit').addEventListener('pointerup',()=>drag=null);
 render();
+})();
+</script>
+
+<script id="context-drawer-local">
+(()=>{
+  const panel=document.querySelector('.side');
+  if(!panel)return;
+  panel.classList.add('context-drawer');
+  if(!panel.querySelector('.context-close')){
+    const close=document.createElement('button');
+    close.type='button';close.className='context-close';close.textContent='×';
+    close.setAttribute('aria-label','Fechar explicação');close.title='Fechar';
+    panel.prepend(close);
+    close.addEventListener('click',e=>{e.stopPropagation();panel.classList.remove('open')});
+  }
+  const triggerSelector='.ctl,.zone';
+  document.addEventListener('click',e=>{
+    if(panel.contains(e.target))return;
+    const trigger=e.target.closest(triggerSelector);
+    if(trigger){requestAnimationFrame(()=>panel.classList.add('open'));return;}
+    panel.classList.remove('open');
+  },true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remove('open')});
 })();
 </script>
 </body></html>
