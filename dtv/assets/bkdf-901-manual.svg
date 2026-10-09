@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="t d">
+<title id="t">Sony BKDF-901 1M/E Control Panel</title>
+<desc id="d">Geometria vetorial reconstruída a partir dos desenhos técnicos das páginas 13 a 19 do manual Sony DFS-900M, com cores ajustadas a partir de referência fotográfica do BKDF-901.</desc>
+<defs>
+ <linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9aa0ad"/><stop offset=".5" stop-color="#858b99"/><stop offset="1" stop-color="#737986"/></linearGradient>
+ <linearGradient id="key" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f8f8f4"/><stop offset=".55" stop-color="#dfdfd8"/><stop offset="1" stop-color="#c8c9c3"/></linearGradient>
+ <linearGradient id="greenKey" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e7f1de"/><stop offset="1" stop-color="#bad2ae"/></linearGradient>
+ <linearGradient id="pinkKey" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f5dada"/><stop offset="1" stop-color="#dfa9ad"/></linearGradient>
+ <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#3c4149"/><stop offset="1" stop-color="#1b1e23"/></linearGradient>
+ <radialGradient id="knob"><stop stop-color="#555b64"/><stop offset=".62" stop-color="#23272d"/><stop offset="1" stop-color="#08090b"/></radialGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity=".35"/></filter>
+</defs>
+<style>
+.txt{font-family:Arial,Helvetica,sans-serif;fill:#23262b;font-weight:700;text-anchor:middle}.micro{font-size:8px}.tiny{font-size:10px}.small{font-size:12px}
+.key{fill:url(#key);stroke:#646a72;stroke-width:1.2}.gkey{fill:url(#greenKey);stroke:#768670;stroke-width:1.2}.pkey{fill:url(#pinkKey);stroke:#996f74;stroke-width:1.2}.dk{fill:url(#dark);stroke:#111318;stroke-width:1.5}.line{fill:none;stroke:#545a62;stroke-width:1.3}.led{fill:#d9f43d;filter:drop-shadow(0 0 4px #d9f43d)}
+</style>
+<g filter="url(#shadow)">
+<rect x="20" y="28" width="1160" height="464" rx="22" fill="url(#body)" stroke="#545963" stroke-width="3"/>
+<rect x="32" y="40" width="1136" height="440" rx="14" fill="none" stroke="#aeb2ba" stroke-opacity=".55"/>
+</g>
+<text x="72" y="63" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="23" fill="#eef0f2">SONY</text>
+
+<!-- External connections / power -->
+<g>
+<rect x="46" y="80" width="100" height="170" rx="6" fill="#7a808c" stroke="#585e67"/>
+<rect class="dk" x="60" y="96" width="70" height="26" rx="3"/><text class="txt micro" x="95" y="113" fill="#f4f4f1">USB MEMORY</text>
+<rect class="key" x="67" y="136" width="56" height="30" rx="4"/><text class="txt micro" x="95" y="155">EDITOR</text>
+<rect class="key" x="67" y="174" width="56" height="30" rx="4"/><text class="txt micro" x="95" y="193">GPI</text>
+<rect class="pkey" x="67" y="212" width="56" height="25" rx="4"/><text class="txt micro" x="95" y="228">SHUTDOWN</text>
+</g>
+
+<!-- Display/menu -->
+<g>
+<rect x="158" y="80" width="485" height="170" rx="7" fill="#777d89" stroke="#585e67"/>
+<rect x="177" y="94" width="446" height="83" rx="5" fill="#151b18" stroke="#242a2c" stroke-width="2"/>
+<text x="194" y="120" font-family="monospace" font-size="15" fill="#c4d9bf">M/E  DME Border Color</text>
+<text x="194" y="143" font-family="monospace" font-size="12" fill="#a9c6a4">Bod=Off  Luv=92.6  Sat=32.5  Hue=363.0</text>
+<text x="194" y="162" font-family="monospace" font-size="10" fill="#9ab699">F1          F2          F3          F4</text>
+<circle cx="235" cy="210" r="17" fill="url(#knob)" stroke="#111317" stroke-width="2"/><circle cx="235" cy="210" r="5" fill="#686f78"/><text class="txt tiny" x="235" y="240">F1</text><circle cx="340" cy="210" r="17" fill="url(#knob)" stroke="#111317" stroke-width="2"/><circle cx="340" cy="210" r="5" fill="#686f78"/><text class="txt tiny" x="340" y="240">F2</text><circle cx="445" cy="210" r="17" fill="url(#knob)" stroke="#111317" stroke-width="2"/><circle cx="445" cy="210" r="5" fill="#686f78"/><text class="txt tiny" x="445" y="240">F3</text><circle cx="550" cy="210" r="17" fill="url(#knob)" stroke="#111317" stroke-width="2"/><circle cx="550" cy="210" r="5" fill="#686f78"/><text class="txt tiny" x="550" y="240">F4</text>
+</g>
+
+<!-- Numeric keypad -->
+<g>
+<rect x="660" y="80" width="174" height="170" rx="7" fill="#777d89" stroke="#585e67"/>
+<rect class="key" x="671" y="95" width="33" height="29" rx="3"/><text class="txt micro" x="687.5" y="113">MENU</text><rect class="key" x="710" y="95" width="33" height="29" rx="3"/><text class="txt micro" x="726.5" y="113">◀</text><rect class="key" x="749" y="95" width="33" height="29" rx="3"/><text class="txt micro" x="765.5" y="113">▶</text><rect class="gkey" x="788" y="95" width="33" height="29" rx="3"/><text class="txt micro" x="804.5" y="113">EVENT</text><rect class="gkey" x="671" y="131" width="33" height="29" rx="3"/><text class="txt micro" x="687.5" y="149">SEQ</text><rect class="key" x="710" y="131" width="33" height="29" rx="3"/><text class="txt micro" x="726.5" y="149">4</text><rect class="key" x="749" y="131" width="33" height="29" rx="3"/><text class="txt micro" x="765.5" y="149">5</text><rect class="key" x="788" y="131" width="33" height="29" rx="3"/><text class="txt micro" x="804.5" y="149">6</text><rect class="key" x="671" y="167" width="33" height="29" rx="3"/><text class="txt micro" x="687.5" y="185">Ⅱ</text><rect class="key" x="710" y="167" width="33" height="29" rx="3"/><text class="txt micro" x="726.5" y="185">1</text><rect class="key" x="749" y="167" width="33" height="29" rx="3"/><text class="txt micro" x="765.5" y="185">2</text><rect class="key" x="788" y="167" width="33" height="29" rx="3"/><text class="txt micro" x="804.5" y="185">3</text><rect class="key" x="671" y="203" width="33" height="29" rx="3"/><text class="txt micro" x="687.5" y="221">▶■</text><rect class="key" x="710" y="203" width="33" height="29" rx="3"/><text class="txt micro" x="726.5" y="221">0</text><rect class="key" x="749" y="203" width="33" height="29" rx="3"/><text class="txt micro" x="765.5" y="221">.</text><rect class="key" x="788" y="203" width="33" height="29" rx="3"/><text class="txt micro" x="804.5" y="221">ENTER</text>
+</g>
+
+<!-- Joystick -->
+<g>
+<rect x="850" y="80" width="300" height="170" rx="7" fill="#777d89" stroke="#585e67"/>
+<rect class="key" x="865" y="96" width="44" height="28" rx="3"/><text class="txt micro" x="887" y="114">DEFAULT</text>
+<rect class="key" x="865" y="132" width="44" height="28" rx="3"/><text class="txt micro" x="887" y="150">FINE</text>
+<rect class="key" x="865" y="168" width="44" height="28" rx="3"/><text class="txt micro" x="887" y="186">X/Y/Z</text>
+<circle cx="1018" cy="164" r="67" fill="#69707c" stroke="#454a52" stroke-width="3"/>
+<circle cx="1018" cy="164" r="48" fill="url(#knob)" stroke="#111317" stroke-width="3"/>
+<circle cx="1018" cy="164" r="25" fill="#20242a" stroke="#555c66" stroke-width="2"/>
+<circle cx="969" cy="116" r="7" fill="#daddde" stroke="#555b64"/><circle cx="1067" cy="116" r="7" fill="#daddde" stroke="#555b64"/><circle cx="969" cy="212" r="7" fill="#daddde" stroke="#555b64"/><circle cx="1067" cy="212" r="7" fill="#daddde" stroke="#555b64"/>
+<text class="txt tiny" x="1018" y="239">JOYSTICK</text>
+</g>
+
+<!-- Keyer -->
+<g>
+<rect x="46" y="265" width="360" height="58" rx="6" fill="#777d89" stroke="#585e67"/>
+<text class="txt micro" x="91" y="279">KEYER</text>
+<rect class="gkey" x="58" y="286" width="50" height="27" rx="3"/><text class="txt micro" x="83" y="303">DME ENABLE</text><rect class="key" x="114" y="286" width="50" height="27" rx="3"/><text class="txt micro" x="139" y="303">EXT</text><rect class="key" x="170" y="286" width="50" height="27" rx="3"/><text class="txt micro" x="195" y="303">SELF</text><rect class="key" x="226" y="286" width="50" height="27" rx="3"/><text class="txt micro" x="251" y="303">CK</text><rect class="key" x="282" y="286" width="50" height="27" rx="3"/><text class="txt micro" x="307" y="303">MASK</text><rect class="key" x="338" y="286" width="50" height="27" rx="3"/><text class="txt micro" x="363" y="303">EDGE SHADOW</text>
+</g>
+
+<!-- DME/Setup -->
+<g>
+<rect x="418" y="265" width="416" height="58" rx="6" fill="#777d89" stroke="#585e67"/>
+<text class="txt micro" x="459" y="279">DME / SETUP</text>
+<rect class="key" x="430" y="286" width="43" height="27" rx="3"/><text class="txt micro" x="451.5" y="302">AUX</text><rect class="key" x="479" y="286" width="43" height="27" rx="3"/><text class="txt micro" x="500.5" y="302">BASIC/MATTE</text><rect class="key" x="528" y="286" width="43" height="27" rx="3"/><text class="txt micro" x="549.5" y="302">BORDER/INPUT</text><rect class="gkey" x="577" y="286" width="43" height="27" rx="3"/><text class="txt micro" x="598.5" y="302">SUB EFF/MV</text><rect class="gkey" x="626" y="286" width="43" height="27" rx="3"/><text class="txt micro" x="647.5" y="302">WARP/SYSTEM</text><rect class="key" x="675" y="286" width="43" height="27" rx="3"/><text class="txt micro" x="696.5" y="302">LIGHT/STATUS</text><rect class="key" x="724" y="286" width="43" height="27" rx="3"/><text class="txt micro" x="745.5" y="302">USER/STILL</text><rect class="key" x="773" y="286" width="43" height="27" rx="3"/><text class="txt micro" x="794.5" y="302">SHIFT</text>
+</g>
+
+<!-- Key delegation -->
+<g>
+<rect x="46" y="334" width="360" height="56" rx="6" fill="#777d89" stroke="#585e67"/>
+<text class="txt micro" x="102" y="349">KEY DELEGATION</text>
+<rect class="key" x="58" y="357" width="50" height="24" rx="3"/><text class="txt micro" x="83" y="372">KEY1</text><rect class="key" x="114" y="357" width="50" height="24" rx="3"/><text class="txt micro" x="139" y="372">KEY2</text><rect class="key" x="170" y="357" width="50" height="24" rx="3"/><text class="txt micro" x="195" y="372">KEY3</text><rect class="key" x="226" y="357" width="50" height="24" rx="3"/><text class="txt micro" x="251" y="372">KEY4</text><rect class="key" x="282" y="357" width="50" height="24" rx="3"/><text class="txt micro" x="307" y="372">DSK1</text><rect class="key" x="338" y="357" width="50" height="24" rx="3"/><text class="txt micro" x="363" y="372">DSK2</text>
+</g>
+
+<!-- Cross point -->
+<g>
+<rect x="46" y="401" width="788" height="67" rx="6" fill="#777d89" stroke="#585e67"/>
+<text class="txt micro" x="72" y="415">PROGRAM</text>
+<rect class="key" x="96" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="117.5" y="421">BLACK</text><rect class="pkey" x="145" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="166.5" y="421">1</text><rect class="pkey" x="194" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="215.5" y="421">2</text><rect class="key" x="243" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="264.5" y="421">3</text><rect class="key" x="292" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="313.5" y="421">4</text><rect class="key" x="341" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="362.5" y="421">5</text><rect class="key" x="390" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="411.5" y="421">6</text><rect class="key" x="439" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="460.5" y="421">7</text><rect class="key" x="488" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="509.5" y="421">8</text><rect class="key" x="537" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="558.5" y="421">9</text><rect class="key" x="586" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="607.5" y="421">10</text><rect class="key" x="635" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="656.5" y="421">11</text><rect class="key" x="684" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="705.5" y="421">12</text><rect class="key" x="733" y="406" width="43" height="24" rx="3"/><text class="txt micro" x="754.5" y="421">SHIFT</text>
+<text class="txt micro" x="72" y="451">PRESET</text>
+<rect class="key" x="96" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="117.5" y="451">BLACK</text><rect class="key" x="145" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="166.5" y="451">1</text><rect class="pkey" x="194" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="215.5" y="451">2</text><rect class="key" x="243" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="264.5" y="451">3</text><rect class="key" x="292" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="313.5" y="451">4</text><rect class="key" x="341" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="362.5" y="451">5</text><rect class="key" x="390" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="411.5" y="451">6</text><rect class="key" x="439" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="460.5" y="451">7</text><rect class="key" x="488" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="509.5" y="451">8</text><rect class="key" x="537" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="558.5" y="451">9</text><rect class="key" x="586" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="607.5" y="451">10</text><rect class="key" x="635" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="656.5" y="451">11</text><rect class="key" x="684" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="705.5" y="451">12</text><rect class="key" x="733" y="436" width="43" height="24" rx="3"/><text class="txt micro" x="754.5" y="451">SHIFT</text>
+</g>
+
+<!-- Transition -->
+<g>
+<rect x="850" y="265" width="300" height="203" rx="7" fill="#777d89" stroke="#585e67"/>
+<text class="txt micro" x="900" y="280">TRANSITION</text>
+<rect class="key" x="865" y="291" width="49" height="25" rx="3"/><text class="txt micro" x="889.5" y="307">MIX</text>
+<rect class="gkey" x="922" y="291" width="49" height="25" rx="3"/><text class="txt micro" x="946.5" y="307">WIPE</text>
+<rect class="key" x="979" y="291" width="49" height="25" rx="3"/><text class="txt micro" x="1003.5" y="307">DME</text>
+<rect class="key" x="1036" y="291" width="49" height="25" rx="3"/><text class="txt micro" x="1060.5" y="307">REV</text>
+<rect class="key" x="865" y="329" width="49" height="25" rx="3"/><text class="txt micro" x="889.5" y="345">CUT</text>
+<rect class="key" x="922" y="329" width="49" height="25" rx="3"/><text class="txt micro" x="946.5" y="345">AUTO TRANS</text>
+<rect class="pkey" x="1084" y="291" width="49" height="63" rx="4"/><text class="txt tiny" x="1108.5" y="327">FTB</text>
+<rect x="985" y="368" width="17" height="80" rx="8" fill="#24282e" stroke="#4c525b"/>
+<rect x="1040" y="368" width="17" height="80" rx="8" fill="#24282e" stroke="#4c525b"/>
+<rect x="966" y="403" width="111" height="28" rx="7" fill="#20242a" stroke="#111317" stroke-width="2"/>
+<circle class="led" cx="954" cy="392" r="5"/>
+<rect class="key" x="1084" y="371" width="49" height="33" rx="4"/><text class="txt micro" x="1108.5" y="391">DSK1 ON</text>
+<rect class="pkey" x="1084" y="412" width="49" height="33" rx="4"/><text class="txt micro" x="1108.5" y="432">DSK2 ON</text>
+</g>
+</svg>
