@@ -4,67 +4,197 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DTV — Sony DFS-900M / BKDF-901</title>
 <style>
-:root{--bg:#0a0d10;--surface:#101419;--surface2:#151a20;--line:#303840;--text:#f4f6f7;--muted:#a7b0b7;--accent:#68b8ff;--green:#58d574}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-main{max-width:1520px;margin:auto;padding:18px}h1{margin:0 0 5px;font-size:29px}.lead{margin:0 0 14px;color:var(--muted);line-height:1.55}
-.topbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:13px}
-.btn{background:#11161b;color:var(--text);border:1px solid #414b54;border-radius:8px;padding:8px 11px;cursor:pointer;text-decoration:none}.btn:hover,.btn.active{border-color:var(--accent);background:#18364e}
-.layout{display:grid;grid-template-columns:minmax(760px,1fr) 390px;gap:18px;align-items:start}.card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:13px}
-.stage{position:relative;overflow:hidden;min-height:500px;display:flex;align-items:center;justify-content:center}.panelWrap{position:relative;width:100%;max-width:1120px}.panelWrap img{display:block;width:100%;height:auto}
-.hotspot{position:absolute;border:1px solid transparent;background:transparent;border-radius:8px;cursor:pointer}.hotspot:hover,.hotspot.active{border-color:var(--accent);background:rgba(104,184,255,.10);box-shadow:0 0 0 1px rgba(104,184,255,.18),0 0 18px rgba(104,184,255,.16)}
-.side h2{margin:0 0 4px;font-size:24px}.term{color:var(--muted);font-size:14px;margin-bottom:14px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:750;margin:14px 0 6px}.copy{line-height:1.62;margin:0}.statusGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}.status{background:#12171b;border:1px solid #354049;border-radius:10px;padding:9px 10px}.status b{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}.status span{font-size:14px;font-weight:650}
-.note{margin-top:14px;background:#0f1418;border:1px solid #303940;border-radius:10px;padding:10px 11px;line-height:1.55}.source{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.45}
-.context-drawer{display:none!important;position:relative!important;width:100%!important;max-width:none!important;margin:0!important}.context-drawer.open{display:block!important}.context-close{float:right;width:38px;height:38px;border-radius:50%;border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;margin:-4px -4px 8px 12px}
-@media(max-width:1160px){.layout{grid-template-columns:1fr}.stage{min-height:420px}.context-drawer{margin-top:12px!important}}@media(max-width:760px){main{padding:10px}.stage{min-height:300px;padding:4px}.card{padding:9px}.side h2{font-size:21px}}
-</style></head>
-<body><main>
+:root{
+  --bg:#0a0d10;--surface:#101419;--surface2:#151a20;--line:#303840;--text:#f4f6f7;--muted:#9faab1;--accent:#68b8ff;
+  --panel:#8b909c;--panel2:#777d88;--ink:#20242a;--key:#e8e8e2;--key2:#c9cac4;--green:#83c67d;--red:#d85e60;--orange:#f0a24a;
+  --ledg:#66ef6e;--ledr:#ff5858;--ledy:#e6f153;--screen:#111712;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{max-width:1580px;margin:auto;padding:18px}h1{margin:0 0 4px;font-size:29px}.lead{margin:0 0 14px;color:var(--muted);line-height:1.55}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.uiBtn{background:#11161b;color:var(--text);border:1px solid #414b54;border-radius:8px;padding:8px 11px;cursor:pointer;text-decoration:none}.uiBtn:hover{border-color:var(--accent);background:#17324a}
+.monitors{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.sonyMonitor{background:#1a1d20;border:1px solid #41484d;border-radius:14px;padding:13px 13px 10px;box-shadow:0 14px 35px rgba(0,0,0,.24)}
+.bezel{background:#24282c;border:2px solid #4c5358;border-radius:8px;padding:13px 13px 25px;position:relative}.sonyLogo{position:absolute;left:14px;bottom:6px;font-weight:800;font-size:12px;color:#d9dddf}.monLabel{position:absolute;right:14px;bottom:6px;font-size:10px;color:#8e989e}
+.screen{aspect-ratio:16/9;background:#050708;border:2px solid #090b0d;overflow:hidden;position:relative}
+.gui{height:100%;background:#c7c9cb;color:#111;font-family:Arial,sans-serif;display:grid;grid-template-rows:30px 1fr 28px}.guiTabs{display:flex;background:#6c7075;border-bottom:1px solid #404348}.guiTab{padding:7px 13px;border-right:1px solid #50545a;font-size:12px;font-weight:700}.guiTab.active{background:#f1f1ef}.guiBody{display:grid;grid-template-columns:180px 1fr}.guiSub{background:#8b8f94;border-right:1px solid #5b5e62;padding:8px}.guiSub button{width:100%;display:block;margin:0 0 5px;padding:6px;text-align:left;font-size:11px;border:1px solid #64686c;background:#dadbd8}.guiSub button.active{background:#fff;border-color:#202327}.guiParam{padding:11px;background:#e4e5e2}.guiParam h3{font-size:15px;margin:0 0 8px}.paramGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.param{background:#f9f9f6;border:1px solid #8f9293;padding:8px;font-size:11px;min-height:55px}.param b{display:block;margin-bottom:5px}.guiStatus{background:#4d5054;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font:11px Arial}
+.mv{height:100%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:2px;background:#111;padding:2px}.mv.type10{grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr)}.mv.type4{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr)}.mvCell{position:relative;overflow:hidden;background:linear-gradient(135deg,#293943,#0f171d);border:2px solid #262b2e}.mvCell.pgm{border-color:#e34f50}.mvCell.pvw{border-color:#55d36d}.mvCell.large{grid-column:span 2;grid-row:span 2}.mvImg{position:absolute;inset:0;background:linear-gradient(135deg,transparent 0 35%,rgba(255,255,255,.12) 35% 42%,transparent 42%),linear-gradient(35deg,#152833,#314b59)}.mvImg.alt{background:linear-gradient(120deg,#17212c,#5d4736)}.mvImg.alt2{background:linear-gradient(145deg,#241a2d,#465562)}.mvTitle{position:absolute;left:5px;bottom:4px;font:700 9px Arial;color:#fff;text-shadow:0 1px 2px #000}.mvBadge{position:absolute;right:4px;top:4px;font:700 8px Arial;padding:2px 4px;background:#0009;color:#fff}
+.workspace{display:grid;grid-template-columns:minmax(820px,1fr) 360px;gap:16px;align-items:start}.stage{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:14px;overflow:auto}.panel{position:relative;aspect-ratio:482/221;min-width:790px;width:100%;background:linear-gradient(#9da2ad,#7e8490);border:2px solid #555b64;border-radius:18px;box-shadow:0 16px 35px rgba(0,0,0,.28);color:var(--ink);overflow:hidden}
+.panel:before{content:"SONY";position:absolute;left:1.7%;top:1.2%;font-weight:900;font-size:clamp(13px,1.3vw,22px);color:#edf0f2}.panel:after{content:"BKDF-901   1M/E CONTROL PANEL";position:absolute;right:2%;top:1.8%;font:700 8px Arial;color:#42474e}
+.block{position:absolute;background:#7b818c;border:1px solid #5c626b;border-radius:5px;padding:.45%;box-shadow:inset 0 1px rgba(255,255,255,.28)}.blockTitle{position:absolute;left:2%;top:-10px;font:700 7px Arial;color:#30343a;white-space:nowrap}
+.ctrl{position:relative;border:1px solid #686d73;background:linear-gradient(#f5f5f1,#cfd0ca);color:#171a1e;border-radius:3px;min-width:0;padding:0;display:flex;align-items:center;justify-content:center;text-align:center;font:700 7px/1.05 Arial;cursor:pointer;box-shadow:inset 0 1px #fff8,0 1px 1px #0004}.ctrl:hover{filter:brightness(1.04)}.ctrl.active{box-shadow:inset 0 0 0 2px currentColor,0 0 7px currentColor}.ctrl.green{background:linear-gradient(#cfe9ca,#8fc888)}.ctrl.red{background:linear-gradient(#f1c6c7,#d2787b)}.ctrl.orange{background:linear-gradient(#f6d39a,#dd9b40)}.ctrl.dark{background:linear-gradient(#555b63,#25292f);color:#f4f5f4}.ctrl.active.redState{color:#a90000}.ctrl.active.greenState{color:#087d1d}.led{position:absolute;width:5px;height:5px;border-radius:50%;top:2px;right:2px;background:#343a3d}.ctrl.active .led{background:var(--ledg);box-shadow:0 0 5px var(--ledg)}.ctrl.program.active .led{background:var(--ledr);box-shadow:0 0 5px var(--ledr)}.ctrl.preset.active .led{background:var(--ledg);box-shadow:0 0 5px var(--ledg)}
+.external{left:2%;top:10%;width:9%;height:31%;display:grid;grid-template-columns:1fr;grid-template-rows:1.1fr repeat(3,1fr);gap:4%}.usb{background:#454b53;border:1px solid #22272c;border-radius:3px;color:#fff;display:flex;align-items:center;justify-content:center;font:700 6px Arial}
+.display{left:12%;top:10%;width:38%;height:31%}.lcd{position:absolute;left:3%;right:3%;top:8%;height:47%;background:#111811;border:2px solid #373e39;border-radius:3px;color:#b8d3b0;padding:3%;font:8px ui-monospace,monospace}.frow{position:absolute;left:5%;right:5%;bottom:6%;height:28%;display:grid;grid-template-columns:repeat(4,1fr);gap:8%}.knob{border-radius:50%;background:radial-gradient(circle at 35% 30%,#59616a,#181c20 60%,#050607 100%);border:2px solid #262b31;color:#dce0e1;display:flex;align-items:center;justify-content:center;font:700 7px Arial;cursor:pointer;aspect-ratio:1}.knob.active{outline:2px solid var(--accent)}
+.keypad{left:51%;top:10%;width:17%;height:31%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:3%;padding:1%}.keypad .ctrl{font-size:6px}.joystick{left:69%;top:10%;width:29%;height:31%}.joyBtns{position:absolute;left:3%;top:9%;bottom:9%;width:37%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4%}.joyPad{position:absolute;right:6%;top:10%;width:46%;aspect-ratio:1;border-radius:50%;background:#656c76;border:2px solid #3b4148}.joyRing{position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle,#525a63 0 28%,#171b20 29% 55%,#555d66 56% 100%);border:2px solid #252a2f;cursor:grab}.joyDot{position:absolute;left:47%;top:47%;width:6%;height:6%;border-radius:50%;background:#ddd;pointer-events:none}
+.keyer{left:2%;top:43%;width:35%;height:12%;display:grid;grid-template-columns:1.15fr repeat(5,1fr);gap:1.5%;padding:1%}.delegation{left:2%;top:57%;width:35%;height:11%;display:grid;grid-template-columns:repeat(6,1fr);gap:1.5%;padding:1%}
+.dme{left:38%;top:43%;width:30%;height:25%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:2%;padding:1.2%}.cross{left:2%;top:70%;width:66%;height:25%;padding:1%}.busrow{height:43%;display:grid;grid-template-columns:1.2fr repeat(12,1fr) 1.2fr;gap:.55%;margin-bottom:2%}.busLabel{position:absolute;left:.5%;font:700 6px Arial;color:#3a3f44}.busLabel.pgm{top:7%}.busLabel.pre{top:54%}
+.transition{left:69%;top:43%;width:29%;height:52%;padding:1%}.transTop{height:35%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:3%}.transTop .ctrl{font-size:6px}.tbarArea{position:absolute;left:34%;top:38%;width:35%;height:57%;background:#6f7580;border:1px solid #535963;border-radius:5px}.tbarTrack{position:absolute;left:46%;top:8%;bottom:8%;width:8%;background:#24292e;border-radius:6px}.tbar{position:absolute;left:13%;width:74%;height:16%;background:#e3e4df;border:1px solid #676d73;border-radius:9px;cursor:ns-resize;top:42%}.ftb{position:absolute;right:5%;top:8%;width:22%;height:18%}.dsk{position:absolute;right:4%;bottom:5%;width:25%;height:48%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:7%}.dsk .ctrl{font-size:6px}
+.side{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:15px;position:sticky;top:10px}.side h2{margin:0 0 4px;font-size:23px}.term{color:var(--muted);font-size:13px;margin-bottom:13px}.ey{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:750;margin:13px 0 5px}.copy{line-height:1.58;margin:0;font-size:14px}.statusGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.status{background:#12171b;border:1px solid #354049;border-radius:10px;padding:8px}.status b{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}.status span{font-size:13px;font-weight:650}.note{margin-top:12px;background:#0f1418;border:1px solid #303940;border-radius:10px;padding:10px;line-height:1.5;font-size:13px}
+@media(max-width:1180px){.workspace{grid-template-columns:1fr}.side{position:relative;top:auto}.monitors{grid-template-columns:1fr}}@media(max-width:760px){main{padding:10px}.stage{padding:8px}.monitors{gap:10px}.bezel{padding:8px 8px 20px}.workspace{gap:10px}}
+</style>
+</head><body><main>
 <h1>DTV — Sony DFS-900M</h1>
-<p class="lead">Painel de operação BKDF-901 1M/E. A geometria segue os desenhos técnicos do manual Sony; as cores e o acabamento reproduzem a aparência real do painel.</p>
-<div class="topbar"><div>Selecione uma área do painel para abrir a explicação.</div><div><a class="btn" href="../rack/index.html">Rack principal</a><button class="btn" id="reset">Restaurar</button></div></div>
-<div class="layout">
-<section class="card stage"><div class="panelWrap" id="panelWrap">
-<img src="./assets/bkdf-901-manual.svg" alt="Painel Sony BKDF-901 1M/E">
-<button class="hotspot" data-zone="power" style="left:2.2%;top:10%;width:9.5%;height:35%" aria-label="Conexões externas e alimentação"></button>
-<button class="hotspot" data-zone="display" style="left:12.5%;top:10%;width:41.5%;height:35%" aria-label="Display e controle de menu"></button>
-<button class="hotspot" data-zone="keypad" style="left:55%;top:10%;width:15%;height:35%" aria-label="Teclado numérico"></button>
-<button class="hotspot" data-zone="joystick" style="left:71%;top:10%;width:26%;height:35%" aria-label="Joystick"></button>
-<button class="hotspot" data-zone="keyer" style="left:2.3%;top:50%;width:31%;height:13%" aria-label="Keyer"></button>
-<button class="hotspot" data-zone="dme" style="left:34%;top:50%;width:36%;height:13%" aria-label="DME e Setup"></button>
-<button class="hotspot" data-zone="delegation" style="left:2.3%;top:64%;width:31%;height:12%" aria-label="Key delegation"></button>
-<button class="hotspot" data-zone="crosspoint" style="left:2.3%;top:77%;width:68%;height:17%" aria-label="Cross-point buses"></button>
-<button class="hotspot" data-zone="transition" style="left:71%;top:50%;width:26%;height:44%" aria-label="Transições"></button>
+<p class="lead">Simulador do painel BKDF-901 1M/E. Dimensão física de referência do painel: 482 × 221 mm. Os dois monitores acima representam a GUI externa e a saída de multiview do sistema.</p>
+<div class="topbar"><div>Os estados do painel, GUI e multiview são interligados.</div><div class="actions"><a class="uiBtn" href="../rack/index.html">Rack principal</a><button class="uiBtn" id="mvType">Multiview 10</button><button class="uiBtn" id="reset">Restaurar</button></div></div>
+
+<section class="monitors">
+<div class="sonyMonitor"><div class="bezel"><div class="screen">
+<div class="gui" id="gui">
+ <div class="guiTabs" id="guiTabs"><div class="guiTab active">Transition</div><div class="guiTab">Keyer</div><div class="guiTab">Still</div><div class="guiTab">Sequence/Event</div><div class="guiTab">Setup</div><div class="guiTab">DME</div></div>
+ <div class="guiBody"><div class="guiSub" id="guiSub"></div><div class="guiParam"><h3 id="guiTitle">Transition / Rate</h3><div class="paramGrid" id="guiParams"></div></div></div>
+ <div class="guiStatus"><span id="guiStatus">DME: 0 · Rate: 30f · 1080i/59.94</span><span id="guiHint">F1–F4 ativos</span></div>
+</div>
+</div><div class="sonyLogo">SONY</div><div class="monLabel">19" · GUI EXT DISPLAY</div></div></div>
+
+<div class="sonyMonitor"><div class="bezel"><div class="screen"><div class="mv type10" id="mv"></div></div><div class="sonyLogo">SONY</div><div class="monLabel">19" · MULTI VIEW</div></div></div>
+</section>
+
+<div class="workspace">
+<section class="stage"><div class="panel" id="panel">
+<div class="block external"><div class="usb">USB<br>MEMORY</div><button class="ctrl" data-id="editor">EDITOR<span class="led"></span></button><button class="ctrl" data-id="gpi">GPI<span class="led"></span></button><button class="ctrl red" data-id="shutdown">SHUTDOWN<span class="led"></span></button></div>
+
+<div class="block display"><div class="lcd" id="lcd">Transition Rate<br>Rate=30f &nbsp; BKGD→PRESET<br>F1 Rate &nbsp; F2 — &nbsp; F3 — &nbsp; F4 —</div><div class="frow"><button class="knob" data-id="f1">F1</button><button class="knob" data-id="f2">F2</button><button class="knob" data-id="f3">F3</button><button class="knob" data-id="f4">F4</button></div></div>
+
+<div class="block keypad" id="keypad"></div>
+
+<div class="block joystick"><div class="joyBtns">
+<button class="ctrl" data-id="default">DEFAULT</button><button class="ctrl" data-id="fine">FINE<span class="led"></span></button><button class="ctrl" data-id="axisX">X<span class="led"></span></button>
+<button class="ctrl green" data-id="autoCk">AUTO CK</button><button class="ctrl" data-id="wipePos">WIPE POS<span class="led"></span></button><button class="ctrl" data-id="axisY">Y<span class="led"></span></button>
+<button class="ctrl" data-id="dmePos">DME POS<span class="led"></span></button><button class="ctrl" data-id="dmeRot">DME ROT<span class="led"></span></button><button class="ctrl" data-id="axisZ">Z<span class="led"></span></button>
+</div><div class="joyPad"><div class="joyRing" id="joyRing"><div class="joyDot" id="joyDot"></div></div></div></div>
+
+<div class="block keyer">
+<button class="ctrl green" data-id="dmeEnable">DME ENABLE<span class="led"></span></button><button class="ctrl" data-id="ext">EXT<span class="led"></span></button><button class="ctrl" data-id="self">SELF<span class="led"></span></button><button class="ctrl" data-id="ck">CK<span class="led"></span></button><button class="ctrl" data-id="mask">MASK<span class="led"></span></button><button class="ctrl" data-id="edge">EDGE SHADOW<span class="led"></span></button>
+</div>
+
+<div class="block delegation" id="delegation"></div>
+
+<div class="block dme">
+<button class="ctrl" data-id="aux">AUX</button><button class="ctrl" data-id="basicMatte">BASIC<br>MATTE</button><button class="ctrl" data-id="borderInput">BORDER<br>INPUT</button><button class="ctrl" data-id="subMv">SUB EFF<br>MV</button>
+<button class="ctrl" data-id="warpSystem">WARP<br>SYSTEM</button><button class="ctrl" data-id="lightStatus">LIGHT<br>STATUS</button><button class="ctrl" data-id="userStill">USER<br>STILL</button><button class="ctrl green" data-id="shiftDme">SHIFT<span class="led"></span></button>
+</div>
+
+<div class="block cross"><div class="busLabel pgm">PROGRAM</div><div class="busrow" id="programBus"></div><div class="busLabel pre">PRESET</div><div class="busrow" id="presetBus"></div></div>
+
+<div class="block transition">
+<div class="transTop">
+<button class="ctrl" data-id="transPvw">TRANS PVW<span class="led"></span></button><button class="ctrl" data-id="bkgd">BKGD<span class="led"></span></button><button class="ctrl" data-id="key1t">KEY1<span class="led"></span></button><button class="ctrl" data-id="key2t">KEY2<span class="led"></span></button>
+<button class="ctrl" data-id="key3t">KEY3<span class="led"></span></button><button class="ctrl" data-id="key4t">KEY4<span class="led"></span></button><button class="ctrl" data-id="faderLimit">FADER LIMIT<span class="led"></span></button><button class="ctrl" data-id="norRev">NOR/REV<span class="led"></span></button>
+<button class="ctrl" data-id="mix">MIX<span class="led"></span></button><button class="ctrl" data-id="wipe">WIPE/FAM<span class="led"></span></button><button class="ctrl" data-id="dmeTrans">DME/NAM<span class="led"></span></button><button class="ctrl" data-id="reverse">REVERSE<span class="led"></span></button>
+</div>
+<button class="ctrl red ftb" data-id="ftb">FTB<span class="led"></span></button>
+<div style="position:absolute;left:4%;bottom:5%;width:27%;height:25%;display:grid;grid-template-columns:1fr 1fr;gap:7%">
+<button class="ctrl" data-id="cut">CUT</button><button class="ctrl green" data-id="autoTrans">AUTO<br>TRANS</button>
+</div>
+<div class="tbarArea"><div class="tbarTrack"></div><div class="tbar" id="tbar"></div></div>
+<div class="dsk"><button class="ctrl" data-id="dsk1on">DSK1 ON<span class="led"></span></button><button class="ctrl" data-id="dsk2on">DSK2 ON<span class="led"></span></button><button class="ctrl green" data-id="dsk1auto">AUTO TRANS</button><button class="ctrl green" data-id="dsk2auto">AUTO TRANS</button></div>
+</div>
 </div></section>
 
-<aside class="card side context-drawer" id="drawer">
-<button class="context-close" id="close" aria-label="Fechar explicação">×</button>
-<h2 id="title">BKDF-901</h2><div class="term" id="term">Painel 1 M/E da DFS-900M</div>
-<div class="ey">O que faz</div><p class="copy" id="what">Selecione uma das nove áreas funcionais do painel.</p>
-<div class="ey">Como usar</div><p class="copy" id="how">Os hotspots acompanham os blocos funcionais definidos no manual da Sony.</p>
-<div class="statusGrid"><div class="status"><b>Modelo</b><span>BKDF-901</span></div><div class="status"><b>Configuração</b><span>1 M/E</span></div><div class="status"><b>Sistema</b><span>DFS-900M</span></div><div class="status"><b>Vista</b><span>Operação</span></div></div>
-<div class="note" id="note">O rack principal não foi alterado. Esta página é uma seção DTV independente.</div>
-<div class="source">Referência de geometria: manual oficial Sony DFS-900M, capítulo “BKDF-901 1M/E Control Panel”, páginas 13–19. Paleta visual ajustada por referência fotográfica do equipamento real.</div>
+<aside class="side">
+<h2 id="infoTitle">BKDF-901</h2><div class="term" id="infoTerm">Painel 1 M/E da DFS-900M</div>
+<div class="ey">Função</div><p class="copy" id="infoWhat">Clique em qualquer controle. O simulador atualiza o estado do painel e, quando aplicável, a GUI e o multiview.</p>
+<div class="ey">Comportamento</div><p class="copy" id="infoHow">PROGRAM acende em vermelho, PRESET em verde. CUT, AUTO TRANS e o T-bar alteram a saída PGM/PVW.</p>
+<div class="statusGrid"><div class="status"><b>Program</b><span id="stPgm">1</span></div><div class="status"><b>Preset</b><span id="stPvw">2</span></div><div class="status"><b>Transição</b><span id="stTrans">MIX</span></div><div class="status"><b>Key target</b><span id="stKey">—</span></div><div class="status"><b>DSK1</b><span id="stDsk1">Off</span></div><div class="status"><b>DSK2</b><span id="stDsk2">Off</span></div></div>
+<div class="note">A geometria geral respeita 482 × 221 mm. Os controles foram posicionados segundo os blocos e proporções do desenho técnico do manual, e a lógica segue o funcionamento documentado da BKDF-901.</div>
 </aside>
-</div></main>
+</div>
 <script>
 (()=>{
-const data={
-power:{title:'Conexões externas e alimentação',term:'Bloco 1',what:'Reúne o conector USB MEMORY e os comandos EDITOR, GPI e SHUTDOWN.',how:'EDITOR e GPI habilitam seus respectivos modos de controle. SHUTDOWN inicia o procedimento seguro de desligamento do painel antes do corte de alimentação.'},
-keyer:{title:'KEYER',term:'Bloco 2',what:'Seleciona o tipo de key e funções associadas, incluindo DME ENABLE, EXT, SELF, CK, MASK e EDGE SHADOW.',how:'Primeiro selecione a camada alvo no bloco KEY DELEGATION; depois escolha o tipo de key e os modificadores desejados.'},
-delegation:{title:'KEY DELEGATION',term:'Bloco 3',what:'Define qual keyer ou DSK será o alvo dos ajustes.',how:'Selecione KEY1–KEY4 ou DSK1/DSK2 antes de alterar parâmetros de key, máscara ou borda.'},
-crosspoint:{title:'Cross-Point Bus',term:'Bloco 4',what:'Seleciona fontes para os buses PROGRAM e PRESET.',how:'PROGRAM define a fonte atualmente no ar. PRESET prepara a próxima fonte. As teclas SHIFT acessam a segunda camada de entradas atribuídas.'},
-transition:{title:'Transition',term:'Bloco 5',what:'Executa transições entre PROGRAM e PRESET e controla DSKs e fade to black.',how:'Escolha o tipo de transição, use CUT ou AUTO TRANS, ou mova o fader. FTB executa fade to black; os controles DSK fazem transições independentes dos downstream keys.'},
-joystick:{title:'Joystick',term:'Bloco 6',what:'Controla parâmetros espaciais e de efeitos DME.',how:'Use o joystick para ajustes de posição e transformação. As teclas ao redor mudam o eixo e o modo de operação.'},
-keypad:{title:'Numeric Keypad',term:'Bloco 7',what:'Permite inserir valores numéricos e navegar em eventos/sequências.',how:'Use 0–9, ponto, sinal e ENTER para parâmetros. Em EVENT/SEQ, as mesmas teclas assumem funções de memória e reprodução.'},
-dme:{title:'DME / SETUP',term:'Bloco 8',what:'Abre grupos de parâmetros de DME e configuração do switcher.',how:'As teclas dão acesso a AUX, matte, border/input, sub effects, warp/system, light/status e user/still. SHIFT alterna a camada de funções.'},
-display:{title:'Display / Menu Control',term:'Bloco 9',what:'LCD principal e quatro encoders F1–F4 para operação dos menus.',how:'Cada encoder atua no parâmetro mostrado diretamente acima dele no LCD; em vários menus também pode ser pressionado para executar ações.'}
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const S={pgm:'1',pvw:'2',transition:'MIX',delegation:null,keyType:null,dsk1:false,dsk2:false,ftb:false,mv:10,shift:false,rate:30,fader:0,menu:'Transition',submenu:'Rate',fine:false,axis:'X',dme:false};
+const desc={
+editor:['EDITOR','Controle externo por editor','Liga/desliga o controle por editor. Dois acionamentos rápidos abrem o menu Serial no display.'],
+gpi:['GPI','Controle por GPI','Liga/desliga o controle por GPI. Dois acionamentos rápidos abrem o menu GPIO Tally.'],
+shutdown:['SHUTDOWN','Desligamento seguro','Acende e solicita confirmação no display; no equipamento real F2 confirma e F3 cancela após backup.'],
+dmeEnable:['DME ENABLE','DME para camada selecionada','Alterna em três estados: DME com key branco, DME com sinal processado e DME desligado.'],
+ext:['EXT','External key','Usa sinais separados para key fill e key source.'],self:['SELF','Self key','Usa o mesmo sinal para fill e source.'],ck:['CK','Chroma key','Cria uma chave por crominância.'],mask:['MASK','Máscara do key','Abre o submenu de máscara do key/DSK selecionado.'],edge:['EDGE SHADOW','Borda/sombra','Ativa edge/shadow e abre o submenu correspondente.'],
+transPvw:['TRANS PVW','Preview da transição','Com a tecla acesa, uma transição manual pelo fader é enviada ao preview antes de ir ao ar.'],
+bkgd:['BKGD','Próxima transição: fundo','Inclui a camada de background na próxima transição.'],key1t:['KEY1','Próxima transição: KEY1','Inclui KEY1 na próxima transição.'],key2t:['KEY2','Próxima transição: KEY2','Inclui KEY2 na próxima transição.'],key3t:['KEY3','Próxima transição: KEY3','Inclui KEY3 na próxima transição.'],key4t:['KEY4','Próxima transição: KEY4','Inclui KEY4 na próxima transição.'],
+mix:['MIX','Mix transition','Seleciona mix e abre Rate no display.'],wipe:['WIPE / FAM','Wipe transition','Seleciona wipe; com MIX pressionado simultaneamente representa FAM.'],dmeTrans:['DME / NAM','DME wipe','Seleciona transição DME; com MIX representa NAM.'],cut:['CUT','Corte','Troca instantaneamente PROGRAM e PRESET.'],autoTrans:['AUTO TRANS','Transição automática','Executa a transição com a taxa configurada.'],ftb:['FTB','Fade to Black','Executa fade do programa para preto usando a taxa específica de FTB.'],
+faderLimit:['FADER LIMIT','Limite do fader','Restringe o intervalo efetivo do T-bar e abre o menu Fader Limit.'],norRev:['NOR/REV','Normal/reverso alternado','Inverte a direção a cada transição.'],reverse:['REVERSE','Direção reversa','Executa transições na direção reversa enquanto ativo.'],
+default:['DEFAULT','Valores padrão','Restaura os parâmetros atribuídos ao joystick.'],autoCk:['AUTO CK','Auto chroma key','Inicia/confirma a criação automática de chroma key quando KEY1–KEY4 é o alvo.'],dmePos:['DME POS','Posição DME','Abre o menu de posição DME e atribui o joystick à posição.'],fine:['FINE','Ajuste fino','Reduz o passo de ajuste do joystick.'],dmeRot:['DME ROT','Rotação DME','Abre o menu de rotação DME.'],wipePos:['WIPE POS','Centro do wipe','Abre o menu de posição do centro do wipe.'],axisX:['X','Eixo X','Atribui X ao movimento do joystick.'],axisY:['Y','Eixo Y','Atribui Y ao movimento do joystick.'],axisZ:['Z','Eixo Z','Atribui Z/rotação ao joystick.'],
+aux:['AUX','Saída auxiliar','Com SHIFT ligado atua como AUX setup.'],basicMatte:['BASIC / MATTE','DME Basic / Matte','Sem SHIFT abre DME Basic; com SHIFT abre Matte.'],borderInput:['BORDER / INPUT','Border / Input','Sem SHIFT abre Border; com SHIFT abre Input.'],subMv:['SUB EFF / MV','Sub Effects / Multi-view','Sem SHIFT abre Sub Effects; com SHIFT abre o menu de Multi-view.'],warpSystem:['WARP / SYSTEM','Warp / System','Sem SHIFT percorre padrões Warp; com SHIFT abre System.'],lightStatus:['LIGHT / STATUS','Light / Status','Sem SHIFT abre iluminação DME; com SHIFT abre Status.'],userStill:['USER / STILL','User / Still','Sem SHIFT abre User patterns; com SHIFT abre Still store.'],shiftDme:['SHIFT','Segunda função','Alterna os botões DME/SETUP entre funções DME e SETUP.'],
+dsk1on:['DSK1 ON','Downstream key 1','Insere/remove DSK1 instantaneamente.'],dsk2on:['DSK2 ON','Downstream key 2','Insere/remove DSK2 instantaneamente.'],dsk1auto:['DSK1 AUTO TRANS','Transição DSK1','Executa transição automática do DSK1.'],dsk2auto:['DSK2 AUTO TRANS','Transição DSK2','Executa transição automática do DSK2.']
 };
-const drawer=document.getElementById('drawer'),title=document.getElementById('title'),term=document.getElementById('term'),what=document.getElementById('what'),how=document.getElementById('how');
-const hs=[...document.querySelectorAll('.hotspot')];
-function select(el){hs.forEach(x=>x.classList.remove('active'));el.classList.add('active');const d=data[el.dataset.zone];title.textContent=d.title;term.textContent=d.term;what.textContent=d.what;how.textContent=d.how;drawer.classList.add('open')}
-hs.forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();select(el)}));
-document.getElementById('close').addEventListener('click',()=>drawer.classList.remove('open'));
-document.getElementById('reset').addEventListener('click',()=>{hs.forEach(x=>x.classList.remove('active'));drawer.classList.remove('open')});
-document.addEventListener('click',e=>{if(!drawer.contains(e.target)&&!e.target.closest('.hotspot'))drawer.classList.remove('open')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')drawer.classList.remove('open')});
+const keypad=[
+['MENU','7'],['≪','8'],['≫','9'],['EVENT','−'],
+['SEQ','4'],['◁','5'],['▷','6'],['STORE',''],
+['Ⅱ','1'],['LOOP','2'],['DIR','3'],['RECALL',''],
+['▶■','0'],['NEW','.'],['DELETE','CANCEL'],['INSERT','ENTER']
+];
+keypad.forEach(([a,b],i)=>{const btn=document.createElement('button');btn.className='ctrl';btn.dataset.id='keypad'+i;btn.innerHTML=a+(b?'<br>'+b:'');$('#keypad').appendChild(btn)});
+['KEY1','KEY2','KEY3','KEY4','DSK1','DSK2'].forEach(k=>{const b=document.createElement('button');b.className='ctrl';b.dataset.id='del'+k;b.textContent=k;$('#delegation').appendChild(b)});
+const sources=['BLACK','1','2','3','4','5','6','7','8','9','10','11','12','SHIFT'];
+sources.forEach(src=>{['program','preset'].forEach(bus=>{const b=document.createElement('button');b.className='ctrl '+bus;b.dataset.bus=bus;b.dataset.src=src;b.innerHTML=src+'<span class="led"></span>';$('#'+bus+'Bus').appendChild(b)})});
+
+function info(id,title,term,how){$('#infoTitle').textContent=title||id;$('#infoTerm').textContent=term||'';$('#infoWhat').textContent=how||'';$('#infoHow').textContent='Estado e dependências são atualizados imediatamente na interface.'}
+function selectExclusive(ids,id){ids.forEach(x=>x.classList.toggle('active',x.dataset.id===id))}
+function setMenu(menu,sub,params){
+ S.menu=menu;S.submenu=sub;$('#guiTitle').textContent=menu+' / '+sub;
+ $$('.guiTab').forEach(t=>t.classList.toggle('active',t.textContent===menu||t.textContent.startsWith(menu)));
+ const subs={Transition:['Rate','Wipe Pattern','DME Pattern','Fader Limit'],Keyer:['Type','Mask','Edge','Chroma'],Setup:['Input','Multi-view','System','Status'],DME:['Basic','Border','Sub Effects','Warp','Light'],Still:['Store','Capture','Export'], 'Sequence/Event':['Event','Sequence']};
+ $('#guiSub').innerHTML='';(subs[menu]||[sub]).forEach(x=>{const b=document.createElement('button');b.textContent=x;b.className=x===sub?'active':'';b.onclick=()=>setMenu(menu,x,params);$('#guiSub').appendChild(b)});
+ $('#guiParams').innerHTML='';(params||[['F1','Rate',S.rate+'f'],['F2','Mode',S.transition],['F3','Direction','Normal'],['F4','Status','Ready']]).forEach(p=>{const d=document.createElement('div');d.className='param';d.innerHTML='<b>'+p[0]+' · '+p[1]+'</b>'+p[2];$('#guiParams').appendChild(d)});
+ $('#lcd').innerHTML=menu+' '+sub+'<br>F1 '+($('#guiParams .param:nth-child(1)')?.innerText||'')+'<br>F2/F3/F4 linked';
+}
+function buildMV(){
+ const mv=$('#mv');mv.className='mv '+(S.mv===4?'type4':'type10');mv.innerHTML='';
+ let items=S.mv===4?['PVW','PGM','IN03','IN04']:['PVW','PGM','IN03','IN04','IN05','IN06','IN07','IN08','STL1','MAT1'];
+ items.forEach((name,i)=>{const d=document.createElement('div');d.className='mvCell '+(S.mv===10&&i<2?'large ':'')+(name==='PGM'?'pgm ':'')+(name==='PVW'?'pvw ':'');const source=name==='PGM'?S.pgm:name==='PVW'?S.pvw:name;d.innerHTML='<div class="mvImg '+(i%3===1?'alt':i%3===2?'alt2':'')+'"></div><div class="mvBadge">'+source+'</div><div class="mvTitle">'+name+(name==='PGM'?' · PROGRAM':name==='PVW'?' · PREVIEW':'')+'</div>';if(S.ftb&&name==='PGM')d.style.filter='brightness(.08)';mv.appendChild(d)});
+}
+function status(){ $('#stPgm').textContent=S.pgm;$('#stPvw').textContent=S.pvw;$('#stTrans').textContent=S.transition;$('#stKey').textContent=S.delegation||'—';$('#stDsk1').textContent=S.dsk1?'On':'Off';$('#stDsk2').textContent=S.dsk2?'On':'Off';$('#guiStatus').textContent='DME: '+(S.dme?1:0)+' · Rate: '+S.rate+'f · PGM '+S.pgm+' · PVW '+S.pvw;buildMV() }
+function buses(){ $$('.program').forEach(b=>b.classList.toggle('active',b.dataset.src===S.pgm));$$('.preset').forEach(b=>b.classList.toggle('active',b.dataset.src===S.pvw))}
+function cut(){const t=S.pgm;S.pgm=S.pvw;S.pvw=t;S.fader=0;buses();status()}
+function autoTrans(){const t=S.pgm;S.pgm=S.pvw;S.pvw=t;buses();status();const b=$('[data-id="autoTrans"]');b.classList.add('active');setTimeout(()=>b.classList.remove('active'),350)}
+function clickControl(el){
+ const id=el.dataset.id;if(!id)return;
+ if(id.startsWith('del')){S.delegation=id.slice(3);$$('#delegation .ctrl').forEach(x=>x.classList.toggle('active',x===el));info(id,S.delegation,'KEY DELEGATION','Seleciona '+S.delegation+' como alvo para KEYER, DME e joystick.');status();return}
+ if(id.startsWith('keypad')){el.classList.add('active');setTimeout(()=>el.classList.remove('active'),120);const i=+id.replace('keypad','');const label=keypad[i].join(' / ');info(id,label,'Numeric keypad','A tecla muda de função conforme MENU, EVENT ou SEQ. Em entrada numérica, ENTER confirma e CANCEL cancela.');return}
+ if(['mix','wipe','dmeTrans'].includes(id)){S.transition=id==='mix'?'MIX':id==='wipe'?'WIPE':'DME';selectExclusive(['mix','wipe','dmeTrans'].map(x=>$('[data-id="'+x+'"]')),id);setMenu('Transition',S.transition==='MIX'?'Rate':S.transition==='WIPE'?'Wipe Pattern':'DME Pattern');status()}
+ else if(id==='cut')cut();
+ else if(id==='autoTrans')autoTrans();
+ else if(id==='ftb'){S.ftb=!S.ftb;el.classList.toggle('active',S.ftb);status()}
+ else if(id==='shiftDme'){S.shift=!S.shift;el.classList.toggle('active',S.shift);setMenu(S.shift?'Setup':'DME',S.shift?'System':'Basic')}
+ else if(id==='subMv'){setMenu(S.shift?'Setup':'DME',S.shift?'Multi-view':'Sub Effects',[['F1','Type',S.mv+' windows'],['F2','Window','1'],['F3','Source','PGM'],['F4','Title','On']])}
+ else if(id==='basicMatte')setMenu(S.shift?'Setup':'DME',S.shift?'Matte':'Basic');
+ else if(id==='borderInput')setMenu(S.shift?'Setup':'DME',S.shift?'Input':'Border');
+ else if(id==='warpSystem')setMenu(S.shift?'Setup':'DME',S.shift?'System':'Warp');
+ else if(id==='lightStatus')setMenu(S.shift?'Setup':'DME',S.shift?'Status':'Light');
+ else if(id==='userStill')setMenu(S.shift?'Still':'DME',S.shift?'Store':'User');
+ else if(id==='dsk1on'){S.dsk1=!S.dsk1;el.classList.toggle('active',S.dsk1);status()}
+ else if(id==='dsk2on'){S.dsk2=!S.dsk2;el.classList.toggle('active',S.dsk2);status()}
+ else if(id==='dsk1auto'){S.dsk1=!S.dsk1;$('[data-id="dsk1on"]').classList.toggle('active',S.dsk1);status()}
+ else if(id==='dsk2auto'){S.dsk2=!S.dsk2;$('[data-id="dsk2on"]').classList.toggle('active',S.dsk2);status()}
+ else if(['ext','self','ck'].includes(id)){S.keyType=id.toUpperCase();selectExclusive(['ext','self','ck'].map(x=>$('[data-id="'+x+'"]')),id);setMenu('Keyer','Type',[['F1','Type',S.keyType],['F2','Fill','Auto'],['F3','Source','Auto'],['F4','Key','On']])}
+ else if(id==='mask')setMenu('Keyer','Mask');
+ else if(id==='edge')setMenu('Keyer','Edge');
+ else if(id==='dmeEnable'){S.dme=!S.dme;el.classList.toggle('active',S.dme);status()}
+ else if(id==='fine'){S.fine=!S.fine;el.classList.toggle('active',S.fine)}
+ else if(['axisX','axisY','axisZ'].includes(id)){S.axis=id.slice(-1).toUpperCase();selectExclusive(['axisX','axisY','axisZ'].map(x=>$('[data-id="'+x+'"]')),id)}
+ else if(id==='dmePos')setMenu('DME','Position',[['F1','X','0.00'],['F2','Y','0.00'],['F3','Z','0.00'],['F4','Global','Off']]);
+ else if(id==='dmeRot')setMenu('DME','Rotation',[['F1','X','0.0°'],['F2','Y','0.0°'],['F3','Z','0.0°'],['F4','Global','Off']]);
+ else if(id==='wipePos')setMenu('Transition','Wipe Pattern',[['F1','X','0.00'],['F2','Y','0.00'],['F3','Pattern','1'],['F4','Aspect','0']]);
+ else if(['editor','gpi','transPvw','bkgd','key1t','key2t','key3t','key4t','faderLimit','norRev','reverse'].includes(id))el.classList.toggle('active');
+ const d=desc[id];if(d)info(id,d[0],d[1],d[2])
+}
+$$('.ctrl').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();clickControl(el)}));
+$$('.knob').forEach(el=>el.addEventListener('click',()=>{el.classList.add('active');setTimeout(()=>el.classList.remove('active'),180);const n=+el.dataset.id.slice(1);if(n===1){S.rate=(S.rate+5)%105||5;setMenu(S.menu,S.submenu,[['F1','Rate',S.rate+'f'],['F2','Mode',S.transition],['F3','Direction','Normal'],['F4','Status','Ready']]);status()}info(el.dataset.id,el.dataset.id.toUpperCase(),'Menu encoder','Gira para alterar o parâmetro correspondente; pressionar habilita entrada numérica e manter pressionado executa ações quando o menu permitir.')}));
+
+$$('[data-bus]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const src=b.dataset.src;if(src==='SHIFT'){b.classList.toggle('active');info('shift','SHIFT do bus','Cross-point bus','Alterna ou mantém a segunda camada de fontes conforme o modo configurado.');return}if(b.dataset.bus==='program')S.pgm=src;else S.pvw=src;buses();status();info('bus',b.dataset.bus.toUpperCase()+' '+src,'Cross-point bus',b.dataset.bus==='program'?'Seleciona a fonte atualmente no ar; a tecla acende em vermelho.':'Seleciona a próxima fonte; a tecla acende em verde.')}));
+
+let drag=false;
+const tbar=$('#tbar'),area=tbar.parentElement;
+function setTbar(y){const r=area.getBoundingClientRect();let p=Math.max(0,Math.min(1,(y-r.top)/r.height));S.fader=p;tbar.style.top=(6+p*76)+'%';$('#guiHint').textContent='T-bar '+Math.round(p*100)+'%';if(p>.98){cut();tbar.style.top='42%';S.fader=0}}
+tbar.addEventListener('pointerdown',e=>{drag=true;tbar.setPointerCapture(e.pointerId)});tbar.addEventListener('pointermove',e=>{if(drag)setTbar(e.clientY)});tbar.addEventListener('pointerup',()=>drag=false);
+
+let joy=false;const ring=$('#joyRing'),dot=$('#joyDot');
+ring.addEventListener('pointerdown',e=>{joy=true;ring.setPointerCapture(e.pointerId)});
+ring.addEventListener('pointermove',e=>{if(!joy)return;const r=ring.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,dx=e.clientX-cx,dy=e.clientY-cy,max=r.width*.32,len=Math.hypot(dx,dy)||1;if(len>max){dx*=max/len;dy*=max/len}dot.style.transform='translate('+dx+'px,'+dy+'px)';$('#guiHint').textContent=S.axis+' '+(S.fine?'FINE ':'')+Math.round((S.axis==='Y'?-dy:dx))});
+ring.addEventListener('pointerup',()=>joy=false);
+
+$('#mvType').onclick=()=>{S.mv=S.mv===10?16:S.mv===16?4:10;$('#mvType').textContent='Multiview '+S.mv;buildMV();if(S.menu==='Setup'&&S.submenu==='Multi-view')setMenu('Setup','Multi-view',[['F1','Type',S.mv+' windows'],['F2','Window','1'],['F3','Source','PGM'],['F4','Title','On']])};
+$('#reset').onclick=()=>location.reload();
+setMenu('Transition','Rate');buses();$('[data-id="mix"]').classList.add('active');buildMV();status();
 })();
 </script></body></html>
