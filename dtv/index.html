@@ -37,15 +37,17 @@ main{max-width:1580px;margin:auto;padding:18px}h1{margin:0 0 4px;font-size:29px}
 .srcScene.cam7 .wall{background:linear-gradient(135deg,#382c22,#6b5541)}.srcScene.cam7 .desk{left:8%;right:8%}
 .srcScene.cam8 .wall{background:linear-gradient(135deg,#201d35,#383e67)}.srcScene.cam8 .screenBox{left:8%;right:auto}
 .srcScene.still{background:linear-gradient(135deg,#966f47,#3e2d23)}.srcScene.still:after{content:"STILL";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font:700 18px Arial}
-.srcScene.matte{background:#2b61b8}.srcScene.matte:after{content:"MATTE";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font:700 14px Arial}.mvTitle{position:absolute;left:5px;bottom:4px;font:700 9px Arial;color:#fff;text-shadow:0 1px 2px #000}.mvBadge{position:absolute;right:4px;top:4px;font:700 8px Arial;padding:2px 4px;background:#0009;color:#fff}
+.srcScene.matte{background:#2b61b8}.srcScene.matte:after{content:"MATTE";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font:700 14px Arial}
+.dskVT{position:absolute;inset:7% 7% 7% 7%;z-index:3;border:2px solid #eceff1;background:linear-gradient(135deg,#6b291f,#d28139);box-shadow:0 3px 12px #0008}.dskVT:before{content:"VT";position:absolute;left:8%;top:10%;font:800 18px Arial;color:#fff}.dskVT:after{content:"PLAYOUT";position:absolute;right:7%;bottom:8%;font:700 8px Arial;color:#fff}
+.dskGC{position:absolute;left:7%;right:7%;bottom:9%;height:24%;z-index:4;background:linear-gradient(90deg,rgba(20,55,90,.88),rgba(35,110,160,.64),rgba(35,110,160,0));border-left:4px solid rgba(255,255,255,.85);color:#fff;padding:5% 5%;font:700 9px Arial;text-shadow:0 1px 2px #000}.dskGC:before{content:"GC · LOWER THIRD";display:block;font-size:10px}.dskGC:after{content:"Composição com canal alpha";display:block;font-weight:400;font-size:7px;margin-top:3px}.mvTitle{position:absolute;left:5px;bottom:4px;font:700 9px Arial;color:#fff;text-shadow:0 1px 2px #000}.mvBadge{position:absolute;right:4px;top:4px;font:700 8px Arial;padding:2px 4px;background:#0009;color:#fff}
 .workspace{display:grid;grid-template-columns:minmax(820px,1fr) 360px;gap:16px;align-items:start}.stage{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:14px;overflow:auto}.panel{position:relative;aspect-ratio:482/221;min-width:790px;width:100%;background:linear-gradient(#9da2ad,#7e8490);border:2px solid #555b64;border-radius:18px;box-shadow:0 16px 35px rgba(0,0,0,.28);color:var(--ink);overflow:hidden}
 .panel:before{content:"SONY";position:absolute;left:1.7%;top:1.2%;font-weight:900;font-size:clamp(13px,1.3vw,22px);color:#edf0f2}.panel:after{content:"BKDF-901   1M/E CONTROL PANEL";position:absolute;right:2%;top:1.8%;font:700 8px Arial;color:#42474e}
 .block{position:absolute;background:#7b818c;border:1px solid #5c626b;border-radius:5px;padding:.45%;box-shadow:inset 0 1px rgba(255,255,255,.28)}.block[data-label]::before{content:attr(data-label);position:absolute;left:2%;top:-9px;font:700 6px Arial;color:#30343a;letter-spacing:.04em;white-space:nowrap}.blockTitle{position:absolute;left:2%;top:-10px;font:700 7px Arial;color:#30343a;white-space:nowrap}
-.ctrl{position:relative;border:1px solid #686d73;background:linear-gradient(#f5f5f1,#cfd0ca);color:#171a1e;border-radius:3px;min-width:0;padding:0;display:flex;align-items:center;justify-content:center;text-align:center;font:700 7px/1.05 Arial;cursor:pointer;box-shadow:inset 0 1px #fff8,0 1px 1px #0004;transition:background .12s,box-shadow .12s,filter .12s}.ctrl:hover{filter:brightness(1.04)}.ctrl.active{background:linear-gradient(#f9d774,#e7a52d);box-shadow:inset 0 0 0 1px #ffd968,0 0 9px rgba(241,169,39,.75)}.ctrl.green{background:linear-gradient(#cfe9ca,#8fc888)}.ctrl.red{background:linear-gradient(#f1c6c7,#d2787b)}.ctrl.orange{background:linear-gradient(#f6d39a,#dd9b40)}.ctrl.dark{background:linear-gradient(#555b63,#25292f);color:#f4f5f4}.delegation .ctrl.active,.keyer .ctrl.active,.dme .ctrl.active.greenState,.joystick .ctrl.active{background:linear-gradient(#baf4ba,#55c969);box-shadow:inset 0 0 0 1px #d8ffd8,0 0 9px rgba(85,201,105,.75)}.ctrl.program.active{background:linear-gradient(#ffaaa9,#e74b4b);box-shadow:inset 0 0 0 1px #ffd0cf,0 0 9px rgba(231,75,75,.8)}.ctrl.preset.active{background:linear-gradient(#b8f4b8,#4fc968);box-shadow:inset 0 0 0 1px #d9ffd9,0 0 9px rgba(79,201,104,.8)}.led{position:absolute;width:4px;height:4px;border-radius:50%;top:2px;right:2px;background:#343a3d}.ctrl.active .led{background:#fff4b0;box-shadow:0 0 4px #fff4b0}.ctrl.program.active .led{background:#fff;box-shadow:0 0 4px #fff}.ctrl.preset.active .led{background:#fff;box-shadow:0 0 4px #fff}
+.ctrl{position:relative;border:1px solid #686d73;background:linear-gradient(#f5f5f1,#cfd0ca);color:#171a1e;border-radius:3px;min-width:0;padding:0;display:flex;align-items:center;justify-content:center;text-align:center;font:700 7px/1.05 Arial;cursor:pointer;box-shadow:inset 0 1px #fff8,0 1px 1px #0004;transition:background .12s,box-shadow .12s,filter .12s}.ctrl:hover{filter:brightness(1.04)}.ctrl.active{background:linear-gradient(#f9d774,#e7a52d);box-shadow:inset 0 0 0 1px #ffd968,0 0 9px rgba(241,169,39,.75)}.ctrl.green{background:linear-gradient(#cfe9ca,#8fc888)}.ctrl.red{background:linear-gradient(#f1c6c7,#d2787b)}.ctrl.orange{background:linear-gradient(#f6d39a,#dd9b40)}.ctrl.dark{background:linear-gradient(#555b63,#25292f);color:#f4f5f4}.delegation .ctrl.active,.keyer .ctrl.active,.dme .ctrl.active.greenState,.joystick .ctrl.active{background:linear-gradient(#baf4ba,#55c969);box-shadow:inset 0 0 0 1px #d8ffd8,0 0 9px rgba(85,201,105,.75)}.ctrl.program.active{background:linear-gradient(#ffaaa9,#e74b4b);box-shadow:inset 0 0 0 1px #ffd0cf,0 0 9px rgba(231,75,75,.8)}.ctrl.preset.active{background:linear-gradient(#b8f4b8,#4fc968);box-shadow:inset 0 0 0 1px #d9ffd9,0 0 9px rgba(79,201,104,.8)}.ctrl.green.active{background:linear-gradient(#ffe28a,#eca62e);box-shadow:inset 0 0 0 1px #fff1b0,0 0 9px rgba(236,166,46,.8)}.dsk [data-id="dsk1on"].active,.dsk [data-id="dsk2on"].active{background:linear-gradient(#ffaaa9,#e74b4b);box-shadow:inset 0 0 0 1px #ffd0cf,0 0 9px rgba(231,75,75,.8)}.led{position:absolute;width:4px;height:4px;border-radius:50%;top:2px;right:2px;background:#343a3d}.ctrl.active .led{background:#fff4b0;box-shadow:0 0 4px #fff4b0}.ctrl.program.active .led{background:#fff;box-shadow:0 0 4px #fff}.ctrl.preset.active .led{background:#fff;box-shadow:0 0 4px #fff}
 .external{left:2%;top:10%;width:9%;height:31%;display:grid;grid-template-columns:1fr;grid-template-rows:1.1fr repeat(3,1fr);gap:4%}.usb{background:#454b53;border:1px solid #22272c;border-radius:3px;color:#fff;display:flex;align-items:center;justify-content:center;font:700 6px Arial}
 .display{left:12%;top:10%;width:38%;height:31%}.lcd{position:absolute;left:3%;right:3%;top:8%;height:48%;background:#111811;border:2px solid #373e39;border-radius:3px;color:#b8d3b0;padding:2.2%;font:7px ui-monospace,monospace}.frow{position:absolute;left:6%;right:6%;bottom:6%;height:24%;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;justify-items:center}.knob{width:23px;height:23px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#59616a,#181c20 60%,#050607 100%);border:1.5px solid #262b31;color:#dce0e1;display:flex;align-items:center;justify-content:center;font:700 5px Arial;cursor:pointer}.knob.active{outline:2px solid var(--accent)}
 .keypad{left:51%;top:10%;width:17%;height:31%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:3%;padding:1%}.keypad .ctrl{font-size:6px}.joystick{left:69%;top:10%;width:29%;height:31%}.joyBtns{position:absolute;left:4%;top:18%;bottom:12%;width:31%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:5%}.joyBtns .ctrl{font-size:5.2px}.joyPad{position:absolute;right:3.5%;top:7%;width:53%;aspect-ratio:1;border-radius:50%;background:#656c76;border:2px solid #3b4148}.joyRing{position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle,#525a63 0 28%,#171b20 29% 55%,#555d66 56% 100%);border:2px solid #252a2f;cursor:grab}.joyDot{position:absolute;left:47%;top:47%;width:6%;height:6%;border-radius:50%;background:#ddd;pointer-events:none}
-.keyer{left:2%;top:43%;width:35%;height:12%;display:grid;grid-template-columns:1.15fr repeat(5,1fr);gap:1.5%;padding:1%}.delegation{left:2%;top:57%;width:35%;height:11%;display:grid;grid-template-columns:repeat(6,1fr);gap:1.5%;padding:1%}
+.keyer{left:2%;top:43%;width:35%;height:12%;position:absolute;padding:0}.keyer .ctrl{position:absolute;height:38%;font-size:5.8px}.keyer [data-id="dmeEnable"]{left:2%;bottom:7%;width:14%}.keyer [data-id="ext"]{left:20%;top:20%;width:12%}.keyer [data-id="self"]{left:34%;top:20%;width:12%}.keyer [data-id="ck"]{left:48%;top:20%;width:12%}.keyer [data-id="mask"]{left:64%;top:20%;width:12%}.keyer [data-id="edge"]{left:78%;top:20%;width:20%}.keyer:after{content:"KEY TYPE";position:absolute;left:20%;top:2%;width:40%;text-align:center;font:700 5px Arial;color:#34383d}.delegation{left:2%;top:57%;width:35%;height:11%;display:grid;grid-template-columns:repeat(6,1fr);gap:1.5%;padding:1%}
 .dme{left:38%;top:43%;width:30%;height:12%;display:grid;grid-template-columns:.85fr repeat(6,1fr) .75fr;grid-template-rows:1fr;gap:1.2%;padding:1.2%}.dme .ctrl{font-size:5.6px;line-height:1.05}.cross{left:2%;top:70%;width:66%;height:25%;padding:1%}.busrow{height:43%;display:grid;grid-template-columns:1.2fr repeat(12,1fr) 1.2fr;gap:.55%;margin-bottom:2%}.busLabel{position:absolute;left:.5%;font:700 6px Arial;color:#3a3f44}.busLabel.pgm{top:7%}.busLabel.pre{top:54%}
 .transition{left:69%;top:43%;width:29%;height:52%;padding:1%}.transTop{height:35%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:3%}.transTop .ctrl{font-size:6px}.tbarArea{position:absolute;left:34%;top:38%;width:35%;height:57%;background:#6f7580;border:1px solid #535963;border-radius:5px}.tbarTrack{position:absolute;left:46%;top:8%;bottom:8%;width:8%;background:#24292e;border-radius:6px}.tbar{position:absolute;left:13%;width:74%;height:16%;background:#e3e4df;border:1px solid #676d73;border-radius:9px;cursor:ns-resize;top:42%}.ftb{position:absolute;right:7%;top:18%;width:14%;height:13%;font-size:6px}.dsk{position:absolute;right:4%;bottom:5%;width:27%;height:43%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:7%}.dsk .ctrl{font-size:6px}
 .side{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:15px;position:sticky;top:10px}.side h2{margin:0 0 4px;font-size:23px}.term{color:var(--muted);font-size:13px;margin-bottom:13px}.ey{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:750;margin:13px 0 5px}.copy{line-height:1.58;margin:0;font-size:14px}.statusGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.status{background:#12171b;border:1px solid #354049;border-radius:10px;padding:8px}.status b{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}.status span{font-size:13px;font-weight:650}.note{margin-top:12px;background:#0f1418;border:1px solid #303940;border-radius:10px;padding:10px;line-height:1.5;font-size:13px}
@@ -114,14 +116,14 @@ main{max-width:1580px;margin:auto;padding:18px}h1{margin:0 0 4px;font-size:29px}
 <h2 id="infoTitle">BKDF-901</h2><div class="term" id="infoTerm">Painel 1 M/E da DFS-900M</div>
 <div class="ey">Função</div><p class="copy" id="infoWhat">Clique em qualquer controle. O simulador atualiza o estado do painel e, quando aplicável, a GUI e o multiview.</p>
 <div class="ey">Comportamento</div><p class="copy" id="infoHow">PROGRAM acende em vermelho, PRESET em verde. CUT, AUTO TRANS e o T-bar alteram a saída PGM/PVW.</p>
-<div class="statusGrid"><div class="status"><b>Program</b><span id="stPgm">1</span></div><div class="status"><b>Preset</b><span id="stPvw">2</span></div><div class="status"><b>Transição</b><span id="stTrans">MIX</span></div><div class="status"><b>Key target</b><span id="stKey">—</span></div><div class="status"><b>DSK1</b><span id="stDsk1">Off</span></div><div class="status"><b>DSK2</b><span id="stDsk2">Off</span></div></div>
+<div class="statusGrid"><div class="status"><b>Program</b><span id="stPgm">CAM1</span></div><div class="status"><b>Preset</b><span id="stPvw">CAM2</span></div><div class="status"><b>Transição</b><span id="stTrans">MIX</span></div><div class="status"><b>Key target</b><span id="stKey">—</span></div><div class="status"><b>DSK1</b><span id="stDsk1">Off</span></div><div class="status"><b>DSK2</b><span id="stDsk2">Off</span></div></div>
 <div class="note">A geometria geral respeita 482 × 221 mm. Os controles foram posicionados segundo os blocos e proporções do desenho técnico do manual, e a lógica segue o funcionamento documentado da BKDF-901.</div>
 </aside>
 </div>
 <script>
 (()=>{
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const S={pgm:'1',pvw:'2',transition:'MIX',delegation:null,keyType:null,dsk1:false,dsk2:false,ftb:false,mv:10,shift:false,rate:30,fader:0,menu:'Transition',submenu:'Rate',fine:false,axis:'X',dme:false};
+const S={pgm:'CAM1',pvw:'CAM2',transition:'MIX',delegation:null,keyType:null,dsk1:false,dsk2:false,ftb:false,mv:10,shift:false,rate:30,fader:0,menu:'Transition',submenu:'Rate',fine:false,axis:'X',dme:false};
 const desc={
 editor:['EDITOR','Controle externo por editor','Liga/desliga o controle por editor. Dois acionamentos rápidos abrem o menu Serial no display.'],
 gpi:['GPI','Controle por GPI','Liga/desliga o controle por GPI. Dois acionamentos rápidos abrem o menu GPIO Tally.'],
@@ -144,8 +146,8 @@ const keypad=[
 ];
 keypad.forEach(([a,b],i)=>{const btn=document.createElement('button');btn.className='ctrl';btn.dataset.id='keypad'+i;btn.innerHTML=a+(b?'<br>'+b:'');$('#keypad').appendChild(btn)});
 ['KEY1','KEY2','KEY3','KEY4','DSK1','DSK2'].forEach(k=>{const b=document.createElement('button');b.className='ctrl';b.dataset.id='del'+k;b.textContent=k;$('#delegation').appendChild(b)});
-const sources=['BLACK','1','2','3','4','5','6','7','8','9','10','11','12','SHIFT'];
-sources.forEach(src=>{['program','preset'].forEach(bus=>{const b=document.createElement('button');b.className='ctrl '+bus;b.dataset.bus=bus;b.dataset.src=src;b.innerHTML=src+'<span class="led"></span>';$('#'+bus+'Bus').appendChild(b)})});
+const sources=['BLACK','CAM1','CAM2','CAM3','CAM4','VT','PROJ','VMIX','GC','—','—','—','—','SHIFT'];
+sources.forEach(src=>{['program','preset'].forEach(bus=>{const b=document.createElement('button');b.className='ctrl '+bus;b.dataset.bus=bus;b.dataset.src=src;b.innerHTML=src+'<span class="led"></span>';if(src==='—'){b.disabled=true;b.style.opacity='.28';b.style.cursor='default'}$('#'+bus+'Bus').appendChild(b)})});
 
 function info(id,title,term,how){$('#infoTitle').textContent=title||id;$('#infoTerm').textContent=term||'';$('#infoWhat').textContent=how||'';$('#infoHow').textContent='Estado e dependências são atualizados imediatamente na interface.'}
 function selectExclusive(ids,id){ids.forEach(x=>x.classList.toggle('active',x.dataset.id===id))}
@@ -184,35 +186,40 @@ function setMenu(menu,sub,params){
  setLCD(m.lcd,m.support);
 }
 function sceneMarkup(source){
- const s=String(source);
- if(s==='BLACK'||s==='BLK') return '<div class="srcScene black"></div>';
- if(s==='STL1'||s==='STL2') return '<div class="srcScene still"></div>';
- if(s==='MAT1'||s==='MAT2'||s==='MAT3'||s==='MAT4') return '<div class="srcScene matte"></div>';
- const n=parseInt(s.replace(/\D/g,''),10)||1;
+ const s=String(source).toUpperCase();
+ if(s==='BLACK'||s==='BLK'||s==='—') return '<div class="srcScene black"></div>';
+ if(s==='VT') return '<div class="srcScene still" style="background:linear-gradient(135deg,#6b291f,#d28139)"></div>';
+ if(s==='GC') return '<div class="srcScene matte" style="background:linear-gradient(135deg,#244c72,#4aa3d8)"></div>';
+ if(s==='PROJ') return '<div class="srcScene cam5"><div class="wall"></div><div class="floor"></div><div class="screenBox" style="left:18%;right:18%;width:auto;height:55%;top:14%"></div></div>';
+ if(s==='VMIX') return '<div class="srcScene cam8"><div class="wall"></div><div class="floor"></div><div class="screenBox" style="left:8%;right:8%;width:auto;height:62%;top:10%"></div></div>';
+ const map={CAM1:1,CAM2:2,CAM3:3,CAM4:4};
+ const n=map[s]||1;
  if(n===4) return '<div class="srcScene cam4"></div>';
- const cls='cam'+(((n-1)%8)+1);
+ const cls='cam'+n;
  let people=n===2?'<div class="person two"></div><div class="person two2"></div>':'<div class="person"></div>';
- return '<div class="srcScene '+cls+'"><div class="wall"></div><div class="floor"></div>'+people+(n%3===0?'<div class="desk"></div>':'')+(n%2===1?'<div class="screenBox"></div>':'')+'</div>';
+ return '<div class="srcScene '+cls+'"><div class="wall"></div><div class="floor"></div>'+people+(n===3?'<div class="desk"></div>':'')+(n===1?'<div class="screenBox"></div>':'')+'</div>';
 }
 function sourceName(source){
- const s=String(source);
- if(s==='BLACK')return 'BLACK';
- if(/^\d+$/.test(s))return 'CAM '+s;
- return s;
+ const s=String(source).toUpperCase();
+ return s==='—'?'UNASSIGNED':s;
 }
 function buildMV(){
  const mv=$('#mv');mv.className='mv '+(S.mv===4?'type4':'type10');mv.innerHTML='';
- let items=S.mv===4?['PVW','PGM','IN03','IN04']:S.mv===16?['PVW','PGM','IN03','IN04','IN05','IN06','IN07','IN08','IN09','IN10','IN11','IN12','STL1','STL2','MAT1','BLACK']:['PVW','PGM','IN03','IN04','IN05','IN06','IN07','IN08','STL1','BLACK'];
+ const fixed=['CAM1','CAM2','CAM3','CAM4','VT','PROJ','VMIX','GC'];
+ let items=S.mv===4?['PVW','PGM','CAM1','CAM2']:S.mv===16?['PVW','PGM','CAM1','CAM2','CAM3','CAM4','VT','PROJ','VMIX','GC','BLACK','BLACK','BLACK','BLACK','BLACK','BLACK']:['PVW','PGM',...fixed];
  items.forEach((name,i)=>{
    const d=document.createElement('div');
    d.className='mvCell '+(S.mv===10&&i<2?'large ':'')+(name==='PGM'?'pgm ':'')+(name==='PVW'?'pvw ':'');
-   let source=name==='PGM'?S.pgm:name==='PVW'?S.pvw:name==='BLACK'?'BLACK':name.startsWith('IN')?String(parseInt(name.slice(2),10)):name;
+   const source=name==='PGM'?S.pgm:name==='PVW'?S.pvw:name;
    const next=name==='PGM'?S.pvw:source;
    const mix=(name==='PGM'?S.fader||0:0);
    if(name==='PGM'&&mix>0)d.classList.add(S.transition==='WIPE'?'wipe':S.transition==='DME'?'dme':'mix');
    d.style.setProperty('--mix',mix);
-   d.innerHTML=sceneMarkup(source)+(name==='PGM'?'<div class="mvNext">'+sceneMarkup(next)+'</div><div class="mvProgress"></div>':'')+'<div class="mvBadge">'+sourceName(source)+'</div><div class="mvTitle">'+name+(name==='PGM'?' · PROGRAM':name==='PVW'?' · PREVIEW':'')+'</div>';
-   if(S.ftb&&name==='PGM')d.innerHTML='<div class="srcScene black"></div><div class="mvBadge">BLACK</div><div class="mvTitle">PGM · PROGRAM</div>';
+   let overlays='';
+   if(name==='PGM'&&S.dsk1)overlays+='<div class="dskVT"></div>';
+   if(name==='PGM'&&S.dsk2)overlays+='<div class="dskGC"></div>';
+   d.innerHTML=sceneMarkup(source)+(name==='PGM'?'<div class="mvNext">'+sceneMarkup(next)+'</div><div class="mvProgress"></div>':'')+overlays+'<div class="mvBadge">'+sourceName(source)+'</div><div class="mvTitle">'+name+(name==='PGM'?' · PROGRAM':name==='PVW'?' · PREVIEW':'')+'</div>';
+   if(S.ftb&&name==='PGM')d.innerHTML='<div class="srcScene black"></div>'+overlays+'<div class="mvBadge">BLACK</div><div class="mvTitle">PGM · PROGRAM</div>';
    mv.appendChild(d);
  });
 }
@@ -242,10 +249,10 @@ function clickControl(el){
  else if(id==='warpSystem')setMenu(S.shift?'Setup':'DME',S.shift?'System':'Warp');
  else if(id==='lightStatus')setMenu(S.shift?'Setup':'DME',S.shift?'Status':'Light');
  else if(id==='userStill')setMenu(S.shift?'Still':'DME',S.shift?'Store':'User');
- else if(id==='dsk1on'){S.dsk1=!S.dsk1;el.classList.toggle('active',S.dsk1);status()}
- else if(id==='dsk2on'){S.dsk2=!S.dsk2;el.classList.toggle('active',S.dsk2);status()}
- else if(id==='dsk1auto'){S.dsk1=!S.dsk1;$('[data-id="dsk1on"]').classList.toggle('active',S.dsk1);status()}
- else if(id==='dsk2auto'){S.dsk2=!S.dsk2;$('[data-id="dsk2on"]').classList.toggle('active',S.dsk2);status()}
+ else if(id==='dsk1on'){S.dsk1=!S.dsk1;el.classList.toggle('active',S.dsk1);setLCD('DSK1','VT '+(S.dsk1?'On':'Off'));status()}
+ else if(id==='dsk2on'){S.dsk2=!S.dsk2;el.classList.toggle('active',S.dsk2);setLCD('DSK2','GC Alpha '+(S.dsk2?'On':'Off'));status()}
+ else if(id==='dsk1auto'){el.classList.add('active');setTimeout(()=>el.classList.remove('active'),350);S.dsk1=!S.dsk1;$('[data-id="dsk1on"]').classList.toggle('active',S.dsk1);setLCD('DSK1 Auto','VT '+(S.dsk1?'In':'Out'));status()}
+ else if(id==='dsk2auto'){el.classList.add('active');setTimeout(()=>el.classList.remove('active'),350);S.dsk2=!S.dsk2;$('[data-id="dsk2on"]').classList.toggle('active',S.dsk2);setLCD('DSK2 Auto','GC Alpha '+(S.dsk2?'In':'Out'));status()}
  else if(['ext','self','ck'].includes(id)){S.keyType=id.toUpperCase();selectExclusive(['ext','self','ck'].map(x=>$('[data-id="'+x+'"]')),id);setMenu('Keyer',id==='ext'?'External Key':id==='self'?'Self Key':'CK Manual 1')}
  else if(id==='mask')setMenu('Keyer','Mask');
  else if(id==='edge')setMenu('Keyer','Edge');
@@ -261,7 +268,7 @@ function clickControl(el){
 $$('.ctrl').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();clickControl(el)}));
 $('.knob').forEach(el=>el.addEventListener('click',()=>{el.classList.add('active');setTimeout(()=>el.classList.remove('active'),180);const n=+el.dataset.id.slice(1);if(S.menu==='Setup'&&S.submenu==='Multi-view'){if(n===1){S.mv=S.mv===4?10:S.mv===10?16:4;$('#mvType').textContent='Multiview '+S.mv;setMenu('Setup','Multi-view');buildMV()}else if(n===3){setLCD('MV1 Window','');$('#lcd').innerHTML='MV1 Window<br>Type='+S.mv+'&nbsp;&nbsp;&nbsp;Win=1&nbsp;&nbsp;&nbsp;Sig='+(S.pgm==='BLACK'?'BLK':'PGM')+'&nbsp;&nbsp;&nbsp;Name=On'}}else if(S.menu==='Transition'&&S.submenu==='Rate'){if(n===2){S.rate=(S.rate+5)%1000||1;setMenu('Transition','Rate');status()}}info(el.dataset.id,el.dataset.id.toUpperCase(),'Menu encoder','O parâmetro sob F1–F4 segue a função real exibida no LCD.') }));
 
-$$('[data-bus]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const src=b.dataset.src;if(src==='SHIFT'){b.classList.toggle('active');info('shift','SHIFT do bus','Cross-point bus','Alterna ou mantém a segunda camada de fontes conforme o modo configurado.');return}if(b.dataset.bus==='program')S.pgm=src;else S.pvw=src;buses();status();info('bus',b.dataset.bus.toUpperCase()+' '+src,'Cross-point bus',b.dataset.bus==='program'?'Seleciona a fonte atualmente no ar; a tecla acende em vermelho.':'Seleciona a próxima fonte; a tecla acende em verde.')}));
+$('[data-bus]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();if(b.disabled)return;const src=b.dataset.src;if(src==='SHIFT'){b.classList.toggle('active');info('shift','SHIFT do bus','Cross-point bus','Alterna ou mantém a segunda camada de fontes conforme o modo configurado.');return}if(b.dataset.bus==='program')S.pgm=src;else S.pvw=src;buses();status();info('bus',b.dataset.bus.toUpperCase()+' '+src,'Cross-point bus',b.dataset.bus==='program'?'Seleciona a fonte atualmente no ar; a tecla acende em vermelho.':'Seleciona a próxima fonte; a tecla acende em verde.')}));
 
 let drag=false;
 const tbar=$('#tbar'),area=tbar.parentElement;
