@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DTV — Sony DFS-900M / BKDF-901</title>
+<style>
+:root{--bg:#0a0d10;--surface:#101419;--surface2:#151a20;--line:#303840;--text:#f4f6f7;--muted:#a7b0b7;--accent:#68b8ff;--green:#58d574}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{max-width:1520px;margin:auto;padding:18px}h1{margin:0 0 5px;font-size:29px}.lead{margin:0 0 14px;color:var(--muted);line-height:1.55}
+.topbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:13px}
+.btn{background:#11161b;color:var(--text);border:1px solid #414b54;border-radius:8px;padding:8px 11px;cursor:pointer;text-decoration:none}.btn:hover,.btn.active{border-color:var(--accent);background:#18364e}
+.layout{display:grid;grid-template-columns:minmax(760px,1fr) 390px;gap:18px;align-items:start}.card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:13px}
+.stage{position:relative;overflow:hidden;min-height:500px;display:flex;align-items:center;justify-content:center}.panelWrap{position:relative;width:100%;max-width:1120px}.panelWrap img{display:block;width:100%;height:auto}
+.hotspot{position:absolute;border:1px solid transparent;background:transparent;border-radius:8px;cursor:pointer}.hotspot:hover,.hotspot.active{border-color:var(--accent);background:rgba(104,184,255,.10);box-shadow:0 0 0 1px rgba(104,184,255,.18),0 0 18px rgba(104,184,255,.16)}
+.side h2{margin:0 0 4px;font-size:24px}.term{color:var(--muted);font-size:14px;margin-bottom:14px}.ey{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:750;margin:14px 0 6px}.copy{line-height:1.62;margin:0}.statusGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}.status{background:#12171b;border:1px solid #354049;border-radius:10px;padding:9px 10px}.status b{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}.status span{font-size:14px;font-weight:650}
+.note{margin-top:14px;background:#0f1418;border:1px solid #303940;border-radius:10px;padding:10px 11px;line-height:1.55}.source{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.45}
+.context-drawer{display:none!important;position:relative!important;width:100%!important;max-width:none!important;margin:0!important}.context-drawer.open{display:block!important}.context-close{float:right;width:38px;height:38px;border-radius:50%;border:1px solid #53616b;background:#11171c;color:#eef2f4;font:700 24px/1 system-ui;cursor:pointer;margin:-4px -4px 8px 12px}
+@media(max-width:1160px){.layout{grid-template-columns:1fr}.stage{min-height:420px}.context-drawer{margin-top:12px!important}}@media(max-width:760px){main{padding:10px}.stage{min-height:300px;padding:4px}.card{padding:9px}.side h2{font-size:21px}}
+</style></head>
+<body><main>
+<h1>DTV — Sony DFS-900M</h1>
+<p class="lead">Painel de operação BKDF-901 1M/E. A geometria segue os desenhos técnicos do manual Sony; as cores e o acabamento reproduzem a aparência real do painel.</p>
+<div class="topbar"><div>Selecione uma área do painel para abrir a explicação.</div><div><a class="btn" href="../rack/index.html">Rack principal</a><button class="btn" id="reset">Restaurar</button></div></div>
+<div class="layout">
+<section class="card stage"><div class="panelWrap" id="panelWrap">
+<img src="./assets/bkdf-901-manual.svg" alt="Painel Sony BKDF-901 1M/E">
+<button class="hotspot" data-zone="power" style="left:2.2%;top:10%;width:9.5%;height:35%" aria-label="Conexões externas e alimentação"></button>
+<button class="hotspot" data-zone="display" style="left:12.5%;top:10%;width:41.5%;height:35%" aria-label="Display e controle de menu"></button>
+<button class="hotspot" data-zone="keypad" style="left:55%;top:10%;width:15%;height:35%" aria-label="Teclado numérico"></button>
+<button class="hotspot" data-zone="joystick" style="left:71%;top:10%;width:26%;height:35%" aria-label="Joystick"></button>
+<button class="hotspot" data-zone="keyer" style="left:2.3%;top:50%;width:31%;height:13%" aria-label="Keyer"></button>
+<button class="hotspot" data-zone="dme" style="left:34%;top:50%;width:36%;height:13%" aria-label="DME e Setup"></button>
+<button class="hotspot" data-zone="delegation" style="left:2.3%;top:64%;width:31%;height:12%" aria-label="Key delegation"></button>
+<button class="hotspot" data-zone="crosspoint" style="left:2.3%;top:77%;width:68%;height:17%" aria-label="Cross-point buses"></button>
+<button class="hotspot" data-zone="transition" style="left:71%;top:50%;width:26%;height:44%" aria-label="Transições"></button>
+</div></section>
+
+<aside class="card side context-drawer" id="drawer">
+<button class="context-close" id="close" aria-label="Fechar explicação">×</button>
+<h2 id="title">BKDF-901</h2><div class="term" id="term">Painel 1 M/E da DFS-900M</div>
+<div class="ey">O que faz</div><p class="copy" id="what">Selecione uma das nove áreas funcionais do painel.</p>
+<div class="ey">Como usar</div><p class="copy" id="how">Os hotspots acompanham os blocos funcionais definidos no manual da Sony.</p>
+<div class="statusGrid"><div class="status"><b>Modelo</b><span>BKDF-901</span></div><div class="status"><b>Configuração</b><span>1 M/E</span></div><div class="status"><b>Sistema</b><span>DFS-900M</span></div><div class="status"><b>Vista</b><span>Operação</span></div></div>
+<div class="note" id="note">O rack principal não foi alterado. Esta página é uma seção DTV independente.</div>
+<div class="source">Referência de geometria: manual oficial Sony DFS-900M, capítulo “BKDF-901 1M/E Control Panel”, páginas 13–19. Paleta visual ajustada por referência fotográfica do equipamento real.</div>
+</aside>
+</div></main>
+<script>
+(()=>{
+const data={
+power:{title:'Conexões externas e alimentação',term:'Bloco 1',what:'Reúne o conector USB MEMORY e os comandos EDITOR, GPI e SHUTDOWN.',how:'EDITOR e GPI habilitam seus respectivos modos de controle. SHUTDOWN inicia o procedimento seguro de desligamento do painel antes do corte de alimentação.'},
+keyer:{title:'KEYER',term:'Bloco 2',what:'Seleciona o tipo de key e funções associadas, incluindo DME ENABLE, EXT, SELF, CK, MASK e EDGE SHADOW.',how:'Primeiro selecione a camada alvo no bloco KEY DELEGATION; depois escolha o tipo de key e os modificadores desejados.'},
+delegation:{title:'KEY DELEGATION',term:'Bloco 3',what:'Define qual keyer ou DSK será o alvo dos ajustes.',how:'Selecione KEY1–KEY4 ou DSK1/DSK2 antes de alterar parâmetros de key, máscara ou borda.'},
+crosspoint:{title:'Cross-Point Bus',term:'Bloco 4',what:'Seleciona fontes para os buses PROGRAM e PRESET.',how:'PROGRAM define a fonte atualmente no ar. PRESET prepara a próxima fonte. As teclas SHIFT acessam a segunda camada de entradas atribuídas.'},
+transition:{title:'Transition',term:'Bloco 5',what:'Executa transições entre PROGRAM e PRESET e controla DSKs e fade to black.',how:'Escolha o tipo de transição, use CUT ou AUTO TRANS, ou mova o fader. FTB executa fade to black; os controles DSK fazem transições independentes dos downstream keys.'},
+joystick:{title:'Joystick',term:'Bloco 6',what:'Controla parâmetros espaciais e de efeitos DME.',how:'Use o joystick para ajustes de posição e transformação. As teclas ao redor mudam o eixo e o modo de operação.'},
+keypad:{title:'Numeric Keypad',term:'Bloco 7',what:'Permite inserir valores numéricos e navegar em eventos/sequências.',how:'Use 0–9, ponto, sinal e ENTER para parâmetros. Em EVENT/SEQ, as mesmas teclas assumem funções de memória e reprodução.'},
+dme:{title:'DME / SETUP',term:'Bloco 8',what:'Abre grupos de parâmetros de DME e configuração do switcher.',how:'As teclas dão acesso a AUX, matte, border/input, sub effects, warp/system, light/status e user/still. SHIFT alterna a camada de funções.'},
+display:{title:'Display / Menu Control',term:'Bloco 9',what:'LCD principal e quatro encoders F1–F4 para operação dos menus.',how:'Cada encoder atua no parâmetro mostrado diretamente acima dele no LCD; em vários menus também pode ser pressionado para executar ações.'}
+};
+const drawer=document.getElementById('drawer'),title=document.getElementById('title'),term=document.getElementById('term'),what=document.getElementById('what'),how=document.getElementById('how');
+const hs=[...document.querySelectorAll('.hotspot')];
+function select(el){hs.forEach(x=>x.classList.remove('active'));el.classList.add('active');const d=data[el.dataset.zone];title.textContent=d.title;term.textContent=d.term;what.textContent=d.what;how.textContent=d.how;drawer.classList.add('open')}
+hs.forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();select(el)}));
+document.getElementById('close').addEventListener('click',()=>drawer.classList.remove('open'));
+document.getElementById('reset').addEventListener('click',()=>{hs.forEach(x=>x.classList.remove('active'));drawer.classList.remove('open')});
+document.addEventListener('click',e=>{if(!drawer.contains(e.target)&&!e.target.closest('.hotspot'))drawer.classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')drawer.classList.remove('open')});
+})();
+</script></body></html>
