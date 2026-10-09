@@ -178,7 +178,7 @@ function setMenu(menu,sub,params){
  S.menu=menu;S.submenu=sub;
  const m=realMenu(menu,sub,params);
  $('#guiTitle').textContent=m.title;
- $$$('.guiTab').forEach(t=>t.classList.toggle('active',t.textContent===menu||t.textContent.startsWith(menu)));
+ $('.guiTab').forEach(t=>t.classList.toggle('active',t.textContent===menu||t.textContent.startsWith(menu)));
  $('#guiSub').innerHTML='';
  m.subs.forEach(x=>{const b=document.createElement('button');b.textContent=x;b.className=x===sub||x===m.title?'active':'';b.onclick=()=>setMenu(menu,x);$('#guiSub').appendChild(b)});
  $('#guiParams').innerHTML='';
@@ -224,7 +224,7 @@ function buildMV(){
  });
 }
 function status(){ $('#stPgm').textContent=S.pgm;$('#stPvw').textContent=S.pvw;$('#stTrans').textContent=S.transition;$('#stKey').textContent=S.delegation||'—';$('#stDsk1').textContent=S.dsk1?'On':'Off';$('#stDsk2').textContent=S.dsk2?'On':'Off';$('#guiStatus').textContent='DME: '+(S.dme?1:0)+' · Rate: '+S.rate+'f · PGM '+sourceName(S.pgm)+' · PVW '+sourceName(S.pvw);if(S.menu==='Transition'&&S.submenu==='Rate')setMenu('Transition','Rate');buildMV() }
-function buses(){ $$$('.program').forEach(b=>b.classList.toggle('active',b.dataset.src===S.pgm));$$$('.preset').forEach(b=>b.classList.toggle('active',b.dataset.src===S.pvw))}
+function buses(){ $('.program').forEach(b=>b.classList.toggle('active',b.dataset.src===S.pgm));$('.preset').forEach(b=>b.classList.toggle('active',b.dataset.src===S.pvw))}
 function cut(){const t=S.pgm;S.pgm=S.pvw;S.pvw=t;S.fader=0;buses();status()}
 function autoTrans(){
  const b=$('[data-id="autoTrans"]');b.classList.add('active');$('#guiHint').textContent='AUTO TRANS · '+S.rate+'f';
@@ -265,7 +265,7 @@ function clickControl(el){
  else if(['editor','gpi','transPvw','bkgd','key1t','key2t','key3t','key4t','faderLimit','norRev','reverse'].includes(id))el.classList.toggle('active');
  const d=desc[id];if(d)info(id,d[0],d[1],d[2])
 }
-$$$('.ctrl').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();clickControl(el)}));
+$('.ctrl').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();clickControl(el)}));
 $$('.knob').forEach(el=>el.addEventListener('click',()=>{el.classList.add('active');setTimeout(()=>el.classList.remove('active'),180);const n=+el.dataset.id.slice(1);if(S.menu==='Setup'&&S.submenu==='Multi-view'){if(n===1){S.mv=S.mv===4?10:S.mv===10?16:4;$('#mvType').textContent='Multiview '+S.mv;setMenu('Setup','Multi-view');buildMV()}else if(n===3){setLCD('MV1 Window','');$('#lcd').innerHTML='MV1 Window<br>Type='+S.mv+'&nbsp;&nbsp;&nbsp;Win=1&nbsp;&nbsp;&nbsp;Sig='+(S.pgm==='BLACK'?'BLK':'PGM')+'&nbsp;&nbsp;&nbsp;Name=On'}}else if(S.menu==='Transition'&&S.submenu==='Rate'){if(n===2){S.rate=(S.rate+5)%1000||1;setMenu('Transition','Rate');status()}}info(el.dataset.id,el.dataset.id.toUpperCase(),'Menu encoder','O parâmetro sob F1–F4 segue a função real exibida no LCD.') }));
 
 $$('[data-bus]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();if(b.disabled)return;const src=b.dataset.src;if(src==='SHIFT'){b.classList.toggle('active');info('shift','SHIFT do bus','Cross-point bus','Alterna ou mantém a segunda camada de fontes conforme o modo configurado.');return}if(b.dataset.bus==='program')S.pgm=src;else S.pvw=src;buses();status();info('bus',b.dataset.bus.toUpperCase()+' '+src,'Cross-point bus',b.dataset.bus==='program'?'Seleciona a fonte atualmente no ar; a tecla acende em vermelho.':'Seleciona a próxima fonte; a tecla acende em verde.')}));
